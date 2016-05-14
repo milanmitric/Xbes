@@ -56,7 +56,6 @@ public class BaseWindow extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				CertificateDialog cd = new CertificateDialog();
 				cd.setModal(true);
 				cd.setLocationRelativeTo(BaseWindow.getInstance());
