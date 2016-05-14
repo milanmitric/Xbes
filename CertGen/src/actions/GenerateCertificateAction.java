@@ -47,19 +47,16 @@ public class GenerateCertificateAction extends AbstractAction{
 		X500NameBuilder builder = generateBuilder();
 		// TODO Hardcoded - needs to be fixed.
 		String certificateNumber = "1";
-		// TODO Dates are hardcoded.
 		Date startDate = null, endDate = null;
 		SimpleDateFormat iso8601Formater = new SimpleDateFormat("yyyy-MM-dd");
 		try {
-			startDate = iso8601Formater.parse("2007-12-31");
+			startDate = iso8601Formater.parse(diag.getDateField().getText());
 		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		try {
-			endDate = iso8601Formater.parse("2017-12-31");
+			endDate = iso8601Formater.parse(diag.getEndDate().getText());
 		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		
@@ -83,6 +80,8 @@ public class GenerateCertificateAction extends AbstractAction{
 	 * @return Generated builder.
 	 */
 	private X500NameBuilder generateBuilder(){
+		
+
 		
 		X500NameBuilder builder = new X500NameBuilder(BCStyle.INSTANCE);
 	    builder.addRDN(BCStyle.CN, diag.getCommon_name().getText());
