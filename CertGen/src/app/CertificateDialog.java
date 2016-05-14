@@ -2,6 +2,10 @@ package app;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.io.File;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchProviderException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -193,6 +197,7 @@ public class CertificateDialog extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+		loadKeyStores();
 	}
 	
 	public JTextField getSurname() {
@@ -289,6 +294,20 @@ public class CertificateDialog extends JDialog {
 
 	public void setPasswordField(JPasswordField passwordField) {
 		this.passwordField = passwordField;
+	}
+	
+	/**
+	 * Loads all keyStores from folder 'keyStore'.
+	 */
+	private void loadKeyStores(){
+		File folder = new File("./keyStore");
+		File[] keyStoreFiles = folder.listFiles();
+		
+		KeyStore keyStore;
+		this.keyStore.addItem(" ");
+		for(File keyStoreFile : keyStoreFiles){
+			this.keyStore.addItem(keyStoreFile.getName());
+		}
 	}
 	
 }
