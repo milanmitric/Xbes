@@ -21,15 +21,15 @@ public class CheckKeyStoreDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JPasswordField passwordField;
-	private KeyStore selectedKeyStore;
+	private CertificateDialog parentDialog;
 	private String fileName;
 
 	/**
 	 * Create the dialog.
 	 */
-	public CheckKeyStoreDialog(String fileName, KeyStore keyStore) {
+	public CheckKeyStoreDialog(String fileName, CertificateDialog parentDialog) {
 		this.fileName = fileName;
-		this.selectedKeyStore = keyStore;
+		this.parentDialog = parentDialog;
 		setTitle("Enter password for chosen KeyStore");
 		setBounds(100, 100, 316, 168);
 		getContentPane().setLayout(new BorderLayout());
@@ -51,7 +51,7 @@ public class CheckKeyStoreDialog extends JDialog {
 			{
 				JButton okButton = new JButton("OK");
 				okButton.setActionCommand("OK");
-				okButton.addActionListener(new LoadKeyStoreAction(this, selectedKeyStore, passwordField, fileName));
+				okButton.addActionListener(new LoadKeyStoreAction(this, parentDialog, passwordField, fileName));
 				buttonPane.add(okButton);
 				
 				getRootPane().setDefaultButton(okButton);

@@ -42,6 +42,10 @@ public class CertificateDialog extends JDialog {
 	private KeyStore selectedKeyStore;
 	private boolean first = true;
 	/**
+	 * Password if keyStore is loaded.
+	 */
+	private char[] keyStorePassword;
+	/**
 	 * Create the dialog.
 	 */
 	public CertificateDialog() {
@@ -153,6 +157,7 @@ public class CertificateDialog extends JDialog {
 			contentPanel.add(lblKeystore, "cell 1 11");
 		}
 		{
+			final CertificateDialog that = this;
 			keyStoreComboBox = new JComboBox();
 			keyStoreComboBox.addActionListener(new ActionListener() {
 				
@@ -166,7 +171,7 @@ public class CertificateDialog extends JDialog {
 						return;
 					}
 					else {
-						CheckKeyStoreDialog cksd = new CheckKeyStoreDialog(keyStoreComboBox.getSelectedItem().toString(), selectedKeyStore);
+						CheckKeyStoreDialog cksd = new CheckKeyStoreDialog(keyStoreComboBox.getSelectedItem().toString(), that);
 						cksd.setModal(true);
 						cksd.setLocationRelativeTo(BaseWindow.getInstance());
 						cksd.setVisible(true);
@@ -213,6 +218,14 @@ public class CertificateDialog extends JDialog {
 		loadKeyStores();
 	}
 	
+	public KeyStore getSelectedKeyStore() {
+		return selectedKeyStore;
+	}
+
+	public void setSelectedKeyStore(KeyStore selectedKeyStore) {
+		this.selectedKeyStore = selectedKeyStore;
+	}
+
 	public JTextField getSurname() {
 		return surname;
 	}
@@ -321,6 +334,14 @@ public class CertificateDialog extends JDialog {
 		for(File keyStoreFile : keyStoreFiles){
 			this.keyStoreComboBox.addItem(keyStoreFile.getName());
 		}
+	}
+
+	public char[] getKeyStorePassword() {
+		return keyStorePassword;
+	}
+
+	public void setKeyStorePassword(char[] keyStorePassword) {
+		this.keyStorePassword = keyStorePassword;
 	}
 	
 }

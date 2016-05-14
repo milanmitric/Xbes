@@ -1,7 +1,10 @@
 package actions;
 
 import java.awt.event.ActionEvent;
+import java.io.FileOutputStream;
+import java.security.Certificate;
 import java.security.KeyPair;
+import java.security.KeyStoreException;
 import java.security.cert.X509Certificate;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -64,6 +67,18 @@ public class GenerateCertificateAction extends AbstractAction{
 		SubjectData subjectData = new SubjectData(keyPair.getPublic(),builder.build(),certificateNumber,startDate, endDate);
 		
 		X509Certificate cert = generator.generateCertificate(issuerData, subjectData);
+		
+		String alias = diag.getAlias().getText();
+		char[] password = diag.getPasswordField().getPassword();
+		try {
+			diag.getSelectedKeyStore().setKeyEntry(alias,keyPair.getPrivate(),password,  new X509Certificate[] {cert});
+			
+			FileOutputStream outputFile = new FileOutputStream("./keyStore/" + (String)diag.getKeyStore().getSelectedItem());
+			diag.getSelectedKeyStore().store(outputFile,diag.getKeyStorePassword());
+		} catch (Exception e1) {
+
+			e1.printStackTrace();
+		}
 		
 		System.out.println("ISSUER: " + cert.getIssuerX500Principal().getName());
 		System.out.println("SUBJECT: " + cert.getSubjectX500Principal().getName());

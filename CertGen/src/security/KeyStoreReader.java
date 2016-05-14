@@ -19,10 +19,10 @@ import java.security.cert.CertificateException;
  */
 public class KeyStoreReader {
 
-	private static final String KEY_STORE_FILE = "./data/marija.jks";
+	private static final String KEY_STORE_FILE = "./keyStore/miki.jks";
 	
-	private char[] password = "test10".toCharArray();
-	private char[] keyPass  = "marija1".toCharArray();
+	private char[] password = "miki".toCharArray();
+	private char[] keyPass  = "prvi".toCharArray();
 	
 	
 	public void testIt() {
@@ -37,26 +37,17 @@ public class KeyStoreReader {
 			BufferedInputStream in = new BufferedInputStream(new FileInputStream(KEY_STORE_FILE));
 			ks.load(in, password);
 			//citamo par sertifikat privatni kljuc
-			System.out.println("Cita se Sertifikat i privatni kljuc Marije...");
 			
-			if(ks.isKeyEntry("marija")) {
+			if(ks.isKeyEntry("prvi")) {
 				System.out.println("Sertifikat:");
-				Certificate cert = ks.getCertificate("marija");
+				Certificate cert = ks.getCertificate("prvi");
 				System.out.println(cert);
-				PrivateKey privKey = (PrivateKey)ks.getKey("marija", keyPass);
+				PrivateKey privKey = (PrivateKey)ks.getKey("prvi", keyPass);
 				System.out.println("Privatni kljuc:");
 				System.out.println(privKey);
 			}
-			else
-				System.out.println("Nema para kljuceva za Mariju");
+		
 			
-			System.out.println("Cita sertifikat Jovana");
-			if(ks.isCertificateEntry("jovan")) {
-				Certificate cert = ks.getCertificate("jovan");
-				System.out.println(cert);
-			}
-			else
-				System.out.println("Nema sertifikata za Jovana");
 		
 		} catch (KeyStoreException e) {
 			e.printStackTrace();
