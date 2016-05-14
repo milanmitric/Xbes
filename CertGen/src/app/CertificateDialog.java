@@ -2,6 +2,8 @@ package app;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -14,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JTextField;
+import javax.swing.JPasswordField;
 
 public class CertificateDialog extends JDialog {
 
@@ -30,16 +33,18 @@ public class CertificateDialog extends JDialog {
 	private JTextField endDate;
 	private JComboBox ca;
 	private JComboBox keyStore;
+	private JTextField alias;
+	private JPasswordField passwordField;
 	
 	/**
 	 * Create the dialog.
 	 */
 	public CertificateDialog() {
-		setBounds(100, 100, 265, 376);
+		setBounds(100, 100, 265, 444);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(new MigLayout("", "[][][][grow]", "[][][][][][][][][][][][]"));
+		contentPanel.setLayout(new MigLayout("", "[][][][grow]", "[][][][][][][][][][][][][][]"));
 		{
 			JLabel CA = new JLabel("CA");
 			contentPanel.add(CA, "cell 1 0");
@@ -144,7 +149,31 @@ public class CertificateDialog extends JDialog {
 		}
 		{
 			keyStore = new JComboBox();
+			keyStore.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					
+				}
+			});
 			contentPanel.add(keyStore, "cell 3 11,growx");
+		}
+		{
+			JLabel lblAlias = new JLabel("Alias");
+			contentPanel.add(lblAlias, "cell 1 12");
+		}
+		{
+			alias = new JTextField();
+			contentPanel.add(alias, "cell 3 12,growx");
+			alias.setColumns(10);
+		}
+		{
+			JLabel lblPassword = new JLabel("Password");
+			contentPanel.add(lblPassword, "cell 1 13");
+		}
+		{
+			passwordField = new JPasswordField();
+			contentPanel.add(passwordField, "cell 3 13,growx");
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -244,6 +273,22 @@ public class CertificateDialog extends JDialog {
 
 	public void setKeyStore(JComboBox keyStore) {
 		this.keyStore = keyStore;
+	}
+
+	public JTextField getAlias() {
+		return alias;
+	}
+
+	public void setAlias(JTextField alias) {
+		this.alias = alias;
+	}
+
+	public JPasswordField getPasswordField() {
+		return passwordField;
+	}
+
+	public void setPasswordField(JPasswordField passwordField) {
+		this.passwordField = passwordField;
 	}
 	
 }
