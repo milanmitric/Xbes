@@ -13,6 +13,10 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 
 public class BaseWindow extends JFrame {
@@ -39,7 +43,7 @@ public class BaseWindow extends JFrame {
 	public void init() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
-		
+		setLocationRelativeTo(null);
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
@@ -48,7 +52,20 @@ public class BaseWindow extends JFrame {
 		
 		JMenuItem mntmGeneratecertificate = new JMenuItem("GenerateCertificate");
 		mntmGeneratecertificate.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_G, InputEvent.CTRL_MASK));
+		mntmGeneratecertificate.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				CertificateDialog cd = new CertificateDialog();
+				cd.setModal(true);
+				cd.setLocationRelativeTo(BaseWindow.getInstance());
+				cd.setVisible(true);
+				
+			}
+		});
 		mnFile.add(mntmGeneratecertificate);
+		
 		
 		JMenuItem mntmDelete = new JMenuItem("Delete");
 		mntmDelete.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, InputEvent.CTRL_MASK));

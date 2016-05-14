@@ -7,6 +7,9 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import actions.GenerateCertificateAction;
+
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import net.miginfocom.swing.MigLayout;
@@ -24,18 +27,7 @@ public class CertificateDialog extends JDialog {
 	private JTextField country_code;
 	private JTextField email_address;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			CertificateDialog dialog = new CertificateDialog();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	
 
 	/**
 	 * Create the dialog.
@@ -132,9 +124,11 @@ public class CertificateDialog extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("OK");
+				okButton.addActionListener(new GenerateCertificateAction());
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
+				
 			}
 			{
 				JButton cancelButton = new JButton("Cancel");
