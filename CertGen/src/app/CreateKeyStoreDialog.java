@@ -14,10 +14,11 @@ import javax.swing.JTextField;
 public class CreateKeyStoreDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField name;
+	private JTextField nameOfKeyStore;
 	private JTextField password;
 
 	
+
 	/**
 	 * Create the dialog.
 	 */
@@ -32,9 +33,9 @@ public class CreateKeyStoreDialog extends JDialog {
 			contentPanel.add(lblName, "cell 0 0,alignx trailing");
 		}
 		{
-			name = new JTextField();
-			contentPanel.add(name, "cell 1 0,growx");
-			name.setColumns(10);
+			nameOfKeyStore = new JTextField();
+			contentPanel.add(nameOfKeyStore, "cell 1 0,growx");
+			nameOfKeyStore.setColumns(10);
 		}
 		{
 			JLabel lblPassword = new JLabel("Password");
@@ -61,6 +62,30 @@ public class CreateKeyStoreDialog extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+	}
+
+
+
+	public JTextField getNameOfKeyStore() {
+		return nameOfKeyStore;
+	}
+
+
+
+	public void setName(JTextField name) {
+		this.nameOfKeyStore = name;
+	}
+
+
+
+	public JTextField getPassword() {
+		return password;
+	}
+
+
+
+	public void setPassword(JTextField password) {
+		this.password = password;
 	}
 
 }

@@ -28,23 +28,24 @@ public class CertificateDialog extends JDialog {
 	private JTextField email_address;
 	private JTextField dateField;
 	private JTextField endDate;
-
+	private JComboBox ca;
+	private JComboBox keyStore;
 	
 	/**
 	 * Create the dialog.
 	 */
 	public CertificateDialog() {
-		setBounds(100, 100, 265, 355);
+		setBounds(100, 100, 265, 376);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(new MigLayout("", "[][][][grow]", "[][][][][][][][][][][]"));
+		contentPanel.setLayout(new MigLayout("", "[][][][grow]", "[][][][][][][][][][][][]"));
 		{
 			JLabel CA = new JLabel("CA");
 			contentPanel.add(CA, "cell 1 0");
 		}
 		{
-			JComboBox ca = new JComboBox();
+			ca = new JComboBox();
 			contentPanel.add(ca, "cell 3 0,growx");
 		}
 		{
@@ -138,6 +139,14 @@ public class CertificateDialog extends JDialog {
 			endDate.setColumns(10);
 		}
 		{
+			JLabel lblKeystore = new JLabel("KeyStore");
+			contentPanel.add(lblKeystore, "cell 1 11");
+		}
+		{
+			keyStore = new JComboBox();
+			contentPanel.add(keyStore, "cell 3 11,growx");
+		}
+		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
@@ -219,6 +228,22 @@ public class CertificateDialog extends JDialog {
 	}
 	public JPanel getContentPanel() {
 		return contentPanel;
+	}
+
+	public JComboBox getCa() {
+		return ca;
+	}
+
+	public void setCa(JComboBox ca) {
+		this.ca = ca;
+	}
+
+	public JComboBox getKeyStore() {
+		return keyStore;
+	}
+
+	public void setKeyStore(JComboBox keyStore) {
+		this.keyStore = keyStore;
 	}
 	
 }

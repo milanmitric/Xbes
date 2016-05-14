@@ -65,6 +65,19 @@ public class BaseWindow extends JFrame {
 		});
 		mnFile.add(mntmGeneratecertificate);
 		
+		JMenuItem mntmCreateKeystore = new JMenuItem("Create KeyStore");
+		mntmCreateKeystore.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_K, InputEvent.CTRL_MASK));
+		mntmCreateKeystore.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				CreateKeyStoreDialog ckd = new CreateKeyStoreDialog();
+				ckd.setModal(true);
+				ckd.setLocationRelativeTo(BaseWindow.getInstance());
+				ckd.setVisible(true);
+			}
+		});
+		mnFile.add(mntmCreateKeystore);
 		
 		JMenuItem mntmDelete = new JMenuItem("Delete");
 		mntmDelete.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, InputEvent.CTRL_MASK));
