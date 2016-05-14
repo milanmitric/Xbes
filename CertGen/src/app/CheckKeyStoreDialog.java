@@ -2,11 +2,17 @@ package app;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.RenderingHints.Key;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.security.KeyStore;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import actions.LoadKeyStoreAction;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
@@ -15,13 +21,15 @@ public class CheckKeyStoreDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JPasswordField passwordField;
-
-	
+	private KeyStore selectedKeyStore;
+	private String fileName;
 
 	/**
 	 * Create the dialog.
 	 */
-	public CheckKeyStoreDialog() {
+	public CheckKeyStoreDialog(String fileName, KeyStore keyStore) {
+		this.fileName = fileName;
+		this.selectedKeyStore = keyStore;
 		setTitle("Enter password for chosen KeyStore");
 		setBounds(100, 100, 316, 168);
 		getContentPane().setLayout(new BorderLayout());
@@ -43,13 +51,24 @@ public class CheckKeyStoreDialog extends JDialog {
 			{
 				JButton okButton = new JButton("OK");
 				okButton.setActionCommand("OK");
+				okButton.addActionListener(new LoadKeyStoreAction(this, selectedKeyStore, passwordField, fileName));
 				buttonPane.add(okButton);
+				
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
+				final CheckKeyStoreDialog that = this;
 				JButton cancelButton = new JButton("Cancel");
 				cancelButton.setActionCommand("Cancel");
+				cancelButton.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						that.dispose();
+					}
+				});
 				buttonPane.add(cancelButton);
+				
 			}
 		}
 	}

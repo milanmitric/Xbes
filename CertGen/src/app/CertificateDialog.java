@@ -36,10 +36,11 @@ public class CertificateDialog extends JDialog {
 	private JTextField dateField;
 	private JTextField endDate;
 	private JComboBox ca;
-	private JComboBox keyStore;
+	private JComboBox keyStoreComboBox;
 	private JTextField alias;
 	private JPasswordField passwordField;
-	
+	private KeyStore selectedKeyStore;
+	private boolean first = true;
 	/**
 	 * Create the dialog.
 	 */
@@ -152,15 +153,27 @@ public class CertificateDialog extends JDialog {
 			contentPanel.add(lblKeystore, "cell 1 11");
 		}
 		{
-			keyStore = new JComboBox();
-			keyStore.addActionListener(new ActionListener() {
+			keyStoreComboBox = new JComboBox();
+			keyStoreComboBox.addActionListener(new ActionListener() {
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					
+					if (first){
+						first = false;
+					} 
+					else if (keyStoreComboBox.getSelectedIndex() == 0)
+					{
+						return;
+					}
+					else {
+						CheckKeyStoreDialog cksd = new CheckKeyStoreDialog(keyStoreComboBox.getSelectedItem().toString(), selectedKeyStore);
+						cksd.setModal(true);
+						cksd.setLocationRelativeTo(BaseWindow.getInstance());
+						cksd.setVisible(true);
+					}
 				}
 			});
-			contentPanel.add(keyStore, "cell 3 11,growx");
+			contentPanel.add(keyStoreComboBox, "cell 3 11,growx");
 		}
 		{
 			JLabel lblAlias = new JLabel("Alias");
@@ -273,11 +286,11 @@ public class CertificateDialog extends JDialog {
 	}
 
 	public JComboBox getKeyStore() {
-		return keyStore;
+		return keyStoreComboBox;
 	}
 
 	public void setKeyStore(JComboBox keyStore) {
-		this.keyStore = keyStore;
+		this.keyStoreComboBox = keyStore;
 	}
 
 	public JTextField getAlias() {
@@ -304,9 +317,9 @@ public class CertificateDialog extends JDialog {
 		File[] keyStoreFiles = folder.listFiles();
 		
 		KeyStore keyStore;
-		this.keyStore.addItem(" ");
+		this.keyStoreComboBox.addItem(" ");
 		for(File keyStoreFile : keyStoreFiles){
-			this.keyStore.addItem(keyStoreFile.getName());
+			this.keyStoreComboBox.addItem(keyStoreFile.getName());
 		}
 	}
 	
