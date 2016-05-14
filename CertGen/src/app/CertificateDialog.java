@@ -33,6 +33,7 @@ public class CertificateDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public CertificateDialog() {
+
 		setBounds(100, 100, 265, 338);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -138,4 +139,107 @@ public class CertificateDialog extends JDialog {
 		}
 	}
 
+
+
+	public JTextField getSurname() {
+		return surname;
+	}
+
+
+
+	public void setSurname(JTextField surname) {
+		this.surname = surname;
+	}
+
+
+
+	public JTextField getCommon_name() {
+		return common_name;
+	}
+
+
+
+	public void setCommon_name(JTextField common_name) {
+		this.common_name = common_name;
+	}
+
+
+
+	public JTextField getOrganization_unit() {
+		return organization_unit;
+	}
+
+
+
+	public void setOrganization_unit(JTextField organization_unit) {
+		this.organization_unit = organization_unit;
+	}
+
+
+
+	public JTextField getOrganization_name() {
+		return organization_name;
+	}
+
+
+
+	public void setOrganization_name(JTextField organization_name) {
+		this.organization_name = organization_name;
+	}
+
+
+
+	public JTextField getGiven_name() {
+		return given_name;
+	}
+
+
+
+	public void setGiven_name(JTextField given_name) {
+		this.given_name = given_name;
+	}
+
+
+
+	public JTextField getState_name() {
+		return state_name;
+	}
+
+
+
+	public void setState_name(JTextField state_name) {
+		this.state_name = state_name;
+	}
+
+
+
+	public JTextField getCountry_code() {
+		return country_code;
+	}
+
+
+
+	public void setCountry_code(JTextField country_code) {
+		this.country_code = country_code;
+	}
+
+
+
+	public JTextField getEmail_address() {
+		return email_address;
+	}
+
+
+
+	public void setEmail_address(JTextField email_address) {
+		this.email_address = email_address;
+	}
+
+
+
+	public JPanel getContentPanel() {
+		return contentPanel;
+	}
+
+	
 }
