@@ -26,19 +26,18 @@ public class CertificateDialog extends JDialog {
 	private JTextField state_name;
 	private JTextField country_code;
 	private JTextField email_address;
+	private JTextField dateField;
 
 	
-
 	/**
 	 * Create the dialog.
 	 */
 	public CertificateDialog() {
-
 		setBounds(100, 100, 265, 338);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(new MigLayout("", "[][][][grow]", "[][][][][][][][][]"));
+		contentPanel.setLayout(new MigLayout("", "[][][][grow]", "[][][][][][][][][][]"));
 		{
 			JLabel CA = new JLabel("CA");
 			contentPanel.add(CA, "cell 1 0");
@@ -120,6 +119,15 @@ public class CertificateDialog extends JDialog {
 			email_address.setColumns(10);
 		}
 		{
+			JLabel lblDate = new JLabel("Date");
+			contentPanel.add(lblDate, "cell 1 9");
+		}
+		{
+			dateField = new JTextField();
+			contentPanel.add(dateField, "cell 3 9,growx");
+			dateField.setColumns(10);
+		}
+		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
@@ -130,6 +138,7 @@ public class CertificateDialog extends JDialog {
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 				
+				
 			}
 			{
 				JButton cancelButton = new JButton("Cancel");
@@ -138,108 +147,6 @@ public class CertificateDialog extends JDialog {
 			}
 		}
 	}
-
-
-
-	public JTextField getSurname() {
-		return surname;
-	}
-
-
-
-	public void setSurname(JTextField surname) {
-		this.surname = surname;
-	}
-
-
-
-	public JTextField getCommon_name() {
-		return common_name;
-	}
-
-
-
-	public void setCommon_name(JTextField common_name) {
-		this.common_name = common_name;
-	}
-
-
-
-	public JTextField getOrganization_unit() {
-		return organization_unit;
-	}
-
-
-
-	public void setOrganization_unit(JTextField organization_unit) {
-		this.organization_unit = organization_unit;
-	}
-
-
-
-	public JTextField getOrganization_name() {
-		return organization_name;
-	}
-
-
-
-	public void setOrganization_name(JTextField organization_name) {
-		this.organization_name = organization_name;
-	}
-
-
-
-	public JTextField getGiven_name() {
-		return given_name;
-	}
-
-
-
-	public void setGiven_name(JTextField given_name) {
-		this.given_name = given_name;
-	}
-
-
-
-	public JTextField getState_name() {
-		return state_name;
-	}
-
-
-
-	public void setState_name(JTextField state_name) {
-		this.state_name = state_name;
-	}
-
-
-
-	public JTextField getCountry_code() {
-		return country_code;
-	}
-
-
-
-	public void setCountry_code(JTextField country_code) {
-		this.country_code = country_code;
-	}
-
-
-
-	public JTextField getEmail_address() {
-		return email_address;
-	}
-
-
-
-	public void setEmail_address(JTextField email_address) {
-		this.email_address = email_address;
-	}
-
-
-
-	public JPanel getContentPanel() {
-		return contentPanel;
-	}
-
+	
 	
 }

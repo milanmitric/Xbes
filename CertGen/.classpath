@@ -3,12 +3,13 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry kind="lib" path="miglayout15-swing.jar" sourcepath="miglayout-src.zip"/>
-	<classpathentry kind="lib" path="D:/GitRepos/XML/CertGen/lib/bcpkix-jdk15on-148.jar"/>
-	<classpathentry kind="lib" path="D:/GitRepos/XML/CertGen/lib/bcprov-jdk15on-148.jar"/>
-	<classpathentry kind="lib" path="D:/GitRepos/XML/CertGen/lib/commons-logging-1.1.jar"/>
-	<classpathentry kind="lib" path="D:/GitRepos/XML/CertGen/lib/commons-logging-adapters-1.1.jar"/>
-	<classpathentry kind="lib" path="D:/GitRepos/XML/CertGen/lib/commons-logging-api-1.1.jar"/>
-	<classpathentry kind="lib" path="D:/GitRepos/XML/CertGen/lib/log4j-1.2.9.jar"/>
-	<classpathentry kind="lib" path="D:/GitRepos/XML/CertGen/lib/xmlsec-1.5.3.jar"/>
+	<classpathentry kind="lib" path="lib/bcpkix-jdk15on-148.jar"/>
+	<classpathentry kind="lib" path="lib/bcprov-jdk15on-148.jar"/>
+	<classpathentry kind="lib" path="lib/commons-logging-1.1.jar"/>
+	<classpathentry kind="lib" path="lib/commons-logging-adapters-1.1.jar"/>
+	<classpathentry kind="lib" path="lib/commons-logging-api-1.1.jar"/>
+	<classpathentry kind="lib" path="lib/log4j-1.2.9.jar"/>
+	<classpathentry kind="lib" path="lib/xmlsec-1.5.3.jar"/>
+	<classpathentry kind="lib" path="miglayout-src.zip"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
