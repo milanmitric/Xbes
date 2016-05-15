@@ -12,6 +12,8 @@ import java.security.PrivateKey;
 import java.security.UnrecoverableKeyException;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * 
@@ -19,9 +21,9 @@ import java.security.cert.CertificateException;
  */
 public class KeyStoreReader {
 
-	private static final String KEY_STORE_FILE = "./keyStore/miki.jks";
+	private static final String KEY_STORE_FILE = "./keyStore/djoka.jks";
 	
-	private char[] password = "miki".toCharArray();
+	private char[] password = "djoka".toCharArray();
 	private char[] keyPass  = "prvi".toCharArray();
 	
 	
@@ -46,9 +48,8 @@ public class KeyStoreReader {
 				System.out.println("Privatni kljuc:");
 				System.out.println(privKey);
 			}
-		
+
 			
-		
 		} catch (KeyStoreException e) {
 			e.printStackTrace();
 		} catch (NoSuchProviderException e) {

@@ -2,6 +2,8 @@ package app;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -62,6 +64,14 @@ public class CreateKeyStoreDialog extends JDialog {
 			{
 				JButton cancelButton = new JButton("Cancel");
 				cancelButton.setActionCommand("Cancel");
+				final CreateKeyStoreDialog cksd = this;
+				cancelButton.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						cksd.dispose();
+					}
+				});
 				buttonPane.add(cancelButton);
 			}
 		}

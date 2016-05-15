@@ -79,12 +79,32 @@ public class BaseWindow extends JFrame {
 		});
 		mnFile.add(mntmCreateKeystore);
 		
+		JMenuItem mntmShowKeyStore = new JMenuItem("Choose KeyStore");
+		mntmShowKeyStore.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.ALT_DOWN_MASK));
+		mntmShowKeyStore.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ShowKeyStoresDialog ckd = new ShowKeyStoresDialog();
+				ckd.setModal(true);
+				ckd.setLocationRelativeTo(BaseWindow.getInstance());
+				ckd.setVisible(true);
+			}
+		});
+		mnFile.add(mntmShowKeyStore);
+		
 		JMenuItem mntmDelete = new JMenuItem("Delete");
 		mntmDelete.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, InputEvent.CTRL_MASK));
 		mnFile.add(mntmDelete);
 		
 		JMenuItem mntmExit = new JMenuItem("Exit");
 		mntmExit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0));
+		mntmExit.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 		mnFile.add(mntmExit);
 		
 		JMenu mnHelp = new JMenu("Help");

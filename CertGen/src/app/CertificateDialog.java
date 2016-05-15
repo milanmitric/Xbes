@@ -174,7 +174,7 @@ public class CertificateDialog extends JDialog {
 						CheckKeyStoreDialog cksd = new CheckKeyStoreDialog(keyStoreComboBox.getSelectedItem().toString(), that);
 						cksd.setModal(true);
 						cksd.setLocationRelativeTo(BaseWindow.getInstance());
-						cksd.setVisible(true);
+						cksd.setVisible(true);	
 					}
 				}
 			});
@@ -210,8 +210,16 @@ public class CertificateDialog extends JDialog {
 				
 			}
 			{
+				final CertificateDialog that = this;
 				JButton cancelButton = new JButton("Cancel");
 				cancelButton.setActionCommand("Cancel");
+				cancelButton.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						that.dispose();
+					}
+				});
 				buttonPane.add(cancelButton);
 			}
 		}

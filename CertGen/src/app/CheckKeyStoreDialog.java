@@ -21,13 +21,13 @@ public class CheckKeyStoreDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JPasswordField passwordField;
-	private CertificateDialog parentDialog;
+	private JDialog parentDialog;
 	private String fileName;
 
 	/**
 	 * Create the dialog.
 	 */
-	public CheckKeyStoreDialog(String fileName, CertificateDialog parentDialog) {
+	public CheckKeyStoreDialog(String fileName, JDialog parentDialog) {
 		this.fileName = fileName;
 		this.parentDialog = parentDialog;
 		setTitle("Enter password for chosen KeyStore");
@@ -58,17 +58,38 @@ public class CheckKeyStoreDialog extends JDialog {
 			}
 			{
 				final CheckKeyStoreDialog that = this;
+				 
+				if(parentDialog instanceof CertificateDialog){
+					final CertificateDialog thatParentDialog = (CertificateDialog)parentDialog;
+					JButton cancelButton = new JButton("Cancel");
+					cancelButton.setActionCommand("Cancel");
+					cancelButton.addActionListener(new ActionListener() {
+						
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							if(thatParentDialog instanceof CertificateDialog){
+								((CertificateDialog)thatParentDialog).getKeyStore().setSelectedIndex(0);
+							}
+							that.dispose();
+						}
+					});
+					buttonPane.add(cancelButton);
+				}else{
+					final ShowKeyStoresDialog thatParentDialog = (ShowKeyStoresDialog)parentDialog;
 				JButton cancelButton = new JButton("Cancel");
 				cancelButton.setActionCommand("Cancel");
 				cancelButton.addActionListener(new ActionListener() {
 					
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						if(thatParentDialog instanceof ShowKeyStoresDialog){
+							((ShowKeyStoresDialog)thatParentDialog).getKeyStoresFromFileSystem().setSelectedIndex(0);
+						}
 						that.dispose();
 					}
 				});
 				buttonPane.add(cancelButton);
-				
+				}
 			}
 		}
 	}

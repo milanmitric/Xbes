@@ -86,7 +86,7 @@ public class GenerateCertificateAction extends AbstractAction{
 		System.out.println("-------------------------------------------------------");
 		System.out.println(cert);
 		System.out.println("-------------------------------------------------------");
-	    
+	    diag.dispose();
 	}
 	
 	
