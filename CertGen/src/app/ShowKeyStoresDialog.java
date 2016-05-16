@@ -77,6 +77,10 @@ public class ShowKeyStoresDialog extends JDialog {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						
+						EnterCertificateInfoDialog cid = new EnterCertificateInfoDialog(selectedKeyStore, keyStorePassword,keyStoresFromFileSystem.getSelectedItem().toString());
+						cid.setModal(true);
+						cid.setLocationRelativeTo(BaseWindow.getInstance());
+						cid.setVisible(true);
 						sksd.dispose();
 					}
 				});

@@ -52,6 +52,7 @@ public class LoadKeyStoreAction extends AbstractAction{
 				System.out.println("DADASDASDA");
 				((ShowKeyStoresDialog)parentDialog).setSelectedKeyStore(keyStore);
 				((ShowKeyStoresDialog)parentDialog).setKeyStorePassword(password.getPassword());
+				
 			}
 			panel.dispose();
 		} catch (Exception exp) {
