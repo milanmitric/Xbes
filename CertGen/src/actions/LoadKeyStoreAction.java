@@ -43,7 +43,9 @@ public class LoadKeyStoreAction extends AbstractAction{
 			KeyStore keyStore = KeyStore.getInstance("JKS","SUN");
 			FileInputStream file = new FileInputStream("./keyStore/"+fileName);
 			keyStore.load(file, password.getPassword());
+			
 			if(parentDialog instanceof CertificateDialog){
+				((CertificateDialog)parentDialog).setCa(keyStore.aliases());
 				((CertificateDialog)parentDialog).setSelectedKeyStore(keyStore);
 				((CertificateDialog)parentDialog).setKeyStorePassword(password.getPassword());
 				((CertificateDialog)parentDialog).getKeyStore().setSelectedIndex(selectedIndex);

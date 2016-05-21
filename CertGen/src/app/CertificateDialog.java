@@ -6,6 +6,8 @@ import java.io.File;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
 import java.security.NoSuchProviderException;
+import java.security.PrivateKey;
+import java.util.Enumeration;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -41,14 +43,26 @@ public class CertificateDialog extends JDialog {
 	private JPasswordField passwordField;
 	private KeyStore selectedKeyStore;
 	private boolean first = true;
+	private boolean firstCa = true;
+	
+	/**
+	 * Password if root CA is selected.
+	 */
+	private PrivateKey rootCertificatePrivateKey = null;
 	/**
 	 * Password if keyStore is loaded.
 	 */
 	private char[] keyStorePassword;
+	
+	private final int KEYSTORE_INDICATOR = 0;
+	private final int ROOT_CERTIFICATE_INDICATOR = 1;
 	/**
 	 * Create the dialog.
 	 */
 	public CertificateDialog() {
+		final CertificateDialog that = this;
+		
+		
 		setBounds(100, 100, 265, 444);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -60,6 +74,25 @@ public class CertificateDialog extends JDialog {
 		}
 		{
 			ca = new JComboBox();
+			ca.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					if (firstCa){
+						firstCa = false;
+					}
+					else if (ca.getSelectedIndex() == 0)
+					{
+						return;
+					} else {
+						CheckKeyStoreDialog cksd = new CheckKeyStoreDialog(ca.getSelectedItem().toString(), that,"Enter password for root certificate",ROOT_CERTIFICATE_INDICATOR);
+						cksd.setModal(true);
+						cksd.setLocationRelativeTo(BaseWindow.getInstance());
+						cksd.setVisible(true);	
+					}
+					
+				}
+			});
 			contentPanel.add(ca, "cell 3 0,growx");
 		}
 		{
@@ -157,7 +190,7 @@ public class CertificateDialog extends JDialog {
 			contentPanel.add(lblKeystore, "cell 1 11");
 		}
 		{
-			final CertificateDialog that = this;
+			
 			keyStoreComboBox = new JComboBox();
 			keyStoreComboBox.addActionListener(new ActionListener() {
 				
@@ -171,7 +204,7 @@ public class CertificateDialog extends JDialog {
 						return;
 					}
 					else {
-						CheckKeyStoreDialog cksd = new CheckKeyStoreDialog(keyStoreComboBox.getSelectedItem().toString(), that);
+						CheckKeyStoreDialog cksd = new CheckKeyStoreDialog(keyStoreComboBox.getSelectedItem().toString(), that,"Enter password for chosen KeyStore",KEYSTORE_INDICATOR);
 						cksd.setModal(true);
 						cksd.setLocationRelativeTo(BaseWindow.getInstance());
 						cksd.setVisible(true);	
@@ -210,7 +243,6 @@ public class CertificateDialog extends JDialog {
 				
 			}
 			{
-				final CertificateDialog that = this;
 				JButton cancelButton = new JButton("Cancel");
 				cancelButton.setActionCommand("Cancel");
 				cancelButton.addActionListener(new ActionListener() {
@@ -302,8 +334,12 @@ public class CertificateDialog extends JDialog {
 		return ca;
 	}
 
-	public void setCa(JComboBox ca) {
-		this.ca = ca;
+	public void setCa(Enumeration<String> aliases) {
+		ca.addItem(" ");
+		while(aliases.hasMoreElements()){
+			String alias = (String)aliases.nextElement();
+			ca.addItem(alias);
+		}
 	}
 
 	public JComboBox getKeyStore() {
@@ -351,5 +387,14 @@ public class CertificateDialog extends JDialog {
 	public void setKeyStorePassword(char[] keyStorePassword) {
 		this.keyStorePassword = keyStorePassword;
 	}
-	
+
+	public PrivateKey getRootCertificatePrivateKey() {
+		return rootCertificatePrivateKey;
+	}
+
+	public void setRootCertificatePrivateKey(PrivateKey rootCertificatePrivateKey) {
+		this.rootCertificatePrivateKey = rootCertificatePrivateKey;
+	}
+
+
 }

@@ -25,6 +25,8 @@ public class ShowKeyStoresDialog extends JDialog {
 	private char[] keyStorePassword;
 	private boolean first = true;
 
+	private final int KEYSTORE_INDICATOR = 0;
+	
 	/**
 	 * Create the dialog.
 	 */
@@ -53,7 +55,7 @@ public class ShowKeyStoresDialog extends JDialog {
 						return;
 					}
 					else {
-						CheckKeyStoreDialog cksd = new CheckKeyStoreDialog(keyStoresFromFileSystem.getSelectedItem().toString(), that);
+						CheckKeyStoreDialog cksd = new CheckKeyStoreDialog(keyStoresFromFileSystem.getSelectedItem().toString(), that,"Enter password for chosen KeyStore",KEYSTORE_INDICATOR);
 						cksd.setModal(true);
 						cksd.setLocationRelativeTo(BaseWindow.getInstance());
 						cksd.setVisible(true);

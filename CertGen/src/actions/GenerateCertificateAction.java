@@ -63,8 +63,14 @@ public class GenerateCertificateAction extends AbstractAction{
 			e1.printStackTrace();
 		}
 		
-		IssuerData issuerData = new IssuerData(keyPair.getPrivate(),builder.build());
+		IssuerData issuerData;
+		if(diag.getRootCertificatePrivateKey() == null){
+			issuerData = new IssuerData(keyPair.getPrivate(),builder.build());
+		} else {
+			issuerData = new IssuerData(diag.getRootCertificatePrivateKey(),builder.build());
+		}
 		SubjectData subjectData = new SubjectData(keyPair.getPublic(),builder.build(),certificateNumber,startDate, endDate);
+		
 		
 		X509Certificate cert = generator.generateCertificate(issuerData, subjectData);
 		
