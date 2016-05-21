@@ -17,11 +17,14 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import org.bouncycastle.asn1.x500.X500NameBuilder;
+import org.bouncycastle.asn1.x500.style.BCStyle;
 import org.bouncycastle.asn1.x509.Certificate;
 import org.bouncycastle.asn1.x509.X509Name;
 
 import actions.LoadKeyStoreAction;
 import net.miginfocom.swing.MigLayout;
+import security.IssuerData;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
@@ -86,7 +89,8 @@ public class CheckKeyStoreDialog extends JDialog {
 									java.security.cert.Certificate cert =  keyStore.getCertificate(alias);
 									
 									X509Certificate cert509 = (X509Certificate)cert;
-									System.out.println(cert509.getIssuerX500Principal().getName());
+									//System.out.println(cert509.getIssuerX500Principal().getName());
+									parseDataFromCertificate(cert509);
 									PrivateKey privKey = (PrivateKey)keyStore.getKey(alias, passwordField.getPassword());
 									parentDialogFinal.setRootCertificatePrivateKey(privKey);
 									that.dispose();
@@ -164,5 +168,44 @@ public class CheckKeyStoreDialog extends JDialog {
 	public void setPasswordField(JPasswordField passwordField) {
 		this.passwordField = passwordField;
 	}
+	/**
+	 * Method for parsing Certificate and getting Issuer data.
+	 * @return Issuer 
+	 * */
+	public X500NameBuilder parseDataFromCertificate(X509Certificate certificateForParse){
+		
+		String stringForParse = certificateForParse.toString();
 
+		String [] arrayForParse = stringForParse.split("Issuer:")[1].split(",");
+		String UID = arrayForParse[0].split("=")[1];
+		String EMAILADDRESS = arrayForParse[1].split("=")[1];
+		String C = arrayForParse[2].split("=")[1];
+		String OU = arrayForParse[3].split("=")[1];
+		String O = arrayForParse[4].split("=")[1];
+		String GIVENNAME = arrayForParse[5].split("=")[1];
+		String SURNAME = arrayForParse[6].split("=")[1];
+		String CN = arrayForParse[7].split("=")[1].split("\n")[0];
+		
+//		System.out.println(UID);
+//		System.out.println(EMAILADDRESS);
+//		System.out.println(C);
+//		System.out.println(OU);
+//		System.out.println(O);
+//		System.out.println(GIVENNAME);
+//		System.out.println(SURNAME);
+//		System.out.println(CN);
+		
+		X500NameBuilder builder = new X500NameBuilder(BCStyle.INSTANCE);
+	    builder.addRDN(BCStyle.CN, CN);
+	    builder.addRDN(BCStyle.SURNAME, SURNAME);
+	    builder.addRDN(BCStyle.GIVENNAME, GIVENNAME);
+	    builder.addRDN(BCStyle.O, O);
+	    builder.addRDN(BCStyle.OU, OU);
+	    builder.addRDN(BCStyle.C, C);
+	    builder.addRDN(BCStyle.E, EMAILADDRESS);
+	    builder.addRDN(BCStyle.UID, UID);
+		
+		return builder;
+	}
+	
 }
