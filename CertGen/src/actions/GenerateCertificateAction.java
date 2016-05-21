@@ -67,7 +67,9 @@ public class GenerateCertificateAction extends AbstractAction{
 		if(diag.getRootCertificatePrivateKey() == null){
 			issuerData = new IssuerData(keyPair.getPrivate(),builder.build());
 		} else {
-			issuerData = new IssuerData(diag.getRootCertificatePrivateKey(),builder.build());
+			issuerData = new IssuerData(diag.getRootCertificatePrivateKey(),diag.getRootNameBuilder().build());
+			diag.setRootCertificatePrivateKey(null);
+			diag.setRootNameBuilder(null);
 		}
 		SubjectData subjectData = new SubjectData(keyPair.getPublic(),builder.build(),certificateNumber,startDate, endDate);
 		

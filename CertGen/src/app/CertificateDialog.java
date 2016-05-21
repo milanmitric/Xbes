@@ -16,6 +16,8 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import org.bouncycastle.asn1.x500.X500NameBuilder;
+
 import actions.GenerateCertificateAction;
 
 import javax.swing.JLabel;
@@ -46,7 +48,11 @@ public class CertificateDialog extends JDialog {
 	private boolean firstCa = true;
 	
 	/**
-	 * Password if root CA is selected.
+	 * Issuer data if root certificate is selected.
+	 */
+	private X500NameBuilder rootNameBuilder = null;
+	/**
+	 * Password if root certificate is selected.
 	 */
 	private PrivateKey rootCertificatePrivateKey = null;
 	/**
@@ -394,6 +400,14 @@ public class CertificateDialog extends JDialog {
 
 	public void setRootCertificatePrivateKey(PrivateKey rootCertificatePrivateKey) {
 		this.rootCertificatePrivateKey = rootCertificatePrivateKey;
+	}
+
+	public X500NameBuilder getRootNameBuilder() {
+		return rootNameBuilder;
+	}
+
+	public void setRootNameBuilder(X500NameBuilder rootNameBuilder) {
+		this.rootNameBuilder = rootNameBuilder;
 	}
 
 

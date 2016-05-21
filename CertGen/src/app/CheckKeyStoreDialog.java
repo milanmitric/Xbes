@@ -90,7 +90,7 @@ public class CheckKeyStoreDialog extends JDialog {
 									
 									X509Certificate cert509 = (X509Certificate)cert;
 									//System.out.println(cert509.getIssuerX500Principal().getName());
-									parseDataFromCertificate(cert509);
+									parentDialogFinal.setRootNameBuilder(parseDataFromCertificate(cert509));
 									PrivateKey privKey = (PrivateKey)keyStore.getKey(alias, passwordField.getPassword());
 									parentDialogFinal.setRootCertificatePrivateKey(privKey);
 									that.dispose();
