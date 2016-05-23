@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns0:Akt xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning"
+ xmlns:ns0="http://www.gradskaskupstina.gov/"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.gradskaskupstina.gov/ file:/D:/GitRepos/XML/XMLSchema/Test.xsd">
+    <ns0:Naslov></ns0:Naslov>
+    <ns0:ZavrsneOdredbe>
+        <ns0:Drzava>Drzava0</ns0:Drzava>
+        <ns0:Pokrajina>Pokrajina0</ns0:Pokrajina>
+        <ns0:Grad>Grad0</ns0:Grad>
+        <ns0:Skupstina>Skupstina0</ns0:Skupstina>
+        <ns0:Broj>Broj0</ns0:Broj>
+        <ns0:Datum>Datum0</ns0:Datum>
+        <ns0:Potpisnik>
+            <ns0:Titula>Titula0</ns0:Titula>
+            <ns0:Ime>Ime0</ns0:Ime>
+            <ns0:Prezime>Prezime0</ns0:Prezime>
+        </ns0:Potpisnik>
+    </ns0:ZavrsneOdredbe>
+</ns0:Akt>

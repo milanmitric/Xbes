@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.gradskaskupstina.gov/"
+    xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning"
+    targetNamespace="http://www.gradskaskupstina.gov/" elementFormDefault="qualified"
+    vc:minVersion="1.1">
+    <xs:element name="Akt" type="TAkt"/>
+    <xs:complexType name="TAkt">
+        <xs:sequence>
+            <xs:element default="" name="Naslov" type="xs:string"/>
+            <xs:choice maxOccurs="1" minOccurs="1">
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="Clan" type="TClan"/>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="Odeljak" type="TOdeljak"/>
+            </xs:choice>
+            <xs:element name="ZavrsneOdredbe" type="TZavrsneOdredbe"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TOdeljak">
+        <xs:sequence>
+            <xs:choice>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="Clan" type="TClan"/>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="Glava" type="TGlava"/>
+            </xs:choice>
+        </xs:sequence>
+        <xs:attribute name="RedniBroj" type="xs:positiveInteger" use="required"/>
+        <xs:attribute name="Naziv" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="TGlava">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="Clan" type="TClan"/>
+        </xs:sequence>
+        <xs:attribute name="RedniBroj" type="xs:positiveInteger" use="required"/>
+        <xs:attribute name="Naziv" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="TClan">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="Stav" type="TStav"/>
+            <xs:element maxOccurs="1" minOccurs="0" name="Clan" type="TClan"/>
+        </xs:sequence>
+        <xs:attribute name="RedniBroj" type="xs:positiveInteger" use="required"/>
+        <xs:attribute name="Naziv" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="TStav">
+        <xs:sequence>
+            <xs:element name="Sadrzaj" type="xs:string"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="Tacka" type="TTacka"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TTacka">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="Podtacka">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute name="RedniSlovo" type="xs:string"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Sadrzaj" type="xs:string"/>
+        </xs:sequence>
+        <xs:attribute name="RedniBroj" type="xs:positiveInteger" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="TZavrsneOdredbe">
+        <xs:sequence>
+            <xs:element form="qualified" name="Drzava" nillable="false" type="xs:string"/>
+            <xs:element name="Pokrajina" type="xs:string"/>
+            <xs:element name="Grad" type="xs:string"/>
+            <xs:element name="Skupstina" type="xs:string"/>
+            <xs:element name="Broj" type="xs:string"/>
+            <xs:element name="Datum" type="xs:string"/>
+            <xs:element name="Potpisnik" type="TPotpisnik"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TPotpisnik">
+        <xs:sequence>
+            <xs:element name="Titula" type="xs:string"/>
+            <xs:element name="Ime" type="xs:string"/>
+            <xs:element name="Prezime" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
