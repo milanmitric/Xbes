@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns="http://www.gradskaskupstina.gov/util"
+    targetNamespace="http://www.gradskaskupstina.gov/util"
+    elementFormDefault="qualified">
+    
+    <xsd:complexType name="TOdeljak">
+        <xsd:sequence>
+            <xsd:element name="naziv" type="xsd:string"></xsd:element>
+            <xsd:choice minOccurs="1" maxOccurs="1">
+                <xsd:element name="pododeljak" type="TPododeljak" minOccurs="1" maxOccurs="unbounded"/>
+                <xsd:element name="clan" type="TClan" minOccurs="1" maxOccurs="unbounded"/>
+            </xsd:choice>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="TPododeljak">
+        <xsd:sequence>
+            <xsd:element name="naziv" type="xsd:string" minOccurs="1" maxOccurs="1"></xsd:element>
+            <xsd:element name="clan" type="TClan" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="slovo" type="TSlovo"></xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="TSlovo">
+        <xsd:restriction base="xsd:string">
+            <xsd:minLength value="1"></xsd:minLength>
+            <xsd:maxLength value="1"></xsd:maxLength>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:complexType name="TClan">
+        <xsd:sequence>
+            <xsd:element name="naziv" type="xsd:string" minOccurs="0" maxOccurs="1"></xsd:element>
+            <xsd:element name="stav" type="TStav" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="redni_broj" type="xsd:nonNegativeInteger"></xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="TStav">
+        <xsd:sequence>
+            <xsd:element name="tacka" type="TTacka" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="TTacka">
+        <xsd:sequence>
+            <xsd:element name="podtacka" type="TPodtacka" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="redni_broj" type="xsd:nonNegativeInteger"></xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="TPodtacka">
+        <xsd:sequence>
+            <xsd:element name="Alineja" type="TSemi_struktuirani_tekst" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="redni_broj" type="xsd:nonNegativeInteger"></xsd:attribute>
+    </xsd:complexType>
+    
+    <!--  Atribut referenca na clan, clanove, stav, stavove, tacku ili tacke nekog akta.
+            Ovi atributi nalaze se u elementu <referenca></referenca>.
+            Validni oblici:
+        <referenca ref_clanovi="5,6"></referenca>
+    -->
+    <xsd:attributeGroup name="referenca">
+        <xsd:attribute name="ref_akt" type="xsd:string" use="optional" default="ovaj_akt"/>
+        <xsd:attribute name="ref_clanovi" type="TNiz_referenci" use="required"/>
+        <xsd:attribute name="ref_stavovi" type="TNiz_referenci" use="optional"/>
+        <xsd:attribute name="ref_tacke" type="TNiz_referenci" use="optional"/>
+    </xsd:attributeGroup>
+    
+    <!-- Tip reference. Prakticno element koji je string sa atributima iz grupe referenca -->
+    <xsd:complexType name="TReferenca">
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+                <xsd:attribute name="referenca" type="xsd:string" use="required"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <!-- Polustruktuirani tekst sa elementima referencama i datumima -->
+    <xsd:complexType name="TSemi_struktuirani_tekst" mixed="true">
+        <xsd:choice minOccurs="1" maxOccurs="unbounded">
+            <xsd:element name="tekst" type="xsd:string"/>
+            <xsd:element name="referenca" type="TReferenca"/>
+            <xsd:element name="datum" type="xsd:date"/>
+        </xsd:choice>
+    </xsd:complexType>
+    
+    <!-- Izgled atributa reference. Moze biti sledeceg oblika
+            Kao obican broj: 15
+            Kao vise brojeva u obliku: 4,5,6
+            Kao niz brojeva u obliku: [1-4]
+            Kao vise nizova brojeva u obliku: [1-4],[6-7]    -->
+    <xsd:simpleType name="TNiz_referenci">
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="(\d+,?)+"/>
+            <xsd:pattern value="(\d+-\d+,?)+"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>
