@@ -4,6 +4,19 @@
     targetNamespace="http://www.gradskaskupstina.gov/util"
     elementFormDefault="qualified">
     
+    
+    
+    <xsd:complexType name="TGlava">
+        <xsd:sequence>
+            <xsd:element name="naziv" type="xsd:string"></xsd:element>
+            <xsd:choice minOccurs="1" maxOccurs="1">
+                <xsd:element name="odeljak" type="TOdeljak" minOccurs="1" maxOccurs="unbounded"/>
+                <xsd:element name="clan" type="TClan" minOccurs="1" maxOccurs="unbounded"/>
+            </xsd:choice>
+        </xsd:sequence>
+        <xsd:attribute name="redni_broj" type="xsd:nonNegativeInteger"></xsd:attribute>
+    </xsd:complexType>
+    
     <xsd:complexType name="TOdeljak">
         <xsd:sequence>
             <xsd:element name="naziv" type="xsd:string"></xsd:element>
@@ -12,6 +25,7 @@
                 <xsd:element name="clan" type="TClan" minOccurs="1" maxOccurs="unbounded"/>
             </xsd:choice>
         </xsd:sequence>
+        <xsd:attribute name="redni_broj" type="xsd:nonNegativeInteger"></xsd:attribute>
     </xsd:complexType>
     
     <xsd:complexType name="TPododeljak">
