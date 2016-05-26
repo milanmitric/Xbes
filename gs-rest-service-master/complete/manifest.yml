@@ -1,0 +1,8 @@
+---
+applications:
+- name: gs-hello.rest-service
+  memory: 256M
+  instances: 1
+  host: hello.rest-service
+  domain: guides.spring.io
+  path: build/libs/gs-hello.rest-service-0.1.0.jar
