@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class GreetingController {
 
+    //REST EXAMPLE
     private static final String template = "Hello, %s!";
     private final AtomicLong counter = new AtomicLong();
 

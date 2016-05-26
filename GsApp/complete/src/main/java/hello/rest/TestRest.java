@@ -1,8 +1,8 @@
 package hello.rest;
 
-
-import com.fasterxml.jackson.databind.util.JSONPObject;
-import jdk.nashorn.internal.parser.JSONParser;
+import hello.entity.TAkt;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
@@ -15,44 +15,58 @@ import org.springframework.web.client.RestTemplate;
 public class TestRest {
 
 
-    @RequestMapping("/test")
+    @RequestMapping("/test1")
     public HttpStatus test() {
-
         return HttpStatus.OK;
     }
 
+
     @RequestMapping("/test2")
     public String test2() {
-
+        //that link generates random JSON
         RestTemplate restTemplate = new RestTemplate();
         String s=restTemplate.getForObject("http://gturnquist-quoters.cfapps.io/api/random", String.class);
         return s;
     }
 
-    @RequestMapping("/testiranje")
-    public HttpStatus testJSONA(@RequestBody String s) {
 
-        System.out.println("*************************************");
-        String sa="sssssss";
+    @RequestMapping("/test3")
+    public HttpStatus test3(@RequestBody String s) {
 
+        //http://www.mkyong.com/java/jaxb-hello-world-example/
 
-        //JSONObject obj=new JSONObject();
-        //JSONObject jsonObj = new JSONObject("{\"phonetype\":\"N95\",\"cat\":\"WP\"}");
-      /*  JSONParser parser = new JSONParser();
+        JSONObject obj = null;
         try {
-            JSONObject json = (JSONObject) parser.parse(s);
-            System.out.println("OVO JE JSON OBJ");
-            System.out.println(json);
-        } catch (ParseException e) {
+             obj=new JSONObject(s);
+            System.out.println(obj.toString());
+        } catch (JSONException e) {
             e.printStackTrace();
-        }*/
+        }
 
-        System.out.println(s);
+        TAkt akt=new TAkt();
+        try {
+            akt.setNaslov(obj.getString("naslov"));
+            //gde validacija ?!
+            //moze da se marshal pa da se naprvi XML doc
+            //pa to saljemo mark bazi?
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
-        System.out.println("***************test**********************");
-
+        System.out.println("NASLOV IZ OBJ AKT: "+akt.getNaslov());
         return HttpStatus.OK;
     }
+
+
+    @RequestMapping("/test4")
+    public HttpStatus test4(@RequestBody TAkt t) {
+        //nece - 405
+        System.out.println(t.getNaslov());
+        return HttpStatus.OK;
+    }
+
+
+
 
 
 }
