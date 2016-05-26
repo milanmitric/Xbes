@@ -6,7 +6,7 @@
 //
 
 
-package gov.gradskaskupstina;
+package hello.entity;
 
 import java.math.BigInteger;
 import java.util.ArrayList;

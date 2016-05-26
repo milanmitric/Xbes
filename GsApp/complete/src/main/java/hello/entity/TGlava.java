@@ -6,7 +6,7 @@
 //
 
 
-package gov.gradskaskupstina;
+package hello.entity;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -20,20 +20,20 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for TClan complex type.
+ * <p>Java class for TGlava complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="TClan">
+ * &lt;complexType name="TGlava">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="Stav" type="{http://www.gradskaskupstina.gov/}TStav" maxOccurs="unbounded"/>
- *         &lt;element name="Clan" type="{http://www.gradskaskupstina.gov/}TClan" minOccurs="0"/>
- *       &lt;/sequence>
+ *       &lt;choice>
+ *         &lt;element name="Clan" type="{http://www.gradskaskupstina.gov/}TClan" maxOccurs="unbounded"/>
+ *         &lt;element name="Odeljak" type="{http://www.gradskaskupstina.gov/}TOdeljak" maxOccurs="unbounded" minOccurs="2"/>
+ *       &lt;/choice>
  *       &lt;attribute name="RedniBroj" use="required" type="{http://www.w3.org/2001/XMLSchema}positiveInteger" />
- *       &lt;attribute name="Naziv" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="Naziv" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -42,73 +42,78 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TClan", propOrder = {
-    "stav",
-    "clan"
+@XmlType(name = "TGlava", propOrder = {
+    "clan",
+    "odeljak"
 })
-public class TClan {
+public class TGlava {
 
-    @XmlElement(name = "Stav", required = true)
-    protected List<TStav> stav;
     @XmlElement(name = "Clan")
-    protected TClan clan;
+    protected List<TClan> clan;
+    @XmlElement(name = "Odeljak")
+    protected List<TOdeljak> odeljak;
     @XmlAttribute(name = "RedniBroj", required = true)
     @XmlSchemaType(name = "positiveInteger")
     protected BigInteger redniBroj;
-    @XmlAttribute(name = "Naziv")
+    @XmlAttribute(name = "Naziv", required = true)
     protected String naziv;
 
     /**
-     * Gets the value of the stav property.
+     * Gets the value of the clan property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the stav property.
+     * This is why there is not a <CODE>set</CODE> method for the clan property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getStav().add(newItem);
+     *    getClan().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link TStav }
+     * {@link TClan }
      * 
      * 
      */
-    public List<TStav> getStav() {
-        if (stav == null) {
-            stav = new ArrayList<TStav>();
+    public List<TClan> getClan() {
+        if (clan == null) {
+            clan = new ArrayList<TClan>();
         }
-        return this.stav;
+        return this.clan;
     }
 
     /**
-     * Gets the value of the clan property.
+     * Gets the value of the odeljak property.
      * 
-     * @return
-     *     possible object is
-     *     {@link TClan }
-     *     
-     */
-    public TClan getClan() {
-        return clan;
-    }
-
-    /**
-     * Sets the value of the clan property.
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the odeljak property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link TClan }
-     *     
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getOdeljak().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link TOdeljak }
+     * 
+     * 
      */
-    public void setClan(TClan value) {
-        this.clan = value;
+    public List<TOdeljak> getOdeljak() {
+        if (odeljak == null) {
+            odeljak = new ArrayList<TOdeljak>();
+        }
+        return this.odeljak;
     }
 
     /**

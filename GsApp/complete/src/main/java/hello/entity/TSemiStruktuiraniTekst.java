@@ -6,7 +6,7 @@
 //
 
 
-package gov.gradskaskupstina;
+package hello.entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;

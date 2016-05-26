@@ -6,7 +6,7 @@
 //
 
 
-package gov.gradskaskupstina;
+package hello.entity;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -20,20 +20,20 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for TOdeljak complex type.
+ * <p>Java class for TClan complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="TOdeljak">
+ * &lt;complexType name="TClan">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;choice>
- *         &lt;element name="Pododeljak" type="{http://www.gradskaskupstina.gov/}TPododeljak" maxOccurs="unbounded" minOccurs="2"/>
- *         &lt;element name="Clan" type="{http://www.gradskaskupstina.gov/}TClan" maxOccurs="unbounded"/>
- *       &lt;/choice>
+ *       &lt;sequence>
+ *         &lt;element name="Stav" type="{http://www.gradskaskupstina.gov/}TStav" maxOccurs="unbounded"/>
+ *         &lt;element name="Clan" type="{http://www.gradskaskupstina.gov/}TClan" minOccurs="0"/>
+ *       &lt;/sequence>
  *       &lt;attribute name="RedniBroj" use="required" type="{http://www.w3.org/2001/XMLSchema}positiveInteger" />
- *       &lt;attribute name="Naziv" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="Naziv" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -42,78 +42,73 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TOdeljak", propOrder = {
-    "pododeljak",
+@XmlType(name = "TClan", propOrder = {
+    "stav",
     "clan"
 })
-public class TOdeljak {
+public class TClan {
 
-    @XmlElement(name = "Pododeljak")
-    protected List<TPododeljak> pododeljak;
+    @XmlElement(name = "Stav", required = true)
+    protected List<TStav> stav;
     @XmlElement(name = "Clan")
-    protected List<TClan> clan;
+    protected TClan clan;
     @XmlAttribute(name = "RedniBroj", required = true)
     @XmlSchemaType(name = "positiveInteger")
     protected BigInteger redniBroj;
-    @XmlAttribute(name = "Naziv", required = true)
+    @XmlAttribute(name = "Naziv")
     protected String naziv;
 
     /**
-     * Gets the value of the pododeljak property.
+     * Gets the value of the stav property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the pododeljak property.
+     * This is why there is not a <CODE>set</CODE> method for the stav property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getPododeljak().add(newItem);
+     *    getStav().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link TPododeljak }
+     * {@link TStav }
      * 
      * 
      */
-    public List<TPododeljak> getPododeljak() {
-        if (pododeljak == null) {
-            pododeljak = new ArrayList<TPododeljak>();
+    public List<TStav> getStav() {
+        if (stav == null) {
+            stav = new ArrayList<TStav>();
         }
-        return this.pododeljak;
+        return this.stav;
     }
 
     /**
      * Gets the value of the clan property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the clan property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getClan().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link TClan }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link TClan }
+     *     
      */
-    public List<TClan> getClan() {
-        if (clan == null) {
-            clan = new ArrayList<TClan>();
-        }
-        return this.clan;
+    public TClan getClan() {
+        return clan;
+    }
+
+    /**
+     * Sets the value of the clan property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link TClan }
+     *     
+     */
+    public void setClan(TClan value) {
+        this.clan = value;
     }
 
     /**

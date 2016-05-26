@@ -6,7 +6,7 @@
 //
 
 
-package gov.gradskaskupstina;
+package hello.entity;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -20,17 +20,17 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for TGlava complex type.
+ * <p>Java class for TOdeljak complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="TGlava">
+ * &lt;complexType name="TOdeljak">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;choice>
+ *         &lt;element name="Pododeljak" type="{http://www.gradskaskupstina.gov/}TPododeljak" maxOccurs="unbounded" minOccurs="2"/>
  *         &lt;element name="Clan" type="{http://www.gradskaskupstina.gov/}TClan" maxOccurs="unbounded"/>
- *         &lt;element name="Odeljak" type="{http://www.gradskaskupstina.gov/}TOdeljak" maxOccurs="unbounded" minOccurs="2"/>
  *       &lt;/choice>
  *       &lt;attribute name="RedniBroj" use="required" type="{http://www.w3.org/2001/XMLSchema}positiveInteger" />
  *       &lt;attribute name="Naziv" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
@@ -42,21 +42,50 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TGlava", propOrder = {
-    "clan",
-    "odeljak"
+@XmlType(name = "TOdeljak", propOrder = {
+    "pododeljak",
+    "clan"
 })
-public class TGlava {
+public class TOdeljak {
 
+    @XmlElement(name = "Pododeljak")
+    protected List<TPododeljak> pododeljak;
     @XmlElement(name = "Clan")
     protected List<TClan> clan;
-    @XmlElement(name = "Odeljak")
-    protected List<TOdeljak> odeljak;
     @XmlAttribute(name = "RedniBroj", required = true)
     @XmlSchemaType(name = "positiveInteger")
     protected BigInteger redniBroj;
     @XmlAttribute(name = "Naziv", required = true)
     protected String naziv;
+
+    /**
+     * Gets the value of the pododeljak property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the pododeljak property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getPododeljak().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link TPododeljak }
+     * 
+     * 
+     */
+    public List<TPododeljak> getPododeljak() {
+        if (pododeljak == null) {
+            pododeljak = new ArrayList<TPododeljak>();
+        }
+        return this.pododeljak;
+    }
 
     /**
      * Gets the value of the clan property.
@@ -85,35 +114,6 @@ public class TGlava {
             clan = new ArrayList<TClan>();
         }
         return this.clan;
-    }
-
-    /**
-     * Gets the value of the odeljak property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the odeljak property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getOdeljak().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link TOdeljak }
-     * 
-     * 
-     */
-    public List<TOdeljak> getOdeljak() {
-        if (odeljak == null) {
-            odeljak = new ArrayList<TOdeljak>();
-        }
-        return this.odeljak;
     }
 
     /**
