@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.gradskaskupstina.gov/"
-    xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning"
-    targetNamespace="http://www.gradskaskupstina.gov/" elementFormDefault="qualified"
-    vc:minVersion="1.1">
-    <xs:element name="Akt" type="TAkt"/>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.gradskaskupstina.gov/util"
+    targetNamespace="http://www.gradskaskupstina.gov/util" elementFormDefault="qualified">
+
     <xs:complexType name="TAkt">
         <xs:sequence>
             <xs:element default="Akt" name="Naslov">
@@ -21,6 +19,32 @@
             <xs:element name="ZavrsneOdredbe" type="TZavrsneOdredbe"/>
         </xs:sequence>
     </xs:complexType>
+
+    <xs:complexType name="TAmandmani">
+        <xs:sequence>
+            <xs:element name="PravniOsnov" type="TReferenca" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="Akt" type="TReferenca" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="Amandman" type="TAmandman" minOccurs="1" maxOccurs="unbounded"></xs:element>
+            <xs:element name="Potpisnik" type="TPotpisnik" minOccurs="1" maxOccurs="1"></xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="TAmandman">
+        <xs:sequence minOccurs="1" maxOccurs="unbounded">
+            <xs:element name="PredmetIzmene" type="TReferenca" minOccurs="1" maxOccurs="1"></xs:element>
+            <xs:element name="TipIzmene" type="TTipIzmene" minOccurs="1" maxOccurs="1" />
+        </xs:sequence>
+        <xs:attribute name="RedniBroj" type="xs:positiveInteger" use="optional"></xs:attribute>
+    </xs:complexType>
+
+    <xs:simpleType name="TTipIzmene">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="izmena"/>
+            <xs:enumeration value="dopuna"/>
+            <xs:enumeration value="brisanje"/>
+        </xs:restriction>
+    </xs:simpleType>
+
     <xs:complexType name="TDeo">
         <xs:sequence>
             <xs:element maxOccurs="unbounded" minOccurs="2" name="Glava" type="TGlava"/>
@@ -28,6 +52,7 @@
         <xs:attribute name="Naziv" type="xs:string"/>
         <xs:attribute name="RedniBroj" type="xs:positiveInteger"/>
     </xs:complexType>
+
     <xs:complexType name="TGlava">
         <xs:choice>
             <xs:element maxOccurs="unbounded" minOccurs="1" name="Clan" type="TClan"/>
@@ -36,6 +61,7 @@
         <xs:attribute name="RedniBroj" type="xs:positiveInteger" use="required"/>
         <xs:attribute name="Naziv" type="xs:string" use="required"/>
     </xs:complexType>
+
     <xs:complexType name="TOdeljak">
         <xs:choice>
             <xs:element maxOccurs="unbounded" minOccurs="2" name="Pododeljak" type="TPododeljak"/>
@@ -44,18 +70,21 @@
         <xs:attribute name="RedniBroj" type="xs:positiveInteger" use="required"/>
         <xs:attribute name="Naziv" type="xs:string" use="required"/>
     </xs:complexType>
+
     <xs:complexType name="TPododeljak">
         <xs:sequence>
             <xs:element maxOccurs="unbounded" name="Clan" type="TClan"/>
         </xs:sequence>
         <xs:attribute name="RednoSlovo" type="TRednoSlovo" use="required"/>
     </xs:complexType>
+
     <xs:simpleType final="" name="TRednoSlovo">
         <xs:restriction base="xs:string">
             <xs:whiteSpace value="preserve"/>
             <xs:pattern value="\p{Ll}"/>
         </xs:restriction>
     </xs:simpleType>
+
     <xs:complexType name="TClan">
         <xs:sequence>
             <xs:element maxOccurs="unbounded" name="Stav" type="TStav"/>
@@ -64,6 +93,7 @@
         <xs:attribute name="RedniBroj" type="xs:positiveInteger" use="required"/>
         <xs:attribute name="Naziv" type="xs:string"/>
     </xs:complexType>
+
     <xs:complexType name="TStav" mixed="false">
         <xs:choice>
             <xs:element name="Sadrzaj" minOccurs="1" type="TSemiStruktuiraniTekst"> </xs:element>
@@ -73,6 +103,7 @@
             </xs:sequence>
         </xs:choice>
     </xs:complexType>
+
     <xs:complexType name="TTacka">
         <xs:sequence>
             <xs:element maxOccurs="unbounded" minOccurs="0" name="Podtacka">
@@ -88,6 +119,7 @@
         </xs:sequence>
         <xs:attribute name="RedniBroj" type="xs:positiveInteger" use="required"/>
     </xs:complexType>
+
     <xs:complexType name="TZavrsneOdredbe">
         <xs:sequence>
             <xs:element form="qualified" name="Drzava" nillable="false" type="xs:string"/>
@@ -99,6 +131,7 @@
             <xs:element name="Potpisnik" type="TPotpisnik"/>
         </xs:sequence>
     </xs:complexType>
+
     <xs:complexType name="TPotpisnik">
         <xs:sequence>
             <xs:element name="Titula" type="xs:string"/>

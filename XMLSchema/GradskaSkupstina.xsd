@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns="http://www.gradskaskupstina.gov"
+    xmlns:gs_util="http://www.gradskaskupstina.gov/util"
+    targetNamespace="http://www.gradskaskupstina.gov/"
+    elementFormDefault="qualified">
+    
+    <xs:import namespace="http://www.gradskaskupstina.gov/util" schemaLocation="Util.xsd"/>
+    
+    <xs:element name="Akt" type="gs_util:TAkt"/>
+    
+    <xs:element name="Amandmani" type="gs_util:TAmandmani"/>
+    
+</xs:schema>
