@@ -43,7 +43,7 @@ public class Util {
 	 * @return the configuration object
 	 */
 	public static ConnectionProperties loadProperties() throws IOException {
-		String propsName = Util.class.getResource("").getPath()+"connection.properties";
+		String propsName = "connection.properties";
 
 		InputStream propsStream = openStream(propsName);
 		if (propsStream == null)
@@ -65,7 +65,7 @@ public class Util {
 	 */
 	public static InputStream openStream(String fileName) throws IOException {
 
-		return new FileInputStream(new File(fileName));
+		return Util.class.getClassLoader().getResourceAsStream(fileName);
 	}
 
 }
