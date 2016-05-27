@@ -2,6 +2,9 @@ package hello.util;
 
 import com.marklogic.client.DatabaseClientFactory.Authentication;
 
+import javax.servlet.ServletContext;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -40,7 +43,7 @@ public class Util {
 	 * @return the configuration object
 	 */
 	public static ConnectionProperties loadProperties() throws IOException {
-		String propsName = "connection.properties";
+		String propsName = Util.class.getResource("").getPath()+"connection.properties";
 
 		InputStream propsStream = openStream(propsName);
 		if (propsStream == null)
@@ -61,7 +64,8 @@ public class Util {
 	 * @throws IOException
 	 */
 	public static InputStream openStream(String fileName) throws IOException {
-		return Util.class.getClassLoader().getResourceAsStream(fileName);
+
+		return new FileInputStream(new File(fileName));
 	}
 
 }
