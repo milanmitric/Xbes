@@ -16,7 +16,7 @@
                 <xs:element maxOccurs="unbounded" minOccurs="1" name="Glava" type="TGlava"/>
                 <xs:element maxOccurs="unbounded" minOccurs="1" name="Clan" type="TClan"/>
             </xs:choice>
-            <xs:element name="ZavrsneOdredbe" type="TZavrsneOdredbe"/>
+            <xs:element name="ZavrsniDeo" type="TZavrsniDeo"/>
         </xs:sequence>
     </xs:complexType>
 
@@ -25,7 +25,7 @@
             <xs:element name="PravniOsnov" type="TReferenca" minOccurs="1" maxOccurs="1"/>
             <xs:element name="Akt" type="TReferenca" minOccurs="1" maxOccurs="1"/>
             <xs:element name="Amandman" type="TAmandman" minOccurs="1" maxOccurs="unbounded"></xs:element>
-            <xs:element name="Potpisnik" type="TPotpisnik" minOccurs="1" maxOccurs="1"></xs:element>
+            <xs:element name="Potpisnici" type="TPotpisnici" minOccurs="1" maxOccurs="1"></xs:element>
         </xs:sequence>
     </xs:complexType>
 
@@ -33,6 +33,7 @@
         <xs:sequence minOccurs="1" maxOccurs="unbounded">
             <xs:element name="PredmetIzmene" type="TReferenca" minOccurs="1" maxOccurs="1"></xs:element>
             <xs:element name="TipIzmene" type="TTipIzmene" minOccurs="1" maxOccurs="1" />
+            <xs:element name="Obrazlozenje" type="TSemiStruktuiraniTekst" minOccurs="1" maxOccurs="1"></xs:element>
         </xs:sequence>
         <xs:attribute name="RedniBroj" type="xs:positiveInteger" use="optional"></xs:attribute>
     </xs:complexType>
@@ -110,7 +111,7 @@
                 <xs:complexType>
                     <xs:simpleContent>
                         <xs:extension base="xs:string">
-                            <xs:attribute name="RedniSlovo" type="xs:string"/>
+                            <xs:attribute name="RedniBroj" type="xs:positiveInteger" use="required"/>
                         </xs:extension>
                     </xs:simpleContent>
                 </xs:complexType>
@@ -120,21 +121,26 @@
         <xs:attribute name="RedniBroj" type="xs:positiveInteger" use="required"/>
     </xs:complexType>
 
-    <xs:complexType name="TZavrsneOdredbe">
+    <xs:complexType name="TZavrsniDeo">
         <xs:sequence>
-            <xs:element form="qualified" name="Drzava" nillable="false" type="xs:string"/>
-            <xs:element name="Pokrajina" type="xs:string"/>
-            <xs:element name="Grad" type="xs:string"/>
-            <xs:element name="Skupstina" type="xs:string"/>
-            <xs:element name="Broj" type="xs:string"/>
-            <xs:element name="Datum" type="xs:string"/>
-            <xs:element name="Potpisnik" type="TPotpisnik"/>
+            <xs:element name="PrelazneOdredbe" type="TGlava" minOccurs="0" maxOccurs="1"></xs:element>
+            <xs:element name="ZavrsneOdredbe" type="TGlava" minOccurs="0" maxOccurs="1"></xs:element>
+            <xs:element name="Organ" type="xs:string" minOccurs="1" maxOccurs="1"></xs:element>
+            <xs:element name="Broj" type="xs:string" minOccurs="1" maxOccurs="1"></xs:element>
+            <xs:element name="Datum" type="xs:string" minOccurs="1" maxOccurs="1"></xs:element>
+            <xs:element name="Potpisnik" type="TPotpisnik" minOccurs="1" maxOccurs="1"></xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="TPotpisnici">
+        <xs:sequence>
+            <xs:element name="Potpisnik" type="TPotpisnik" minOccurs="1" maxOccurs="unbounded"></xs:element>
         </xs:sequence>
     </xs:complexType>
 
     <xs:complexType name="TPotpisnik">
         <xs:sequence>
-            <xs:element name="Titula" type="xs:string"/>
+            <xs:element name="Titula" type="xs:string" minOccurs="0"/>
             <xs:element name="Ime" type="xs:string"/>
             <xs:element name="Prezime" type="xs:string"/>
         </xs:sequence>
@@ -147,7 +153,7 @@
     -->
     <xs:attributeGroup name="AGReferenca">
         <xs:attribute name="ref_akt" type="xs:string" use="optional" default="ovaj_akt"/>
-        <xs:attribute name="ref_clanovi" type="TNiz_referenci" use="required"/>
+        <xs:attribute name="ref_clanovi" type="TNiz_referenci" use="optional"/>
         <xs:attribute name="ref_stavovi" type="TNiz_referenci" use="optional"/>
         <xs:attribute name="ref_tacke" type="TNiz_referenci" use="optional"/>
     </xs:attributeGroup>
@@ -163,7 +169,7 @@
 
     <!-- Polustruktuirani tekst sa elementima referencama i datumima -->
     <xs:complexType name="TSemiStruktuiraniTekst" mixed="true">
-        <xs:choice minOccurs="1" maxOccurs="unbounded">
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
             <xs:element name="Tekst">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
