@@ -6,6 +6,9 @@ import hello.entity.TGlava;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -16,13 +19,26 @@ import org.springframework.web.client.RestTemplate;
 @RequestMapping("/api")
 public class TestRest {
 
-
-    @RequestMapping("/test1")
-    public HttpStatus test() {
+    @PreAuthorize("hasRole('ADMIN')")
+    @RequestMapping("/test0")
+    public HttpStatus test0() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        //if(auth.getAuthorities().contains("ROLE_ANONYMOUS")){
+        //    return HttpStatus.BAD_REQUEST;
+        //}
         return HttpStatus.OK;
     }
 
+    @PreAuthorize("hasAuthority('GOST')")
+    @RequestMapping("/test1")
+    public HttpStatus test1() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(auth.toString());
 
+        return HttpStatus.OK;
+    }
+
+    @PreAuthorize("isAuthenticated()")
     @RequestMapping("/test2")
     public String test2() {
         //that link generates random JSON

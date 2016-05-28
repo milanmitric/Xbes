@@ -1,5 +1,6 @@
 package hello.rest;
 
+import hello.entity.Greeting;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -25,13 +26,12 @@ public class UserController {
     public HttpStatus signin() {
 
 
-        /*
         final Collection<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority(userTry.getRole().name()));
-        final Authentication authentication = new PreAuthenticatedAuthenticationToken(userTry, null,
+        authorities.add(new SimpleGrantedAuthority("ADMIN"));
+        final Authentication authentication = new PreAuthenticatedAuthenticationToken(new Greeting(4, "ss"), null,
                 authorities);
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        */
+
 
         return HttpStatus.OK;
     }

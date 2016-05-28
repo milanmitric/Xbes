@@ -55,6 +55,7 @@ import java.util.List;
 @XmlRootElement
 public class TAkt {
 
+
     @XmlElement(name = "Naslov", required = true, defaultValue = "Akt")
     protected String naslov;
     @XmlElement(name = "Deo")
