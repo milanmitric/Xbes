@@ -1,6 +1,8 @@
 package hello.rest;
 
+import hello.businessLogic.BeanManager;
 import hello.entity.TAkt;
+import hello.entity.TGlava;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
@@ -59,9 +61,13 @@ public class TestRest {
 
 
     @RequestMapping("/test4")
-    public HttpStatus test4(@RequestBody TAkt t) {
+    public HttpStatus test4(@RequestBody TGlava t) {
         //nece - 405
-        System.out.println(t.getNaslov());
+        System.out.println(t.getNaziv());
+
+        BeanManager<TGlava> bm=new BeanManager<>();
+        bm.write(t, "/lalalala", "testovoono");
+
         return HttpStatus.OK;
     }
 
