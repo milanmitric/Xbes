@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gs:Akt xmlns:gs_util="http://www.gradskaskupstina.gov/util"
+ xmlns:gs="http://www.gradskaskupstina.gov/"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.gradskaskupstina.gov/ file:/C:/Users/FS-LB/Desktop/XMLProjekat/DJIT/Xbes/XMLSchema/GradskaSkupstina.xsd">
+    <gs_util:Naslov>Zakon o izmenama i dopunama zakona o javno-privatnom partnerstvu i koncesijama</gs_util:Naslov>
+    <gs_util:Clan RedniBroj="1">
+        <gs_util:Stav><gs_util:Sadrzaj>U Zakonu o javno-privatnom partnerstvu i koncesijama („Službeni glasnik RS”, broj 88/11), u članu 2. stav 1. posle reči: „partnerom” dodaju se reči: „radi realizacije projekata javno-privatnog partnerstva”.</gs_util:Sadrzaj></gs_util:Stav>
+    </gs_util:Clan>
+    <gs_util:Clan RedniBroj="2">
+        <gs_util:Stav><gs_util:Sadrzaj>U <gs_util:Referenca ref_akt="ZOJPPIK" ref_clanovi="4" ref_tacke="6">članu 4. tačka 6)</gs_util:Referenca> reči: „može osnivati” zamenjuju se rečju: „osniva”.</gs_util:Sadrzaj></gs_util:Stav>
+    </gs_util:Clan>
+    <gs_util:Clan RedniBroj="3">
+        <gs_util:Stav><gs_util:Sadrzaj>U <gs_util:Referenca ref_akt="ZOJPPIK" ref_clanovi="7" ref_stavovi="2" ref_tacke="1">članu 7. stav 2. tačka 1)</gs_util:Referenca> posle reči: „drugog dobra” dodaju se reči: „niti isključiva isporuka dobara”.</gs_util:Sadrzaj></gs_util:Stav>
+        <gs_util:Stav><gs_util:Sadrzaj>U <gs_util:Referenca ref_akt="ZOJPPIK" ref_clanovi="7" ref_stavovi="2" ref_tacke="3">stavu 2. tačka 3)</gs_util:Referenca> reč: „projektovanje” i zapeta posle te reči brišu se.</gs_util:Sadrzaj></gs_util:Stav>
+        <gs_util:Stav><gs_util:Sadrzaj>U <gs_util:Referenca ref_akt="ZOJPPIK" ref_clanovi="7" ref_stavovi="2" ref_tacke="6">tački 6)</gs_util:Referenca> posle reči: „između javnog i privatnog partnera” dodaje se zapeta i reči: „a naročito preuzimanje rizika tražnje ili rizika raspoloživosti objekta, usluge, infrastrukture i sl.”.</gs_util:Sadrzaj></gs_util:Stav>
+    </gs_util:Clan>
+    <gs_util:ZavrsniDeo>
+        <gs_util:Organ>Drzava0</gs_util:Organ>
+        <gs_util:Broj>Broj0</gs_util:Broj>
+        <gs_util:Datum>Datum0</gs_util:Datum>
+        <gs_util:Potpisnik>
+            <gs_util:Ime>Ime0</gs_util:Ime>
+            <gs_util:Prezime>Prezime0</gs_util:Prezime>
+        </gs_util:Potpisnik>
+    </gs_util:ZavrsniDeo>
+</gs:Akt>
