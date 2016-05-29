@@ -30,6 +30,10 @@ public class UserDTO {
         this.role = role;
     }
 
+    @Override
+    public String toString() {
+        return "[ username = " + username +" ]";
+    }
     //TODO
     // function for:
     // IN(real user obj)

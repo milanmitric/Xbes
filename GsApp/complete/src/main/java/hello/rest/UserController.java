@@ -2,6 +2,7 @@ package hello.rest;
 
 import hello.dto.UserDTO;
 import hello.util.Role;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by aloha on 28-May-16.
@@ -21,20 +24,21 @@ import java.util.Collection;
 @RestController
 @RequestMapping("/api")
 public class UserController {
-
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @RequestMapping(value = "/signin")
     public ResponseEntity<UserDTO> signin() {
         //TODO
         /*SIMULATION*/
-        UserDTO user=new UserDTO(Role.ROLE_GRADJANIN, "usernameTEST");  //this is user that is found in database
-
+        logger.info("REST request for signing in");
+        UserDTO user=new UserDTO("usernameTEST", Role.ROLE_GRADJANIN);  //this is user that is found in database
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         final Collection<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(user.getRole()));
         final Authentication authentication = new PreAuthenticatedAuthenticationToken(user, null, authorities);
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
+        logger.info("Returning user : " + user);
         return ResponseEntity.ok(user);
     }
 
