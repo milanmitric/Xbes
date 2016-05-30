@@ -9,6 +9,6 @@
     
     <xs:element name="Akt" type="gs_util:TAkt"/>
     
-    <xs:element name="Amandmani" type="gs_util:TAmandmani"/>
+    <xs:element name="Amandman" type="gs_util:TAmandmani"/>
     
 </xs:schema>
