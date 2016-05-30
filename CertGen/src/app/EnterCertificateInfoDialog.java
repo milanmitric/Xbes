@@ -95,7 +95,7 @@ public class EnterCertificateInfoDialog extends JDialog {
 								Certificate cert = selKeyStore.getCertificate(alias.getText());
 								
 								ecid.dispose();
-								ShowCertificateInformationDialog scid = new ShowCertificateInformationDialog(cert);
+								ShowCertificateInformationDialog scid = new ShowCertificateInformationDialog(cert,alias.getText());
 								scid.setModal(true);
 								scid.setLocationRelativeTo(BaseWindow.getInstance());
 								scid.setVisible(true);
