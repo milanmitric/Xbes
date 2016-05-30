@@ -35,9 +35,6 @@ public class Database {
         DatabaseClient client = null;
         try {
             props = Util.loadProperties();
-            // Initialize the database client
-            System.out.println("[INFO] Using \"" + props.database + "\" database.");
-
             client = DatabaseClientFactory.newClient(props.host, props.port, props.database, props.user, props.password, props.authType);
         } catch (Exception e) {
             System.out.println("Unexpected error: " + e.getMessage());

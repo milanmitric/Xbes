@@ -1,10 +1,12 @@
 package hello.rest;
 
-import hello.entity.TAkt;
+import hello.entity.Akt;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -43,7 +45,7 @@ public class TestRest {
             e.printStackTrace();
         }
 
-        TAkt akt=new TAkt();
+        Akt akt=new Akt();
         try {
             akt.setNaslov(obj.getString("naslov"));
             //gde validacija ?!
@@ -59,7 +61,7 @@ public class TestRest {
 
 
     @RequestMapping("/test4")
-    public HttpStatus test4(@RequestBody TAkt t) {
+    public HttpStatus test4(@RequestBody Akt t) {
         //nece - 405
         System.out.println(t.getNaslov());
         return HttpStatus.OK;
