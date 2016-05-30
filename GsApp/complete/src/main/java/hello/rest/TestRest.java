@@ -1,13 +1,15 @@
 package hello.rest;
 
 import hello.businessLogic.BeanManager;
-import hello.entity.TAkt;
+import hello.entity.Akt;
 import hello.entity.TGlava;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -54,7 +56,7 @@ public class TestRest {
             e.printStackTrace();
         }
 
-        TAkt akt=new TAkt();
+        Akt akt=new Akt();
         try {
             akt.setNaslov(obj.getString("naslov"));
             //gde validacija ?!

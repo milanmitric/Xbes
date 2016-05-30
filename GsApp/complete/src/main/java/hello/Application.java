@@ -3,9 +3,8 @@ package hello;
 
 import com.marklogic.client.DatabaseClient;
 import hello.businessLogic.BeanManager;
-import hello.entity.TAkt;
+import hello.entity.Akt;
 import hello.util.Database;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.io.File;
@@ -14,28 +13,30 @@ import java.io.IOException;
 @SpringBootApplication
 public class Application {
 
-    public static void main(String[] args) throws IOException {
+            public static void main(String[] args) throws IOException {
 
-        SpringApplication.run(Application.class, args);
+        //SpringApplication.run(Application.class, args);
 
-      /*  BeanManager<TAkt> aktManager = new BeanManager<>();
+        BeanManager<Akt> aktManager = new BeanManager<>();
 
-        String docId = "/example/books.xml";
-        File file = new File("instance1.xml");
-        TAkt inputAkt = aktManager.convertFromXml(file);
-        if (!aktManager.write(inputAkt,docId,"dwadwa")){
-            System.out.println("Could't write akt!");
-        } else{
-            System.out.println("Write successful!");
-        }
-        TAkt akt = aktManager.read(docId);
+                String docId = "/example/books.xml";
+                File file = new File("instance1.xml");
+                Akt inputAkt = aktManager.convertFromXml(file);
+                if (!aktManager.write(inputAkt,docId,"dwadwa")){
+                    System.out.println("Could't write akt!");
+                } else{
+                    Akt akt = aktManager.read(docId);
 
-        System.out.println(akt.getNaslov());
+                    System.out.println(aktManager.validate(akt));
 
-        DatabaseClient client = Database.getDbClient();
+                    System.out.println("Write successful!");
+                }
+
+
+                DatabaseClient client = Database.getDbClient();
 
         client.release();
-*/
+
     }
 
 

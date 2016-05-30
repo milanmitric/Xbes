@@ -1,1 +1,407 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><tGlava xmlns:ns2="http://www.gradskaskupstina.gov/" RedniBroj="9999" Naziv="aaaaaaaaaaaaa"/>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Akt xmlns="http://www.gradskaskupstina.gov/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gradskaskupstina.gov/">
+    <Naslov>Akt</Naslov>
+    <Deo>
+        <Glava RedniBroj="50" Naziv="Naziv1">
+            <Odeljak RedniBroj="50" Naziv="Naziv2">
+                <Pododeljak RednoSlovo="a">
+                    <Clan RedniBroj="50">
+                        <Stav>
+                            <Tacka RedniBroj="50">
+<Sadrzaj>Sadrzaj0</Sadrzaj>
+                            </Tacka>
+                            <Tacka RedniBroj="50">
+<Sadrzaj>Sadrzaj1</Sadrzaj>
+                            </Tacka>
+                        </Stav>
+                        <Stav>
+                            <Tacka RedniBroj="50">
+<Sadrzaj>Sadrzaj2</Sadrzaj>
+                            </Tacka>
+                            <Tacka RedniBroj="50">
+<Sadrzaj>Sadrzaj3</Sadrzaj>
+                            </Tacka>
+                        </Stav>
+                    </Clan>
+                    <Clan RedniBroj="50">
+                        <Stav>
+                            <Sadrzaj>
+                                <Referenca ref_clanovi="0">Referenca0</Referenca>
+                                <Tekst>Tekst0</Tekst>
+                            </Sadrzaj>
+                        </Stav>
+                        <Stav>
+                            <Sadrzaj>
+                                <Referenca ref_clanovi="0">Referenca1</Referenca>
+                                <Datum>2006-05-04</Datum>
+                            </Sadrzaj>
+                        </Stav>
+                    </Clan>
+                </Pododeljak>
+                <Pododeljak RednoSlovo="a">
+                    <Clan RedniBroj="50">
+                        <Stav>
+                            <Tacka RedniBroj="50">
+<Sadrzaj>Sadrzaj4</Sadrzaj>
+                            </Tacka>
+                            <Tacka RedniBroj="50">
+<Sadrzaj>Sadrzaj5</Sadrzaj>
+                            </Tacka>
+                        </Stav>
+                        <Stav>
+                            <Sadrzaj>
+                                <Tekst>Tekst1</Tekst>
+                                <Tekst>Tekst2</Tekst>
+                            </Sadrzaj>
+                        </Stav>
+                    </Clan>
+                    <Clan RedniBroj="50">
+                        <Stav>
+                            <Sadrzaj>
+                                <Datum>2006-05-04</Datum>
+                                <Referenca ref_clanovi="0">Referenca2</Referenca>
+                            </Sadrzaj>
+                        </Stav>
+                        <Stav>
+                            <Sadrzaj>
+                                <Referenca ref_clanovi="0">Referenca3</Referenca>
+                                <Referenca ref_clanovi="0">Referenca4</Referenca>
+                            </Sadrzaj>
+                        </Stav>
+                    </Clan>
+                </Pododeljak>
+            </Odeljak>
+            <Odeljak RedniBroj="50" Naziv="Naziv7">
+                <Clan RedniBroj="50">
+                    <Stav>
+                        <Sadrzaj>
+                            <Tekst>Tekst3</Tekst>
+                            <Tekst>Tekst4</Tekst>
+                        </Sadrzaj>
+                    </Stav>
+                    <Stav>
+                        <Sadrzaj>
+                            <Tekst>Tekst5</Tekst>
+                            <Tekst>Tekst6</Tekst>
+                        </Sadrzaj>
+                    </Stav>
+                </Clan>
+                <Clan RedniBroj="50">
+                    <Stav>
+                        <Tacka RedniBroj="50">
+                            <Sadrzaj>Sadrzaj6</Sadrzaj>
+                        </Tacka>
+                        <Tacka RedniBroj="50">
+                            <Sadrzaj>Sadrzaj7</Sadrzaj>
+                        </Tacka>
+                    </Stav>
+                    <Stav>
+                        <Tacka RedniBroj="50">
+                            <Sadrzaj>Sadrzaj8</Sadrzaj>
+                        </Tacka>
+                        <Tacka RedniBroj="50">
+                            <Sadrzaj>Sadrzaj9</Sadrzaj>
+                        </Tacka>
+                    </Stav>
+                </Clan>
+            </Odeljak>
+        </Glava>
+        <Glava RedniBroj="50" Naziv="Naziv10">
+            <Odeljak RedniBroj="50" Naziv="Naziv11">
+                <Pododeljak RednoSlovo="a">
+                    <Clan RedniBroj="50">
+                        <Stav>
+                            <Sadrzaj>
+                                <Referenca ref_clanovi="0">Referenca5</Referenca>
+                                <Tekst>Tekst7</Tekst>
+                            </Sadrzaj>
+                        </Stav>
+                        <Stav>
+                            <Tacka RedniBroj="50">
+<Sadrzaj>Sadrzaj10</Sadrzaj>
+                            </Tacka>
+                            <Tacka RedniBroj="50">
+<Sadrzaj>Sadrzaj11</Sadrzaj>
+                            </Tacka>
+                        </Stav>
+                    </Clan>
+                    <Clan RedniBroj="50">
+                        <Stav>
+                            <Sadrzaj>
+                                <Datum>2006-05-04</Datum>
+                                <Datum>2006-05-04</Datum>
+                            </Sadrzaj>
+                        </Stav>
+                        <Stav>
+                            <Tacka RedniBroj="50">
+<Sadrzaj>Sadrzaj12</Sadrzaj>
+                            </Tacka>
+                            <Tacka RedniBroj="50">
+<Sadrzaj>Sadrzaj13</Sadrzaj>
+                            </Tacka>
+                        </Stav>
+                    </Clan>
+                </Pododeljak>
+                <Pododeljak RednoSlovo="a">
+                    <Clan RedniBroj="50">
+                        <Stav>
+                            <Tacka RedniBroj="50">
+<Sadrzaj>Sadrzaj14</Sadrzaj>
+                            </Tacka>
+                            <Tacka RedniBroj="50">
+<Sadrzaj>Sadrzaj15</Sadrzaj>
+                            </Tacka>
+                        </Stav>
+                        <Stav>
+                            <Sadrzaj>
+                                <Tekst>Tekst8</Tekst>
+                                <Datum>2006-05-04</Datum>
+                            </Sadrzaj>
+                        </Stav>
+                    </Clan>
+                    <Clan RedniBroj="50">
+                        <Stav>
+                            <Sadrzaj>
+                                <Tekst>Tekst9</Tekst>
+                                <Datum>2006-05-04</Datum>
+                            </Sadrzaj>
+                        </Stav>
+                        <Stav>
+                            <Sadrzaj>
+                                <Referenca ref_clanovi="0">Referenca6</Referenca>
+                                <Datum>2006-05-04</Datum>
+                            </Sadrzaj>
+                        </Stav>
+                    </Clan>
+                </Pododeljak>
+            </Odeljak>
+            <Odeljak RedniBroj="50" Naziv="Naziv16">
+                <Clan RedniBroj="50">
+                    <Stav>
+                        <Tacka RedniBroj="50">
+                            <Sadrzaj>Sadrzaj16</Sadrzaj>
+                        </Tacka>
+                        <Tacka RedniBroj="50">
+                            <Sadrzaj>Sadrzaj17</Sadrzaj>
+                        </Tacka>
+                    </Stav>
+                    <Stav>
+                        <Tacka RedniBroj="50">
+                            <Sadrzaj>Sadrzaj18</Sadrzaj>
+                        </Tacka>
+                        <Tacka RedniBroj="50">
+                            <Sadrzaj>Sadrzaj19</Sadrzaj>
+                        </Tacka>
+                    </Stav>
+                </Clan>
+                <Clan RedniBroj="50">
+                    <Stav>
+                        <Tacka RedniBroj="50">
+                            <Sadrzaj>Sadrzaj20</Sadrzaj>
+                        </Tacka>
+                        <Tacka RedniBroj="50">
+                            <Sadrzaj>Sadrzaj21</Sadrzaj>
+                        </Tacka>
+                    </Stav>
+                    <Stav>
+                        <Sadrzaj>
+                            <Datum>2006-05-04</Datum>
+                            <Tekst>Tekst10</Tekst>
+                        </Sadrzaj>
+                    </Stav>
+                </Clan>
+            </Odeljak>
+        </Glava>
+    </Deo>
+    <Deo>
+        <Glava RedniBroj="50" Naziv="Naziv20">
+            <Clan RedniBroj="50">
+                <Stav>
+                    <Sadrzaj>
+                        <Referenca ref_clanovi="0">Referenca7</Referenca>
+                        <Datum>2006-05-04</Datum>
+                    </Sadrzaj>
+                </Stav>
+                <Stav>
+                    <Tacka RedniBroj="50">
+                        <Sadrzaj>Sadrzaj22</Sadrzaj>
+                    </Tacka>
+                    <Tacka RedniBroj="50">
+                        <Sadrzaj>Sadrzaj23</Sadrzaj>
+                    </Tacka>
+                </Stav>
+            </Clan>
+            <Clan RedniBroj="50">
+                <Stav>
+                    <Tacka RedniBroj="50">
+                        <Sadrzaj>Sadrzaj24</Sadrzaj>
+                    </Tacka>
+                    <Tacka RedniBroj="50">
+                        <Sadrzaj>Sadrzaj25</Sadrzaj>
+                    </Tacka>
+                </Stav>
+                <Stav>
+                    <Tacka RedniBroj="50">
+                        <Sadrzaj>Sadrzaj26</Sadrzaj>
+                    </Tacka>
+                    <Tacka RedniBroj="50">
+                        <Sadrzaj>Sadrzaj27</Sadrzaj>
+                    </Tacka>
+                </Stav>
+            </Clan>
+        </Glava>
+        <Glava RedniBroj="50" Naziv="Naziv23">
+            <Odeljak RedniBroj="50" Naziv="Naziv24">
+                <Pododeljak RednoSlovo="a">
+                    <Clan RedniBroj="50">
+                        <Stav>
+                            <Tacka RedniBroj="50">
+<Sadrzaj>Sadrzaj28</Sadrzaj>
+                            </Tacka>
+                            <Tacka RedniBroj="50">
+<Sadrzaj>Sadrzaj29</Sadrzaj>
+                            </Tacka>
+                        </Stav>
+                        <Stav>
+                            <Tacka RedniBroj="50">
+<Sadrzaj>Sadrzaj30</Sadrzaj>
+                            </Tacka>
+                            <Tacka RedniBroj="50">
+<Sadrzaj>Sadrzaj31</Sadrzaj>
+                            </Tacka>
+                        </Stav>
+                    </Clan>
+                    <Clan RedniBroj="50">
+                        <Stav>
+                            <Sadrzaj>
+                                <Datum>2006-05-04</Datum>
+                                <Referenca ref_clanovi="0">Referenca8</Referenca>
+                            </Sadrzaj>
+                        </Stav>
+                        <Stav>
+                            <Sadrzaj>
+                                <Datum>2006-05-04</Datum>
+                                <Datum>2006-05-04</Datum>
+                            </Sadrzaj>
+                        </Stav>
+                    </Clan>
+                </Pododeljak>
+                <Pododeljak RednoSlovo="a">
+                    <Clan RedniBroj="50">
+                        <Stav>
+                            <Sadrzaj>
+                                <Tekst>Tekst11</Tekst>
+                                <Datum>2006-05-04</Datum>
+                            </Sadrzaj>
+                        </Stav>
+                        <Stav>
+                            <Tacka RedniBroj="50">
+<Sadrzaj>Sadrzaj32</Sadrzaj>
+                            </Tacka>
+                            <Tacka RedniBroj="50">
+<Sadrzaj>Sadrzaj33</Sadrzaj>
+                            </Tacka>
+                        </Stav>
+                    </Clan>
+                    <Clan RedniBroj="50">
+                        <Stav>
+                            <Tacka RedniBroj="50">
+<Sadrzaj>Sadrzaj34</Sadrzaj>
+                            </Tacka>
+                            <Tacka RedniBroj="50">
+<Sadrzaj>Sadrzaj35</Sadrzaj>
+                            </Tacka>
+                        </Stav>
+                        <Stav>
+                            <Sadrzaj>
+                                <Tekst>Tekst12</Tekst>
+                                <Datum>2006-05-04</Datum>
+                            </Sadrzaj>
+                        </Stav>
+                    </Clan>
+                </Pododeljak>
+            </Odeljak>
+            <Odeljak RedniBroj="50" Naziv="Naziv29">
+                <Pododeljak RednoSlovo="a">
+                    <Clan RedniBroj="50">
+                        <Stav>
+                            <Sadrzaj>
+                                <Datum>2006-05-04</Datum>
+                                <Referenca ref_clanovi="0">Referenca9</Referenca>
+                            </Sadrzaj>
+                        </Stav>
+                        <Stav>
+                            <Sadrzaj>
+                                <Datum>2006-05-04</Datum>
+                                <Referenca ref_clanovi="0">Referenca10</Referenca>
+                            </Sadrzaj>
+                        </Stav>
+                    </Clan>
+                    <Clan RedniBroj="50">
+                        <Stav>
+                            <Tacka RedniBroj="50">
+<Sadrzaj>Sadrzaj36</Sadrzaj>
+                            </Tacka>
+                            <Tacka RedniBroj="50">
+<Sadrzaj>Sadrzaj37</Sadrzaj>
+                            </Tacka>
+                        </Stav>
+                        <Stav>
+                            <Sadrzaj>
+                                <Datum>2006-05-04</Datum>
+                                <Referenca ref_clanovi="0">Referenca11</Referenca>
+                            </Sadrzaj>
+                        </Stav>
+                    </Clan>
+                </Pododeljak>
+                <Pododeljak RednoSlovo="a">
+                    <Clan RedniBroj="50">
+                        <Stav>
+                            <Sadrzaj>
+                                <Datum>2006-05-04</Datum>
+                                <Referenca ref_clanovi="0">Referenca12</Referenca>
+                            </Sadrzaj>
+                        </Stav>
+                        <Stav>
+                            <Tacka RedniBroj="50">
+<Sadrzaj>Sadrzaj38</Sadrzaj>
+                            </Tacka>
+                            <Tacka RedniBroj="50">
+<Sadrzaj>Sadrzaj39</Sadrzaj>
+                            </Tacka>
+                        </Stav>
+                    </Clan>
+                    <Clan RedniBroj="50">
+                        <Stav>
+                            <Sadrzaj>
+                                <Datum>2006-05-04</Datum>
+                                <Datum>2006-05-04</Datum>
+                            </Sadrzaj>
+                        </Stav>
+                        <Stav>
+                            <Tacka RedniBroj="50">
+<Sadrzaj>Sadrzaj40</Sadrzaj>
+                            </Tacka>
+                            <Tacka RedniBroj="50">
+<Sadrzaj>Sadrzaj41</Sadrzaj>
+                            </Tacka>
+                        </Stav>
+                    </Clan>
+                </Pododeljak>
+            </Odeljak>
+        </Glava>
+    </Deo>
+    <ZavrsneOdredbe>
+        <Drzava>Drzava0</Drzava>
+        <Pokrajina>Pokrajina0</Pokrajina>
+        <Grad>Grad0</Grad>
+        <Skupstina>Skupstina0</Skupstina>
+        <Broj>Broj0</Broj>
+        <Datum>Datum0</Datum>
+        <Potpisnik>
+            <Titula>Titula0</Titula>
+            <Ime>Ime0</Ime>
+            <Prezime>Prezime0</Prezime>
+        </Potpisnik>
+    </ZavrsneOdredbe>
+</Akt>
