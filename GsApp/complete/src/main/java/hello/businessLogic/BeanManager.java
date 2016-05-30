@@ -6,13 +6,22 @@ import com.marklogic.client.document.XMLDocumentManager;
 import com.marklogic.client.io.DocumentMetadataHandle;
 import com.marklogic.client.io.InputStreamHandle;
 import com.marklogic.client.io.JAXBHandle;
+import hello.entity.Akt;
+import hello.security.SignEnveloped;
+import hello.security.VerifySignatureEnveloped;
 import hello.util.Database;
+import hello.util.MyValidationEventHandler;
+import org.w3c.dom.Document;
 
+import javax.xml.XMLConstants;
 import javax.xml.bind.*;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.InputStream;
+import java.security.PrivateKey;
+import java.security.cert.Certificate;
 
 /**
  * Created by milan on 27.5.2016..
@@ -40,12 +49,21 @@ public class BeanManager <T>{
      */
     private XMLDocumentManager xmlManager;
 
+    private SchemaFactory schemaFactory;
+    private Schema schema;
     /**
      * Initializes database client and XML manager.
      */
     public BeanManager() {
-        client = Database.getDbClient();
-        xmlManager = client.newXMLDocumentManager();
+        try {
+            client = Database.getDbClient();
+            xmlManager = client.newXMLDocumentManager();
+            schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+            schema = schemaFactory.newSchema(new File("./schema/Test.xsd"));
+        } catch (Exception e){
+            System.out.println("Can't initialize Bean manager.");
+        }
+
     }
 
     /**
@@ -55,9 +73,12 @@ public class BeanManager <T>{
      * @param colId URI for collection if the docue.
      * @return Indicator of success.
      */
-    public boolean write(InputStream inputStream, String docId, String colId) {
+    public boolean write(FileInputStream inputStream, String docId, String colId) {
         boolean ret = false;
         try{
+            if (!singXml(null)) {
+                throw  new Exception("Could not sign xml, check tmp.xml.");
+            }
             InputStreamHandle handle = new InputStreamHandle(inputStream);
             DocumentMetadataHandle metadata = new DocumentMetadataHandle();
             metadata.getCollections().add(colId);
@@ -112,6 +133,12 @@ public class BeanManager <T>{
             DocumentMetadataHandle metadata = new DocumentMetadataHandle();
             xmlManager.read(docId,metadata,handle);
             ret = handle.get();
+            // Convert so that you can validate it.
+            convertToXml(ret);
+            /*
+            if (!validateXML()){
+                ret = null;
+            }*/
         }
         catch (Exception e) {
             System.out.println("Unexpected error: " + e.getMessage());
@@ -130,9 +157,8 @@ public class BeanManager <T>{
         try {
             JAXBContext jc = JAXBContext.newInstance("hello.entity");
             Unmarshaller u = jc.createUnmarshaller();
-            JAXBElement<T> root= (JAXBElement<T>) u.unmarshal(file);
-            ret = root.getValue();
-        } catch (JAXBException e) {
+            ret = (T) JAXBIntrospector.getValue(u.unmarshal(file));
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             return ret;
@@ -150,8 +176,10 @@ public class BeanManager <T>{
         try {
             fileOutputStream = new FileOutputStream(file);
             JAXBContext jc = JAXBContext.newInstance("hello.entity");
-            Marshaller m = jc.createMarshaller();
-            m.marshal(bean,fileOutputStream);
+            Marshaller marshaller = jc.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+            marshaller.setProperty(Marshaller.JAXB_SCHEMA_LOCATION, "http://www.gradskaskupstina.gov/");
+            marshaller.marshal(bean,fileOutputStream);
             fileOutputStream.close();
             ret = true;
         } catch (JAXBException e) {
@@ -191,6 +219,81 @@ public class BeanManager <T>{
             ret = true;
         } catch (Exception e){
             e.printStackTrace();
+        } finally {
+            return  ret;
+        }
+    }
+
+    /**
+     * Validates JAXB bean.
+     * @param akt Bean to be validated
+     * @return Indicator of success.
+     */
+    public boolean validate(T akt){
+        boolean ret = false;
+
+        try{
+            if (!(akt instanceof Akt)){
+                throw  new Exception("Can't validate element that is not Akt!");
+            }
+            JAXBContext context = JAXBContext.newInstance("hello.entity");
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+            Schema schema = schemaFactory.newSchema(new File("./schema/Test.xsd"));
+
+            convertToXml(akt);
+            // Podešavanje unmarshaller-a za XML schema validaciju
+            unmarshaller.setSchema(schema);
+            unmarshaller.setEventHandler(new MyValidationEventHandler());
+            T tmpAkt = (T) JAXBIntrospector.getValue(unmarshaller.unmarshal(new File("tmp.xml")));
+            ret = true;
+        } catch (Exception e){
+            System.out.println("Unexpected error: " +e.getMessage());
+        }finally {
+            return ret;
+        }
+    }
+
+    /**
+     * Signs xml files currently with example private key and certificate.
+     * TODO: Rewrite to accept custom private key, certificate and input file.
+     * @param filePath Path to xml to be signed.
+     * @return Indicator of success.
+     */
+    public boolean singXml(String filePath){
+
+        boolean ret = false;
+
+        try{
+            SignEnveloped signEnveloped = new SignEnveloped();
+            Document document;
+            if (filePath == null) {
+              document  =signEnveloped.loadDocument("tmp.xml");
+            }  else {
+                document = signEnveloped.loadDocument(filePath);
+            }
+            PrivateKey pk = signEnveloped.readPrivateKey();
+            Certificate cert = signEnveloped.readCertificate();
+            document = signEnveloped.signDocument(document,pk,cert);
+            signEnveloped.saveDocument(document,"tmp.xml");
+            ret = true;
+
+        } catch (Exception e){
+            System.out.println("Unexpected error: " +e.getMessage());
+        } finally {
+            return  ret;
+        }
+    }
+
+    public boolean validateXML(){
+        boolean ret = false;
+
+        try{
+            VerifySignatureEnveloped verifySignatureEnveloped = new VerifySignatureEnveloped();
+            Document document = verifySignatureEnveloped.loadDocument("tmp.xml");
+            ret =  verifySignatureEnveloped.verifySignature(document);
+        } catch(Exception e){
+            System.out.println("Unexpected error: " +e.getMessage());
         } finally {
             return  ret;
         }

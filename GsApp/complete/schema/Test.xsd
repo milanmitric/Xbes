@@ -1,26 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.gradskaskupstina.gov/"
-    xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning"
-    targetNamespace="http://www.gradskaskupstina.gov/" elementFormDefault="qualified"
-    vc:minVersion="1.1">
-    <xs:element name="Akt" type="TAkt"/>
-    <xs:complexType name="TAkt">
-        <xs:sequence>
-            <xs:element default="Akt" name="Naslov">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:minLength value="1"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:element>
-            <xs:choice maxOccurs="1" minOccurs="1">
-                <xs:element maxOccurs="unbounded" minOccurs="1" name="Deo" type="TDeo"/>
-                <xs:element maxOccurs="unbounded" minOccurs="1" name="Glava" type="TGlava"/>
-                <xs:element maxOccurs="unbounded" minOccurs="1" name="Clan" type="TClan"/>
-            </xs:choice>
-            <xs:element name="ZavrsneOdredbe" type="TZavrsneOdredbe"/>
-        </xs:sequence>
-    </xs:complexType>
+<xs:schema xmlns="http://www.gradskaskupstina.gov/" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning"
+           targetNamespace="http://www.gradskaskupstina.gov/" elementFormDefault="qualified"
+           attributeFormDefault="unqualified" vc:minVersion="1.1">
+    <xs:element name="Akt">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element default="Akt" name="Naslov">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:minLength value="1"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:choice maxOccurs="1" minOccurs="1">
+                    <xs:element maxOccurs="unbounded" minOccurs="1" name="Deo" type="TDeo"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="1" name="Glava" type="TGlava"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="1" name="Clan" type="TClan"/>
+                </xs:choice>
+                <xs:element name="ZavrsneOdredbe" type="TZavrsneOdredbe"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="TAkt"> </xs:complexType>
     <xs:complexType name="TDeo">
         <xs:sequence>
             <xs:element maxOccurs="unbounded" minOccurs="2" name="Glava" type="TGlava"/>

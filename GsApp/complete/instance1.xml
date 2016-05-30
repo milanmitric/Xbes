@@ -1,61 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ns0:Akt xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning"
- xmlns:ns0="http://www.gradskaskupstina.gov/"
- xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xsi:schemaLocation="http://www.gradskaskupstina.gov/ file:/D:/GitRepos/XML/XMLSchema/Test.xsd">
-    <ns0:Naslov>DRUGI AKT</ns0:Naslov>
+         xmlns:ns0="http://www.gradskaskupstina.gov/"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.gradskaskupstina.gov/ file:/C:/Users/milan/Desktop/2.%20XMLParsers%20(JAXB)/data/Test.xsd">
+    <ns0:Naslov>Akt</ns0:Naslov>
     <ns0:Deo>
         <ns0:Glava RedniBroj="50" Naziv="Naziv1">
             <ns0:Odeljak RedniBroj="50" Naziv="Naziv2">
-                <ns0:Clan RedniBroj="50">
-                    <ns0:Stav>
-                        <ns0:Tacka RedniBroj="50">
-                            <ns0:Sadrzaj>Sadrzaj0</ns0:Sadrzaj>
-                        </ns0:Tacka>
-                        <ns0:Tacka RedniBroj="50">
-                            <ns0:Sadrzaj>Sadrzaj1</ns0:Sadrzaj>
-                        </ns0:Tacka>
-                    </ns0:Stav>
-                    <ns0:Stav>
-                        <ns0:Sadrzaj>
-                            <ns0:Tekst>Tekst0</ns0:Tekst>
-                            <ns0:Referenca ref_clanovi="0">Referenca0</ns0:Referenca>
-                        </ns0:Sadrzaj>
-                    </ns0:Stav>
-                </ns0:Clan>
-                <ns0:Clan RedniBroj="50">
-                    <ns0:Stav>
-                        <ns0:Sadrzaj>
-                            <ns0:Referenca ref_clanovi="0">Referenca1</ns0:Referenca>
-                            <ns0:Datum>2006-05-04</ns0:Datum>
-                        </ns0:Sadrzaj>
-                    </ns0:Stav>
-                    <ns0:Stav>
-                        <ns0:Tacka RedniBroj="50">
-                            <ns0:Sadrzaj>Sadrzaj2</ns0:Sadrzaj>
-                        </ns0:Tacka>
-                        <ns0:Tacka RedniBroj="50">
-                            <ns0:Sadrzaj>Sadrzaj3</ns0:Sadrzaj>
-                        </ns0:Tacka>
-                    </ns0:Stav>
-                </ns0:Clan>
-            </ns0:Odeljak>
-            <ns0:Odeljak RedniBroj="50" Naziv="Naziv5">
                 <ns0:Pododeljak RednoSlovo="a">
                     <ns0:Clan RedniBroj="50">
                         <ns0:Stav>
+                            <ns0:Tacka RedniBroj="50">
+                                <ns0:Sadrzaj>Sadrzaj0</ns0:Sadrzaj>
+                            </ns0:Tacka>
+                            <ns0:Tacka RedniBroj="50">
+                                <ns0:Sadrzaj>Sadrzaj1</ns0:Sadrzaj>
+                            </ns0:Tacka>
+                        </ns0:Stav>
+                        <ns0:Stav>
+                            <ns0:Tacka RedniBroj="50">
+                                <ns0:Sadrzaj>Sadrzaj2</ns0:Sadrzaj>
+                            </ns0:Tacka>
+                            <ns0:Tacka RedniBroj="50">
+                                <ns0:Sadrzaj>Sadrzaj3</ns0:Sadrzaj>
+                            </ns0:Tacka>
+                        </ns0:Stav>
+                    </ns0:Clan>
+                    <ns0:Clan RedniBroj="50">
+                        <ns0:Stav>
                             <ns0:Sadrzaj>
-                                <ns0:Referenca ref_clanovi="0">Referenca2</ns0:Referenca>
-                                <ns0:Tekst>Tekst1</ns0:Tekst>
+                                <ns0:Referenca ref_clanovi="0">Referenca0</ns0:Referenca>
+                                <ns0:Tekst>Tekst0</ns0:Tekst>
                             </ns0:Sadrzaj>
                         </ns0:Stav>
                         <ns0:Stav>
                             <ns0:Sadrzaj>
-                                <ns0:Referenca ref_clanovi="0">Referenca3</ns0:Referenca>
-                                <ns0:Referenca ref_clanovi="0">Referenca4</ns0:Referenca>
+                                <ns0:Referenca ref_clanovi="0">Referenca1</ns0:Referenca>
+                                <ns0:Datum>2006-05-04</ns0:Datum>
                             </ns0:Sadrzaj>
                         </ns0:Stav>
                     </ns0:Clan>
+                </ns0:Pododeljak>
+                <ns0:Pododeljak RednoSlovo="a">
                     <ns0:Clan RedniBroj="50">
                         <ns0:Stav>
                             <ns0:Tacka RedniBroj="50">
@@ -67,52 +53,72 @@
                         </ns0:Stav>
                         <ns0:Stav>
                             <ns0:Sadrzaj>
+                                <ns0:Tekst>Tekst1</ns0:Tekst>
                                 <ns0:Tekst>Tekst2</ns0:Tekst>
-                                <ns0:Referenca ref_clanovi="0">Referenca5</ns0:Referenca>
                             </ns0:Sadrzaj>
                         </ns0:Stav>
                     </ns0:Clan>
-                </ns0:Pododeljak>
-                <ns0:Pododeljak RednoSlovo="a">
                     <ns0:Clan RedniBroj="50">
                         <ns0:Stav>
                             <ns0:Sadrzaj>
                                 <ns0:Datum>2006-05-04</ns0:Datum>
-                                <ns0:Datum>2006-05-04</ns0:Datum>
+                                <ns0:Referenca ref_clanovi="0">Referenca2</ns0:Referenca>
                             </ns0:Sadrzaj>
                         </ns0:Stav>
                         <ns0:Stav>
-                            <ns0:Tacka RedniBroj="50">
-                                <ns0:Sadrzaj>Sadrzaj6</ns0:Sadrzaj>
-                            </ns0:Tacka>
-                            <ns0:Tacka RedniBroj="50">
-                                <ns0:Sadrzaj>Sadrzaj7</ns0:Sadrzaj>
-                            </ns0:Tacka>
-                        </ns0:Stav>
-                    </ns0:Clan>
-                    <ns0:Clan RedniBroj="50">
-                        <ns0:Stav>
-                            <ns0:Tacka RedniBroj="50">
-                                <ns0:Sadrzaj>Sadrzaj8</ns0:Sadrzaj>
-                            </ns0:Tacka>
-                            <ns0:Tacka RedniBroj="50">
-                                <ns0:Sadrzaj>Sadrzaj9</ns0:Sadrzaj>
-                            </ns0:Tacka>
-                        </ns0:Stav>
-                        <ns0:Stav>
                             <ns0:Sadrzaj>
-                                <ns0:Referenca ref_clanovi="0">Referenca6</ns0:Referenca>
-                                <ns0:Tekst>Tekst3</ns0:Tekst>
+                                <ns0:Referenca ref_clanovi="0">Referenca3</ns0:Referenca>
+                                <ns0:Referenca ref_clanovi="0">Referenca4</ns0:Referenca>
                             </ns0:Sadrzaj>
                         </ns0:Stav>
                     </ns0:Clan>
                 </ns0:Pododeljak>
+            </ns0:Odeljak>
+            <ns0:Odeljak RedniBroj="50" Naziv="Naziv7">
+                <ns0:Clan RedniBroj="50">
+                    <ns0:Stav>
+                        <ns0:Sadrzaj>
+                            <ns0:Tekst>Tekst3</ns0:Tekst>
+                            <ns0:Tekst>Tekst4</ns0:Tekst>
+                        </ns0:Sadrzaj>
+                    </ns0:Stav>
+                    <ns0:Stav>
+                        <ns0:Sadrzaj>
+                            <ns0:Tekst>Tekst5</ns0:Tekst>
+                            <ns0:Tekst>Tekst6</ns0:Tekst>
+                        </ns0:Sadrzaj>
+                    </ns0:Stav>
+                </ns0:Clan>
+                <ns0:Clan RedniBroj="50">
+                    <ns0:Stav>
+                        <ns0:Tacka RedniBroj="50">
+                            <ns0:Sadrzaj>Sadrzaj6</ns0:Sadrzaj>
+                        </ns0:Tacka>
+                        <ns0:Tacka RedniBroj="50">
+                            <ns0:Sadrzaj>Sadrzaj7</ns0:Sadrzaj>
+                        </ns0:Tacka>
+                    </ns0:Stav>
+                    <ns0:Stav>
+                        <ns0:Tacka RedniBroj="50">
+                            <ns0:Sadrzaj>Sadrzaj8</ns0:Sadrzaj>
+                        </ns0:Tacka>
+                        <ns0:Tacka RedniBroj="50">
+                            <ns0:Sadrzaj>Sadrzaj9</ns0:Sadrzaj>
+                        </ns0:Tacka>
+                    </ns0:Stav>
+                </ns0:Clan>
             </ns0:Odeljak>
         </ns0:Glava>
         <ns0:Glava RedniBroj="50" Naziv="Naziv10">
             <ns0:Odeljak RedniBroj="50" Naziv="Naziv11">
                 <ns0:Pododeljak RednoSlovo="a">
                     <ns0:Clan RedniBroj="50">
+                        <ns0:Stav>
+                            <ns0:Sadrzaj>
+                                <ns0:Referenca ref_clanovi="0">Referenca5</ns0:Referenca>
+                                <ns0:Tekst>Tekst7</ns0:Tekst>
+                            </ns0:Sadrzaj>
+                        </ns0:Stav>
                         <ns0:Stav>
                             <ns0:Tacka RedniBroj="50">
                                 <ns0:Sadrzaj>Sadrzaj10</ns0:Sadrzaj>
@@ -121,18 +127,12 @@
                                 <ns0:Sadrzaj>Sadrzaj11</ns0:Sadrzaj>
                             </ns0:Tacka>
                         </ns0:Stav>
-                        <ns0:Stav>
-                            <ns0:Sadrzaj>
-                                <ns0:Referenca ref_clanovi="0">Referenca7</ns0:Referenca>
-                                <ns0:Referenca ref_clanovi="0">Referenca8</ns0:Referenca>
-                            </ns0:Sadrzaj>
-                        </ns0:Stav>
                     </ns0:Clan>
                     <ns0:Clan RedniBroj="50">
                         <ns0:Stav>
                             <ns0:Sadrzaj>
                                 <ns0:Datum>2006-05-04</ns0:Datum>
-                                <ns0:Tekst>Tekst4</ns0:Tekst>
+                                <ns0:Datum>2006-05-04</ns0:Datum>
                             </ns0:Sadrzaj>
                         </ns0:Stav>
                         <ns0:Stav>
@@ -156,26 +156,22 @@
                             </ns0:Tacka>
                         </ns0:Stav>
                         <ns0:Stav>
-                            <ns0:Tacka RedniBroj="50">
-                                <ns0:Sadrzaj>Sadrzaj16</ns0:Sadrzaj>
-                            </ns0:Tacka>
-                            <ns0:Tacka RedniBroj="50">
-                                <ns0:Sadrzaj>Sadrzaj17</ns0:Sadrzaj>
-                            </ns0:Tacka>
+                            <ns0:Sadrzaj>
+                                <ns0:Tekst>Tekst8</ns0:Tekst>
+                                <ns0:Datum>2006-05-04</ns0:Datum>
+                            </ns0:Sadrzaj>
                         </ns0:Stav>
                     </ns0:Clan>
                     <ns0:Clan RedniBroj="50">
                         <ns0:Stav>
-                            <ns0:Tacka RedniBroj="50">
-                                <ns0:Sadrzaj>Sadrzaj18</ns0:Sadrzaj>
-                            </ns0:Tacka>
-                            <ns0:Tacka RedniBroj="50">
-                                <ns0:Sadrzaj>Sadrzaj19</ns0:Sadrzaj>
-                            </ns0:Tacka>
+                            <ns0:Sadrzaj>
+                                <ns0:Tekst>Tekst9</ns0:Tekst>
+                                <ns0:Datum>2006-05-04</ns0:Datum>
+                            </ns0:Sadrzaj>
                         </ns0:Stav>
                         <ns0:Stav>
                             <ns0:Sadrzaj>
-                                <ns0:Tekst>Tekst5</ns0:Tekst>
+                                <ns0:Referenca ref_clanovi="0">Referenca6</ns0:Referenca>
                                 <ns0:Datum>2006-05-04</ns0:Datum>
                             </ns0:Sadrzaj>
                         </ns0:Stav>
@@ -185,11 +181,23 @@
             <ns0:Odeljak RedniBroj="50" Naziv="Naziv16">
                 <ns0:Clan RedniBroj="50">
                     <ns0:Stav>
-                        <ns0:Sadrzaj>
-                            <ns0:Datum>2006-05-04</ns0:Datum>
-                            <ns0:Datum>2006-05-04</ns0:Datum>
-                        </ns0:Sadrzaj>
+                        <ns0:Tacka RedniBroj="50">
+                            <ns0:Sadrzaj>Sadrzaj16</ns0:Sadrzaj>
+                        </ns0:Tacka>
+                        <ns0:Tacka RedniBroj="50">
+                            <ns0:Sadrzaj>Sadrzaj17</ns0:Sadrzaj>
+                        </ns0:Tacka>
                     </ns0:Stav>
+                    <ns0:Stav>
+                        <ns0:Tacka RedniBroj="50">
+                            <ns0:Sadrzaj>Sadrzaj18</ns0:Sadrzaj>
+                        </ns0:Tacka>
+                        <ns0:Tacka RedniBroj="50">
+                            <ns0:Sadrzaj>Sadrzaj19</ns0:Sadrzaj>
+                        </ns0:Tacka>
+                    </ns0:Stav>
+                </ns0:Clan>
+                <ns0:Clan RedniBroj="50">
                     <ns0:Stav>
                         <ns0:Tacka RedniBroj="50">
                             <ns0:Sadrzaj>Sadrzaj20</ns0:Sadrzaj>
@@ -198,20 +206,10 @@
                             <ns0:Sadrzaj>Sadrzaj21</ns0:Sadrzaj>
                         </ns0:Tacka>
                     </ns0:Stav>
-                </ns0:Clan>
-                <ns0:Clan RedniBroj="50">
-                    <ns0:Stav>
-                        <ns0:Tacka RedniBroj="50">
-                            <ns0:Sadrzaj>Sadrzaj22</ns0:Sadrzaj>
-                        </ns0:Tacka>
-                        <ns0:Tacka RedniBroj="50">
-                            <ns0:Sadrzaj>Sadrzaj23</ns0:Sadrzaj>
-                        </ns0:Tacka>
-                    </ns0:Stav>
                     <ns0:Stav>
                         <ns0:Sadrzaj>
                             <ns0:Datum>2006-05-04</ns0:Datum>
-                            <ns0:Datum>2006-05-04</ns0:Datum>
+                            <ns0:Tekst>Tekst10</ns0:Tekst>
                         </ns0:Sadrzaj>
                     </ns0:Stav>
                 </ns0:Clan>
@@ -220,49 +218,45 @@
     </ns0:Deo>
     <ns0:Deo>
         <ns0:Glava RedniBroj="50" Naziv="Naziv20">
-            <ns0:Odeljak RedniBroj="50" Naziv="Naziv21">
-                <ns0:Clan RedniBroj="50">
-                    <ns0:Stav>
-                        <ns0:Sadrzaj>
-                            <ns0:Tekst>Tekst6</ns0:Tekst>
-                            <ns0:Referenca ref_clanovi="0">Referenca9</ns0:Referenca>
-                        </ns0:Sadrzaj>
-                    </ns0:Stav>
-                    <ns0:Stav>
-                        <ns0:Tacka RedniBroj="50">
-                            <ns0:Sadrzaj>Sadrzaj24</ns0:Sadrzaj>
-                        </ns0:Tacka>
-                        <ns0:Tacka RedniBroj="50">
-                            <ns0:Sadrzaj>Sadrzaj25</ns0:Sadrzaj>
-                        </ns0:Tacka>
-                    </ns0:Stav>
-                </ns0:Clan>
-                <ns0:Clan RedniBroj="50">
-                    <ns0:Stav>
-                        <ns0:Sadrzaj>
-                            <ns0:Tekst>Tekst7</ns0:Tekst>
-                            <ns0:Datum>2006-05-04</ns0:Datum>
-                        </ns0:Sadrzaj>
-                    </ns0:Stav>
-                    <ns0:Stav>
-                        <ns0:Tacka RedniBroj="50">
-                            <ns0:Sadrzaj>Sadrzaj26</ns0:Sadrzaj>
-                        </ns0:Tacka>
-                        <ns0:Tacka RedniBroj="50">
-                            <ns0:Sadrzaj>Sadrzaj27</ns0:Sadrzaj>
-                        </ns0:Tacka>
-                    </ns0:Stav>
-                </ns0:Clan>
-            </ns0:Odeljak>
+            <ns0:Clan RedniBroj="50">
+                <ns0:Stav>
+                    <ns0:Sadrzaj>
+                        <ns0:Referenca ref_clanovi="0">Referenca7</ns0:Referenca>
+                        <ns0:Datum>2006-05-04</ns0:Datum>
+                    </ns0:Sadrzaj>
+                </ns0:Stav>
+                <ns0:Stav>
+                    <ns0:Tacka RedniBroj="50">
+                        <ns0:Sadrzaj>Sadrzaj22</ns0:Sadrzaj>
+                    </ns0:Tacka>
+                    <ns0:Tacka RedniBroj="50">
+                        <ns0:Sadrzaj>Sadrzaj23</ns0:Sadrzaj>
+                    </ns0:Tacka>
+                </ns0:Stav>
+            </ns0:Clan>
+            <ns0:Clan RedniBroj="50">
+                <ns0:Stav>
+                    <ns0:Tacka RedniBroj="50">
+                        <ns0:Sadrzaj>Sadrzaj24</ns0:Sadrzaj>
+                    </ns0:Tacka>
+                    <ns0:Tacka RedniBroj="50">
+                        <ns0:Sadrzaj>Sadrzaj25</ns0:Sadrzaj>
+                    </ns0:Tacka>
+                </ns0:Stav>
+                <ns0:Stav>
+                    <ns0:Tacka RedniBroj="50">
+                        <ns0:Sadrzaj>Sadrzaj26</ns0:Sadrzaj>
+                    </ns0:Tacka>
+                    <ns0:Tacka RedniBroj="50">
+                        <ns0:Sadrzaj>Sadrzaj27</ns0:Sadrzaj>
+                    </ns0:Tacka>
+                </ns0:Stav>
+            </ns0:Clan>
+        </ns0:Glava>
+        <ns0:Glava RedniBroj="50" Naziv="Naziv23">
             <ns0:Odeljak RedniBroj="50" Naziv="Naziv24">
                 <ns0:Pododeljak RednoSlovo="a">
                     <ns0:Clan RedniBroj="50">
-                        <ns0:Stav>
-                            <ns0:Sadrzaj>
-                                <ns0:Datum>2006-05-04</ns0:Datum>
-                                <ns0:Referenca ref_clanovi="0">Referenca10</ns0:Referenca>
-                            </ns0:Sadrzaj>
-                        </ns0:Stav>
                         <ns0:Stav>
                             <ns0:Tacka RedniBroj="50">
                                 <ns0:Sadrzaj>Sadrzaj28</ns0:Sadrzaj>
@@ -270,30 +264,6 @@
                             <ns0:Tacka RedniBroj="50">
                                 <ns0:Sadrzaj>Sadrzaj29</ns0:Sadrzaj>
                             </ns0:Tacka>
-                        </ns0:Stav>
-                    </ns0:Clan>
-                    <ns0:Clan RedniBroj="50">
-                        <ns0:Stav>
-                            <ns0:Sadrzaj>
-                                <ns0:Referenca ref_clanovi="0">Referenca11</ns0:Referenca>
-                                <ns0:Referenca ref_clanovi="0">Referenca12</ns0:Referenca>
-                            </ns0:Sadrzaj>
-                        </ns0:Stav>
-                        <ns0:Stav>
-                            <ns0:Sadrzaj>
-                                <ns0:Tekst>Tekst8</ns0:Tekst>
-                                <ns0:Datum>2006-05-04</ns0:Datum>
-                            </ns0:Sadrzaj>
-                        </ns0:Stav>
-                    </ns0:Clan>
-                </ns0:Pododeljak>
-                <ns0:Pododeljak RednoSlovo="a">
-                    <ns0:Clan RedniBroj="50">
-                        <ns0:Stav>
-                            <ns0:Sadrzaj>
-                                <ns0:Tekst>Tekst9</ns0:Tekst>
-                                <ns0:Tekst>Tekst10</ns0:Tekst>
-                            </ns0:Sadrzaj>
                         </ns0:Stav>
                         <ns0:Stav>
                             <ns0:Tacka RedniBroj="50">
@@ -307,8 +277,24 @@
                     <ns0:Clan RedniBroj="50">
                         <ns0:Stav>
                             <ns0:Sadrzaj>
-                                <ns0:Referenca ref_clanovi="0">Referenca13</ns0:Referenca>
+                                <ns0:Datum>2006-05-04</ns0:Datum>
+                                <ns0:Referenca ref_clanovi="0">Referenca8</ns0:Referenca>
+                            </ns0:Sadrzaj>
+                        </ns0:Stav>
+                        <ns0:Stav>
+                            <ns0:Sadrzaj>
+                                <ns0:Datum>2006-05-04</ns0:Datum>
+                                <ns0:Datum>2006-05-04</ns0:Datum>
+                            </ns0:Sadrzaj>
+                        </ns0:Stav>
+                    </ns0:Clan>
+                </ns0:Pododeljak>
+                <ns0:Pododeljak RednoSlovo="a">
+                    <ns0:Clan RedniBroj="50">
+                        <ns0:Stav>
+                            <ns0:Sadrzaj>
                                 <ns0:Tekst>Tekst11</ns0:Tekst>
+                                <ns0:Datum>2006-05-04</ns0:Datum>
                             </ns0:Sadrzaj>
                         </ns0:Stav>
                         <ns0:Stav>
@@ -320,51 +306,63 @@
                             </ns0:Tacka>
                         </ns0:Stav>
                     </ns0:Clan>
+                    <ns0:Clan RedniBroj="50">
+                        <ns0:Stav>
+                            <ns0:Tacka RedniBroj="50">
+                                <ns0:Sadrzaj>Sadrzaj34</ns0:Sadrzaj>
+                            </ns0:Tacka>
+                            <ns0:Tacka RedniBroj="50">
+                                <ns0:Sadrzaj>Sadrzaj35</ns0:Sadrzaj>
+                            </ns0:Tacka>
+                        </ns0:Stav>
+                        <ns0:Stav>
+                            <ns0:Sadrzaj>
+                                <ns0:Tekst>Tekst12</ns0:Tekst>
+                                <ns0:Datum>2006-05-04</ns0:Datum>
+                            </ns0:Sadrzaj>
+                        </ns0:Stav>
+                    </ns0:Clan>
                 </ns0:Pododeljak>
             </ns0:Odeljak>
-        </ns0:Glava>
-        <ns0:Glava RedniBroj="50" Naziv="Naziv29">
-            <ns0:Odeljak RedniBroj="50" Naziv="Naziv30">
-                <ns0:Clan RedniBroj="50">
-                    <ns0:Stav>
-                        <ns0:Tacka RedniBroj="50">
-                            <ns0:Sadrzaj>Sadrzaj34</ns0:Sadrzaj>
-                        </ns0:Tacka>
-                        <ns0:Tacka RedniBroj="50">
-                            <ns0:Sadrzaj>Sadrzaj35</ns0:Sadrzaj>
-                        </ns0:Tacka>
-                    </ns0:Stav>
-                    <ns0:Stav>
-                        <ns0:Tacka RedniBroj="50">
-                            <ns0:Sadrzaj>Sadrzaj36</ns0:Sadrzaj>
-                        </ns0:Tacka>
-                        <ns0:Tacka RedniBroj="50">
-                            <ns0:Sadrzaj>Sadrzaj37</ns0:Sadrzaj>
-                        </ns0:Tacka>
-                    </ns0:Stav>
-                </ns0:Clan>
-                <ns0:Clan RedniBroj="50">
-                    <ns0:Stav>
-                        <ns0:Sadrzaj>
-                            <ns0:Datum>2006-05-04</ns0:Datum>
-                            <ns0:Referenca ref_clanovi="0">Referenca14</ns0:Referenca>
-                        </ns0:Sadrzaj>
-                    </ns0:Stav>
-                    <ns0:Stav>
-                        <ns0:Sadrzaj>
-                            <ns0:Tekst>Tekst12</ns0:Tekst>
-                            <ns0:Tekst>Tekst13</ns0:Tekst>
-                        </ns0:Sadrzaj>
-                    </ns0:Stav>
-                </ns0:Clan>
-            </ns0:Odeljak>
-            <ns0:Odeljak RedniBroj="50" Naziv="Naziv33">
+            <ns0:Odeljak RedniBroj="50" Naziv="Naziv29">
                 <ns0:Pododeljak RednoSlovo="a">
                     <ns0:Clan RedniBroj="50">
                         <ns0:Stav>
                             <ns0:Sadrzaj>
-                                <ns0:Tekst>Tekst14</ns0:Tekst>
-                                <ns0:Referenca ref_clanovi="0">Referenca15</ns0:Referenca>
+                                <ns0:Datum>2006-05-04</ns0:Datum>
+                                <ns0:Referenca ref_clanovi="0">Referenca9</ns0:Referenca>
+                            </ns0:Sadrzaj>
+                        </ns0:Stav>
+                        <ns0:Stav>
+                            <ns0:Sadrzaj>
+                                <ns0:Datum>2006-05-04</ns0:Datum>
+                                <ns0:Referenca ref_clanovi="0">Referenca10</ns0:Referenca>
+                            </ns0:Sadrzaj>
+                        </ns0:Stav>
+                    </ns0:Clan>
+                    <ns0:Clan RedniBroj="50">
+                        <ns0:Stav>
+                            <ns0:Tacka RedniBroj="50">
+                                <ns0:Sadrzaj>Sadrzaj36</ns0:Sadrzaj>
+                            </ns0:Tacka>
+                            <ns0:Tacka RedniBroj="50">
+                                <ns0:Sadrzaj>Sadrzaj37</ns0:Sadrzaj>
+                            </ns0:Tacka>
+                        </ns0:Stav>
+                        <ns0:Stav>
+                            <ns0:Sadrzaj>
+                                <ns0:Datum>2006-05-04</ns0:Datum>
+                                <ns0:Referenca ref_clanovi="0">Referenca11</ns0:Referenca>
+                            </ns0:Sadrzaj>
+                        </ns0:Stav>
+                    </ns0:Clan>
+                </ns0:Pododeljak>
+                <ns0:Pododeljak RednoSlovo="a">
+                    <ns0:Clan RedniBroj="50">
+                        <ns0:Stav>
+                            <ns0:Sadrzaj>
+                                <ns0:Datum>2006-05-04</ns0:Datum>
+                                <ns0:Referenca ref_clanovi="0">Referenca12</ns0:Referenca>
                             </ns0:Sadrzaj>
                         </ns0:Stav>
                         <ns0:Stav>
@@ -379,52 +377,16 @@
                     <ns0:Clan RedniBroj="50">
                         <ns0:Stav>
                             <ns0:Sadrzaj>
-                                <ns0:Tekst>Tekst15</ns0:Tekst>
-                                <ns0:Referenca ref_clanovi="0">Referenca16</ns0:Referenca>
+                                <ns0:Datum>2006-05-04</ns0:Datum>
+                                <ns0:Datum>2006-05-04</ns0:Datum>
                             </ns0:Sadrzaj>
                         </ns0:Stav>
-                        <ns0:Stav>
-                            <ns0:Sadrzaj>
-                                <ns0:Referenca ref_clanovi="0">Referenca17</ns0:Referenca>
-                                <ns0:Tekst>Tekst16</ns0:Tekst>
-                            </ns0:Sadrzaj>
-                        </ns0:Stav>
-                    </ns0:Clan>
-                </ns0:Pododeljak>
-                <ns0:Pododeljak RednoSlovo="a">
-                    <ns0:Clan RedniBroj="50">
                         <ns0:Stav>
                             <ns0:Tacka RedniBroj="50">
                                 <ns0:Sadrzaj>Sadrzaj40</ns0:Sadrzaj>
                             </ns0:Tacka>
                             <ns0:Tacka RedniBroj="50">
                                 <ns0:Sadrzaj>Sadrzaj41</ns0:Sadrzaj>
-                            </ns0:Tacka>
-                        </ns0:Stav>
-                        <ns0:Stav>
-                            <ns0:Tacka RedniBroj="50">
-                                <ns0:Sadrzaj>Sadrzaj42</ns0:Sadrzaj>
-                            </ns0:Tacka>
-                            <ns0:Tacka RedniBroj="50">
-                                <ns0:Sadrzaj>Sadrzaj43</ns0:Sadrzaj>
-                            </ns0:Tacka>
-                        </ns0:Stav>
-                    </ns0:Clan>
-                    <ns0:Clan RedniBroj="50">
-                        <ns0:Stav>
-                            <ns0:Tacka RedniBroj="50">
-                                <ns0:Sadrzaj>Sadrzaj44</ns0:Sadrzaj>
-                            </ns0:Tacka>
-                            <ns0:Tacka RedniBroj="50">
-                                <ns0:Sadrzaj>Sadrzaj45</ns0:Sadrzaj>
-                            </ns0:Tacka>
-                        </ns0:Stav>
-                        <ns0:Stav>
-                            <ns0:Tacka RedniBroj="50">
-                                <ns0:Sadrzaj>Sadrzaj46</ns0:Sadrzaj>
-                            </ns0:Tacka>
-                            <ns0:Tacka RedniBroj="50">
-                                <ns0:Sadrzaj>Sadrzaj47</ns0:Sadrzaj>
                             </ns0:Tacka>
                         </ns0:Stav>
                     </ns0:Clan>
