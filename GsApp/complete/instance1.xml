@@ -14,7 +14,7 @@
                                 <ns0:Sadrzaj>Sadrzaj0</ns0:Sadrzaj>
                             </ns0:Tacka>
                             <ns0:Tacka RedniBroj="50">
-                                <ns0:Sadrzaj>Sadrzaj1</ns0:Sadrzaj>
+                                <ns0:Sadrzaj>dwadawdawdaw</ns0:Sadrzaj>
                             </ns0:Tacka>
                         </ns0:Stav>
                         <ns0:Stav>
@@ -22,7 +22,7 @@
                                 <ns0:Sadrzaj>Sadrzaj2</ns0:Sadrzaj>
                             </ns0:Tacka>
                             <ns0:Tacka RedniBroj="50">
-                                <ns0:Sadrzaj>Sadrzaj3</ns0:Sadrzaj>
+                                <ns0:Sadrzaj>dwadawdaw</ns0:Sadrzaj>
                             </ns0:Tacka>
                         </ns0:Stav>
                     </ns0:Clan>
@@ -30,7 +30,7 @@
                         <ns0:Stav>
                             <ns0:Sadrzaj>
                                 <ns0:Referenca ref_clanovi="0">Referenca0</ns0:Referenca>
-                                <ns0:Tekst>Tekst0</ns0:Tekst>
+                                <ns0:Tekst>dwadaw</ns0:Tekst>
                             </ns0:Sadrzaj>
                         </ns0:Stav>
                         <ns0:Stav>

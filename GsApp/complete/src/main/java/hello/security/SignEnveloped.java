@@ -244,10 +244,5 @@ public class SignEnveloped {
 			return null;
 		}
 	}
-	
-	public static void main(String[] args) {
-		SignEnveloped sign = new SignEnveloped();
-		sign.testIt();
-	}
 
 }

@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Akt xmlns="http://www.gradskaskupstina.gov/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gradskaskupstina.gov/">
+<?xml version="1.0" encoding="UTF-8"?><Akt xmlns="http://www.gradskaskupstina.gov/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gradskaskupstina.gov/">
     <Naslov>Akt</Naslov>
     <Deo>
-        <Glava RedniBroj="50" Naziv="Naziv1">
-            <Odeljak RedniBroj="50" Naziv="Naziv2">
+        <Glava Naziv="Naziv1" RedniBroj="50">
+            <Odeljak Naziv="Naziv2" RedniBroj="50">
                 <Pododeljak RednoSlovo="a">
                     <Clan RedniBroj="50">
                         <Stav>
@@ -11,7 +10,7 @@
 <Sadrzaj>Sadrzaj0</Sadrzaj>
                             </Tacka>
                             <Tacka RedniBroj="50">
-<Sadrzaj>Sadrzaj1</Sadrzaj>
+<Sadrzaj>dwadawdawdaw</Sadrzaj>
                             </Tacka>
                         </Stav>
                         <Stav>
@@ -19,7 +18,7 @@
 <Sadrzaj>Sadrzaj2</Sadrzaj>
                             </Tacka>
                             <Tacka RedniBroj="50">
-<Sadrzaj>Sadrzaj3</Sadrzaj>
+<Sadrzaj>dwadawdaw</Sadrzaj>
                             </Tacka>
                         </Stav>
                     </Clan>
@@ -27,7 +26,7 @@
                         <Stav>
                             <Sadrzaj>
                                 <Referenca ref_clanovi="0">Referenca0</Referenca>
-                                <Tekst>Tekst0</Tekst>
+                                <Tekst>dwadaw</Tekst>
                             </Sadrzaj>
                         </Stav>
                         <Stav>
@@ -71,7 +70,7 @@
                     </Clan>
                 </Pododeljak>
             </Odeljak>
-            <Odeljak RedniBroj="50" Naziv="Naziv7">
+            <Odeljak Naziv="Naziv7" RedniBroj="50">
                 <Clan RedniBroj="50">
                     <Stav>
                         <Sadrzaj>
@@ -106,8 +105,8 @@
                 </Clan>
             </Odeljak>
         </Glava>
-        <Glava RedniBroj="50" Naziv="Naziv10">
-            <Odeljak RedniBroj="50" Naziv="Naziv11">
+        <Glava Naziv="Naziv10" RedniBroj="50">
+            <Odeljak Naziv="Naziv11" RedniBroj="50">
                 <Pododeljak RednoSlovo="a">
                     <Clan RedniBroj="50">
                         <Stav>
@@ -175,7 +174,7 @@
                     </Clan>
                 </Pododeljak>
             </Odeljak>
-            <Odeljak RedniBroj="50" Naziv="Naziv16">
+            <Odeljak Naziv="Naziv16" RedniBroj="50">
                 <Clan RedniBroj="50">
                     <Stav>
                         <Tacka RedniBroj="50">
@@ -214,7 +213,7 @@
         </Glava>
     </Deo>
     <Deo>
-        <Glava RedniBroj="50" Naziv="Naziv20">
+        <Glava Naziv="Naziv20" RedniBroj="50">
             <Clan RedniBroj="50">
                 <Stav>
                     <Sadrzaj>
@@ -250,8 +249,8 @@
                 </Stav>
             </Clan>
         </Glava>
-        <Glava RedniBroj="50" Naziv="Naziv23">
-            <Odeljak RedniBroj="50" Naziv="Naziv24">
+        <Glava Naziv="Naziv23" RedniBroj="50">
+            <Odeljak Naziv="Naziv24" RedniBroj="50">
                 <Pododeljak RednoSlovo="a">
                     <Clan RedniBroj="50">
                         <Stav>
@@ -321,7 +320,7 @@
                     </Clan>
                 </Pododeljak>
             </Odeljak>
-            <Odeljak RedniBroj="50" Naziv="Naziv29">
+            <Odeljak Naziv="Naziv29" RedniBroj="50">
                 <Pododeljak RednoSlovo="a">
                     <Clan RedniBroj="50">
                         <Stav>
@@ -404,4 +403,47 @@
             <Prezime>Prezime0</Prezime>
         </Potpisnik>
     </ZavrsneOdredbe>
+<ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+<ds:SignedInfo>
+<ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+<ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
+<ds:Reference URI="">
+<ds:Transforms>
+<ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+<ds:Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments"/>
+</ds:Transforms>
+<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+<ds:DigestValue>pEmQvrmD9bqDM2las/qeTD59ABI=</ds:DigestValue>
+</ds:Reference>
+</ds:SignedInfo>
+<ds:SignatureValue>
+Pbr2yE4G9Q8UQ3E6MP6MVQV8j6cyBeDai8bNeixQtoE5iFWAEtzKkUmKA4X6woEka7slkB71R9fq
+d2MYcQP8TfGfY6wQ5KAOaZgVnD/gpzISONFIoYSS1gf7bRpvkAdW5dnCyG7R6drWMRq6YW138rsp
+kC3rBxx78/HPnIZChco=
+</ds:SignatureValue>
+<ds:KeyInfo>
+<ds:KeyValue>
+<ds:RSAKeyValue>
+<ds:Modulus>
+zQ9KJLShafi/S2HkWlfnRpKcuLB4BgeJ5y2wBafGRRNz5kss0gjzzQZIDf684gwQ2WYEDlH2s+OX
+fbX4v6KTKJ4ug0wfY05sciJ7Dx+HOPUw6KU5aWvbBIKAXJE+MCSaO/FSk+ujgXSZAY/epUsSqBo2
+EZgUl90oEpTRbV+xX8E=
+</ds:Modulus>
+<ds:Exponent>AQAB</ds:Exponent>
+</ds:RSAKeyValue>
+</ds:KeyValue>
+<ds:X509Data>
+<ds:X509Certificate>
+MIIBtjCCAR8CBEZasCQwDQYJKoZIhvcNAQEFBQAwIjEPMA0GA1UECwwGcHJpbWVyMQ8wDQYDVQQD
+DAZwcmltZXIwHhcNMDcwNTI4MTAzNDEyWhcNMjcwNTIzMTAzNDEyWjAiMQ8wDQYDVQQLDAZwcmlt
+ZXIxDzANBgNVBAMMBnByaW1lcjCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAzQ9KJLShafi/
+S2HkWlfnRpKcuLB4BgeJ5y2wBafGRRNz5kss0gjzzQZIDf684gwQ2WYEDlH2s+OXfbX4v6KTKJ4u
+g0wfY05sciJ7Dx+HOPUw6KU5aWvbBIKAXJE+MCSaO/FSk+ujgXSZAY/epUsSqBo2EZgUl90oEpTR
+bV+xX8ECAwEAATANBgkqhkiG9w0BAQUFAAOBgQB2HjPI427zRaVfLTaeNVcjH9hoTkl9OUJAAmEa
+6EQdbdqZ75ca3IfuLHJFJ8zzyBP4LUGSxgA4OpnKs6Ej5w2n0GHmu0g4YqxInfpv/kCwswoia4Oz
+a17te8mMamffCn3ySX5yZzEex5nueNAyhJkmWBcBCOvJw4+U+gSK50Xbcw==
+</ds:X509Certificate>
+</ds:X509Data>
+</ds:KeyInfo>
+</ds:Signature>
 </Akt>

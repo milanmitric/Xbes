@@ -3,25 +3,21 @@ package hello.businessLogic;
 import com.marklogic.client.DatabaseClient;
 import com.marklogic.client.document.DocumentMetadataPatchBuilder;
 import com.marklogic.client.document.XMLDocumentManager;
-import com.marklogic.client.io.DocumentMetadataHandle;
-import com.marklogic.client.io.InputStreamHandle;
-import com.marklogic.client.io.JAXBHandle;
 import hello.entity.Akt;
-import hello.security.SignEnveloped;
 import hello.security.VerifySignatureEnveloped;
+import hello.util.Converter;
 import hello.util.Database;
 import hello.util.MyValidationEventHandler;
 import org.w3c.dom.Document;
 
 import javax.xml.XMLConstants;
-import javax.xml.bind.*;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBIntrospector;
+import javax.xml.bind.Unmarshaller;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.security.PrivateKey;
-import java.security.cert.Certificate;
 
 /**
  * Created by milan on 27.5.2016..
@@ -49,8 +45,30 @@ public class BeanManager <T>{
      */
     private XMLDocumentManager xmlManager;
 
+    /**
+     * Schema factory for creating validation schemas.
+     */
     private SchemaFactory schemaFactory;
+
+    /**
+     * Default schema located in <b>"./schema/Test.xsd"</b>
+     */
     private Schema schema;
+
+    /**
+     * Encapsulates all read-related operations.
+     */
+    private ReadManager<T> readManager;
+
+    /**
+     * Encapsulates all write-related operations.
+     */
+    private WriteManager<T> writeManager;
+
+    /**
+     * Support class for xml-bean conversion.
+     */
+    private Converter<T> converter;
     /**
      * Initializes database client and XML manager.
      */
@@ -60,10 +78,30 @@ public class BeanManager <T>{
             xmlManager = client.newXMLDocumentManager();
             schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
             schema = schemaFactory.newSchema(new File("./schema/Test.xsd"));
+            readManager = new ReadManager<T>(client,xmlManager,schemaFactory,schema);
+            writeManager = new WriteManager<>(client,xmlManager,schemaFactory,schema);
+            converter = new Converter<>();
         } catch (Exception e){
             System.out.println("Can't initialize Bean manager.");
         }
+    }
 
+    /**
+     * Initializes database client and XML manager.
+     * @param schemaFilePath Schema to validate xmls from.
+     */
+    public BeanManager(String schemaFilePath) {
+        try {
+            client = Database.getDbClient();
+            xmlManager = client.newXMLDocumentManager();
+            schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+            schema = schemaFactory.newSchema(new File(schemaFilePath));
+            readManager = new ReadManager<T>(client,xmlManager,schemaFactory,schema);
+            writeManager = new WriteManager<>(client,xmlManager,schemaFactory,schema);
+            converter = new Converter<>();
+        } catch (Exception e){
+            System.out.println("Can't initialize Bean manager.");
+        }
     }
 
     /**
@@ -74,22 +112,7 @@ public class BeanManager <T>{
      * @return Indicator of success.
      */
     public boolean write(FileInputStream inputStream, String docId, String colId) {
-        boolean ret = false;
-        try{
-            if (!singXml(null)) {
-                throw  new Exception("Could not sign xml, check tmp.xml.");
-            }
-            InputStreamHandle handle = new InputStreamHandle(inputStream);
-            DocumentMetadataHandle metadata = new DocumentMetadataHandle();
-            metadata.getCollections().add(colId);
-            xmlManager.write(docId,metadata,handle);
-            ret = true;
-        }
-        catch (Exception e){
-            System.out.println("Unexpected error: " + e.getMessage());
-        } finally{
-            return ret;
-        }
+        return  writeManager.write(inputStream,docId,colId);
     }
 
 
@@ -101,22 +124,7 @@ public class BeanManager <T>{
      * @return Indicator of success.
      */
     public boolean write(T bean, String docId, String colId) {
-        boolean ret = false;
-        try {
-            // Try to convert to xml on default location.
-            if (convertToXml(bean)){
-                FileInputStream inputStream = new FileInputStream(new File("tmp.xml"));
-                ret = write(inputStream,docId,colId);
-            } else {
-                throw new Exception("Can't convert JAXB bean " + bean.toString() + " to XML.");
-            }
-        }
-        catch (Exception e) {
-            System.out.println("Unexpected error: " + e.getMessage());
-        }
-        finally{
-            return ret;
-        }
+        return writeManager.write(bean,docId,colId);
     }
 
     /**
@@ -125,26 +133,7 @@ public class BeanManager <T>{
      * @return Read bean, <code>null</code> if not successful.
      */
     public T read(String docId){
-        T ret = null;
-        try{
-            JAXBContext jc = JAXBContext.newInstance("hello.entity");
-            JAXBHandle<T> handle = new JAXBHandle<>(jc);
-            // A metadata handle for metadata retrieval
-            DocumentMetadataHandle metadata = new DocumentMetadataHandle();
-            xmlManager.read(docId,metadata,handle);
-            ret = handle.get();
-            // Convert so that you can validate it.
-            convertToXml(ret);
-            /*
-            if (!validateXML()){
-                ret = null;
-            }*/
-        }
-        catch (Exception e) {
-            System.out.println("Unexpected error: " + e.getMessage());
-        } finally {
-            return ret;
-        }
+        return readManager.read(docId);
     }
 
     /**
@@ -153,16 +142,7 @@ public class BeanManager <T>{
      * @return Converted bean,<code>null</code> if not not successful.
      */
     public T convertFromXml(File file){
-        T ret = null;
-        try {
-            JAXBContext jc = JAXBContext.newInstance("hello.entity");
-            Unmarshaller u = jc.createUnmarshaller();
-            ret = (T) JAXBIntrospector.getValue(u.unmarshal(file));
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            return ret;
-        }
+        return converter.convertFromXml(file,schema);
     }
 
     /**
@@ -170,23 +150,7 @@ public class BeanManager <T>{
      * @return Indicator of success.
      */
     public boolean convertToXml(T  bean){
-        boolean ret = false;
-        File file = new File("tmp.xml");
-        FileOutputStream fileOutputStream = null;
-        try {
-            fileOutputStream = new FileOutputStream(file);
-            JAXBContext jc = JAXBContext.newInstance("hello.entity");
-            Marshaller marshaller = jc.createMarshaller();
-            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            marshaller.setProperty(Marshaller.JAXB_SCHEMA_LOCATION, "http://www.gradskaskupstina.gov/");
-            marshaller.marshal(bean,fileOutputStream);
-            fileOutputStream.close();
-            ret = true;
-        } catch (JAXBException e) {
-            e.printStackTrace();
-        } finally {
-            return ret;
-        }
+       return converter.convertToXml(bean);
     }
 
     /**
@@ -238,9 +202,6 @@ public class BeanManager <T>{
             }
             JAXBContext context = JAXBContext.newInstance("hello.entity");
             Unmarshaller unmarshaller = context.createUnmarshaller();
-            SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-            Schema schema = schemaFactory.newSchema(new File("./schema/Test.xsd"));
-
             convertToXml(akt);
             // Podešavanje unmarshaller-a za XML schema validaciju
             unmarshaller.setSchema(schema);
@@ -255,42 +216,16 @@ public class BeanManager <T>{
     }
 
     /**
-     * Signs xml files currently with example private key and certificate.
-     * TODO: Rewrite to accept custom private key, certificate and input file.
-     * @param filePath Path to xml to be signed.
+     * Validates signed xml document from <b>tmp.xml</b>.
+     * @param filepath Path of xml file to be validated.s
      * @return Indicator of success.
      */
-    public boolean singXml(String filePath){
-
-        boolean ret = false;
-
-        try{
-            SignEnveloped signEnveloped = new SignEnveloped();
-            Document document;
-            if (filePath == null) {
-              document  =signEnveloped.loadDocument("tmp.xml");
-            }  else {
-                document = signEnveloped.loadDocument(filePath);
-            }
-            PrivateKey pk = signEnveloped.readPrivateKey();
-            Certificate cert = signEnveloped.readCertificate();
-            document = signEnveloped.signDocument(document,pk,cert);
-            signEnveloped.saveDocument(document,"tmp.xml");
-            ret = true;
-
-        } catch (Exception e){
-            System.out.println("Unexpected error: " +e.getMessage());
-        } finally {
-            return  ret;
-        }
-    }
-
-    public boolean validateXML(){
+    private boolean validateXML(String filepath){
         boolean ret = false;
 
         try{
             VerifySignatureEnveloped verifySignatureEnveloped = new VerifySignatureEnveloped();
-            Document document = verifySignatureEnveloped.loadDocument("tmp.xml");
+            Document document = verifySignatureEnveloped.loadDocument(filepath);
             ret =  verifySignatureEnveloped.verifySignature(document);
         } catch(Exception e){
             System.out.println("Unexpected error: " +e.getMessage());
@@ -298,6 +233,9 @@ public class BeanManager <T>{
             return  ret;
         }
     }
+
+
+
 
 
 
