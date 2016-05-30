@@ -246,7 +246,6 @@ public class BeanManager <T>{
             unmarshaller.setSchema(schema);
             unmarshaller.setEventHandler(new MyValidationEventHandler());
             T tmpAkt = (T) JAXBIntrospector.getValue(unmarshaller.unmarshal(new File("tmp.xml")));
-
             ret = true;
         } catch (Exception e){
             System.out.println("Unexpected error: " +e.getMessage());

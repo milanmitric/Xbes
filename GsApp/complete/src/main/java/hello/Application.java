@@ -5,7 +5,6 @@ import com.marklogic.client.DatabaseClient;
 import hello.businessLogic.BeanManager;
 import hello.entity.Akt;
 import hello.util.Database;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.io.File;
@@ -16,9 +15,9 @@ public class Application {
 
             public static void main(String[] args) throws IOException {
 
-        SpringApplication.run(Application.class, args);
+        //SpringApplication.run(Application.class, args);
 
-      /*  BeanManager<TAkt> aktManager = new BeanManager<>();
+        BeanManager<Akt> aktManager = new BeanManager<>();
 
                 String docId = "/example/books.xml";
                 File file = new File("instance1.xml");
@@ -37,7 +36,7 @@ public class Application {
                 DatabaseClient client = Database.getDbClient();
 
         client.release();
-*/
+
     }
 
 
