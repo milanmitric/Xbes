@@ -74,13 +74,13 @@ public class ReadManager <T>{
 
 
             // Input xml validation.
-            if (!convertInputToTmp(docId)){
+            /*if (!convertInputToTmp(docId)){
                 ret = null;
                 throw  new Exception("Can't read from database!");
             }
             // For now. Signature check is not working?
             // TODO: Refactor signature check.
-            /*
+
             if (!validateXML("tmp.xml")){
                 ret = null;
                 throw  new Exception("Input bean signature is not well formated!");
