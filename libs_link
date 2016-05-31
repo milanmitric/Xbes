@@ -1,0 +1,5 @@
+link for sharing libs
+
+-copy all jars to 'lib' folder
+-when you add libs to project, upload this zip file so others can add it too (because git won't add it to repo)
+https://drive.google.com/open?id=0B79DSjbZnzKpbWN1RFBidTZweFU

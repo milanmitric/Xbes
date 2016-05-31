@@ -107,10 +107,5 @@ public class VerifySignatureEnveloped {
 			return false;
 		}
 	}
-	
-	public static void main(String[] args) {
-		VerifySignatureEnveloped verify = new VerifySignatureEnveloped();
-		verify.testIt();
-	}
 
 }
