@@ -51,7 +51,7 @@ public class BeanManager <T>{
     /**
      * Encapsulates all read-related operations.
      */
-    private ReadManager<T> readManager;
+    private ReadManager<T> ReadManager;
 
     /**
      * Encapsulates all write-related operations.
@@ -76,7 +76,7 @@ public class BeanManager <T>{
             xmlManager = client.newXMLDocumentManager();
             schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
             schema = schemaFactory.newSchema(new File("./schema/Test.xsd"));
-            readManager = new ReadManager<T>(client,xmlManager,schemaFactory,schema);
+            ReadManager = new ReadManager<T>(client,xmlManager,schemaFactory,schema);
             writeManager = new WriteManager<>(client,xmlManager,schemaFactory,schema);
             customManager = new CustomManager<>(client,xmlManager,schemaFactory,schema);
             converter = new Converter<>();
@@ -95,7 +95,7 @@ public class BeanManager <T>{
             xmlManager = client.newXMLDocumentManager();
             schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
             schema = schemaFactory.newSchema(new File(schemaFilePath));
-            readManager = new ReadManager<T>(client,xmlManager,schemaFactory,schema);
+            ReadManager = new ReadManager<T>(client,xmlManager,schemaFactory,schema);
             writeManager = new WriteManager<>(client,xmlManager,schemaFactory,schema);
             customManager = new CustomManager<>(client,xmlManager,schemaFactory,schema);
             converter = new Converter<>();
@@ -133,7 +133,7 @@ public class BeanManager <T>{
      * @return Read bean, <code>null</code> if not successful.
      */
     public T read(String docId){
-        return readManager.read(docId);
+        return ReadManager.read(docId);
     }
 
     /**
@@ -196,7 +196,7 @@ public class BeanManager <T>{
      * @return Indicator of success.
      */
     public boolean validateXMLBySignature(String filepath){
-        return readManager.validateXMLBySignature(filepath);
+        return ReadManager.validateXMLBySignature(filepath);
     }
 
 

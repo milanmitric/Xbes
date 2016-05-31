@@ -23,7 +23,7 @@ import java.io.OutputStream;
  * Created by milan on 31.5.2016..
  * Class that handles read-associated operation with beans.
  */
-public class ReadManager <T>{
+public class ReadManager<T>{
 
     /**
      * Manages CRUD operations on XML documents and JAXB beans..
