@@ -27,7 +27,7 @@ public class Application {
                 } else{
                     Akt akt = aktManager.read(docId);
 
-                    System.out.println(aktManager.validate(akt));
+                    System.out.println(aktManager.validateBeanBySchema(akt));
                     System.out.println("Write successful!");
                 }
 

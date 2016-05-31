@@ -4,11 +4,9 @@ import com.marklogic.client.DatabaseClient;
 import com.marklogic.client.document.DocumentMetadataPatchBuilder;
 import com.marklogic.client.document.XMLDocumentManager;
 import hello.entity.Akt;
-import hello.security.VerifySignatureEnveloped;
 import hello.util.Converter;
 import hello.util.Database;
 import hello.util.MyValidationEventHandler;
-import org.w3c.dom.Document;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
@@ -88,7 +86,7 @@ public class BeanManager <T>{
 
     /**
      * Initializes database client and XML manager.
-     * @param schemaFilePath Schema to validate xmls from.
+     * @param schemaFilePath Schema to validateBeanBySchema xmls from.
      */
     public BeanManager(String schemaFilePath) {
         try {
@@ -189,16 +187,16 @@ public class BeanManager <T>{
     }
 
     /**
-     * Validates JAXB bean.
+     * Validates JAXB bean by <code>schema</code> field of class.
      * @param akt Bean to be validated
      * @return Indicator of success.
      */
-    public boolean validate(T akt){
+    public boolean validateBeanBySchema(T akt){
         boolean ret = false;
 
         try{
             if (!(akt instanceof Akt)){
-                throw  new Exception("Can't validate element that is not Akt!");
+                throw  new Exception("Can't validateBeanBySchema element that is not Akt!");
             }
             JAXBContext context = JAXBContext.newInstance("hello.entity");
             Unmarshaller unmarshaller = context.createUnmarshaller();
@@ -216,22 +214,35 @@ public class BeanManager <T>{
     }
 
     /**
+     * Validates xml documnt by <code>schema</code> field of class.
+     * @param filePath Path of file to be validated.
+     * @return Indicator of success.
+     */
+    public boolean validateXmlBySchema(String filePath){
+        boolean ret = false;
+
+        try{
+            JAXBContext context = JAXBContext.newInstance("hello.entity");
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            // Podešavanje unmarshaller-a za XML schema validaciju
+            unmarshaller.setSchema(schema);
+            unmarshaller.setEventHandler(new MyValidationEventHandler());
+            T tmpAkt = (T) JAXBIntrospector.getValue(unmarshaller.unmarshal(new File(filePath)));
+            ret = true;
+        } catch (Exception e){
+            System.out.println("Unexpected error: " +e.getMessage());
+        }finally {
+            return ret;
+        }
+    }
+
+    /**
      * Validates signed xml document from <b>tmp.xml</b>.
      * @param filepath Path of xml file to be validated.s
      * @return Indicator of success.
      */
-    private boolean validateXML(String filepath){
-        boolean ret = false;
-
-        try{
-            VerifySignatureEnveloped verifySignatureEnveloped = new VerifySignatureEnveloped();
-            Document document = verifySignatureEnveloped.loadDocument(filepath);
-            ret =  verifySignatureEnveloped.verifySignature(document);
-        } catch(Exception e){
-            System.out.println("Unexpected error: " +e.getMessage());
-        } finally {
-            return  ret;
-        }
+    public boolean validateXML(String filepath){
+        return readManager.validateXML(filepath);
     }
 
 
