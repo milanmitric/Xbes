@@ -47,6 +47,9 @@ public class ReadManager <T>{
 
     private static TransformerFactory transformerFactory;
 
+    /**
+     * Support class for xml-bean conversion.
+     */
     private Converter<T> converter;
 
     static {
@@ -92,7 +95,7 @@ public class ReadManager <T>{
             xmlManager.read(docId,metadata,handle);
 
             ret = handle.get();
-            // Convert bean to tmp.xml so that you can validate it.
+            // Convert bean to tmp.xml so that you can validateBeanBySchema it.
             if (!converter.convertToXml(ret)){
                 ret = null;
                 throw  new Exception("Could not convert bean to xml!");
@@ -110,7 +113,7 @@ public class ReadManager <T>{
      * @param filepath Path of xml file to be validated.s
      * @return Indicator of success.
      */
-    private boolean validateXML(String filepath){
+    public boolean validateXMLBySignature(String filepath){
         boolean ret = false;
 
         try{

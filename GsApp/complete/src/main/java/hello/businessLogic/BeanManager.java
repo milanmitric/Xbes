@@ -3,15 +3,10 @@ package hello.businessLogic;
 import com.marklogic.client.DatabaseClient;
 import com.marklogic.client.document.DocumentMetadataPatchBuilder;
 import com.marklogic.client.document.XMLDocumentManager;
-import hello.entity.Akt;
 import hello.util.Converter;
 import hello.util.Database;
-import hello.util.MyValidationEventHandler;
 
 import javax.xml.XMLConstants;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBIntrospector;
-import javax.xml.bind.Unmarshaller;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import java.io.File;
@@ -67,6 +62,11 @@ public class BeanManager <T>{
      * Support class for xml-bean conversion.
      */
     private Converter<T> converter;
+
+    /**
+     * Encapsulates all update, delete operations and all validations.
+     */
+    private CustomManager<T> customManager;
     /**
      * Initializes database client and XML manager.
      */
@@ -78,6 +78,7 @@ public class BeanManager <T>{
             schema = schemaFactory.newSchema(new File("./schema/Test.xsd"));
             readManager = new ReadManager<T>(client,xmlManager,schemaFactory,schema);
             writeManager = new WriteManager<>(client,xmlManager,schemaFactory,schema);
+            customManager = new CustomManager<>(client,xmlManager,schemaFactory,schema);
             converter = new Converter<>();
         } catch (Exception e){
             System.out.println("Can't initialize Bean manager.");
@@ -96,6 +97,7 @@ public class BeanManager <T>{
             schema = schemaFactory.newSchema(new File(schemaFilePath));
             readManager = new ReadManager<T>(client,xmlManager,schemaFactory,schema);
             writeManager = new WriteManager<>(client,xmlManager,schemaFactory,schema);
+            customManager = new CustomManager<>(client,xmlManager,schemaFactory,schema);
             converter = new Converter<>();
         } catch (Exception e){
             System.out.println("Can't initialize Bean manager.");
@@ -157,15 +159,7 @@ public class BeanManager <T>{
      * @return Indicator of success.
      */
     public boolean deleteDocument(String docId){
-        boolean ret = false;
-        try {
-            xmlManager.delete(docId);
-            ret = true;
-        }catch (Exception e){
-            e.printStackTrace();
-        } finally {
-            return  ret;
-        }
+        return  customManager.deleteDocument(docId);
     }
 
     /**
@@ -175,15 +169,7 @@ public class BeanManager <T>{
      * @return Indicator of success.
      */
     public boolean updateDocument(String docId, DocumentMetadataPatchBuilder.PatchHandle patchHandle){
-        boolean ret = false;
-        try{
-            xmlManager.patch(docId,patchHandle);
-            ret = true;
-        } catch (Exception e){
-            e.printStackTrace();
-        } finally {
-            return  ret;
-        }
+       return customManager.updateDocument(docId,patchHandle);
     }
 
     /**
@@ -192,25 +178,7 @@ public class BeanManager <T>{
      * @return Indicator of success.
      */
     public boolean validateBeanBySchema(T akt){
-        boolean ret = false;
-
-        try{
-            if (!(akt instanceof Akt)){
-                throw  new Exception("Can't validateBeanBySchema element that is not Akt!");
-            }
-            JAXBContext context = JAXBContext.newInstance("hello.entity");
-            Unmarshaller unmarshaller = context.createUnmarshaller();
-            convertToXml(akt);
-            // Podešavanje unmarshaller-a za XML schema validaciju
-            unmarshaller.setSchema(schema);
-            unmarshaller.setEventHandler(new MyValidationEventHandler());
-            T tmpAkt = (T) JAXBIntrospector.getValue(unmarshaller.unmarshal(new File("tmp.xml")));
-            ret = true;
-        } catch (Exception e){
-            System.out.println("Unexpected error: " +e.getMessage());
-        }finally {
-            return ret;
-        }
+        return customManager.validateBeanBySchema(akt);
     }
 
     /**
@@ -219,21 +187,7 @@ public class BeanManager <T>{
      * @return Indicator of success.
      */
     public boolean validateXmlBySchema(String filePath){
-        boolean ret = false;
-
-        try{
-            JAXBContext context = JAXBContext.newInstance("hello.entity");
-            Unmarshaller unmarshaller = context.createUnmarshaller();
-            // Podešavanje unmarshaller-a za XML schema validaciju
-            unmarshaller.setSchema(schema);
-            unmarshaller.setEventHandler(new MyValidationEventHandler());
-            T tmpAkt = (T) JAXBIntrospector.getValue(unmarshaller.unmarshal(new File(filePath)));
-            ret = true;
-        } catch (Exception e){
-            System.out.println("Unexpected error: " +e.getMessage());
-        }finally {
-            return ret;
-        }
+        return customManager.validateXmlBySchema(filePath);
     }
 
     /**
@@ -241,8 +195,8 @@ public class BeanManager <T>{
      * @param filepath Path of xml file to be validated.s
      * @return Indicator of success.
      */
-    public boolean validateXML(String filepath){
-        return readManager.validateXML(filepath);
+    public boolean validateXMLBySignature(String filepath){
+        return readManager.validateXMLBySignature(filepath);
     }
 
 
