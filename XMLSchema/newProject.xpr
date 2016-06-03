@@ -6,5 +6,12 @@
     </meta>
     <projectTree name="newProject.xpr">
         <folder path="."/>
+        <file name="Akt.xsd"/>
+        <file name="akt1.xml"/>
+        <file name="AktZOIIDZOJPPIK.xml"/>
+        <file name="Amandmani.xsd"/>
+        <file name="amandmanProba1.xml"/>
+        <file name="AmandmanPZOIIDZOJPPIK.xml"/>
+        <file name="Test.xsd"/>
     </projectTree>
 </project>

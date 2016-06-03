@@ -43,6 +43,10 @@
 		<xjc schema="${data.dir}/Amandmani.xsd" destdir="${gen.dir}"/>
 	</target>
 
+	<target name="generateUsers" depends="init">
+		<xjc schema="${data.dir}/Users.xsd" destdir="${gen.dir}"/>
+	</target>
+
 	<target name="generateAll" depends="generateAkt, generateAmandman"></target>
 
 </project>

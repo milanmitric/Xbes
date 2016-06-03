@@ -5,6 +5,7 @@ import com.marklogic.client.document.DocumentMetadataPatchBuilder;
 import com.marklogic.client.document.XMLDocumentManager;
 import hello.entity.gov.gradskaskupstina.Akt;
 import hello.entity.gov.gradskaskupstina.Amandman;
+import hello.entity.gov.gradskaskupstina.Users;
 import hello.util.Converter;
 import hello.util.MyValidationEventHandler;
 import org.slf4j.Logger;
@@ -107,7 +108,7 @@ public class CustomManager <T>{
         boolean ret = false;
 
         try{
-            if (!(bean instanceof Akt) && !(bean instanceof Amandman)){
+            if (!(bean instanceof Akt) && !(bean instanceof Amandman) && !(bean instanceof Users)){
                 throw  new Exception("Can't validateBeanBySchema element that is not Akt!");
             }
             JAXBContext context = JAXBContext.newInstance("hello.entity.gov.gradskaskupstina");

@@ -13,14 +13,36 @@
         <Stav><Sadrzaj>U <Referenca ref_akt="ZOJPPIK" ref_clanovi="7" ref_stavovi="2" ref_tacke="1">članu 7. stav 2. tačka 1)</Referenca> posle reči: „drugog dobra” dodaju se reči: „niti isključiva isporuka dobara”.</Sadrzaj></Stav>
         <Stav><Sadrzaj>U <Referenca ref_akt="ZOJPPIK" ref_clanovi="7" ref_stavovi="2" ref_tacke="3">stavu 2. tačka 3)</Referenca> reč: „projektovanje” i zapeta posle te reči brišu se.</Sadrzaj></Stav>
         <Stav><Sadrzaj>U <Referenca ref_akt="ZOJPPIK" ref_clanovi="7" ref_stavovi="2" ref_tacke="6">tački 6)</Referenca> posle reči: „između javnog i privatnog partnera” dodaje se zapeta i reči: „a naročito preuzimanje rizika tražnje ili rizika raspoloživosti objekta, usluge, infrastrukture i sl.”.</Sadrzaj></Stav>
+        <Stav><Sadrzaj>U <Referenca ref_akt="ZOJPPIK" ref_clanovi="7" ref_stavovi="2" ref_tacke="7">tački 7)</Referenca> posle reči: "komercijalnu delatnost" dodaju se reči: "ili izgradi druge objekte"</Sadrzaj></Stav>
+    </Clan>
+    <Clan RedniBroj="4">
+        <Stav><Sadrzaj>U <Referenca ref_akt="ZOJPPIK" ref_clanovi="9" ref_stavovi="4">članu 9. stav 4.</Referenca> posle reči: „zaključuju” dodaju se reči: „javni ugovor i”.</Sadrzaj></Stav>
+    </Clan>
+    <Clan RedniBroj="5">
+        <Stav><Sadrzaj>U <Referenca ref_akt="ZOJPPIK" ref_clanovi="14" ref_stavovi="2">članu 14. stav 2.</Referenca> reči: „ne moraju tražiti” zamenjuju se rečima: „nemaju pravo da traže”.</Sadrzaj></Stav>
+    </Clan>
+    <Clan RedniBroj="10">
+        <Stav>
+            <Sadrzaj>U <Referenca ref_akt="ZOJPPIK" ref_clanovi="22" ref_stavovi="3">članu 22. stav 3.</Referenca> reči: „u jednom međunarodnom listu i” brišu se.</Sadrzaj>
+        </Stav>
+    </Clan>
+    <Clan RedniBroj="12">
+        <Stav>
+            <Sadrzaj>U članu 29. posle stava 3. dodaje se novi stav 4, koji glasi:
+                „Ako je Republika Srbija davalac koncesije, odnosno kada su javna tela i
+                predmet koncesije u nadležnosti Republike Srbije i ako je procenjena vrednost te
+                koncesije veća od 50 miliona evra, Komisija za JPP, pre davanja svog mišljenja,
+                obavezno prethodno pribavlja mišljenje ministarstva nadležnog za poslove finansija.”.
+                Dosadašnji st. 4. i 5. postaju st. 5. i 6.</Sadrzaj>
+        </Stav>
     </Clan>
     <ZavrsniDeo>
-        <Organ>Drzava0</Organ>
-        <Broj>Broj0</Broj>
-        <Datum>Datum0</Datum>
+        <Organ>Serbia</Organ>
+        <Broj>1/16</Broj>
+        <Datum>03.06.2016.</Datum>
         <Potpisnik>
-            <Ime>Ime0</Ime>
-            <Prezime>Prezime0</Prezime>
+            <Ime>Branislav</Ime>
+            <Prezime>Čogić</Prezime>
         </Potpisnik>
     </ZavrsniDeo>
 </Akt>

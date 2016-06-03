@@ -1,66 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Amandman xmlns="http://www.gradskaskupstina.gov/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gradskaskupstina.gov/">
-    <PravniOsnov ref_akt="Poslovnik Narodne Skupstine" ref_clanovi="161"></PravniOsnov>
-    <Akt ref_akt="AktPZOIIDZOJPPIK">Predlog Zakona o izmenama i dopunama Zakona o javno-privatnom partnerstvu i koncesijama</Akt>
-    <Amandman RedniBroj="1">
-        <PredmetIzmene ref_clanovi="3" ref_stavovi="4"></PredmetIzmene>
-        <TipIzmene>brisanje</TipIzmene>
-        <Obrazlozenje>Novelacija u Predlogu zakona odnosi se na to da se bitni elementi JPP odnose i na mogućnost javnog partnera da privatnom partneru dozvoli da obavlja komercijalnu delatnost, što je bilo i u dosadašnjem zakonu, ali i "DA IZGRADI DRUGE OBJEKTE...". Ovo rešenje otvara prostor korupcije ogromnih razmera i obesmišljava institut javno-privatnog partnerstva.</Obrazlozenje>
-    </Amandman>
-    <Amandman RedniBroj="2">
-        <PredmetIzmene ref_clanovi="10"></PredmetIzmene>
-        <TipIzmene>brisanje</TipIzmene>
-        <Obrazlozenje>
-            <Referenca ref_clanovi="10">Članom 10.</Referenca> Predloga zakona predlaže se izmena u članu 22. Zakona brisanjem obaveze da se javni poziv objavi u jednom međunarodnom listu, sa obrazloženjem Predlagaća zakona da je već objavljen na Tenders Electronic Daily a da je međunarodni list koji se distribuira po celom svetu obično Finanical Times koji je navodno veoma skupo glasilo za lokalne samouprave, naročito kada je reč o ne naročito velikim projektima.</Obrazlozenje>
-    </Amandman>
-    <Amandman RedniBroj="3">
-        <PredmetIzmene ref_clanovi="12" ref_stavovi="1"></PredmetIzmene>
-        <TipIzmene>izmena</TipIzmene>
-        <Obrazlozenje/>
-    </Amandman>
-    <Potpisnici>
-        <Potpisnik>
-            <Ime>Marko</Ime>
-            <Prezime>Đurišić</Prezime>
-        </Potpisnik>
-        <Potpisnik>
-            <Titula>prof. dr</Titula>
-            <Ime>Ninoslav</Ime>
-            <Prezime>Stojadinović</Prezime>
-        </Potpisnik>
-        <Potpisnik>
-            <Ime>Aleksandar</Ime>
-            <Prezime>Senić</Prezime>
-        </Potpisnik>
-        <Potpisnik>
-            <Ime>Biljana</Ime>
-            <Prezime>Hasanović-Korać</Prezime>
-        </Potpisnik>
-        <Potpisnik>
-            <Ime>Goran</Ime>
-            <Prezime>Bogdanović</Prezime>
-        </Potpisnik>
-        <Potpisnik>
-            <Ime>Branka</Ime>
-            <Prezime>Karavidić</Prezime>
-        </Potpisnik>
-        <Potpisnik>
-            <Ime>Slobodan</Ime>
-            <Prezime>Homen</Prezime>
-        </Potpisnik>
-        <Potpisnik>
-            <Titula>dr</Titula>
-            <Ime>Miroslav</Ime>
-            <Prezime>Marinković</Prezime>
-        </Potpisnik>
-        <Potpisnik>
-            <Titula>mr sci. dr stom.</Titula>
-            <Ime>Blagoje</Ime>
-            <Prezime>Bradić</Prezime>
-        </Potpisnik>
-        <Potpisnik>
-            <Ime>Ivan</Ime>
-            <Prezime>Karić</Prezime>
-        </Potpisnik>
-    </Potpisnici>
-</Amandman>
+<Users xmlns="http://www.gradskaskupstina.gov/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gradskaskupstina.gov/">
+    <User>
+        <Username>rusija</Username>
+        <Password>rusija</Password>
+        <Ime>Radomir</Ime>
+        <Prezime>Marinković</Prezime>
+        <Salt>so</Salt>
+        <Role>ROLE_PREDSEDNIK</Role>
+    </User>
+    <User>
+        <Username>mitra</Username>
+        <Password>mitra</Password>
+        <Ime>Milan</Ime>
+        <Prezime>Mitrić</Prezime>
+        <Salt>so</Salt>
+        <Role>ROLE_ODBORNIK</Role>
+    </User>
+    <User>
+        <Username>roki</Username>
+        <Password>roki</Password>
+        <Ime>Nebojša</Ime>
+        <Prezime>Popović</Prezime>
+        <Salt>so</Salt>
+        <Role>ROLE_GRADJANIN</Role>
+    </User>
+    <User>
+        <Username>cho</Username>
+        <Password>cho</Password>
+        <Ime>Branislav</Ime>
+        <Prezime>Čogić</Prezime>
+        <Salt>so</Salt>
+        <Role>ROLE_GRADJANIN</Role>
+    </User>
+</Users>

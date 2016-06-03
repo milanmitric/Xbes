@@ -125,7 +125,6 @@ public class ReadManager<T>{
             Document document = verifySignatureEnveloped.loadDocument(filepath);
             ret =  verifySignatureEnveloped.verifySignature(document);
         } catch(Exception e){
-            //System.out.println("Unexpected error: " + e.getMessage());
             logger.info("ERROR: Unexpected error: " + e.getMessage());
         } finally {
             return  ret;
@@ -152,7 +151,6 @@ public class ReadManager<T>{
             ret = true;
 
         } catch (Exception e){
-            //System.out.println("Unexpected error: " + e.getMessage());
             logger.info("ERROR: Unexpected error: " + e.getMessage());
 
         } finally {
