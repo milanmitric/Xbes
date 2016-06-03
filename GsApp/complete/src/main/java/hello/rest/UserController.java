@@ -1,7 +1,12 @@
 package hello.rest;
 
+import com.marklogic.client.document.DocumentMetadataPatchBuilder;
+import hello.businessLogic.BeanManager;
+import hello.businessLogic.CustomManager;
 import hello.dto.UserDTO;
 import hello.dto.LoginUser;
+import hello.entity.gov.gradskaskupstina.User;
+import hello.entity.gov.gradskaskupstina.Users;
 import hello.util.Role;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -31,8 +36,15 @@ public class UserController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public HttpStatus signin(@RequestBody LoginUser loginTry) {
 
-        System.out.println("SOMEONE TRYED: ");
-        System.out.println(loginTry.toString());
+        BeanManager<Users> bm1 = new BeanManager<>("schema/Users.xsd");
+        /*citamo sve usere iz baze*/
+        Users users = bm1.read("/test17/coveci.xml");
+        for(User user : users.getUser()){
+            if(loginTry.getPassword().equals(user.getPassword())
+                    && loginTry.getUsername().equals(user.getUsername())){
+                
+            }
+        }
 
 
         /*
@@ -54,11 +66,21 @@ public class UserController {
 
 
     @RequestMapping(value = "/signup",
-            method = RequestMethod.POST)
-    public HttpStatus signup() {
-        //TODO
-        //System.out.println()
-        return HttpStatus.OK;
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity signup(@RequestBody User userTry) {
+
+        //TODO validate userTry
+        BeanManager<Users> bm1 = new BeanManager<>("schema/Users.xsd");
+        /*citamo sve usere iz baze*/
+        Users users = bm1.read("/test17/coveci.xml");
+        /*dodamo novog usera*/
+        users.getUser().add(userTry);
+        /*upisemo ceo doc nazad*/
+        //TODO hashing pass
+        bm1.write(users, "/test17/coveci.xml", "Proba");
+
+        return new ResponseEntity("SVE KUL", HttpStatus.OK);
     }
 
 

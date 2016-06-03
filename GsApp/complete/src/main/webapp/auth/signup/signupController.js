@@ -5,27 +5,14 @@ angular.module('xapp')
 
  		//button clicked
 	    $scope.signup = function(){
-
+            console.log($scope.user);
 		   authService.signup(
-			   $scope.username, 
-			   $scope.email,
-			   $scope.password,
+			   $scope.user,
 			   function(response){
-				  
-				   console.log(response.data);	
-				   if(response.data.success==true){
-				   	alertify.success(response.data.msg);
-				   	$location.path('/signin')
-				   }else{
-				   	alertify.error(response.data.msg);
-				   }
-
+				   console.log(response.data);
 			   }
 			   ,function(response){
-
-					console.log(response.data);
-					alertify.error(response.data.msg);									   
-
+				    console.log(response.data);
 			   });
   		};
 

@@ -184,6 +184,23 @@ public class ObjectFactory {
         return new TTacka.Podtacka();
     }
 
+
+    /**
+     * Create an instance of {@link Users }
+     *
+     */
+    public Users createUsers() {
+        return new Users();
+    }
+
+    /**
+     * Create an instance of {@link User }
+     *
+     */
+    public User createUser() {
+        return new User();
+    }
+
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link XMLGregorianCalendar }{@code >}}
      * 

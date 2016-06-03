@@ -15,18 +15,14 @@ angular.module('xapp')
 		}
 		$http(req).then(onSuccess, onError);
 		},
-		signup: function(username, email, password, onSuccess, onError){
+		signup: function(user, onSuccess, onError){
 		var req = {
 		    method: 'POST',
 		    url: '/api/signup',
 		    headers: {
 		        'Content-Type': 'application/json'
 		    },
-		    data: {
-		    	username: username,
-		    	email: email,
-		    	password: password 
-		    }
+		    data: user
 		}
 		$http(req).then(onSuccess, onError);
 		},
