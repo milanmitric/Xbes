@@ -8,6 +8,7 @@ import hello.entity.gov.gradskaskupstina.Akt;
 import hello.entity.gov.gradskaskupstina.Amandman;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.io.File;
@@ -19,14 +20,14 @@ public class Application {
 
     public static void main(String[] args) throws IOException {
 
-        //SpringApplication.run(Application.class, args);
+        SpringApplication.run(Application.class, args);
 
-        testAkt();
+/*        testAkt();
         testAmandman();
 
 
         DatabaseClient client = Database.getDbClient();
-        client.release();
+        client.release();*/
     }
 
     public static void testAkt(){
@@ -84,4 +85,7 @@ public class Application {
             }
         }
     }
+
+
+
 }

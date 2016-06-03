@@ -1,8 +1,7 @@
 package hello.rest;
 
 import hello.businessLogic.BeanManager;
-import hello.entity.Akt;
-import hello.entity.TGlava;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
@@ -48,7 +47,7 @@ public class TestRest {
 
         //http://www.mkyong.com/java/jaxb-hello-world-example/
 
-        JSONObject obj = null;
+    /*    JSONObject obj = null;
         try {
              obj=new JSONObject(s);
             System.out.println(obj.toString());
@@ -66,12 +65,12 @@ public class TestRest {
             e.printStackTrace();
         }
 
-        System.out.println("NASLOV IZ OBJ AKT: "+akt.getNaslov());
+        System.out.println("NASLOV IZ OBJ AKT: "+akt.getNaslov());*/
         return HttpStatus.OK;
     }
 
 
-    @RequestMapping("/test4")
+   /* @RequestMapping("/test4")
     public HttpStatus test4(@RequestBody TGlava t) {
         //nece - 405
         System.out.println(t.getNaziv());
@@ -80,7 +79,7 @@ public class TestRest {
         bm.write(t, "/lalalala", "testovoono");
 
         return HttpStatus.OK;
-    }
+    }*/
 
 
 

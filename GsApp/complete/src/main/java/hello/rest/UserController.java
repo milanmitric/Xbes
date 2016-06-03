@@ -1,20 +1,18 @@
 package hello.rest;
 
 import hello.dto.UserDTO;
+import hello.dto.LoginUser;
 import hello.util.Role;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,10 +24,19 @@ import org.slf4j.LoggerFactory;
 public class UserController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @RequestMapping(value = "/signin")
-    public ResponseEntity<UserDTO> signin() {
-        //TODO
-        /*SIMULATION*/
+
+
+    @RequestMapping(value = "/signin",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public HttpStatus signin(@RequestBody LoginUser loginTry) {
+
+        System.out.println("SOMEONE TRYED: ");
+        System.out.println(loginTry.toString());
+
+
+        /*
+        *//*SIMULATION*//*
         logger.info("REST request for signing in");
         UserDTO user=new UserDTO("usernameTEST", Role.ROLE_GRADJANIN);  //this is user that is found in database
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -39,18 +46,24 @@ public class UserController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         logger.info("Returning user : " + user);
-        return ResponseEntity.ok(user);
-    }
+        */
 
-
-    @RequestMapping(value = "/signup")
-    public HttpStatus signup() {
-        //TODO
         return HttpStatus.OK;
     }
 
 
-    @RequestMapping(value = "/auth")
+
+    @RequestMapping(value = "/signup",
+            method = RequestMethod.POST)
+    public HttpStatus signup() {
+        //TODO
+        //System.out.println()
+        return HttpStatus.OK;
+    }
+
+
+
+    @RequestMapping(value = "/authenticate")
     public ResponseEntity<UserDTO> auth() {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -64,6 +77,7 @@ public class UserController {
         }
         return ResponseEntity.ok(user);
     }
+
 
 
     @RequestMapping(value = "/signout")
