@@ -1,6 +1,5 @@
 package hello.businessLogic;
 
-
 import com.marklogic.client.DatabaseClient;
 import com.marklogic.client.document.XMLDocumentManager;
 import com.marklogic.client.io.DOMHandle;
@@ -87,7 +86,6 @@ public class ReadManager<T>{
             }
             // For now. Signature check is not working?
             // TODO: Refactor signature check.
-
             if (!validateXML("tmp.xml")){
                 ret = null;
                 throw  new Exception("Input bean signature is not well formated!");
