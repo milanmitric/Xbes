@@ -1,5 +1,7 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Amandman xmlns="http://www.gradskaskupstina.gov/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gradskaskupstina.gov/">
+<?xml version="1.0" encoding="UTF-8"?>
+<Amandman xmlns="http://www.gradskaskupstina.gov/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.gradskaskupstina.gov/ file:/C:/Users/FS-LB/Desktop/XMLProjekat/DJIT/Xbes/GsApp/complete/schema/Amandman.xsd">
     <PravniOsnov ref_akt="Poslovnik Narodne Skupstine" ref_clanovi="161"></PravniOsnov>
     <Akt ref_akt="AktPZOIIDZOJPPIK">Predlog Zakona o izmenama i dopunama Zakona o javno-privatnom partnerstvu i koncesijama</Akt>
     <Amandman RedniBroj="1">
@@ -10,13 +12,12 @@
     <Amandman RedniBroj="2">
         <PredmetIzmene ref_clanovi="10"></PredmetIzmene>
         <TipIzmene>brisanje</TipIzmene>
-        <Obrazlozenje>
-            <Referenca ref_clanovi="10">Članom 10.</Referenca> Predloga zakona predlaže se izmena u članu 22. Zakona brisanjem obaveze da se javni poziv objavi u jednom međunarodnom listu, sa obrazloženjem Predlagaća zakona da je već objavljen na Tenders Electronic Daily a da je međunarodni list koji se distribuira po celom svetu obično Finanical Times koji je navodno veoma skupo glasilo za lokalne samouprave, naročito kada je reč o ne naročito velikim projektima.</Obrazlozenje>
+        <Obrazlozenje><Referenca ref_clanovi="10">Članom 10.</Referenca> Predloga zakona predlaže se izmena u članu 22. Zakona brisanjem obaveze da se javni poziv objavi u jednom međunarodnom listu, sa obrazloženjem Predlagaća zakona da je već objavljen na Tenders Electronic Daily a da je međunarodni list koji se distribuira po celom svetu obično Finanical Times koji je navodno veoma skupo glasilo za lokalne samouprave, naročito kada je reč o ne naročito velikim projektima.</Obrazlozenje>
     </Amandman>
     <Amandman RedniBroj="3">
         <PredmetIzmene ref_clanovi="12" ref_stavovi="1"></PredmetIzmene>
         <TipIzmene>izmena</TipIzmene>
-        <Obrazlozenje/>
+        <Obrazlozenje></Obrazlozenje>
     </Amandman>
     <Potpisnici>
         <Potpisnik>

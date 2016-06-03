@@ -3,9 +3,12 @@ package hello.businessLogic;
 import com.marklogic.client.DatabaseClient;
 import com.marklogic.client.document.DocumentMetadataPatchBuilder;
 import com.marklogic.client.document.XMLDocumentManager;
-import hello.entity.Akt;
+import hello.entity.gov.gradskaskupstina.Akt;
+import hello.entity.gov.gradskaskupstina.Amandman;
 import hello.util.Converter;
 import hello.util.MyValidationEventHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBIntrospector;
@@ -20,7 +23,7 @@ import java.io.File;
  * Class that handles all validations and update and delete operations.
  */
 public class CustomManager <T>{
-
+    private static final Logger logger = LoggerFactory.getLogger(CustomManager.class);
     /**
      * Manages CRUD operations on XML documents and JAXB beans..
      */
@@ -97,26 +100,27 @@ public class CustomManager <T>{
 
     /**
      * Validates JAXB bean by <code>schema</code> field of class.
-     * @param akt Bean to be validated
+     * @param bean Bean to be validated
      * @return Indicator of success.
      */
-    public boolean validateBeanBySchema(T akt){
+    public boolean validateBeanBySchema(T bean){
         boolean ret = false;
 
         try{
-            if (!(akt instanceof Akt)){
+            if (!(bean instanceof Akt) && !(bean instanceof Amandman)){
                 throw  new Exception("Can't validateBeanBySchema element that is not Akt!");
             }
-            JAXBContext context = JAXBContext.newInstance("hello.entity");
+            JAXBContext context = JAXBContext.newInstance("hello.entity.gov.gradskaskupstina");
             Unmarshaller unmarshaller = context.createUnmarshaller();
-            converter.convertToXml(akt);
+            converter.convertToXml(bean);
             // Podešavanje unmarshaller-a za XML schema validaciju
             unmarshaller.setSchema(schema);
             unmarshaller.setEventHandler(new MyValidationEventHandler());
             T tmpAkt = (T) JAXBIntrospector.getValue(unmarshaller.unmarshal(new File("tmp.xml")));
             ret = true;
         } catch (Exception e){
-            System.out.println("Unexpected error: " +e.getMessage());
+            logger.debug("Unexpected error: " +e.getMessage());
+            e.printStackTrace();
         }finally {
             return ret;
         }
@@ -131,7 +135,7 @@ public class CustomManager <T>{
         boolean ret = false;
 
         try{
-            JAXBContext context = JAXBContext.newInstance("hello.entity");
+            JAXBContext context = JAXBContext.newInstance("hello.entity.gov.gradskaskupstina");
             Unmarshaller unmarshaller = context.createUnmarshaller();
             // Podešavanje unmarshaller-a za XML schema validaciju
             unmarshaller.setSchema(schema);
@@ -139,7 +143,8 @@ public class CustomManager <T>{
             T tmpAkt = (T) JAXBIntrospector.getValue(unmarshaller.unmarshal(new File(filePath)));
             ret = true;
         } catch (Exception e){
-            System.out.println("Unexpected error: " +e.getMessage());
+            logger.info("ERROR: Unexpceted error: " + e.getMessage());
+            //System.out.println("Unexpected error: " +e.getMessage());
         }finally {
             return ret;
         }

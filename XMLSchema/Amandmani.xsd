@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+            xmlns="http://www.gradskaskupstina.gov/"
+            targetNamespace="http://www.gradskaskupstina.gov/"
+            elementFormDefault="qualified">
+
+    <xs:element name="Amandman">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="PravniOsnov" type="TReferenca" minOccurs="1" maxOccurs="1"/>
+                <xs:element name="Akt" type="TReferenca" minOccurs="1" maxOccurs="1"/>
+                <xs:element name="Amandman" type="TAmandman" minOccurs="1" maxOccurs="unbounded"></xs:element>
+                <xs:element name="Potpisnici" type="TPotpisnici" minOccurs="1" maxOccurs="1"></xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="TAmandman">
+        <xs:sequence minOccurs="1" maxOccurs="unbounded">
+            <xs:element name="PredmetIzmene" type="TReferenca" minOccurs="1" maxOccurs="1"></xs:element>
+            <xs:element name="TipIzmene" type="TTipIzmene" minOccurs="1" maxOccurs="1" />
+            <xs:element name="Obrazlozenje" type="TSemiStruktuiraniTekst" minOccurs="1" maxOccurs="1"></xs:element>
+        </xs:sequence>
+        <xs:attribute name="RedniBroj" type="xs:positiveInteger" use="optional"></xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="TPotpisnici">
+        <xs:sequence>
+            <xs:element name="Potpisnik" type="TPotpisnik" minOccurs="1" maxOccurs="unbounded"></xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="TPotpisnik">
+        <xs:sequence>
+            <xs:element name="Titula" type="xs:string" minOccurs="0"/>
+            <xs:element name="Ime" type="xs:string"/>
+            <xs:element name="Prezime" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="TTipIzmene">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="izmena"/>
+            <xs:enumeration value="dopuna"/>
+            <xs:enumeration value="brisanje"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!--  Atribut referenca na clan, clanove, stav, stavove, tacku ili tacke nekog akta.
+            Ovi atributi nalaze se u elementu <referenca></referenca>.
+            Validni oblici:
+        <referenca ref_clanovi="5,6"></referenca>
+    -->
+    <xs:attributeGroup name="AGReferenca">
+        <xs:attribute name="ref_akt" type="xs:string" use="optional" default="ovaj_akt"/>
+        <xs:attribute name="ref_clanovi" type="TNiz_referenci" use="optional"/>
+        <xs:attribute name="ref_stavovi" type="TNiz_referenci" use="optional"/>
+        <xs:attribute name="ref_tacke" type="TNiz_referenci" use="optional"/>
+    </xs:attributeGroup>
+
+    <!-- Tip reference. Prakticno element koji je string sa atributima iz grupe referenca -->
+    <xs:complexType name="TReferenca">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attributeGroup ref="AGReferenca"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <!-- Polustruktuirani tekst sa elementima referencama i datumima -->
+    <xs:complexType name="TSemiStruktuiraniTekst" mixed="true">
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="Tekst">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="Referenca" type="TReferenca"/>
+            <xs:element name="Datum" type="xs:date"/>
+        </xs:choice>
+    </xs:complexType>
+
+    <!-- Izgled atributa reference. Moze biti sledeceg oblika
+            Kao obican broj: 15
+            Kao vise brojeva u obliku: 4,5,6
+            Kao niz brojeva u obliku: [1-4]
+            Kao vise nizova brojeva u obliku: [1-4],[6-7]    -->
+    <xs:simpleType name="TNiz_referenci">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="(\d+,?)+"/>
+            <xs:pattern value="(\d+-\d+,?)+"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+</xs:schema>

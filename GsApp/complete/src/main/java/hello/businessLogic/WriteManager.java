@@ -6,6 +6,8 @@ import com.marklogic.client.io.DocumentMetadataHandle;
 import com.marklogic.client.io.InputStreamHandle;
 import hello.security.SignEnveloped;
 import hello.util.Converter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 
 import javax.xml.validation.Schema;
@@ -20,6 +22,7 @@ import java.security.cert.Certificate;
  * Class that handles write-associated operation with beans.
  */
 public class WriteManager <T>{
+    private static final Logger logger = LoggerFactory.getLogger(WriteManager.class);
     /**
      * Manages CRUD operations on XML documents and JAXB beans..
      */
@@ -60,9 +63,9 @@ public class WriteManager <T>{
     public boolean write(FileInputStream inputStream, String docId, String colId) {
         boolean ret = false;
         try{
-            if (!singXml(null)) {
-                throw  new Exception("Could not sign xml, check tmp.xml.");
-            }
+            //if (!singXml(null)) {
+            //    throw  new Exception("Could not sign xml, check tmp.xml.");
+            //}
             InputStreamHandle handle = new InputStreamHandle(inputStream);
             DocumentMetadataHandle metadata = new DocumentMetadataHandle();
             metadata.getCollections().add(colId);
@@ -70,7 +73,8 @@ public class WriteManager <T>{
             ret = true;
         }
         catch (Exception e){
-            System.out.println("Unexpected error: " + e.getMessage());
+            logger.info("Unexpected error: " + e.getMessage());
+            //System.out.println("Unexpected error: " + e.getMessage());
         } finally{
             return ret;
         }
@@ -97,7 +101,8 @@ public class WriteManager <T>{
             }
         }
         catch (Exception e) {
-            System.out.println("Unexpected error: " + e.getMessage());
+            logger.info("ERROR: Unexpected error: " + e.getMessage());
+            //System.out.println("Unexpected error: " + e.getMessage());
         }
         finally{
             return ret;

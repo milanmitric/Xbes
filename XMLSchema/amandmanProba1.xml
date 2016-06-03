@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Amandman xmlns="http://www.gradskaskupstina.gov/"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.gradskaskupstina.gov/ file:/C:/Users/FS-LB/Desktop/XMLProjekat/DJIT/Xbes/GsApp/complete/schema/Amandmani.xsd">
+    <PravniOsnov>PravniOsnov0</PravniOsnov>
+    <Akt>Akt0</Akt>
+    <Amandman>
+        <PredmetIzmene>PredmetIzmene0</PredmetIzmene>
+        <TipIzmene>izmena</TipIzmene>
+        <Obrazlozenje/>
+        <PredmetIzmene>PredmetIzmene1</PredmetIzmene>
+        <TipIzmene>izmena</TipIzmene>
+        <Obrazlozenje/>
+    </Amandman>
+    <Amandman>
+        <PredmetIzmene>PredmetIzmene2</PredmetIzmene>
+        <TipIzmene>izmena</TipIzmene>
+        <Obrazlozenje/>
+        <PredmetIzmene>PredmetIzmene3</PredmetIzmene>
+        <TipIzmene>izmena</TipIzmene>
+        <Obrazlozenje/>
+    </Amandman>
+    <Potpisnici>
+        <Potpisnik>
+            <Ime>Ime0</Ime>
+            <Prezime>Prezime0</Prezime>
+        </Potpisnik>
+        <Potpisnik>
+            <Ime>Ime1</Ime>
+            <Prezime>Prezime1</Prezime>
+        </Potpisnik>
+    </Potpisnici>
+</Amandman>

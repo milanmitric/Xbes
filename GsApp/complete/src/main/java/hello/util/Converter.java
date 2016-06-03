@@ -21,7 +21,7 @@ public class Converter<T> {
         FileOutputStream fileOutputStream = null;
         try {
             fileOutputStream = new FileOutputStream(file);
-            JAXBContext jc = JAXBContext.newInstance("hello.entity");
+            JAXBContext jc = JAXBContext.newInstance("hello.entity.gov.gradskaskupstina");
             Marshaller marshaller = jc.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             marshaller.setProperty(Marshaller.JAXB_SCHEMA_LOCATION, "http://www.gradskaskupstina.gov/");
@@ -43,7 +43,7 @@ public class Converter<T> {
     public T convertFromXml(File file, Schema schema){
         T ret = null;
         try {
-            JAXBContext jc = JAXBContext.newInstance("hello.entity");
+            JAXBContext jc = JAXBContext.newInstance("hello.entity.gov.gradskaskupstina");
             Unmarshaller unmarshaller = jc.createUnmarshaller();
             unmarshaller.setSchema(schema);
             ret = (T) JAXBIntrospector.getValue(unmarshaller.unmarshal(file));

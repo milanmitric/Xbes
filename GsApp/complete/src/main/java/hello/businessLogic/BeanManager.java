@@ -44,7 +44,7 @@ public class BeanManager <T>{
     private SchemaFactory schemaFactory;
 
     /**
-     * Default schema located in <b>"./schema/Test.xsd"</b>
+     * Default schema located in <b>"./schema/Akt.xsd"</b>
      */
     private Schema schema;
 
@@ -75,13 +75,14 @@ public class BeanManager <T>{
             client = Database.getDbClient();
             xmlManager = client.newXMLDocumentManager();
             schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-            schema = schemaFactory.newSchema(new File("./schema/Test.xsd"));
+            schema = schemaFactory.newSchema(new File("schema/Akt.xsd"));
             ReadManager = new ReadManager<T>(client,xmlManager,schemaFactory,schema);
             writeManager = new WriteManager<>(client,xmlManager,schemaFactory,schema);
             customManager = new CustomManager<>(client,xmlManager,schemaFactory,schema);
             converter = new Converter<>();
         } catch (Exception e){
             System.out.println("Can't initialize Bean manager.");
+            e.printStackTrace();
         }
     }
 
@@ -177,8 +178,8 @@ public class BeanManager <T>{
      * @param akt Bean to be validated
      * @return Indicator of success.
      */
-    public boolean validateBeanBySchema(T akt){
-        return customManager.validateBeanBySchema(akt);
+    public boolean validateBeanBySchema(T bean){
+        return customManager.validateBeanBySchema(bean);
     }
 
     /**

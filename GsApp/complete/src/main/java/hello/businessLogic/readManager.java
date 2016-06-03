@@ -7,6 +7,8 @@ import com.marklogic.client.io.DocumentMetadataHandle;
 import com.marklogic.client.io.JAXBHandle;
 import hello.security.VerifySignatureEnveloped;
 import hello.util.Converter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
@@ -24,6 +26,7 @@ import java.io.OutputStream;
  * Class that handles read-associated operation with beans.
  */
 public class ReadManager<T>{
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     /**
      * Manages CRUD operations on XML documents and JAXB beans..
@@ -72,7 +75,7 @@ public class ReadManager<T>{
     public T read(String docId){
         T ret = null;
         try{
-            JAXBContext jc = JAXBContext.newInstance("hello.entity");
+            JAXBContext jc = JAXBContext.newInstance("hello.entity.gov.gradskaskupstina");
             JAXBHandle<T> handle = new JAXBHandle<>(jc);
 
 
@@ -102,7 +105,8 @@ public class ReadManager<T>{
             }
         }
         catch (Exception e) {
-            System.out.println("Unexpected error: " + e.getMessage());
+            //System.out.println("Unexpected error: " + e.getMessage());
+            logger.info("ERROR: Unexpected error: " + e.getMessage());
         } finally {
             return ret;
         }
@@ -121,7 +125,8 @@ public class ReadManager<T>{
             Document document = verifySignatureEnveloped.loadDocument(filepath);
             ret =  verifySignatureEnveloped.verifySignature(document);
         } catch(Exception e){
-            System.out.println("Unexpected error: " +e.getMessage());
+            //System.out.println("Unexpected error: " + e.getMessage());
+            logger.info("ERROR: Unexpected error: " + e.getMessage());
         } finally {
             return  ret;
         }
@@ -147,7 +152,8 @@ public class ReadManager<T>{
             ret = true;
 
         } catch (Exception e){
-            System.out.println("Unexpected error: "+e.getMessage());
+            //System.out.println("Unexpected error: " + e.getMessage());
+            logger.info("ERROR: Unexpected error: " + e.getMessage());
 
         } finally {
             return ret;
