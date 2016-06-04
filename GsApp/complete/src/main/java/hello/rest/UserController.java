@@ -1,14 +1,12 @@
 package hello.rest;
 
-import com.marklogic.client.document.DocumentMetadataPatchBuilder;
 import hello.businessLogic.BeanManager;
-import hello.businessLogic.CustomManager;
 import hello.dto.UserDTO;
 import hello.dto.LoginUser;
 import hello.entity.gov.gradskaskupstina.User;
 import hello.entity.gov.gradskaskupstina.Users;
-import hello.util.MarkStrings;
-import hello.util.Role;
+import hello.StringResources.MarkLogicStrings;
+import hello.StringResources.Role;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -45,7 +43,7 @@ public class UserController {
 
         BeanManager<Users> bm1 = new BeanManager<>("schema/Users.xsd");
         /*citamo sve usere iz baze*/
-        Users users = bm1.read(MarkStrings.USERS_DOC_ID);
+        Users users = bm1.read(MarkLogicStrings.USERS_DOC_ID);
         for(User user : users.getUser()){
             if(loginTry.getPassword().equals(user.getPassword())
                     && loginTry.getUsername().equals(user.getUsername())){
@@ -93,7 +91,7 @@ public class UserController {
         userTry.setRole(Role.ROLE_GRADJANIN);
         BeanManager<Users> bm1 = new BeanManager<>("schema/Users.xsd");
         /*citamo sve usere iz baze*/
-        Users users = bm1.read(MarkStrings.USERS_DOC_ID);
+        Users users = bm1.read(MarkLogicStrings.USERS_DOC_ID);
 
         for(User user : users.getUser()){
             if(user.getUsername().equals(userTry.getUsername())){
@@ -109,7 +107,7 @@ public class UserController {
         users.getUser().add(userTry);
         /*upisemo ceo doc nazad*/
         //TODO hashing password
-        bm1.write(users, MarkStrings.USERS_DOC_ID, "Proba");
+        bm1.write(users, MarkLogicStrings.USERS_DOC_ID, "Proba");
 
         HashMap<String, String> res= new HashMap<>();
         res.put("success", "true");
@@ -136,12 +134,12 @@ public class UserController {
     }
 
 
-
     @RequestMapping(value = "/signout")
     public HttpStatus signout() {
         SecurityContextHolder.clearContext();
         return HttpStatus.OK;
     }
+
 
 
 }

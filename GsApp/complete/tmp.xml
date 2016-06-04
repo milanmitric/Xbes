@@ -32,4 +32,18 @@
         <Salt>so</Salt>
         <Role>ROLE_GRADJANIN</Role>
     </User>
+    <User>
+        <Username>a</Username>
+        <Password>a</Password>
+        <Ime>a</Ime>
+        <Prezime>a</Prezime>
+        <Role>ROLE_GRADJANIN</Role>
+    </User>
+    <User>
+        <Username>b</Username>
+        <Password>b</Password>
+        <Ime>b</Ime>
+        <Prezime>b</Prezime>
+        <Role>ROLE_GRADJANIN</Role>
+    </User>
 </Users>

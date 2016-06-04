@@ -1,13 +1,11 @@
 package hello;
 
 
-import com.marklogic.client.DatabaseClient;
 import hello.businessLogic.BeanManager;
-import hello.util.Database;
 import hello.entity.gov.gradskaskupstina.Akt;
 import hello.entity.gov.gradskaskupstina.Amandman;
 import hello.entity.gov.gradskaskupstina.Users;
-import hello.util.MarkStrings;
+import hello.StringResources.MarkLogicStrings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -99,7 +97,7 @@ public class Application {
                 logger.info("Schema validation: " + inputUsers + " is valid!");
             else
                 logger.info("Schema validation: " + inputUsers + "is NOT valid");
-            if (!userManager.write(inputUsers, MarkStrings.USERS_DOC_ID, MarkStrings.USERS_DOC_ID)) {
+            if (!userManager.write(inputUsers, MarkLogicStrings.USERS_DOC_ID, MarkLogicStrings.USERS_DOC_ID)) {
                 //System.out.println("Could't write akt!");
                 logger.info("Could't write akt!");
             } else {
@@ -107,7 +105,7 @@ public class Application {
                 logger.info("Write successful!");
 
                 // Citamo upravo upisani akt iz mark logic baze
-                Users users = userManager.read(MarkStrings.USERS_DOC_ID);
+                Users users = userManager.read(MarkLogicStrings.USERS_DOC_ID);
                 if(userManager.validateBeanBySchema(users))
                     logger.info("Schema validation: " + users + " is valid!");
                 else
