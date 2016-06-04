@@ -53,4 +53,24 @@ public class Converter<T> {
             return ret;
         }
     }
+
+
+    /**
+     * Write string content to xml.
+     * @param fileContent Content to be written.
+     * @return Indicator of succes.
+     */
+    public boolean writeStringToFile(String fileContent) {
+        boolean ret = false;
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream("tmp.xml");
+            fileOutputStream.write(fileContent.getBytes());
+            fileOutputStream.close();
+            ret = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return ret;
+    }
 }

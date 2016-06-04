@@ -3,25 +3,24 @@
 angular.module('xapp')
     .config(function ($stateProvider) {
         $stateProvider
-        .state('newakt', {
-                url: '/newakt',
+        .state('newamandman', {
+                url: '/newamandman',
                 views: {
                     'content': {
-                        templateUrl: 'akt/newAkt.html',
-                        controller: 'NewAktController'
+                        templateUrl: 'amandman/newAmandman.html',
+                        controller: 'NewAmandmanController'
                     },
                     'navbar':{
                         templateUrl: 'navbar/navbar.html',
                         controller: 'NavbarController'
                     }
                 }
-
-        }).state('searchacts', {
-                          url: '/searchacts',
+        }).state('searchamandmans', {
+                          url: '/searchamandmans',
                           views: {
                               'content': {
-                                  templateUrl: 'akt/searchActs.html',
-                                  controller: 'SearchAktController'
+                                  templateUrl: 'amandman/searchAmandmans.html',
+                                  controller: 'SearchAmandmansController'
                               },
                               'navbar':{
                                   templateUrl: 'navbar/navbar.html',

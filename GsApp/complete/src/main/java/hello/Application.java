@@ -1,11 +1,11 @@
 package hello;
 
 
+import hello.StringResources.MarkLogicStrings;
 import hello.businessLogic.BeanManager;
 import hello.entity.gov.gradskaskupstina.Akt;
 import hello.entity.gov.gradskaskupstina.Amandman;
 import hello.entity.gov.gradskaskupstina.Users;
-import hello.StringResources.MarkLogicStrings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;

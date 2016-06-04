@@ -3,6 +3,7 @@ package hello.businessLogic;
 import com.marklogic.client.DatabaseClient;
 import com.marklogic.client.document.DocumentMetadataPatchBuilder;
 import com.marklogic.client.document.XMLDocumentManager;
+import hello.StringResources.MarkLogicStrings;
 import hello.util.Converter;
 import hello.util.Database;
 
@@ -11,6 +12,7 @@ import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.ArrayList;
 
 /**
  * Created by milan on 27.5.2016..
@@ -51,7 +53,7 @@ public class BeanManager <T>{
     /**
      * Encapsulates all read-related operations.
      */
-    private ReadManager<T> ReadManager;
+    private ReadManager<T> readManager;
 
     /**
      * Encapsulates all write-related operations.
@@ -67,6 +69,8 @@ public class BeanManager <T>{
      * Encapsulates all update, delete operations and all validations.
      */
     private CustomManager<T> customManager;
+
+    private QueryManager queryManager;
     /**
      * Initializes database client and XML manager.
      */
@@ -76,10 +80,12 @@ public class BeanManager <T>{
             xmlManager = client.newXMLDocumentManager();
             schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
             schema = schemaFactory.newSchema(new File("schema/Akt.xsd"));
-            ReadManager = new ReadManager<T>(client,xmlManager,schemaFactory,schema);
-            writeManager = new WriteManager<>(client,xmlManager,schemaFactory,schema);
-            customManager = new CustomManager<>(client,xmlManager,schemaFactory,schema);
             converter = new Converter<>();
+            readManager = new ReadManager<T>(client,xmlManager,schemaFactory,schema,converter);
+            writeManager = new WriteManager<>(client,xmlManager,schemaFactory,schema,converter);
+            customManager = new CustomManager<>(client,xmlManager,schemaFactory,schema,converter);
+            queryManager = new QueryManager(client, schema,converter);
+
         } catch (Exception e){
             System.out.println("Can't initialize Bean manager.");
             e.printStackTrace();
@@ -96,10 +102,11 @@ public class BeanManager <T>{
             xmlManager = client.newXMLDocumentManager();
             schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
             schema = schemaFactory.newSchema(new File(schemaFilePath));
-            ReadManager = new ReadManager<T>(client,xmlManager,schemaFactory,schema);
-            writeManager = new WriteManager<>(client,xmlManager,schemaFactory,schema);
-            customManager = new CustomManager<>(client,xmlManager,schemaFactory,schema);
             converter = new Converter<>();
+            readManager = new ReadManager<T>(client,xmlManager,schemaFactory,schema,converter);
+            writeManager = new WriteManager<>(client,xmlManager,schemaFactory,schema,converter);
+            customManager = new CustomManager<>(client,xmlManager,schemaFactory,schema,converter);
+            queryManager = new QueryManager(client,schema, converter);
         } catch (Exception e){
             System.out.println("Can't initialize Bean manager.");
         }
@@ -121,7 +128,7 @@ public class BeanManager <T>{
      * Writes bean to database.
      * @param bean JAXB bean to be written.
      * @param docId URI for document to be written.
-     * @param colId URI for collection if the docue.
+     * @param colId URI for collection to store document.
      * @return Indicator of success.
      */
     public boolean write(T bean, String docId, String colId) {
@@ -134,7 +141,7 @@ public class BeanManager <T>{
      * @return Read bean, <code>null</code> if not successful.
      */
     public T read(String docId){
-        return ReadManager.read(docId);
+        return readManager.read(docId);
     }
 
     /**
@@ -175,7 +182,6 @@ public class BeanManager <T>{
 
     /**
      * Validates JAXB bean by <code>schema</code> field of class.
-     * @param akt Bean to be validated
      * @return Indicator of success.
      */
     public boolean validateBeanBySchema(T bean){
@@ -197,14 +203,27 @@ public class BeanManager <T>{
      * @return Indicator of success.
      */
     public boolean validateXMLBySignature(String filepath){
-        return ReadManager.validateXMLBySignature(filepath);
+        return readManager.validateXMLBySignature(filepath);
     }
 
+    /**
+     * Executes given query.
+     * @param query String representation of XQuery.
+     * @return Interpreted results. <code>NULL</code> if error occurs.
+     */
+    public ArrayList<T> executeQuery(String query){
+        return queryManager.executeQuery(query);
+    }
 
-
-
-
-
-
-
+    /**
+     * Returns all files that are proposed from database.
+     * @return List of files in database.
+     */
+    public ArrayList<T> getAllFilesProposed(){
+        StringBuilder query = new StringBuilder();
+        query.append("fn:collection(\"");
+        query.append(MarkLogicStrings.AKTOVI_PREDLOZEN_COL_ID);
+        query.append("\")");
+        return queryManager.executeQuery(query.toString());
+    }
 }

@@ -56,12 +56,12 @@ public class CustomManager <T>{
         transformerFactory = TransformerFactory.newInstance();
     }
 
-    public CustomManager(DatabaseClient client, XMLDocumentManager xmlManager, SchemaFactory schemaFactory, Schema schema){
+    public CustomManager(DatabaseClient client, XMLDocumentManager xmlManager, SchemaFactory schemaFactory, Schema schema, Converter converter){
         this.client = client;
         this.xmlManager = xmlManager;
         this.schemaFactory = schemaFactory;
         this.schema = schema;
-        converter = new Converter<>();
+        this.converter = converter;
     }
 
     /**
@@ -120,7 +120,7 @@ public class CustomManager <T>{
             T tmpAkt = (T) JAXBIntrospector.getValue(unmarshaller.unmarshal(new File("tmp.xml")));
             ret = true;
         } catch (Exception e){
-            logger.debug("Unexpected error: " +e.getMessage());
+            logger.debug("[CustomManager] Unexpected error: " +e.getMessage());
             e.printStackTrace();
         }finally {
             return ret;
@@ -144,7 +144,7 @@ public class CustomManager <T>{
             T tmpAkt = (T) JAXBIntrospector.getValue(unmarshaller.unmarshal(new File(filePath)));
             ret = true;
         } catch (Exception e){
-            logger.info("ERROR: Unexpceted error: " + e.getMessage());
+            logger.info("[CustomManager] ERROR: Unexpected error: " + e.getMessage());
             //System.out.println("Unexpected error: " +e.getMessage());
         }finally {
             return ret;

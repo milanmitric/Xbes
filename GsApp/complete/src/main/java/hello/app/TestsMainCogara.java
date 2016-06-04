@@ -8,6 +8,7 @@ import hello.entity.gov.gradskaskupstina.Akt;
 import hello.entity.gov.gradskaskupstina.Amandman;
 import hello.entity.gov.gradskaskupstina.Users;
 import hello.util.Database;
+import hello.StringResources.MarkLogicStrings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -99,6 +100,8 @@ public class TestsMainCogara {
             else
                 logger.info("Schema validation: " + inputUsers + "is NOT valid");
             if (!userManager.write(inputUsers, MarkLogicStrings.USERS_DOC_ID, MarkLogicStrings.USERS_DOC_ID)) {
+
+
                 //System.out.println("Could't write akt!");
                 logger.info("Could't write akt!");
             } else {

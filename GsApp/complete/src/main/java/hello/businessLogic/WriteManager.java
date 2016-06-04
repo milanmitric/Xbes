@@ -45,12 +45,12 @@ public class WriteManager <T>{
 
     private Converter<T> converter;
 
-    public WriteManager(DatabaseClient client, XMLDocumentManager xmlManager, SchemaFactory schemaFactory, Schema schema){
+    public WriteManager(DatabaseClient client, XMLDocumentManager xmlManager, SchemaFactory schemaFactory, Schema schema, Converter converter){
         this.client = client;
         this.xmlManager = xmlManager;
         this.schemaFactory = schemaFactory;
         this.schema = schema;
-        converter = new Converter<>();
+        this.converter = converter;
     }
 
     /**
@@ -73,7 +73,7 @@ public class WriteManager <T>{
             ret = true;
         }
         catch (Exception e){
-            logger.info("Unexpected error: " + e.getMessage());
+            logger.info("[WriteManager] Unexpected error: " + e.getMessage());
             //System.out.println("Unexpected error: " + e.getMessage());
         } finally{
             return ret;
@@ -97,11 +97,11 @@ public class WriteManager <T>{
                 FileInputStream inputStream = new FileInputStream(new File("tmp.xml"));
                 ret = write(inputStream,docId,colId);
             } else {
-                throw new Exception("Can't convert JAXB bean " + bean.toString() + " to XML.");
+                throw new Exception("[WriteManager] Can't convert JAXB bean " + bean.toString() + " to XML.");
             }
         }
         catch (Exception e) {
-            logger.info("ERROR: Unexpected error: " + e.getMessage());
+            logger.info("[WriteManager] ERROR: Unexpected error: " + e.getMessage());
             //System.out.println("Unexpected error: " + e.getMessage());
         }
         finally{
@@ -134,7 +134,7 @@ public class WriteManager <T>{
             ret = true;
 
         } catch (Exception e){
-            System.out.println("Unexpected error: " +e.getMessage());
+            System.out.println("[WriteManager] Unexpected error: " +e.getMessage());
         } finally {
             return  ret;
         }
