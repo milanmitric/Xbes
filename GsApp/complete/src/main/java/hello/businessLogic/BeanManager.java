@@ -3,6 +3,7 @@ package hello.businessLogic;
 import com.marklogic.client.DatabaseClient;
 import com.marklogic.client.document.DocumentMetadataPatchBuilder;
 import com.marklogic.client.document.XMLDocumentManager;
+import hello.StringResources.MarkLogicStrings;
 import hello.util.Converter;
 import hello.util.Database;
 
@@ -214,11 +215,15 @@ public class BeanManager <T>{
         return queryManager.executeQuery(query);
     }
 
-
-
-
-
-
-
-
+    /**
+     * Returns all files that are proposed from database.
+     * @return List of files in database.
+     */
+    public ArrayList<T> getAllFilesProposed(){
+        StringBuilder query = new StringBuilder();
+        query.append("fn:collection(\"");
+        query.append(MarkLogicStrings.AKTOVI_PREDLOZEN_COL_ID);
+        query.append("\")");
+        return queryManager.executeQuery(query.toString());
+    }
 }

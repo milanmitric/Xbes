@@ -4,7 +4,6 @@ import com.marklogic.client.DatabaseClient;
 import com.marklogic.client.eval.EvalResult;
 import com.marklogic.client.eval.EvalResultIterator;
 import com.marklogic.client.eval.ServerEvaluationCall;
-import hello.Application;
 import hello.util.Converter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,15 +11,13 @@ import org.slf4j.LoggerFactory;
 import javax.xml.validation.Schema;
 import java.io.File;
 import java.util.ArrayList;
-
 /**
  * Created by milan on 4.6.2016..
  * Class that invokes xquery on mark logic server.
  */
 public class QueryManager <T> {
 
-    private static final Logger logger = LoggerFactory.getLogger(Application.class);
-
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     /**
      * Database client.
      */
@@ -76,7 +73,7 @@ public class QueryManager <T> {
                     if (bean != null) {
                         ret.add(bean);
                     } else {
-                        logger.error("[QueryManager] ERROR: Could not convert xml to JAXB bean!");
+                         logger.error("[QueryManager] ERROR: Could not convert xml to JAXB bean!");
                     }
                 } else {
                     logger.error("[QueryManager] ERROR: Could not write query result to file!");
@@ -87,4 +84,5 @@ public class QueryManager <T> {
         }
         return ret;
     }
+
 }

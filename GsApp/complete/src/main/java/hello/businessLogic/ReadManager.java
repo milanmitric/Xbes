@@ -100,12 +100,12 @@ public class ReadManager<T>{
             // Convert bean to tmp.xml so that you can validateBeanBySchema it.
             if (!converter.convertToXml(ret)){
                 ret = null;
-                throw  new Exception("Could not convert bean to xml!");
+                throw  new Exception("[ReadManager] ERROR: Could not convert bean to xml!");
             }
         }
         catch (Exception e) {
             //System.out.println("Unexpected error: " + e.getMessage());
-            logger.info("ERROR: Unexpected error: " + e.getMessage());
+            logger.info("[ReadManager] ERROR: Unexpected error: " + e.getMessage());
         } finally {
             return ret;
         }
@@ -124,7 +124,7 @@ public class ReadManager<T>{
             Document document = verifySignatureEnveloped.loadDocument(filepath);
             ret =  verifySignatureEnveloped.verifySignature(document);
         } catch(Exception e){
-            logger.info("ERROR: Unexpected error: " + e.getMessage());
+            logger.info("[ReadManager] ERROR: Unexpected error: " + e.getMessage());
         } finally {
             return  ret;
         }
@@ -150,7 +150,7 @@ public class ReadManager<T>{
             ret = true;
 
         } catch (Exception e){
-            logger.info("ERROR: Unexpected error: " + e.getMessage());
+            logger.info("[ReadManager] ERROR: Unexpected error: " + e.getMessage());
 
         } finally {
             return ret;
