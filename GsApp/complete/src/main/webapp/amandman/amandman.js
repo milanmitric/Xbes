@@ -27,8 +27,19 @@ angular.module('xapp')
                                   controller: 'NavbarController'
                               }
                           }
-                  })
-        ;
+        }).state('showamandmans', {
+                                              url: '/showamandmans',
+                                              views: {
+                                                  'content': {
+                                                      templateUrl: 'amandman/showAmandmans.html',
+                                                      controller: 'ShowAmandmansController'
+                                                  },
+                                                  'navbar':{
+                                                      templateUrl: 'navbar/navbar.html',
+                                                      controller: 'NavbarController'
+                                                  }
+                                              }
+                                      });
 
 
         //$locationProvider.html5Mode(true);

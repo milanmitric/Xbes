@@ -28,8 +28,19 @@ angular.module('xapp')
                                   controller: 'NavbarController'
                               }
                           }
-                  })
-        ;
+        }).state('showacts', {
+                                                        url: '/showacts',
+                                                        views: {
+                                                            'content': {
+                                                                templateUrl: 'akt/showActs.html',
+                                                                controller: 'ShowActsController'
+                                                            },
+                                                            'navbar':{
+                                                                templateUrl: 'navbar/navbar.html',
+                                                                controller: 'NavbarController'
+                                                            }
+                                                        }
+                                                });
 
 
         //$locationProvider.html5Mode(true);
