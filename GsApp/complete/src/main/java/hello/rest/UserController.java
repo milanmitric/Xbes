@@ -7,12 +7,16 @@ import hello.dto.UserDTO;
 import hello.dto.LoginUser;
 import hello.entity.gov.gradskaskupstina.User;
 import hello.entity.gov.gradskaskupstina.Users;
+import hello.util.MarkStrings;
 import hello.util.Role;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,6 +24,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 
 /**
  * Created by aloha on 28-May-16.
@@ -30,25 +38,34 @@ public class UserController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 
-
     @RequestMapping(value = "/signin",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public HttpStatus signin(@RequestBody LoginUser loginTry) {
+    public ResponseEntity signin(@RequestBody LoginUser loginTry) {
 
         BeanManager<Users> bm1 = new BeanManager<>("schema/Users.xsd");
         /*citamo sve usere iz baze*/
-        Users users = bm1.read("/test17/coveci.xml");
+        Users users = bm1.read(MarkStrings.USERS_DOC_ID);
         for(User user : users.getUser()){
             if(loginTry.getPassword().equals(user.getPassword())
                     && loginTry.getUsername().equals(user.getUsername())){
-                
+
+                System.out.println("ULOGOVAO SE SABAN:" +user.getUsername()+ " " +user.getRole());
+                final Collection<GrantedAuthority> authorities = new ArrayList<>();
+                authorities.add(new SimpleGrantedAuthority(user.getRole()));
+                final Authentication authentication = new PreAuthenticatedAuthenticationToken(user, null, authorities);
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+
+                HashMap<String, String> res= new HashMap<>();
+                res.put("success", "true");
+                res.put("data", user.getUsername());
+                return new ResponseEntity(res, HttpStatus.OK);
             }
         }
 
 
         /*
-        *//*SIMULATION*//*
+        //*SIMULATION*//*
         logger.info("REST request for signing in");
         UserDTO user=new UserDTO("usernameTEST", Role.ROLE_GRADJANIN);  //this is user that is found in database
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -56,11 +73,13 @@ public class UserController {
         authorities.add(new SimpleGrantedAuthority(user.getRole()));
         final Authentication authentication = new PreAuthenticatedAuthenticationToken(user, null, authorities);
         SecurityContextHolder.getContext().setAuthentication(authentication);
-
         logger.info("Returning user : " + user);
         */
 
-        return HttpStatus.OK;
+        HashMap<String, String> res= new HashMap<>();
+        res.put("success", "false");
+        res.put("msg", "Pogresno username ili pass");
+        return new ResponseEntity(res, HttpStatus.OK);
     }
 
 
@@ -70,17 +89,32 @@ public class UserController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity signup(@RequestBody User userTry) {
 
-        //TODO validate userTry
+        /*user's default role*/
+        userTry.setRole(Role.ROLE_GRADJANIN);
         BeanManager<Users> bm1 = new BeanManager<>("schema/Users.xsd");
         /*citamo sve usere iz baze*/
-        Users users = bm1.read("/test17/coveci.xml");
+        Users users = bm1.read(MarkStrings.USERS_DOC_ID);
+
+        for(User user : users.getUser()){
+            if(user.getUsername().equals(userTry.getUsername())){
+                HashMap<String, String> res= new HashMap<>();
+                res.put("success", "false");
+                res.put("msg", "Postoji vec username");
+                return new ResponseEntity(res, HttpStatus.OK);
+            }
+        }
+
+
         /*dodamo novog usera*/
         users.getUser().add(userTry);
         /*upisemo ceo doc nazad*/
-        //TODO hashing pass
-        bm1.write(users, "/test17/coveci.xml", "Proba");
+        //TODO hashing password
+        bm1.write(users, MarkStrings.USERS_DOC_ID, "Proba");
 
-        return new ResponseEntity("SVE KUL", HttpStatus.OK);
+        HashMap<String, String> res= new HashMap<>();
+        res.put("success", "true");
+        res.put("msg", "Sve kul");
+        return new ResponseEntity(res, HttpStatus.OK);
     }
 
 
@@ -90,14 +124,15 @@ public class UserController {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         System.out.println("AUTH DATA(ALL): " + auth.toString());
-        UserDTO user=new UserDTO(Role.ROLE_ANONYMOUS, "ANONYMOUS");
+        UserDTO userDTO;
         try{
-            user.setRole(((UserDTO)auth.getPrincipal()).getRole());
-            user.setUsername(((UserDTO)auth.getPrincipal()).getUsername());
+            User user = (User)auth.getPrincipal();
+            userDTO=new UserDTO(user);
         }catch (Exception e){
-            e.printStackTrace();
+            userDTO=new UserDTO();
         }
-        return ResponseEntity.ok(user);
+
+        return ResponseEntity.ok(userDTO);
     }
 
 

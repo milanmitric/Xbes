@@ -1,17 +1,14 @@
 angular.module('xapp')
 .service('authService', function($http){
 	return{
-		signin: function(username, password, onSuccess, onError){
+		signin: function(user, onSuccess, onError){
 		var req = {
 		    method: 'POST',
 		    url: '/api/signin',
 		    headers: {
-		        'Content-Type': 'application/json'
+		        'Content-Type': 'application/json',
 		    },
-		    data: {
-		    	username: username,
-		    	password: password 
-		    }
+		    data: user
 		}
 		$http(req).then(onSuccess, onError);
 		},

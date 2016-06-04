@@ -32,49 +32,4 @@
         <Salt>so</Salt>
         <Role>ROLE_GRADJANIN</Role>
     </User>
-    <User>
-        <Username>sada</Username>
-        <Password>saddada</Password>
-        <Ime>asddsadada</Ime>
-        <Prezime>sada</Prezime>
-    </User>
-    <User>
-        <Ime>sadasd</Ime>
-    </User>
-    <User>
-        <Username>sa</Username>
-        <Password>sadadsa</Password>
-        <Ime>sadasd</Ime>
-        <Prezime>sad</Prezime>
-    </User>
-    <User>
-        <Username>t</Username>
-        <Password>t</Password>
-        <Ime>tt</Ime>
-        <Prezime>tt</Prezime>
-    </User>
-    <User>
-        <Username>llll</Username>
-        <Password>lll;l</Password>
-        <Ime>lky</Ime>
-        <Prezime>llklkjl</Prezime>
-    </User>
-    <User>
-        <Username>adsad</Username>
-        <Password>dsada</Password>
-        <Ime>asda</Ime>
-        <Prezime>dasd</Prezime>
-    </User>
-    <User>
-        <Username>dsa</Username>
-        <Password>sadasd</Password>
-        <Ime>sadasd</Ime>
-        <Prezime>sada</Prezime>
-    </User>
-    <User>
-        <Username>aaaaaaaa</Username>
-        <Password>aaaaaaaaaaaaaaa</Password>
-        <Ime>aaaaaaaaaa</Ime>
-        <Prezime>aaaaaaaa</Prezime>
-    </User>
 </Users>

@@ -7,6 +7,7 @@ import hello.util.Database;
 import hello.entity.gov.gradskaskupstina.Akt;
 import hello.entity.gov.gradskaskupstina.Amandman;
 import hello.entity.gov.gradskaskupstina.Users;
+import hello.util.MarkStrings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -90,7 +91,7 @@ public class Application {
     public static void testUsers(){
         BeanManager<Users> userManager = new BeanManager<>("schema/Users.xsd");
 
-        String docId = "/test17/coveci.xml";
+        //String docId = "/test17/coveci.xml";
         File file = new File("res/validationTest/users1.xml");
         if(file != null) {
             Users inputUsers = userManager.convertFromXml(file);
@@ -98,7 +99,7 @@ public class Application {
                 logger.info("Schema validation: " + inputUsers + " is valid!");
             else
                 logger.info("Schema validation: " + inputUsers + "is NOT valid");
-            if (!userManager.write(inputUsers, docId, "Proba")) {
+            if (!userManager.write(inputUsers, MarkStrings.USERS_DOC_ID, MarkStrings.USERS_DOC_ID)) {
                 //System.out.println("Could't write akt!");
                 logger.info("Could't write akt!");
             } else {
@@ -106,7 +107,7 @@ public class Application {
                 logger.info("Write successful!");
 
                 // Citamo upravo upisani akt iz mark logic baze
-                Users users = userManager.read(docId);
+                Users users = userManager.read(MarkStrings.USERS_DOC_ID);
                 if(userManager.validateBeanBySchema(users))
                     logger.info("Schema validation: " + users + " is valid!");
                 else

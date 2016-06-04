@@ -7,24 +7,17 @@ angular.module('xapp')
 	    $scope.signin = function(){
 
 		   authService.signin(
-			   $scope.username, 
-			   $scope.password, 
+               $scope.user,
 			   function(response){
-				  
-				   console.log(response.data);	
-				   if(response.data.success==true){
-				   	alertify.success("WELCOME!");
-				   	$state.go('home');
+				   console.log(response);
+				   if(response.data.success=='true'){
+				   alertify.success("SUCCESS");
 				   }else{
-				   	alertify.error("ERROR");
+				   alertify.error("FAIL");
 				   }
-
 			   }
 			   ,function(response){
-
-					console.log(response.data);
-					alertify.error("ERROR");									   
-
+					alertify.error("ERROR");
 			   });
   		};
 

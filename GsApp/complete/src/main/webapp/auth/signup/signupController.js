@@ -9,10 +9,15 @@ angular.module('xapp')
 		   authService.signup(
 			   $scope.user,
 			   function(response){
-				   console.log(response.data);
+				   console.log(response);
+                  				   if(response.data.success=='true'){
+                  				   alertify.success("SUCCESS");
+                  				   }else{
+                  				   alertify.error("FAIL");
+                  				   }
 			   }
 			   ,function(response){
-				    console.log(response.data);
+				   alertify.error("ERROR");
 			   });
   		};
 
