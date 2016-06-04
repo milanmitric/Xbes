@@ -1,9 +1,9 @@
-package hello.businessLogic;
+package hello.businessLogic.core;
 
 import com.marklogic.client.DatabaseClient;
+import com.marklogic.client.document.DocumentDescriptor;
 import com.marklogic.client.document.DocumentMetadataPatchBuilder;
 import com.marklogic.client.document.XMLDocumentManager;
-import hello.StringResources.MarkLogicStrings;
 import hello.util.Converter;
 import hello.util.Database;
 
@@ -68,9 +68,12 @@ public class BeanManager <T>{
     /**
      * Encapsulates all update, delete operations and all validations.
      */
-    private CustomManager<T> customManager;
+    protected CustomManager<T> customManager;
 
-    private QueryManager queryManager;
+    /**
+     * Query executing manager.
+     */
+    protected QueryManager queryManager;
     /**
      * Initializes database client and XML manager.
      */
@@ -123,6 +126,15 @@ public class BeanManager <T>{
         return  writeManager.write(inputStream,docId,colId);
     }
 
+    /**
+     * Writes file to database with template docId.
+     * @param inputStream File to be written.
+     * @param colId URI for collection if the docue.
+     * @return Generated URI. <code>NULL</code> if not successful.
+     */
+    public DocumentDescriptor write(FileInputStream inputStream, String colId) {
+        return writeManager.write(inputStream,colId);
+    }
 
     /**
      * Writes bean to database.
@@ -133,6 +145,16 @@ public class BeanManager <T>{
      */
     public boolean write(T bean, String docId, String colId) {
         return writeManager.write(bean,docId,colId);
+    }
+
+    /**
+     * Writes bean to database with template docId.
+     * @param bean JAXB bean to be written.
+     * @param colId URI for collection if the docue.
+     * @return Generated URI. <code>NULL</code> if not successful.
+     */
+    public DocumentDescriptor write(T bean,String colId) {
+        return writeManager.write(bean,colId);
     }
 
     /**
@@ -215,15 +237,4 @@ public class BeanManager <T>{
         return queryManager.executeQuery(query);
     }
 
-    /**
-     * Returns all files that are proposed from database.
-     * @return List of files in database.
-     */
-    public ArrayList<T> getAllFilesProposed(){
-        StringBuilder query = new StringBuilder();
-        query.append("fn:collection(\"");
-        query.append(MarkLogicStrings.AKTOVI_PREDLOZEN_COL_ID);
-        query.append("\")");
-        return queryManager.executeQuery(query.toString());
-    }
 }

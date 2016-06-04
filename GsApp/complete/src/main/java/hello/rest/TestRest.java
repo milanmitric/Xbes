@@ -1,9 +1,5 @@
 package hello.rest;
 
-import hello.businessLogic.BeanManager;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;

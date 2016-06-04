@@ -1,6 +1,8 @@
-package hello.businessLogic;
+package hello.businessLogic.core;
 
 import com.marklogic.client.DatabaseClient;
+import com.marklogic.client.document.DocumentDescriptor;
+import com.marklogic.client.document.DocumentUriTemplate;
 import com.marklogic.client.document.XMLDocumentManager;
 import com.marklogic.client.io.DocumentMetadataHandle;
 import com.marklogic.client.io.InputStreamHandle;
@@ -45,6 +47,7 @@ public class WriteManager <T>{
 
     private Converter<T> converter;
 
+
     public WriteManager(DatabaseClient client, XMLDocumentManager xmlManager, SchemaFactory schemaFactory, Schema schema, Converter converter){
         this.client = client;
         this.xmlManager = xmlManager;
@@ -80,7 +83,31 @@ public class WriteManager <T>{
         }
     }
 
-
+    /**
+     * Writes file to database with template docId.
+     * @param inputStream File to be written.
+     * @param colId URI for collection if the docue.
+     * @return Generated URI. <code>NULL</code> if not successful.
+     */
+    public DocumentDescriptor write(FileInputStream inputStream, String colId) {
+        DocumentDescriptor ret = null;
+        try{
+            // TODO: Solve this!
+            //if (!singXml(null)) {
+            //    throw  new Exception("Could not sign xml, check tmp.xml.");
+            //}
+            DocumentUriTemplate template = xmlManager.newDocumentUriTemplate("xml");
+            DocumentMetadataHandle metadata = new DocumentMetadataHandle();
+            metadata.getCollections().add(colId);
+            InputStreamHandle handle = new InputStreamHandle(inputStream);
+            ret = xmlManager.create(template,metadata, handle);
+        }
+        catch (Exception e){
+            logger.info("[WriteManager] Unexpected error: " + e.getMessage());
+        } finally{
+            return ret;
+        }
+    }
 
     /**
      * Writes bean to database.
@@ -96,6 +123,32 @@ public class WriteManager <T>{
             if (converter.convertToXml(bean)){
                 FileInputStream inputStream = new FileInputStream(new File("tmp.xml"));
                 ret = write(inputStream,docId,colId);
+            } else {
+                throw new Exception("[WriteManager] Can't convert JAXB bean " + bean.toString() + " to XML.");
+            }
+        }
+        catch (Exception e) {
+            logger.info("[WriteManager] ERROR: Unexpected error: " + e.getMessage());
+            //System.out.println("Unexpected error: " + e.getMessage());
+        }
+        finally{
+            return ret;
+        }
+    }
+
+    /**
+     * Writes bean to database with template docId.
+     * @param bean JAXB bean to be written.
+     * @param colId URI for collection if the docue.
+     * @return Generated URI. <code>NULL</code> if not successful.
+     */
+    public DocumentDescriptor write(T bean,String colId) {
+        DocumentDescriptor ret = null;
+        try {
+            // Try to convert to xml on default location.
+            if (converter.convertToXml(bean)){
+                FileInputStream inputStream = new FileInputStream(new File("tmp.xml"));
+                ret = write(inputStream,colId);
             } else {
                 throw new Exception("[WriteManager] Can't convert JAXB bean " + bean.toString() + " to XML.");
             }

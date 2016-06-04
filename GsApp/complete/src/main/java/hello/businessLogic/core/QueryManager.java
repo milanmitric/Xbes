@@ -1,4 +1,4 @@
-package hello.businessLogic;
+package hello.businessLogic.core;
 
 import com.marklogic.client.DatabaseClient;
 import com.marklogic.client.eval.EvalResult;
