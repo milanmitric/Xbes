@@ -84,5 +84,22 @@ public class AktManager extends BeanManager<Akt> {
         return ret;
     }
 
+    /**
+     * Deletes unapproved files.
+     * @param docId URI of act to be deleted.
+     * @return Indicator of success.
+     */
+    public boolean deleteAkt(String docId){
+        boolean ret = false;
+
+        try {
+            deleteDocument(docId);
+            ret = true;
+        } catch (Exception e){
+            logger.error("[AktManager] Could not delete akt with id " + docId);
+        }
+        return ret;
+    }
+
 
 }
