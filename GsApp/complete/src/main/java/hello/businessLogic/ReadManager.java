@@ -59,12 +59,12 @@ public class ReadManager<T>{
         transformerFactory = TransformerFactory.newInstance();
     }
 
-    public ReadManager(DatabaseClient client, XMLDocumentManager xmlManager, SchemaFactory schemaFactory, Schema schema){
+    public ReadManager(DatabaseClient client, XMLDocumentManager xmlManager, SchemaFactory schemaFactory, Schema schema, Converter converter){
         this.client = client;
         this.xmlManager = xmlManager;
         this.schemaFactory = schemaFactory;
         this.schema = schema;
-        converter = new Converter<>();
+        this.converter = converter;
     }
 
     /**

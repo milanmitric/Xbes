@@ -45,12 +45,12 @@ public class WriteManager <T>{
 
     private Converter<T> converter;
 
-    public WriteManager(DatabaseClient client, XMLDocumentManager xmlManager, SchemaFactory schemaFactory, Schema schema){
+    public WriteManager(DatabaseClient client, XMLDocumentManager xmlManager, SchemaFactory schemaFactory, Schema schema, Converter converter){
         this.client = client;
         this.xmlManager = xmlManager;
         this.schemaFactory = schemaFactory;
         this.schema = schema;
-        converter = new Converter<>();
+        this.converter = converter;
     }
 
     /**

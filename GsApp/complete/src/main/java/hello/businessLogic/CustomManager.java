@@ -56,12 +56,12 @@ public class CustomManager <T>{
         transformerFactory = TransformerFactory.newInstance();
     }
 
-    public CustomManager(DatabaseClient client, XMLDocumentManager xmlManager, SchemaFactory schemaFactory, Schema schema){
+    public CustomManager(DatabaseClient client, XMLDocumentManager xmlManager, SchemaFactory schemaFactory, Schema schema, Converter converter){
         this.client = client;
         this.xmlManager = xmlManager;
         this.schemaFactory = schemaFactory;
         this.schema = schema;
-        converter = new Converter<>();
+        this.converter = converter;
     }
 
     /**
