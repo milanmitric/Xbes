@@ -2,7 +2,8 @@ package hello.app;
 
 import com.marklogic.client.DatabaseClient;
 import hello.Application;
-import hello.businessLogic.core.BeanManager;
+import hello.StringResources.MarkLogicStrings;
+import hello.businessLogic.BeanManager;
 import hello.entity.gov.gradskaskupstina.Akt;
 import hello.entity.gov.gradskaskupstina.Amandman;
 import hello.entity.gov.gradskaskupstina.Users;
@@ -22,8 +23,8 @@ public class TestsMainCogara {
 
     public static void main(String[] args){
 
-        testAkt();
-        testAmandman();
+        //testAkt();
+        //testAmandman();
         testUsers();
 
         DatabaseClient client = Database.getDbClient();
@@ -98,7 +99,9 @@ public class TestsMainCogara {
                 logger.info("Schema validation: " + inputUsers + " is valid!");
             else
                 logger.info("Schema validation: " + inputUsers + "is NOT valid");
-            if (!userManager.write(inputUsers, MarkLogicStrings.USERS_DOC_ID, MarkLogicStrings.USERS_COL_ID)) {
+            if (!userManager.write(inputUsers, MarkLogicStrings.USERS_DOC_ID, MarkLogicStrings.USERS_DOC_ID)) {
+
+
                 //System.out.println("Could't write akt!");
                 logger.info("Could't write akt!");
             } else {
