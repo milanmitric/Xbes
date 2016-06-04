@@ -1,9 +1,8 @@
 package hello.rest;
 
-import hello.businessLogic.BeanManager;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import hello.util.PasswordStorage;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,12 +11,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+
 /**
  * Created by aloha on 24-May-16.
  */
 @RestController
 @RequestMapping("/api")
 public class TestRest {
+
 
 
     @RequestMapping("/test0")
@@ -75,6 +78,35 @@ public class TestRest {
     public HttpStatus test4(@PathVariable Long id) {
 
         System.out.println("USAO U METODU");
+
+        //PasswordStorage.
+        byte[] salt = new byte[0];
+        try {
+            salt= PasswordStorage.generateSalt();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+
+
+
+        String pass="testpass";
+        System.out.println("PASS PLAIN:" +pass.toString());
+        System.out.println("SALT: " +salt.toString());
+        String so=salt.toString();
+        try {
+            System.out.println("HASNGIRANA" +PasswordStorage.hashPassword(pass, salt));
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (InvalidKeySpecException e) {
+            e.printStackTrace();
+        }
+        try {
+            System.out.println("HASNGIRANA OPET SA STRING SOLI" +PasswordStorage.hashPassword(pass, so.getBytes()));
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (InvalidKeySpecException e) {
+            e.printStackTrace();
+        }
 
 
         return HttpStatus.OK;

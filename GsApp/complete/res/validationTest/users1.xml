@@ -7,7 +7,7 @@
 		<Password>rusija</Password>
 		<Ime>Radomir</Ime>
 		<Prezime>Marinković</Prezime>
-		<Salt>so</Salt>
+		<Salt>X1eBX3DNI6M=</Salt>
 		<Role>ROLE_PREDSEDNIK</Role>
 	</User>
 	<User>
@@ -15,7 +15,7 @@
 		<Password>mitra</Password>
 		<Ime>Milan</Ime>
 		<Prezime>Mitrić</Prezime>
-		<Salt>so</Salt>
+		<Salt>X1eBX3DNI6M=</Salt>
 		<Role>ROLE_ODBORNIK</Role>
 	</User>
 	<User>
@@ -23,7 +23,7 @@
 		<Password>roki</Password>
 		<Ime>Nebojša</Ime>
 		<Prezime>Popović</Prezime>
-		<Salt>so</Salt>
+		<Salt>X1eBX3DNI6M=</Salt>
 		<Role>ROLE_GRADJANIN</Role>
 	</User>
 	<User>
@@ -31,7 +31,7 @@
 		<Password>cho</Password>
 		<Ime>Branislav</Ime>
 		<Prezime>Čogić</Prezime>
-		<Salt>so</Salt>
+		<Salt>X1eBX3DNI6M=</Salt>
 		<Role>ROLE_GRADJANIN</Role>
 	</User>
 </Users>

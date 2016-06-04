@@ -200,11 +200,11 @@ public class User {
 
     /**
      * Sets the value of the salt property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setSalt(String value) {
         this.salt = value;
