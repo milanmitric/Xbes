@@ -3,12 +3,11 @@ package hello.app;
 import com.marklogic.client.DatabaseClient;
 import hello.Application;
 import hello.StringResources.MarkLogicStrings;
-import hello.businessLogic.BeanManager;
+import hello.businessLogic.core.BeanManager;
 import hello.entity.gov.gradskaskupstina.Akt;
 import hello.entity.gov.gradskaskupstina.Amandman;
 import hello.entity.gov.gradskaskupstina.Users;
 import hello.util.Database;
-import hello.StringResources.MarkLogicStrings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
