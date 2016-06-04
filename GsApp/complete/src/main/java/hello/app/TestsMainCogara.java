@@ -1,28 +1,35 @@
-package hello;
+package hello.app;
 
-
+import com.marklogic.client.DatabaseClient;
+import hello.Application;
 import hello.businessLogic.BeanManager;
 import hello.entity.gov.gradskaskupstina.Akt;
 import hello.entity.gov.gradskaskupstina.Amandman;
 import hello.entity.gov.gradskaskupstina.Users;
-import hello.StringResources.MarkLogicStrings;
+import hello.util.Database;
+import hello.util.MarkStrings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.io.IOException;
+import java.io.File;
 
-@SpringBootApplication
-public class Application {
+/**
+ * Created by milan on 4.6.2016..
+ */
+public class TestsMainCogara {
+
     private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args){
 
-        SpringApplication.run(Application.class, args);
+        testAkt();
+        testAmandman();
+        testUsers();
 
-
+        DatabaseClient client = Database.getDbClient();
+        client.release();
     }
+
 
     public static void testAkt(){
         BeanManager<Akt> aktManager = new BeanManager<>();
@@ -91,7 +98,7 @@ public class Application {
                 logger.info("Schema validation: " + inputUsers + " is valid!");
             else
                 logger.info("Schema validation: " + inputUsers + "is NOT valid");
-            if (!userManager.write(inputUsers, MarkLogicStrings.USERS_DOC_ID, MarkLogicStrings.USERS_DOC_ID)) {
+            if (!userManager.write(inputUsers, MarkStrings.USERS_DOC_ID, MarkStrings.USERS_DOC_ID)) {
                 //System.out.println("Could't write akt!");
                 logger.info("Could't write akt!");
             } else {
@@ -99,7 +106,7 @@ public class Application {
                 logger.info("Write successful!");
 
                 // Citamo upravo upisani akt iz mark logic baze
-                Users users = userManager.read(MarkLogicStrings.USERS_DOC_ID);
+                Users users = userManager.read(MarkStrings.USERS_DOC_ID);
                 if(userManager.validateBeanBySchema(users))
                     logger.info("Schema validation: " + users + " is valid!");
                 else

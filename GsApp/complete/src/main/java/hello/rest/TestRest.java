@@ -6,6 +6,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -70,16 +71,14 @@ public class TestRest {
     }
 
 
-   /* @RequestMapping("/test4")
-    public HttpStatus test4(@RequestBody TGlava t) {
-        //nece - 405
-        System.out.println(t.getNaziv());
+    @RequestMapping(value = "/rezervacijas/{id}")
+    public HttpStatus test4(@PathVariable Long id) {
 
-        BeanManager<TGlava> bm=new BeanManager<>();
-        bm.write(t, "/lalalala", "testovoono");
+        System.out.println("USAO U METODU");
+
 
         return HttpStatus.OK;
-    }*/
+    }
 
 
 

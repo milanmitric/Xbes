@@ -1,4 +1,4 @@
-package hello.util;
+package hello.StringResources;
 
 /**
  * Created by aloha on 29-May-16.
