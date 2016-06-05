@@ -53,9 +53,13 @@ public class AktManager extends BeanManager<Akt> {
      * @return Generated URI. <code>NULL</code> if not successful.
      */
     public String proposeAkt(Akt akt){
+
+        if (!validateBeanBySchema(akt)){
+            logger.info("[AktManager] ERROR: Akt is not valid!");
+            return null;
+        }
         String ret = null;
         DocumentUriTemplate template = xmlManager.newDocumentUriTemplate("xml");
-        System.out.println(template);
         try {
             ret = this.write(akt,MarkLogicStrings.AKTOVI_PREDLOZEN_COL_ID).getUri();
             akt.setDocumentId(ret);
@@ -76,6 +80,10 @@ public class AktManager extends BeanManager<Akt> {
      * @return Generated URI. <code>NULL</code> if not successful.
      */
     public String approveAkt(Akt akt){
+        if (!validateBeanBySchema(akt)){
+            logger.info("[AktManager] ERROR: Akt is not valid!");
+            return null;
+        }
         String ret = null;
         String docId = akt.getDocumentId();
         try {
@@ -118,6 +126,8 @@ public class AktManager extends BeanManager<Akt> {
         }
         return ret;
     }
+
+
 
 
 }
