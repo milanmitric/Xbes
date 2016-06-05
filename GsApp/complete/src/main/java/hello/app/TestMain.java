@@ -55,5 +55,25 @@ public class TestMain {
 
 
     }
+
+    public static void deleteAkts(){
+        AktManager aktManager = new AktManager();
+        aktManager.deleteAkt("10943157544121059935.xml");
+        aktManager.deleteAkt("11514770735810005726.xml");
+        aktManager.deleteAkt("13398967872520214127.xml");
+        aktManager.deleteAkt("14052306458949503553.xml");
+        aktManager.deleteAkt("1433963191818237235.xml");
+        aktManager.deleteAkt("15953398522250976203.xml");
+        aktManager.deleteAkt("16439675836494731279.xml");
+        aktManager.deleteAkt("17265559496333134016.xml");
+        aktManager.deleteAkt("2506229216889392209.xml");
+        aktManager.deleteAkt("3376611596855260398.xml");
+        aktManager.deleteAkt("3515949106954256392.xml");
+        aktManager.deleteAkt("3995367421470449471.xml");
+        aktManager.deleteAkt("4794372873215895682.xml");
+        aktManager.deleteAkt("6354302967360018838.xml");
+
+
+    }
 }
 

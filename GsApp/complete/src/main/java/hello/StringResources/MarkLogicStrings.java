@@ -10,9 +10,11 @@ public class MarkLogicStrings {
     public static String USERS_COL_ID="userscoll";
 
 
-    public static  String AKTOVI_PREDLOZEN_COL_ID = "/predlozeni";
-    public static  String AKTOVI_USVOJENI_COL_ID = "/usvojeni";
+    public static  String AKTOVI_PREDLOZEN_COL_ID = "/predlozeniAktovi";
+    public static  String AKTOVI_USVOJENI_COL_ID = "/usvojeniAktovi";
 
+    public static  String AMANDMANI_PREDLOZEN_COL_ID = "/predlozeniAmandmani";
+    public static  String AMANDMANI_USVOJENI_COL_ID = "/usvojeniAmandmani";
     /* tlalala */
 
 

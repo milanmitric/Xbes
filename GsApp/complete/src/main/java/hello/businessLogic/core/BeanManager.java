@@ -126,7 +126,7 @@ public class BeanManager <T>{
      * @param colId URI for collection if the docue.
      * @return Indicator of success.
      */
-    public boolean write(FileInputStream inputStream, String docId, String colId) {
+    protected boolean write(FileInputStream inputStream, String docId, String colId) {
         return  writeManager.write(inputStream,docId,colId);
     }
 
@@ -136,7 +136,7 @@ public class BeanManager <T>{
      * @param colId URI for collection if the docue.
      * @return Generated URI. <code>NULL</code> if not successful.
      */
-    public DocumentDescriptor write(FileInputStream inputStream, String colId) {
+    protected DocumentDescriptor write(FileInputStream inputStream, String colId) {
         return writeManager.write(inputStream,colId);
     }
 
@@ -147,7 +147,7 @@ public class BeanManager <T>{
      * @param colId URI for collection to store document.
      * @return Indicator of success.
      */
-    public boolean write(T bean, String docId, String colId) {
+    protected boolean write(T bean, String docId, String colId) {
         return writeManager.write(bean,docId,colId);
     }
 
@@ -157,7 +157,7 @@ public class BeanManager <T>{
      * @param colId URI for collection if the docue.
      * @return Generated URI. <code>NULL</code> if not successful.
      */
-    public DocumentDescriptor write(T bean,String colId) {
+    protected DocumentDescriptor write(T bean,String colId) {
         if (customManager.validateBeanBySchema(bean)){
             logger.info("[BeanManager] Successfully validated bean!");
             return writeManager.write(bean,colId);
@@ -173,7 +173,7 @@ public class BeanManager <T>{
      * @param docId Document URI to read from database.
      * @return Read bean, <code>null</code> if not successful.
      */
-    public T read(String docId){
+    protected T read(String docId){
         return readManager.read(docId);
     }
 
@@ -199,7 +199,7 @@ public class BeanManager <T>{
      * @param docId URI of document to be deleted.
      * @return Indicator of success.
      */
-    public boolean deleteDocument(String docId){
+    protected boolean deleteDocument(String docId){
         return  customManager.deleteDocument(docId);
     }
 
@@ -209,7 +209,7 @@ public class BeanManager <T>{
      * @param patchHandle Contains updates on document using XPath, positions to be inserted and patches as Strings.
      * @return Indicator of success.
      */
-    public boolean updateDocument(String docId, DocumentMetadataPatchBuilder.PatchHandle patchHandle){
+    protected boolean updateDocument(String docId, DocumentMetadataPatchBuilder.PatchHandle patchHandle){
        return customManager.updateDocument(docId,patchHandle);
     }
 
