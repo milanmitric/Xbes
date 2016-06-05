@@ -8,13 +8,9 @@
 
 package hello.entity.gov.gradskaskupstina;
 
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
 
 
 /**
@@ -63,7 +59,7 @@ public class Akt {
 
     @XmlElement(name = "Naslov", required = true, defaultValue = "Akt")
     protected String naslov;
-    @XmlElement(name = "DocumentId", required = true, nillable = true)
+    @XmlElement(name = "DocumentId",  nillable = true)
     protected String documentId;
     @XmlElement(name = "Deo")
     protected List<TDeo> deo;

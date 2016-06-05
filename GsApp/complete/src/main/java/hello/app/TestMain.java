@@ -1,9 +1,8 @@
 package hello.app;
 
-import com.marklogic.client.document.DocumentDescriptor;
 import hello.Application;
-import hello.businessLogic.document.AktManager;
 import hello.businessLogic.core.BeanManager;
+import hello.businessLogic.document.AktManager;
 import hello.entity.gov.gradskaskupstina.Akt;
 import hello.entity.gov.gradskaskupstina.Users;
 import org.slf4j.Logger;
@@ -39,10 +38,21 @@ public class TestMain {
         AktManager aktManager = new AktManager();
         Akt akt = aktManager.convertFromXml(new File("res/validationTest/AktZOIIDZOJPPIK.xml"));
 
-        DocumentDescriptor desc = aktManager.proposeAkt(akt);
-        logger.info("Successfully proposed document [" + desc.getUri() + "].");
-        desc  = aktManager.approveAkt(akt,desc.getUri());
-        logger.info("Successfully approved document [" + desc.getUri() + "].");
+
+        String docId = aktManager.proposeAkt(akt);
+        if (docId != null){
+            logger.info("Successfully proposed document [" + docId + "].");
+        } else {
+            logger.info("[ERROR] Could not propose document [" + docId + "].");
+        }
+
+        docId  = aktManager.approveAkt(akt);
+        if (docId != null){
+            logger.info("Successfully approved document [" + docId + "].");
+        } else {
+            logger.info("[ERROR] Could not approve document [" + docId + "].");
+        }
+
 
     }
 }

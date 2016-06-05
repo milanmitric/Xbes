@@ -1,67 +1,104 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Amandman xmlns="http://www.gradskaskupstina.gov/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gradskaskupstina.gov/">
-    <DocumentId></DocumentId>
-    <PravniOsnov ref_akt="Poslovnik Narodne Skupstine" ref_clanovi="161"></PravniOsnov>
-    <Akt ref_akt="AktPZOIIDZOJPPIK">Predlog Zakona o izmenama i dopunama Zakona o javno-privatnom partnerstvu i koncesijama</Akt>
-    <Amandman RedniBroj="1">
-        <PredmetIzmene ref_clanovi="3" ref_stavovi="4"></PredmetIzmene>
-        <TipIzmene>brisanje</TipIzmene>
-        <Obrazlozenje>Novelacija u Predlogu zakona odnosi se na to da se bitni elementi JPP odnose i na mogućnost javnog partnera da privatnom partneru dozvoli da obavlja komercijalnu delatnost, što je bilo i u dosadašnjem zakonu, ali i "DA IZGRADI DRUGE OBJEKTE...". Ovo rešenje otvara prostor korupcije ogromnih razmera i obesmišljava institut javno-privatnog partnerstva.</Obrazlozenje>
-    </Amandman>
-    <Amandman RedniBroj="2">
-        <PredmetIzmene ref_clanovi="10"></PredmetIzmene>
-        <TipIzmene>brisanje</TipIzmene>
-        <Obrazlozenje>
-            <Referenca ref_clanovi="10">Članom 10.</Referenca> Predloga zakona predlaže se izmena u članu 22. Zakona brisanjem obaveze da se javni poziv objavi u jednom međunarodnom listu, sa obrazloženjem Predlagaća zakona da je već objavljen na Tenders Electronic Daily a da je međunarodni list koji se distribuira po celom svetu obično Finanical Times koji je navodno veoma skupo glasilo za lokalne samouprave, naročito kada je reč o ne naročito velikim projektima.</Obrazlozenje>
-    </Amandman>
-    <Amandman RedniBroj="3">
-        <PredmetIzmene ref_clanovi="12" ref_stavovi="1"></PredmetIzmene>
-        <TipIzmene>izmena</TipIzmene>
-        <Obrazlozenje/>
-    </Amandman>
-    <Potpisnici>
+<?xml version="1.0" encoding="UTF-8"?><Akt xmlns="http://www.gradskaskupstina.gov/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gradskaskupstina.gov/">
+    <Naslov>Zakon o izmenama i dopunama zakona o javno-privatnom partnerstvu i koncesijama</Naslov>
+    <DocumentId>3995367421470449471.xml</DocumentId>
+    <Clan RedniBroj="1">
+        <Stav>
+            <Sadrzaj>U Zakonu o javno-privatnom partnerstvu i koncesijama („Službeni glasnik RS”, broj 88/11), u članu 2. stav 1. posle reči: „partnerom” dodaju se reči: „radi realizacije projekata javno-privatnog partnerstva”.</Sadrzaj>
+        </Stav>
+    </Clan>
+    <Clan RedniBroj="2">
+        <Stav>
+            <Sadrzaj>U <Referenca ref_akt="ZOJPPIK" ref_clanovi="4" ref_tacke="6">članu 4. tačka 6)</Referenca> reči: „može osnivati” zamenjuju se rečju: „osniva”.</Sadrzaj>
+        </Stav>
+    </Clan>
+    <Clan RedniBroj="3">
+        <Stav>
+            <Sadrzaj>U <Referenca ref_akt="ZOJPPIK" ref_clanovi="7" ref_stavovi="2" ref_tacke="1">članu 7. stav 2. tačka 1)</Referenca> posle reči: „drugog dobra” dodaju se reči: „niti isključiva isporuka dobara”.</Sadrzaj>
+        </Stav>
+        <Stav>
+            <Sadrzaj>U <Referenca ref_akt="ZOJPPIK" ref_clanovi="7" ref_stavovi="2" ref_tacke="3">stavu 2. tačka 3)</Referenca> reč: „projektovanje” i zapeta posle te reči brišu se.</Sadrzaj>
+        </Stav>
+        <Stav>
+            <Sadrzaj>U <Referenca ref_akt="ZOJPPIK" ref_clanovi="7" ref_stavovi="2" ref_tacke="6">tački 6)</Referenca> posle reči: „između javnog i privatnog partnera” dodaje se zapeta i reči: „a naročito preuzimanje rizika tražnje ili rizika raspoloživosti objekta, usluge, infrastrukture i sl.”.</Sadrzaj>
+        </Stav>
+        <Stav>
+            <Sadrzaj>U <Referenca ref_akt="ZOJPPIK" ref_clanovi="7" ref_stavovi="2" ref_tacke="7">tački 7)</Referenca> posle reči: "komercijalnu delatnost" dodaju se reči: "ili izgradi druge objekte"</Sadrzaj>
+        </Stav>
+    </Clan>
+    <Clan RedniBroj="4">
+        <Stav>
+            <Sadrzaj>U <Referenca ref_akt="ZOJPPIK" ref_clanovi="9" ref_stavovi="4">članu 9. stav 4.</Referenca> posle reči: „zaključuju” dodaju se reči: „javni ugovor i”.</Sadrzaj>
+        </Stav>
+    </Clan>
+    <Clan RedniBroj="5">
+        <Stav>
+            <Sadrzaj>U <Referenca ref_akt="ZOJPPIK" ref_clanovi="14" ref_stavovi="2">članu 14. stav 2.</Referenca> reči: „ne moraju tražiti” zamenjuju se rečima: „nemaju pravo da traže”.</Sadrzaj>
+        </Stav>
+    </Clan>
+    <Clan RedniBroj="10">
+        <Stav>
+            <Sadrzaj>U <Referenca ref_akt="ZOJPPIK" ref_clanovi="22" ref_stavovi="3">članu 22. stav 3.</Referenca> reči: „u jednom međunarodnom listu i” brišu se.</Sadrzaj>
+        </Stav>
+    </Clan>
+    <Clan RedniBroj="12">
+        <Stav>
+            <Sadrzaj>U članu 29. posle stava 3. dodaje se novi stav 4, koji glasi:
+                „Ako je Republika Srbija davalac koncesije, odnosno kada su javna tela i
+                predmet koncesije u nadležnosti Republike Srbije i ako je procenjena vrednost te
+                koncesije veća od 50 miliona evra, Komisija za JPP, pre davanja svog mišljenja,
+                obavezno prethodno pribavlja mišljenje ministarstva nadležnog za poslove finansija.”.
+                Dosadašnji st. 4. i 5. postaju st. 5. i 6.</Sadrzaj>
+        </Stav>
+    </Clan>
+    <ZavrsniDeo>
+        <Organ>Serbia</Organ>
+        <Broj>1/16</Broj>
+        <Datum>03.06.2016.</Datum>
         <Potpisnik>
-            <Ime>Marko</Ime>
-            <Prezime>Đurišić</Prezime>
+            <Ime>Branislav</Ime>
+            <Prezime>Čogić</Prezime>
         </Potpisnik>
-        <Potpisnik>
-            <Titula>prof. dr</Titula>
-            <Ime>Ninoslav</Ime>
-            <Prezime>Stojadinović</Prezime>
-        </Potpisnik>
-        <Potpisnik>
-            <Ime>Aleksandar</Ime>
-            <Prezime>Senić</Prezime>
-        </Potpisnik>
-        <Potpisnik>
-            <Ime>Biljana</Ime>
-            <Prezime>Hasanović-Korać</Prezime>
-        </Potpisnik>
-        <Potpisnik>
-            <Ime>Goran</Ime>
-            <Prezime>Bogdanović</Prezime>
-        </Potpisnik>
-        <Potpisnik>
-            <Ime>Branka</Ime>
-            <Prezime>Karavidić</Prezime>
-        </Potpisnik>
-        <Potpisnik>
-            <Ime>Slobodan</Ime>
-            <Prezime>Homen</Prezime>
-        </Potpisnik>
-        <Potpisnik>
-            <Titula>dr</Titula>
-            <Ime>Miroslav</Ime>
-            <Prezime>Marinković</Prezime>
-        </Potpisnik>
-        <Potpisnik>
-            <Titula>mr sci. dr stom.</Titula>
-            <Ime>Blagoje</Ime>
-            <Prezime>Bradić</Prezime>
-        </Potpisnik>
-        <Potpisnik>
-            <Ime>Ivan</Ime>
-            <Prezime>Karić</Prezime>
-        </Potpisnik>
-    </Potpisnici>
-</Amandman>
+    </ZavrsniDeo>
+<ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+<ds:SignedInfo>
+<ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+<ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
+<ds:Reference URI="">
+<ds:Transforms>
+<ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+<ds:Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments"/>
+</ds:Transforms>
+<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+<ds:DigestValue>rUlVfAYefE79eUzPXaeNSG3ggys=</ds:DigestValue>
+</ds:Reference>
+</ds:SignedInfo>
+<ds:SignatureValue>
+mmkyrb6UO4/JlJgZps9M4WHiyIho7h+EdYsfSScr54jhqY70/tqVLK+22dMbvmP3ciNrCNsMwjtG
+yzg2cudtfDKTvXEVr+VsUn8alfK1duXQLn2DM358wr9vVINvN/QfrMyEDXs1RR0kAQfdzP51dirf
+qCpQYWJlJ5zf7iewfWU=
+</ds:SignatureValue>
+<ds:KeyInfo>
+<ds:KeyValue>
+<ds:RSAKeyValue>
+<ds:Modulus>
+zQ9KJLShafi/S2HkWlfnRpKcuLB4BgeJ5y2wBafGRRNz5kss0gjzzQZIDf684gwQ2WYEDlH2s+OX
+fbX4v6KTKJ4ug0wfY05sciJ7Dx+HOPUw6KU5aWvbBIKAXJE+MCSaO/FSk+ujgXSZAY/epUsSqBo2
+EZgUl90oEpTRbV+xX8E=
+</ds:Modulus>
+<ds:Exponent>AQAB</ds:Exponent>
+</ds:RSAKeyValue>
+</ds:KeyValue>
+<ds:X509Data>
+<ds:X509Certificate>
+MIIBtjCCAR8CBEZasCQwDQYJKoZIhvcNAQEFBQAwIjEPMA0GA1UECwwGcHJpbWVyMQ8wDQYDVQQD
+DAZwcmltZXIwHhcNMDcwNTI4MTAzNDEyWhcNMjcwNTIzMTAzNDEyWjAiMQ8wDQYDVQQLDAZwcmlt
+ZXIxDzANBgNVBAMMBnByaW1lcjCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAzQ9KJLShafi/
+S2HkWlfnRpKcuLB4BgeJ5y2wBafGRRNz5kss0gjzzQZIDf684gwQ2WYEDlH2s+OXfbX4v6KTKJ4u
+g0wfY05sciJ7Dx+HOPUw6KU5aWvbBIKAXJE+MCSaO/FSk+ujgXSZAY/epUsSqBo2EZgUl90oEpTR
+bV+xX8ECAwEAATANBgkqhkiG9w0BAQUFAAOBgQB2HjPI427zRaVfLTaeNVcjH9hoTkl9OUJAAmEa
+6EQdbdqZ75ca3IfuLHJFJ8zzyBP4LUGSxgA4OpnKs6Ej5w2n0GHmu0g4YqxInfpv/kCwswoia4Oz
+a17te8mMamffCn3ySX5yZzEex5nueNAyhJkmWBcBCOvJw4+U+gSK50Xbcw==
+</ds:X509Certificate>
+</ds:X509Data>
+</ds:KeyInfo>
+</ds:Signature></Akt>

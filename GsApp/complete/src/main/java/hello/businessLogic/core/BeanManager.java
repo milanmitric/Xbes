@@ -38,7 +38,7 @@ public class BeanManager <T>{
     /**
      * Manages CRUD operations on XML documents and JAXB beans..
      */
-    private XMLDocumentManager xmlManager;
+    protected XMLDocumentManager xmlManager;
 
     /**
      * Schema factory for creating validation schemas.
