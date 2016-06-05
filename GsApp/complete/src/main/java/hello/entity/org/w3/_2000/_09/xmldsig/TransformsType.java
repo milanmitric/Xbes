@@ -6,7 +6,7 @@
 //
 
 
-package hello.entity.gov.gradskaskupstina;
+package hello.entity.org.w3._2000._09.xmldsig;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,16 +17,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for TPotpisnici complex type.
+ * <p>Java class for TransformsType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="TPotpisnici">
+ * &lt;complexType name="TransformsType">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="Potpisnik" type="{http://www.gradskaskupstina.gov/}TPotpisnik" maxOccurs="unbounded"/>
+ *         &lt;element ref="{http://www.w3.org/2000/09/xmldsig#}Transform" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -36,41 +36,41 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TPotpisnici", propOrder = {
-    "potpisnik"
+@XmlType(name = "TransformsType", propOrder = {
+    "transform"
 })
-public class TPotpisnici {
+public class TransformsType {
 
-    @XmlElement(name = "Potpisnik", required = true)
-    protected List<TPotpisnik> potpisnik;
+    @XmlElement(name = "Transform", required = true)
+    protected List<TransformType> transform;
 
     /**
-     * Gets the value of the potpisnik property.
+     * Gets the value of the transform property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the potpisnik property.
+     * This is why there is not a <CODE>set</CODE> method for the transform property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getPotpisnik().add(newItem);
+     *    getTransform().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link TPotpisnik }
+     * {@link TransformType }
      * 
      * 
      */
-    public List<TPotpisnik> getPotpisnik() {
-        if (potpisnik == null) {
-            potpisnik = new ArrayList<TPotpisnik>();
+    public List<TransformType> getTransform() {
+        if (transform == null) {
+            transform = new ArrayList<TransformType>();
         }
-        return this.potpisnik;
+        return this.transform;
     }
 
 }

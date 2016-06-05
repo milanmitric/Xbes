@@ -6,41 +6,36 @@
 //
 
 
-package hello.entity.gov.gradskaskupstina;
+package hello.entity.org.w3._2000._09.xmldsig;
 
-import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAnyElement;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlMixed;
+import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
- * <p>Java class for TSemiStruktuiraniTekst complex type.
+ * <p>Java class for SignatureMethodType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="TSemiStruktuiraniTekst">
+ * &lt;complexType name="SignatureMethodType">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;choice maxOccurs="unbounded" minOccurs="0">
- *         &lt;element name="Tekst">
- *           &lt;simpleType>
- *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *               &lt;minLength value="1"/>
- *             &lt;/restriction>
- *           &lt;/simpleType>
- *         &lt;/element>
- *         &lt;element name="Referenca" type="{http://www.gradskaskupstina.gov/}TReferenca"/>
- *         &lt;element name="Datum" type="{http://www.w3.org/2001/XMLSchema}date"/>
- *       &lt;/choice>
+ *       &lt;sequence>
+ *         &lt;element name="HMACOutputLength" type="{http://www.w3.org/2000/09/xmldsig#}HMACOutputLengthType" minOccurs="0"/>
+ *         &lt;any namespace='##other' maxOccurs="unbounded" minOccurs="0"/>
+ *       &lt;/sequence>
+ *       &lt;attribute name="Algorithm" use="required" type="{http://www.w3.org/2001/XMLSchema}anyURI" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -49,18 +44,18 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TSemiStruktuiraniTekst", propOrder = {
+@XmlType(name = "SignatureMethodType", propOrder = {
     "content"
 })
-public class TSemiStruktuiraniTekst {
+public class SignatureMethodType {
 
-    @XmlElementRefs({
-        @XmlElementRef(name = "Referenca", namespace = "http://www.gradskaskupstina.gov/", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "Tekst", namespace = "http://www.gradskaskupstina.gov/", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "Datum", namespace = "http://www.gradskaskupstina.gov/", type = JAXBElement.class, required = false)
-    })
+    @XmlElementRef(name = "HMACOutputLength", namespace = "http://www.w3.org/2000/09/xmldsig#", type = JAXBElement.class, required = false)
     @XmlMixed
-    protected List<Serializable> content;
+    @XmlAnyElement(lax = true)
+    protected List<Object> content;
+    @XmlAttribute(name = "Algorithm", required = true)
+    @XmlSchemaType(name = "anyURI")
+    protected String algorithm;
 
     /**
      * Gets the value of the content property.
@@ -81,17 +76,40 @@ public class TSemiStruktuiraniTekst {
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link String }
-     * {@link JAXBElement }{@code <}{@link TReferenca }{@code >}
-     * {@link JAXBElement }{@code <}{@link String }{@code >}
-     * {@link JAXBElement }{@code <}{@link XMLGregorianCalendar }{@code >}
+     * {@link Object }
+     * {@link JAXBElement }{@code <}{@link BigInteger }{@code >}
      * 
      * 
      */
-    public List<Serializable> getContent() {
+    public List<Object> getContent() {
         if (content == null) {
-            content = new ArrayList<Serializable>();
+            content = new ArrayList<Object>();
         }
         return this.content;
+    }
+
+    /**
+     * Gets the value of the algorithm property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getAlgorithm() {
+        return algorithm;
+    }
+
+    /**
+     * Sets the value of the algorithm property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setAlgorithm(String value) {
+        this.algorithm = value;
     }
 
 }

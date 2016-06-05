@@ -1,6 +1,7 @@
 package hello.businessLogic.core;
 
 import hello.entity.gov.gradskaskupstina.*;
+import hello.entity.gov.gradskaskupstina.pro.*;
 
 import java.util.HashMap;
 

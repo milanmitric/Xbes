@@ -6,7 +6,7 @@
 //
 
 
-package hello.entity.gov.gradskaskupstina;
+package hello.entity.org.w3._2000._09.xmldsig;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,22 +14,26 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
- * <p>Java class for TPododeljak complex type.
+ * <p>Java class for SignaturePropertiesType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="TPododeljak">
+ * &lt;complexType name="SignaturePropertiesType">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="Clan" type="{http://www.gradskaskupstina.gov/}TClan" maxOccurs="unbounded"/>
+ *         &lt;element ref="{http://www.w3.org/2000/09/xmldsig#}SignatureProperty" maxOccurs="unbounded"/>
  *       &lt;/sequence>
- *       &lt;attribute name="RednoSlovo" use="required" type="{http://www.gradskaskupstina.gov/}TRednoSlovo" />
+ *       &lt;attribute name="Id" type="{http://www.w3.org/2001/XMLSchema}ID" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -38,67 +42,70 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TPododeljak", propOrder = {
-    "clan"
+@XmlType(name = "SignaturePropertiesType", propOrder = {
+    "signatureProperty"
 })
-public class TPododeljak {
+public class SignaturePropertiesType {
 
-    @XmlElement(name = "Clan", required = true)
-    protected List<TClan> clan;
-    @XmlAttribute(name = "RednoSlovo", required = true)
-    protected String rednoSlovo;
+    @XmlElement(name = "SignatureProperty", required = true)
+    protected List<SignaturePropertyType> signatureProperty;
+    @XmlAttribute(name = "Id")
+    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
+    @XmlID
+    @XmlSchemaType(name = "ID")
+    protected String id;
 
     /**
-     * Gets the value of the clan property.
+     * Gets the value of the signatureProperty property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the clan property.
+     * This is why there is not a <CODE>set</CODE> method for the signatureProperty property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getClan().add(newItem);
+     *    getSignatureProperty().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link TClan }
+     * {@link SignaturePropertyType }
      * 
      * 
      */
-    public List<TClan> getClan() {
-        if (clan == null) {
-            clan = new ArrayList<TClan>();
+    public List<SignaturePropertyType> getSignatureProperty() {
+        if (signatureProperty == null) {
+            signatureProperty = new ArrayList<SignaturePropertyType>();
         }
-        return this.clan;
+        return this.signatureProperty;
     }
 
     /**
-     * Gets the value of the rednoSlovo property.
+     * Gets the value of the id property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getRednoSlovo() {
-        return rednoSlovo;
+    public String getId() {
+        return id;
     }
 
     /**
-     * Sets the value of the rednoSlovo property.
+     * Sets the value of the id property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setRednoSlovo(String value) {
-        this.rednoSlovo = value;
+    public void setId(String value) {
+        this.id = value;
     }
 
 }

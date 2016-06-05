@@ -5,5 +5,5 @@
 // Generated on: 2016.06.05 at 06:38:31 PM CEST 
 //
 
-@javax.xml.bind.annotation.XmlSchema(namespace = "http://www.gradskaskupstina.gov/", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
-package hello.entity.gov.gradskaskupstina;
+@javax.xml.bind.annotation.XmlSchema(namespace = "http://www.w3.org/2000/09/xmldsig#", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
+package hello.entity.org.w3._2000._09.xmldsig;
