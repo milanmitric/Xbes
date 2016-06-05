@@ -229,4 +229,8 @@ public class Akt {
         this.zavrsniDeo = value;
     }
 
+    @Override
+    public String toString(){
+        return "Naslov: " + this.naslov + ", Potpisnik = " + getZavrsniDeo().getPotpisnik().toString();
+    }
 }
