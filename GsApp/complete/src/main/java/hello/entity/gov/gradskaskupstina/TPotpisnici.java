@@ -73,4 +73,12 @@ public class TPotpisnici {
         return this.potpisnik;
     }
 
+    @Override
+    public String toString(){
+        StringBuilder retValue = new StringBuilder("Potpisnici: ");
+        for(TPotpisnik osoba : potpisnik){
+            retValue.append(osoba.toString() + ", ");
+        }
+        return retValue.substring(0, retValue.length()-2);
+    }
 }

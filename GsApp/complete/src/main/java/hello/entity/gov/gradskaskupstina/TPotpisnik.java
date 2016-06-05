@@ -122,4 +122,8 @@ public class TPotpisnik {
         this.prezime = value;
     }
 
+    @Override
+    public String toString(){
+        return ime + " " + prezime;
+    }
 }
