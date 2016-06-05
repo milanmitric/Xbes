@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('xapp')
-    .controller('ShowAmandmansController', function ($scope, $state, aktService) {
+    .controller('ShowAmandmansController', function ($scope, $state, amandmanService) {
 
-    aktService.getAllActs(function(response){
-                $scope.collection = [];
-                //                    $scope.result = response.data
+    amandmanService.getAllAmandmans(function(response){
+                $scope.collection = response.data;
+
                 },function(response){
 
     });
