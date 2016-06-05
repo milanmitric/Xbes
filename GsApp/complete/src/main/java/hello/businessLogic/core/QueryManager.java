@@ -50,7 +50,7 @@ public class QueryManager <T> {
             this.schema = schema;
             invoker = client.newServerEval();
         } catch (Exception e){
-            logger.error("[QueryManager] Can't initialize QueryManager!");
+            logger.info("[ERROR] Can't initialize QueryManager!");
             e.printStackTrace();
         }
     }
@@ -74,10 +74,10 @@ public class QueryManager <T> {
                     if (bean != null) {
                         ret.add(bean);
                     } else {
-                         logger.error("[QueryManager] ERROR: Could not convert xml to JAXB bean!");
+                         logger.info("ERROR: Could not convert xml to JAXB bean!");
                     }
                 } else {
-                    logger.error("[QueryManager] ERROR: Could not write query result to file!");
+                    logger.info("ERROR: Could not write query result to file!");
                 }
             }
         } catch (Exception e){

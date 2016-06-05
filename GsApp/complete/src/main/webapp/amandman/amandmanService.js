@@ -9,7 +9,7 @@ angular.module('xapp')
                              					method: 'POST',
                              					url: '/api/amandman',
                              					headers: {
-                                                		        'Content-Type': 'application/json'
+                                                		        'Content-Type': 'application/xml'
                                                 },
                              					data: amandman
                              				}

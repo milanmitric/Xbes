@@ -1,6 +1,7 @@
 package hello.rest;
 
 import hello.businessLogic.core.BeanManager;
+import hello.businessLogic.document.UsersManager;
 import hello.dto.UserDTO;
 import hello.dto.LoginUser;
 import hello.entity.gov.gradskaskupstina.User;
@@ -46,9 +47,9 @@ public class UserController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity signin(@RequestBody LoginUser loginTry) {
 
-        BeanManager<Users> bm1 = new BeanManager<>("schema/Users.xsd");
+        UsersManager usersManager = new UsersManager();
         /*citamo sve usere iz baze*/
-        Users users = bm1.read(MarkLogicStrings.USERS_DOC_ID);
+        Users users = usersManager.read(MarkLogicStrings.USERS_DOC_ID);
         for(User user : users.getUser()){
             if(loginTry.getUsername().equals(user.getUsername())){
                 try {
@@ -132,9 +133,9 @@ public class UserController {
             return new ResponseEntity(res, HttpStatus.OK);
         }
 
-        BeanManager<Users> bm1 = new BeanManager<>("schema/Users.xsd");
+        UsersManager usersManager = new UsersManager();
         /*citamo sve usere iz baze*/
-        Users users = bm1.read(MarkLogicStrings.USERS_DOC_ID);
+        Users users = usersManager.read(MarkLogicStrings.USERS_DOC_ID);
 
         System.out.println();
 
@@ -178,7 +179,7 @@ public class UserController {
         users.getUser().add(userTry);
         /*upisemo ceo doc nazad*/
         //TODO hashing password
-        bm1.write(users, MarkLogicStrings.USERS_DOC_ID, "Proba");
+        usersManager.write(users, MarkLogicStrings.USERS_DOC_ID, "Proba");
 
         HashMap<String, String> res= new HashMap<>();
         res.put("success", "true");
