@@ -23,7 +23,7 @@ public class TestsMainCogara {
     public static void main(String[] args){
 
         testAkt();
-        //testAmandman();
+        testAmandman();
         //testUsers();
 
         DatabaseClient client = Database.getDbClient();

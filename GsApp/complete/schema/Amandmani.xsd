@@ -7,6 +7,7 @@
     <xs:element name="Amandman">
         <xs:complexType>
             <xs:sequence>
+                <xs:element name="DocumentId" nillable="true" type="xs:string" minOccurs="1" maxOccurs="1"/>
                 <xs:element name="PravniOsnov" type="TReferenca" minOccurs="1" maxOccurs="1"/>
                 <xs:element name="Akt" type="TReferenca" minOccurs="1" maxOccurs="1"/>
                 <xs:element name="Amandman" type="TAmandman" minOccurs="1" maxOccurs="unbounded"></xs:element>

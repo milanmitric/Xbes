@@ -2,6 +2,7 @@
 <Amandman xmlns="http://www.gradskaskupstina.gov/"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.gradskaskupstina.gov/ file:/C:/Users/FS-LB/Desktop/XMLProjekat/DJIT/Xbes/GsApp/complete/schema/Amandman.xsd">
+    <DocumentId></DocumentId>
     <PravniOsnov ref_akt="Poslovnik Narodne Skupstine" ref_clanovi="161"></PravniOsnov>
     <Akt ref_akt="AktPZOIIDZOJPPIK">Predlog Zakona o izmenama i dopunama Zakona o javno-privatnom partnerstvu i koncesijama</Akt>
     <Amandman RedniBroj="1">
