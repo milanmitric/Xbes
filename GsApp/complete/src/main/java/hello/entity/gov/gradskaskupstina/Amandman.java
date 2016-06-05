@@ -186,4 +186,8 @@ public class Amandman {
         this.potpisnici = value;
     }
 
+    @Override
+    public String toString() {
+        return "Naslov: " + this.akt + ", Potpisnici = " + potpisnici.toString();
+    }
 }
