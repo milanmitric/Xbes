@@ -12,6 +12,17 @@ angular.module('xapp')
 
              			$http(req).then(onSuccess, onError);
 		},
+		saveAct: function(act,onSuccess, onError){
+                     var req = {
+                     					method: 'POST',
+                     					url: '/api/akt',
+                     					headers: {
+                                        		        'Content-Type': 'application/xml'
+                                        },
+                     					data: act
+                     				}
+                     				$http(req).then(onSuccess, onError);
+        },
 		delete: function(onSuccess,onError){
 
 		},
