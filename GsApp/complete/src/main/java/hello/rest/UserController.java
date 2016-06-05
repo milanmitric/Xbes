@@ -8,7 +8,6 @@ import hello.entity.gov.gradskaskupstina.Users;
 import hello.StringResources.MarkLogicStrings;
 import hello.StringResources.Role;
 import hello.util.PasswordStorage;
-import org.omg.IOP.Encoding;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -24,10 +23,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import sun.security.util.Password;
 
 import java.io.IOException;
-import java.nio.charset.Charset;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.ArrayList;

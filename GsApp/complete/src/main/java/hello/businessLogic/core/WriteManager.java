@@ -66,9 +66,9 @@ public class WriteManager <T>{
     public boolean write(FileInputStream inputStream, String docId, String colId) {
         boolean ret = false;
         try{
-            //if (!singXml(null)) {
-            //    throw  new Exception("Could not sign xml, check tmp.xml.");
-            //}
+            if (!singXml(null)) {
+                throw  new Exception("Could not sign xml, check tmp.xml.");
+            }
             InputStreamHandle handle = new InputStreamHandle(inputStream);
             DocumentMetadataHandle metadata = new DocumentMetadataHandle();
             metadata.getCollections().add(colId);

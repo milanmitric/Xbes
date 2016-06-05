@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema  xmlns:xs="http://www.w3.org/2001/XMLSchema"
-            xmlns="http://www.gradskaskupstina.gov/"
-            targetNamespace="http://www.gradskaskupstina.gov/"
-            elementFormDefault="qualified">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.gradskaskupstina.gov/"
+    targetNamespace="http://www.gradskaskupstina.gov/" elementFormDefault="qualified">
 
     <xs:element name="Akt">
         <xs:complexType>
@@ -14,6 +12,7 @@
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:element>
+                <xs:element name="DocumentId" nillable="true" type="xs:string"/>
                 <xs:choice maxOccurs="1" minOccurs="1">
                     <xs:element maxOccurs="unbounded" minOccurs="1" name="Deo" type="TDeo"/>
                     <xs:element maxOccurs="unbounded" minOccurs="1" name="Glava" type="TGlava"/>
@@ -28,18 +27,19 @@
         <xs:sequence>
             <xs:element name="PravniOsnov" type="TReferenca" minOccurs="1" maxOccurs="1"/>
             <xs:element name="Akt" type="TReferenca" minOccurs="1" maxOccurs="1"/>
-            <xs:element name="Amandman" type="TAmandman" minOccurs="1" maxOccurs="unbounded"></xs:element>
-            <xs:element name="Potpisnici" type="TPotpisnici" minOccurs="1" maxOccurs="1"></xs:element>
+            <xs:element name="Amandman" type="TAmandman" minOccurs="1" maxOccurs="unbounded"/>
+            <xs:element name="Potpisnici" type="TPotpisnici" minOccurs="1" maxOccurs="1"/>
         </xs:sequence>
     </xs:complexType>
 
     <xs:complexType name="TAmandman">
         <xs:sequence minOccurs="1" maxOccurs="unbounded">
-            <xs:element name="PredmetIzmene" type="TReferenca" minOccurs="1" maxOccurs="1"></xs:element>
-            <xs:element name="TipIzmene" type="TTipIzmene" minOccurs="1" maxOccurs="1" />
-            <xs:element name="Obrazlozenje" type="TSemiStruktuiraniTekst" minOccurs="1" maxOccurs="1"></xs:element>
+            <xs:element name="PredmetIzmene" type="TReferenca" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="TipIzmene" type="TTipIzmene" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="Obrazlozenje" type="TSemiStruktuiraniTekst" minOccurs="1"
+                maxOccurs="1"/>
         </xs:sequence>
-        <xs:attribute name="RedniBroj" type="xs:positiveInteger" use="optional"></xs:attribute>
+        <xs:attribute name="RedniBroj" type="xs:positiveInteger" use="optional"/>
     </xs:complexType>
 
     <xs:simpleType name="TTipIzmene">
@@ -115,7 +115,8 @@
                 <xs:complexType>
                     <xs:simpleContent>
                         <xs:extension base="xs:string">
-                            <xs:attribute name="RedniBroj" type="xs:positiveInteger" use="required"/>
+                            <xs:attribute name="RedniBroj" type="xs:positiveInteger" use="required"
+                            />
                         </xs:extension>
                     </xs:simpleContent>
                 </xs:complexType>
@@ -127,18 +128,18 @@
 
     <xs:complexType name="TZavrsniDeo">
         <xs:sequence>
-            <xs:element name="PrelazneOdredbe" type="TGlava" minOccurs="0" maxOccurs="1"></xs:element>
-            <xs:element name="ZavrsneOdredbe" type="TGlava" minOccurs="0" maxOccurs="1"></xs:element>
-            <xs:element name="Organ" type="xs:string" minOccurs="1" maxOccurs="1"></xs:element>
-            <xs:element name="Broj" type="xs:string" minOccurs="1" maxOccurs="1"></xs:element>
-            <xs:element name="Datum" type="xs:string" minOccurs="1" maxOccurs="1"></xs:element>
-            <xs:element name="Potpisnik" type="TPotpisnik" minOccurs="1" maxOccurs="1"></xs:element>
+            <xs:element name="PrelazneOdredbe" type="TGlava" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="ZavrsneOdredbe" type="TGlava" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="Organ" type="xs:string" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="Broj" type="xs:string" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="Datum" type="xs:string" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="Potpisnik" type="TPotpisnik" minOccurs="1" maxOccurs="1"/>
         </xs:sequence>
     </xs:complexType>
 
     <xs:complexType name="TPotpisnici">
         <xs:sequence>
-            <xs:element name="Potpisnik" type="TPotpisnik" minOccurs="1" maxOccurs="unbounded"></xs:element>
+            <xs:element name="Potpisnik" type="TPotpisnik" minOccurs="1" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
 

@@ -72,7 +72,9 @@ public class AktManager extends BeanManager<Akt> {
     public DocumentDescriptor approveAkt(Akt akt, String docId){
         DocumentDescriptor ret = null;
         try {
-            this.deleteDocument(docId);
+            if (!this.deleteDocument(docId)) {
+                throw  new Exception();
+            }
         } catch (Exception e) {
             logger.error("[AktManager] Could not delete document with id [" + docId + "] from proposed!");
         }
