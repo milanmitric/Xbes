@@ -211,7 +211,7 @@ public class BeanManager <T>{
     }
 
     /**
-     * Validates xml documnt by <code>schema</code> field of class.
+     * Validates xml document by <code>schema</code> field of class.
      * @param filePath Path of file to be validated.
      * @return Indicator of success.
      */

@@ -59,9 +59,9 @@ public class TestRest {
             e.printStackTrace();
         }
 
-        Akt akt=new Akt();
+        Akt document=new Akt();
         try {
-            akt.setNaslov(obj.getString("naslov"));
+            document.setNaslov(obj.getString("naslov"));
             //gde validacija ?!
             //moze da se marshal pa da se naprvi XML doc
             //pa to saljemo mark bazi?
@@ -69,7 +69,7 @@ public class TestRest {
             e.printStackTrace();
         }
 
-        System.out.println("NASLOV IZ OBJ AKT: "+akt.getNaslov());*/
+        System.out.println("NASLOV IZ OBJ AKT: "+document.getNaslov());*/
         return HttpStatus.OK;
     }
 

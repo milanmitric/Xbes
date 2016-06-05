@@ -1,4 +1,4 @@
-package hello.businessLogic.akt;
+package hello.businessLogic.document;
 
 import com.marklogic.client.document.DocumentDescriptor;
 import hello.StringResources.MarkLogicStrings;
@@ -48,7 +48,7 @@ public class AktManager extends BeanManager<Akt> {
     }
 
     /**
-     * Proposes an akt.
+     * Proposes an document.
      * @param akt Bean to be proposed.
      * @return Generated URI. <code>NULL</code> if not successful.
      */
@@ -64,9 +64,9 @@ public class AktManager extends BeanManager<Akt> {
 
 
     /**
-     * Approves an akt.
+     * Approves an document.
      * @param akt Bean to be approved.
-     * @param docId  docID of akt to be deleted from proposed.
+     * @param docId  docID of document to be deleted from proposed.
      * @return Generated URI. <code>NULL</code> if not successful.
      */
     public DocumentDescriptor approveAkt(Akt akt, String docId){
@@ -74,12 +74,12 @@ public class AktManager extends BeanManager<Akt> {
         try {
             this.deleteDocument(docId);
         } catch (Exception e) {
-            logger.error("[AktManager] Could not delete akt with id [" + docId + "] from proposed!");
+            logger.error("[AktManager] Could not delete document with id [" + docId + "] from proposed!");
         }
         try {
             ret = this.write(akt,MarkLogicStrings.AKTOVI_USVOJENI_COL_ID);
         } catch (Exception e) {
-            logger.error("[AktManager] Could not approve akt!");
+            logger.error("[AktManager] Could not approve document!");
         }
         return ret;
     }
@@ -96,7 +96,7 @@ public class AktManager extends BeanManager<Akt> {
             deleteDocument(docId);
             ret = true;
         } catch (Exception e){
-            logger.error("[AktManager] Could not delete akt with id " + docId);
+            logger.error("[AktManager] Could not delete document with id " + docId);
         }
         return ret;
     }

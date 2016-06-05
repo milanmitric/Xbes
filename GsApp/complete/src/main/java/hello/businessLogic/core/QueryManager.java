@@ -50,6 +50,7 @@ public class QueryManager <T> {
             this.schema = schema;
             invoker = client.newServerEval();
         } catch (Exception e){
+            logger.error("[QueryManager] Can't initialize QueryManager!");
             e.printStackTrace();
         }
     }

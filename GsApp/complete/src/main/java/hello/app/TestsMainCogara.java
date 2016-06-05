@@ -43,13 +43,13 @@ public class TestsMainCogara {
             else
                 logger.info("Schema validation: " + inputAkt + "is NOT valid");
             if (!aktManager.write(inputAkt, docId, "Proba")) {
-                //System.out.println("Could't write akt!");
-                logger.info("Could't write akt!");
+                //System.out.println("Could't write document!");
+                logger.info("Could't write document!");
             } else {
                 //System.out.println("Write successful!");
                 logger.info("Write successful!");
 
-                // Citamo upravo upisani akt iz mark logic baze
+                // Citamo upravo upisani document iz mark logic baze
                 Akt akt = aktManager.read(docId);
                 if(aktManager.validateBeanBySchema(akt))
                     logger.info("Schema validation: " + akt + " is valid!");
@@ -71,13 +71,13 @@ public class TestsMainCogara {
             else
                 logger.info("Schema validation: " + inputAmandman + "is NOT valid");
             if (!amandmanManager.write(inputAmandman, docId, "Proba")) {
-                //System.out.println("Could't write akt!");
-                logger.info("Could't write akt!");
+                //System.out.println("Could't write document!");
+                logger.info("Could't write document!");
             } else {
                 //System.out.println("Write successful!");
                 logger.info("Write successful!");
 
-                // Citamo upravo upisani akt iz mark logic baze
+                // Citamo upravo upisani document iz mark logic baze
                 Amandman amandman = amandmanManager.read(docId);
                 if(amandmanManager.validateBeanBySchema(amandman))
                     logger.info("Schema validation: " + amandman + " is valid!");
@@ -101,13 +101,13 @@ public class TestsMainCogara {
             if (!userManager.write(inputUsers, MarkLogicStrings.USERS_DOC_ID, MarkLogicStrings.USERS_DOC_ID)) {
 
 
-                //System.out.println("Could't write akt!");
-                logger.info("Could't write akt!");
+                //System.out.println("Could't write document!");
+                logger.info("Could't write document!");
             } else {
                 //System.out.println("Write successful!");
                 logger.info("Write successful!");
 
-                // Citamo upravo upisani akt iz mark logic baze
+                // Citamo upravo upisani document iz mark logic baze
                 Users users = userManager.read(MarkLogicStrings.USERS_DOC_ID);
                 if(userManager.validateBeanBySchema(users))
                     logger.info("Schema validation: " + users + " is valid!");

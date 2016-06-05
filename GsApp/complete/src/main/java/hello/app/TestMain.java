@@ -2,7 +2,7 @@ package hello.app;
 
 import com.marklogic.client.document.DocumentDescriptor;
 import hello.Application;
-import hello.businessLogic.akt.AktManager;
+import hello.businessLogic.document.AktManager;
 import hello.businessLogic.core.BeanManager;
 import hello.entity.gov.gradskaskupstina.Akt;
 import hello.entity.gov.gradskaskupstina.Users;
@@ -40,16 +40,10 @@ public class TestMain {
         Akt akt = aktManager.convertFromXml(new File("res/validationTest/AktZOIIDZOJPPIK.xml"));
 
         DocumentDescriptor desc = aktManager.proposeAkt(akt);
+        logger.info("Successfully proposed document [" + desc.getUri() + "].");
+        desc  = aktManager.approveAkt(akt,desc.getUri());
+        logger.info("Successfully approved document [" + desc.getUri() + "].");
 
-
-        for(Akt tmpAkt: aktManager.getAllFilesProposed()){
-            System.out.println("AKT " + tmpAkt.getNaslov());
-        }
-        if (aktManager.deleteAkt(desc.getUri())){
-            System.out.println("Successfully deleted akt " + desc.getUri());
-        } else {
-            System.out.println("Could not delete akt!");
-        }
     }
 }
 
