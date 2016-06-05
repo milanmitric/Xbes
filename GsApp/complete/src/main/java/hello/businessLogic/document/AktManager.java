@@ -127,6 +127,15 @@ public class AktManager extends BeanManager<Akt> {
         return ret;
     }
 
+    /**
+     * Validates Akt by schema.
+     * @param akt Akt to be validated.
+     * @return Indicator of success.
+     */
+    public boolean validateAkt(Akt akt){
+        return validateBeanBySchema(akt);
+    }
+
 
 
 
