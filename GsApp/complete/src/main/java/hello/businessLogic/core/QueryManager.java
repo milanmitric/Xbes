@@ -65,6 +65,7 @@ public class QueryManager <T> {
         try {
             EvalResultIterator response = null;
             // Invoke the query
+            invoker = client.newServerEval();
             invoker.xquery(query);
             response = invoker.eval();
             ret = new ArrayList<>();

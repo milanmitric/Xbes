@@ -1,10 +1,7 @@
 package hello.businessLogic.document;
 
 import hello.businessLogic.core.BeanManager;
-import hello.entity.gov.gradskaskupstina.User;
 import hello.entity.gov.gradskaskupstina.Users;
-
-import java.io.FileInputStream;
 
 /**
  * Created by Nebojsa on 6/5/2016.

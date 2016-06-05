@@ -1,6 +1,5 @@
 package hello.rest;
 
-import hello.businessLogic.core.BeanManager;
 import hello.businessLogic.document.UsersManager;
 import hello.dto.UserDTO;
 import hello.dto.LoginUser;

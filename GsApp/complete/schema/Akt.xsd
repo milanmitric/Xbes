@@ -23,7 +23,7 @@
                     <xs:element maxOccurs="unbounded" minOccurs="1" name="Clan" type="TClan"/>
                 </xs:choice>
                 <xs:element name="ZavrsniDeo" type="TZavrsniDeo"/>
-            	<xs:element name="Signature" type="ds:SignatureType" minOccurs="0"></xs:element>
+            	<xs:element ref="ds:Signature"></xs:element>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
