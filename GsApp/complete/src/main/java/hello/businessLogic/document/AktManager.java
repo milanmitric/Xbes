@@ -1,6 +1,6 @@
 package hello.businessLogic.document;
 
-import com.marklogic.client.document.DocumentDescriptor;
+import com.marklogic.client.document.DocumentUriTemplate;
 import hello.StringResources.MarkLogicStrings;
 import hello.businessLogic.core.BeanManager;
 import hello.entity.gov.gradskaskupstina.Akt;
@@ -52,10 +52,21 @@ public class AktManager extends BeanManager<Akt> {
      * @param akt Bean to be proposed.
      * @return Generated URI. <code>NULL</code> if not successful.
      */
-    public DocumentDescriptor proposeAkt(Akt akt){
-        DocumentDescriptor ret = null;
+    public String proposeAkt(Akt akt){
+
+        if (!validateBeanBySchema(akt)){
+            logger.info("[AktManager] ERROR: Akt is not valid!");
+            return null;
+        }
+        String ret = null;
+        DocumentUriTemplate template = xmlManager.newDocumentUriTemplate("xml");
         try {
-            ret = this.write(akt,MarkLogicStrings.AKTOVI_PREDLOZEN_COL_ID);
+            ret = this.write(akt,MarkLogicStrings.AKTOVI_PREDLOZEN_COL_ID).getUri();
+            akt.setDocumentId(ret);
+            if (!this.write(akt,ret,MarkLogicStrings.AKTOVI_PREDLOZEN_COL_ID)){
+                ret = null;
+                throw new Exception();
+            }
         } catch (Exception e) {
             logger.error("[AktManager] Could not propose AKT!");
         }
@@ -66,12 +77,19 @@ public class AktManager extends BeanManager<Akt> {
     /**
      * Approves an document.
      * @param akt Bean to be approved.
-     * @param docId  docID of document to be deleted from proposed.
      * @return Generated URI. <code>NULL</code> if not successful.
      */
-    public DocumentDescriptor approveAkt(Akt akt, String docId){
-        DocumentDescriptor ret = null;
+    public String approveAkt(Akt akt){
+        if (!validateBeanBySchema(akt)){
+            logger.info("[AktManager] ERROR: Akt is not valid!");
+            return null;
+        }
+        String ret = null;
+        String docId = akt.getDocumentId();
         try {
+            if (docId == null ||docId.isEmpty()){
+                throw new Exception();
+            }
             if (!this.deleteDocument(docId)) {
                 throw  new Exception();
             }
@@ -79,7 +97,13 @@ public class AktManager extends BeanManager<Akt> {
             logger.error("[AktManager] Could not delete document with id [" + docId + "] from proposed!");
         }
         try {
-            ret = this.write(akt,MarkLogicStrings.AKTOVI_USVOJENI_COL_ID);
+            if (!write(akt,akt.getDocumentId(),MarkLogicStrings.AKTOVI_USVOJENI_COL_ID)){
+                ret = null;
+                throw  new Exception();
+            } else {
+                ret = akt.getDocumentId();
+            }
+
         } catch (Exception e) {
             logger.error("[AktManager] Could not approve document!");
         }
@@ -102,6 +126,17 @@ public class AktManager extends BeanManager<Akt> {
         }
         return ret;
     }
+
+    /**
+     * Validates Akt by schema.
+     * @param akt Akt to be validated.
+     * @return Indicator of success.
+     */
+    public boolean validateAkt(Akt akt){
+        return validateBeanBySchema(akt);
+    }
+
+
 
 
 }

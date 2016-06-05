@@ -6,6 +6,8 @@ import com.marklogic.client.document.DocumentMetadataPatchBuilder;
 import com.marklogic.client.document.XMLDocumentManager;
 import hello.util.Converter;
 import hello.util.Database;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.xml.XMLConstants;
 import javax.xml.validation.Schema;
@@ -20,6 +22,8 @@ import java.util.ArrayList;
  */
 public class BeanManager <T>{
 
+
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     /**
      * Default docId for CRUD operations.
@@ -38,7 +42,7 @@ public class BeanManager <T>{
     /**
      * Manages CRUD operations on XML documents and JAXB beans..
      */
-    private XMLDocumentManager xmlManager;
+    protected XMLDocumentManager xmlManager;
 
     /**
      * Schema factory for creating validation schemas.
@@ -154,7 +158,14 @@ public class BeanManager <T>{
      * @return Generated URI. <code>NULL</code> if not successful.
      */
     public DocumentDescriptor write(T bean,String colId) {
-        return writeManager.write(bean,colId);
+        if (customManager.validateBeanBySchema(bean)){
+            logger.info("[BeanManager] Successfully validated bean!");
+            return writeManager.write(bean,colId);
+        } else {
+            logger.info("[BeanManager] Could not validate bean!");
+            return null;
+        }
+
     }
 
     /**
