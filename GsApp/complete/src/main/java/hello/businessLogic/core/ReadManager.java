@@ -59,6 +59,9 @@ public class ReadManager<T>{
         transformerFactory = TransformerFactory.newInstance();
     }
 
+    public ReadManager(){
+
+    }
     public ReadManager(DatabaseClient client, XMLDocumentManager xmlManager, SchemaFactory schemaFactory, Schema schema, Converter converter){
         this.client = client;
         this.xmlManager = xmlManager;
@@ -78,15 +81,16 @@ public class ReadManager<T>{
             JAXBContext jc = JAXBContext.newInstance("hello.entity.gov.gradskaskupstina");
             JAXBHandle<T> handle = new JAXBHandle<>(jc);
 
-
+            /*
             // Input xml validation.
-            /*if (!convertInputToTmp(docId)){
+            if (!convertInputToTmp(docId)){
                 ret = null;
                 throw  new Exception("Can't read from database!");
             }
             // For now. Signature check is not working?
             // TODO: Refactor signature check.
-            if (!validateXML("tmp.xml")){
+
+            if (!validateXMLBySignature("tmp.xml")){
                 ret = null;
                 throw  new Exception("Input bean signature is not well formated!");
             }*/
@@ -100,12 +104,13 @@ public class ReadManager<T>{
             // Convert bean to tmp.xml so that you can validateBeanBySchema it.
             if (!converter.convertToXml(ret)){
                 ret = null;
-                throw  new Exception("[ReadManager] ERROR: Could not convert bean to xml!");
+                throw  new Exception("Could not convert bean to xml!");
             }
         }
         catch (Exception e) {
-            //System.out.println("Unexpected error: " + e.getMessage());
-            logger.info("[ReadManager] ERROR: Unexpected error: " + e.getMessage());
+            logger.info("Could not read database with URI "+ docId + ".");
+            logger.info("[ERROR] " + e.getMessage());
+            logger.info("[STACK TRACE] " + e.getStackTrace());
         } finally {
             return ret;
         }
@@ -124,7 +129,9 @@ public class ReadManager<T>{
             Document document = verifySignatureEnveloped.loadDocument(filepath);
             ret =  verifySignatureEnveloped.verifySignature(document);
         } catch(Exception e){
-            logger.info("[ReadManager] ERROR: Unexpected error: " + e.getMessage());
+            logger.info("Could not validate XML by signature on filepath "+ filepath+ ".");
+            logger.info("[ERROR] " + e.getMessage());
+            logger.info("[STACK TRACE] " + e.getStackTrace());
         } finally {
             return  ret;
         }
@@ -150,8 +157,9 @@ public class ReadManager<T>{
             ret = true;
 
         } catch (Exception e){
-            logger.info("[ReadManager] ERROR: Unexpected error: " + e.getMessage());
-
+            logger.info("Could not read xml["+ docId+ "] and store to tmp.xml!");
+            logger.info("[ERROR] " + e.getMessage());
+            logger.info("[STACK TRACE] " + e.getStackTrace());
         } finally {
             return ret;
         }

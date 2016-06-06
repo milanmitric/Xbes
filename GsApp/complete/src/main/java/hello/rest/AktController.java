@@ -49,7 +49,7 @@ public class AktController {
             logger.info("[AktController] ERROR: NOT PROPOSED");
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         } else {
-            logger.info("[AktController] sSuccessfully proposed akt: " + akt.toString() + " with id " + docID);
+            logger.info("[AktController] Successfully proposed akt: " + akt.toString() + " with id " + docID);
         }
 
         return new ResponseEntity(HttpStatus.OK);

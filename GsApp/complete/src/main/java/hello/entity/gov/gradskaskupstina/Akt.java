@@ -8,14 +8,11 @@
 
 package hello.entity.gov.gradskaskupstina;
 
+import hello.entity.org.w3._2000._09.xmldsig.SignatureType;
+
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
-import hello.entity.org.w3._2000._09.xmldsig.SignatureType;
 
 
 /**
@@ -76,7 +73,7 @@ public class Akt {
     protected List<TClan> clan;
     @XmlElement(name = "ZavrsniDeo", required = true)
     protected TZavrsniDeo zavrsniDeo;
-    @XmlElement(name = "Signature", namespace = "http://www.w3.org/2000/09/xmldsig#", required = true)
+    @XmlElement(name = "Signature", namespace = "http://www.w3.org/2000/09/xmldsig#")
     protected SignatureType signature;
 
     /**

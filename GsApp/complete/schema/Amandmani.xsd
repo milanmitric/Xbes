@@ -15,7 +15,7 @@
                 <xs:element name="Akt" type="TReferenca" minOccurs="1" maxOccurs="1"/>
                 <xs:element name="Amandman" type="TAmandman" minOccurs="1" maxOccurs="unbounded"></xs:element>
                 <xs:element name="Potpisnici" type="TPotpisnici" minOccurs="1" maxOccurs="1"></xs:element>
-            	<xs:element ref="ds:Signature" minOccurs="0"></xs:element>
+            	<xs:element ref="ds:Signature" minOccurs="0" maxOccurs="1"></xs:element>
             </xs:sequence>
         </xs:complexType>
     </xs:element>

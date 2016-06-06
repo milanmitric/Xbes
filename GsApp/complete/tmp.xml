@@ -1,105 +1,43 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Akt xsi:schemaLocation="http://www.gradskaskupstina.gov/" xmlns="http://www.gradskaskupstina.gov/" xmlns:ns2="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <Naslov>Zakon o izmenama i dopunama zakona o javno-privatnom partnerstvu i koncesijama</Naslov>
-    <DocumentId>16725829884999733778.xml</DocumentId>
-    <Clan RedniBroj="1">
-        <Stav>
-            <Sadrzaj>U Zakonu o javno-privatnom partnerstvu i koncesijama („Službeni glasnik RS”, broj 88/11), u članu 2. stav 1. posle reči: „partnerom” dodaju se reči: „radi realizacije projekata javno-privatnog partnerstva”.</Sadrzaj>
-        </Stav>
-    </Clan>
-    <Clan RedniBroj="2">
-        <Stav>
-            <Sadrzaj>U <Referenca ref_akt="ZOJPPIK" ref_clanovi="4" ref_tacke="6">članu 4. tačka 6)</Referenca> reči: „može osnivati” zamenjuju se rečju: „osniva”.</Sadrzaj>
-        </Stav>
-    </Clan>
-    <Clan RedniBroj="3">
-        <Stav>
-            <Sadrzaj>U <Referenca ref_akt="ZOJPPIK" ref_clanovi="7" ref_stavovi="2" ref_tacke="1">članu 7. stav 2. tačka 1)</Referenca> posle reči: „drugog dobra” dodaju se reči: „niti isključiva isporuka dobara”.</Sadrzaj>
-        </Stav>
-        <Stav>
-            <Sadrzaj>U <Referenca ref_akt="ZOJPPIK" ref_clanovi="7" ref_stavovi="2" ref_tacke="3">stavu 2. tačka 3)</Referenca> reč: „projektovanje” i zapeta posle te reči brišu se.</Sadrzaj>
-        </Stav>
-        <Stav>
-            <Sadrzaj>U <Referenca ref_akt="ZOJPPIK" ref_clanovi="7" ref_stavovi="2" ref_tacke="6">tački 6)</Referenca> posle reči: „između javnog i privatnog partnera” dodaje se zapeta i reči: „a naročito preuzimanje rizika tražnje ili rizika raspoloživosti objekta, usluge, infrastrukture i sl.”.</Sadrzaj>
-        </Stav>
-        <Stav>
-            <Sadrzaj>U <Referenca ref_akt="ZOJPPIK" ref_clanovi="7" ref_stavovi="2" ref_tacke="7">tački 7)</Referenca> posle reči: "komercijalnu delatnost" dodaju se reči: "ili izgradi druge objekte"</Sadrzaj>
-        </Stav>
-    </Clan>
-    <Clan RedniBroj="4">
-        <Stav>
-            <Sadrzaj>U <Referenca ref_akt="ZOJPPIK" ref_clanovi="9" ref_stavovi="4">članu 9. stav 4.</Referenca> posle reči: „zaključuju” dodaju se reči: „javni ugovor i”.</Sadrzaj>
-        </Stav>
-    </Clan>
-    <Clan RedniBroj="5">
-        <Stav>
-            <Sadrzaj>U <Referenca ref_akt="ZOJPPIK" ref_clanovi="14" ref_stavovi="2">članu 14. stav 2.</Referenca> reči: „ne moraju tražiti” zamenjuju se rečima: „nemaju pravo da traže”.</Sadrzaj>
-        </Stav>
-    </Clan>
-    <Clan RedniBroj="10">
-        <Stav>
-            <Sadrzaj>U <Referenca ref_akt="ZOJPPIK" ref_clanovi="22" ref_stavovi="3">članu 22. stav 3.</Referenca> reči: „u jednom međunarodnom listu i” brišu se.</Sadrzaj>
-        </Stav>
-    </Clan>
-    <Clan RedniBroj="12">
-        <Stav>
-            <Sadrzaj>U članu 29. posle stava 3. dodaje se novi stav 4, koji glasi:
-                „Ako je Republika Srbija davalac koncesije, odnosno kada su javna tela i
-                predmet koncesije u nadležnosti Republike Srbije i ako je procenjena vrednost te
-                koncesije veća od 50 miliona evra, Komisija za JPP, pre davanja svog mišljenja,
-                obavezno prethodno pribavlja mišljenje ministarstva nadležnog za poslove finansija.”.
-                Dosadašnji st. 4. i 5. postaju st. 5. i 6.</Sadrzaj>
-        </Stav>
-    </Clan>
-    <ZavrsniDeo>
-        <Organ>Serbia</Organ>
-        <Broj>1/16</Broj>
-        <Datum>03.06.2016.</Datum>
-        <Potpisnik>
-            <Ime>Branislav</Ime>
-            <Prezime>Čogić</Prezime>
-        </Potpisnik>
-    </ZavrsniDeo>
-<ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
-<ds:SignedInfo>
-<ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
-<ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
-<ds:Reference URI="">
-<ds:Transforms>
-<ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
-<ds:Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments"/>
-</ds:Transforms>
-<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
-<ds:DigestValue>y0KahtPQIKqFBVjlwQp4w7vq4X0=</ds:DigestValue>
-</ds:Reference>
-</ds:SignedInfo>
-<ds:SignatureValue>
-vCIBQaIo2Uw4mDrUA8YZ5Kd90xwszvxRZ/YLmeCQikhxcFi88x4LSmiEoaSvIGNV8lZ4675/s1vu
-PfcgDQuu4o/GUMzFimHaQhcZokEnxuFcRxr4FFw8q7TulHM1bVg7ng//SlhlV5gyZ+G7oySLpYEa
-WobeiKuPbyetEa5Klc0=
-</ds:SignatureValue>
-<ds:KeyInfo>
-<ds:KeyValue>
-<ds:RSAKeyValue>
-<ds:Modulus>
-zQ9KJLShafi/S2HkWlfnRpKcuLB4BgeJ5y2wBafGRRNz5kss0gjzzQZIDf684gwQ2WYEDlH2s+OX
-fbX4v6KTKJ4ug0wfY05sciJ7Dx+HOPUw6KU5aWvbBIKAXJE+MCSaO/FSk+ujgXSZAY/epUsSqBo2
-EZgUl90oEpTRbV+xX8E=
-</ds:Modulus>
-<ds:Exponent>AQAB</ds:Exponent>
-</ds:RSAKeyValue>
-</ds:KeyValue>
-<ds:X509Data>
-<ds:X509Certificate>
-MIIBtjCCAR8CBEZasCQwDQYJKoZIhvcNAQEFBQAwIjEPMA0GA1UECwwGcHJpbWVyMQ8wDQYDVQQD
-DAZwcmltZXIwHhcNMDcwNTI4MTAzNDEyWhcNMjcwNTIzMTAzNDEyWjAiMQ8wDQYDVQQLDAZwcmlt
-ZXIxDzANBgNVBAMMBnByaW1lcjCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAzQ9KJLShafi/
-S2HkWlfnRpKcuLB4BgeJ5y2wBafGRRNz5kss0gjzzQZIDf684gwQ2WYEDlH2s+OXfbX4v6KTKJ4u
-g0wfY05sciJ7Dx+HOPUw6KU5aWvbBIKAXJE+MCSaO/FSk+ujgXSZAY/epUsSqBo2EZgUl90oEpTR
-bV+xX8ECAwEAATANBgkqhkiG9w0BAQUFAAOBgQB2HjPI427zRaVfLTaeNVcjH9hoTkl9OUJAAmEa
-6EQdbdqZ75ca3IfuLHJFJ8zzyBP4LUGSxgA4OpnKs6Ej5w2n0GHmu0g4YqxInfpv/kCwswoia4Oz
-a17te8mMamffCn3ySX5yZzEex5nueNAyhJkmWBcBCOvJw4+U+gSK50Xbcw==
-</ds:X509Certificate>
-</ds:X509Data>
-</ds:KeyInfo>
-</ds:Signature></Akt>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Users xmlns="http://www.gradskaskupstina.gov/" xmlns:ns2="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gradskaskupstina.gov/">
+    <User>
+        <Username>rusija</Username>
+        <Password>rusija</Password>
+        <Ime>Radomir</Ime>
+        <Prezime>Marinković</Prezime>
+        <Salt>X1eBX3DNI6M=</Salt>
+        <Role>ROLE_PREDSEDNIK</Role>
+    </User>
+    <User>
+        <Username>mitra</Username>
+        <Password>mitra</Password>
+        <Ime>Milan</Ime>
+        <Prezime>Mitrić</Prezime>
+        <Salt>X1eBX3DNI6M=</Salt>
+        <Role>ROLE_ODBORNIK</Role>
+    </User>
+    <User>
+        <Username>roki</Username>
+        <Password>roki</Password>
+        <Ime>Nebojša</Ime>
+        <Prezime>Popović</Prezime>
+        <Salt>X1eBX3DNI6M=</Salt>
+        <Role>ROLE_GRADJANIN</Role>
+    </User>
+    <User>
+        <Username>cho</Username>
+        <Password>cho</Password>
+        <Ime>Branislav</Ime>
+        <Prezime>Čogić</Prezime>
+        <Salt>X1eBX3DNI6M=</Salt>
+        <Role>ROLE_GRADJANIN</Role>
+    </User>
+    <User>
+        <Username>aaa</Username>
+        <Password>6//oRub2Fh3k/h5lfYb8fKExCZg=</Password>
+        <Ime>aaa</Ime>
+        <Prezime>aaa</Prezime>
+        <Salt>DFXZs0ZCuH0=</Salt>
+        <Role>ROLE_GRADJANIN</Role>
+    </User>
+</Users>

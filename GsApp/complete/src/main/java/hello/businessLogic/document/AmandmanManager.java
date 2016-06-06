@@ -69,7 +69,7 @@ public class AmandmanManager extends BeanManager<Amandman> {
                 throw new Exception();
             }
         } catch (Exception e) {
-            logger.error("[AmandmanManager] Could not propose Amandman!");
+            logger.info("[ERROR] Could not propose Amandman!");
         }
         return ret;
     }
@@ -81,7 +81,7 @@ public class AmandmanManager extends BeanManager<Amandman> {
      */
     public String approveAmandman(Amandman amandman){
         if (!validateBeanBySchema(amandman)){
-            logger.info("[AmandmanManager] ERROR: amendments is not valid!");
+            logger.info("[ERROR] Amendment[" + amandman.getDocumentId() + "] is not valid!");
             return null;
         }
         String ret = null;
@@ -94,7 +94,7 @@ public class AmandmanManager extends BeanManager<Amandman> {
                 throw  new Exception();
             }
         } catch (Exception e) {
-            logger.error("[AmandmanManager] Could not delete amendments with id [" + docId + "] from proposed!");
+            logger.info("[ERROR] Could not delete amendment[" + docId + "] from proposed!");
         }
         try {
             if (!write(amandman,amandman.getDocumentId(),MarkLogicStrings.AMANDMANI_USVOJENI_COL_ID)){
@@ -105,7 +105,7 @@ public class AmandmanManager extends BeanManager<Amandman> {
             }
 
         } catch (Exception e) {
-            logger.error("[AmandmanManager] Could not approve amendments!");
+            logger.info("[ERROR]  Could not approve amendment["+docId +"]!");
         }
         return ret;
     }
@@ -122,7 +122,7 @@ public class AmandmanManager extends BeanManager<Amandman> {
             deleteDocument(docId);
             ret = true;
         } catch (Exception e){
-            logger.error("[AmandmanManager] Could not delete document with id " + docId);
+            logger.info("[ERROR] Could not delete amadnment[" + docId+"]!");
         }
         return ret;
     }

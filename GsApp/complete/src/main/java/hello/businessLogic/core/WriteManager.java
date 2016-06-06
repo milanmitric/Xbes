@@ -47,6 +47,9 @@ public class WriteManager <T>{
 
     private Converter<T> converter;
 
+    public WriteManager(){
+
+    }
 
     public WriteManager(DatabaseClient client, XMLDocumentManager xmlManager, SchemaFactory schemaFactory, Schema schema, Converter converter){
         this.client = client;
@@ -67,7 +70,7 @@ public class WriteManager <T>{
         boolean ret = false;
         try{
             if (!singXml(null)) {
-                throw  new Exception("Could not sign xml, check tmp.xml.");
+                throw  new Exception("Could not sign xml!");
             }
             InputStreamHandle handle = new InputStreamHandle(inputStream);
             DocumentMetadataHandle metadata = new DocumentMetadataHandle();
@@ -76,8 +79,9 @@ public class WriteManager <T>{
             ret = true;
         }
         catch (Exception e){
-            logger.info("[WriteManager] Unexpected error: " + e.getMessage());
-            //System.out.println("Unexpected error: " + e.getMessage());
+            logger.info("Could not write xml["+ docId+ "].");
+            logger.info("[ERROR] " + e.getMessage());
+            logger.info("[STACK TRACE] " + e.getStackTrace());
         } finally{
             return ret;
         }
@@ -103,7 +107,9 @@ public class WriteManager <T>{
             ret = xmlManager.create(template,metadata, handle);
         }
         catch (Exception e){
-            logger.info("[WriteManager] Unexpected error: " + e.getMessage());
+            logger.info("Could not write xml bean.");
+            logger.info("[ERROR] " + e.getMessage());
+            logger.info("[STACK TRACE] " + e.getStackTrace());
         } finally{
             return ret;
         }
@@ -124,12 +130,13 @@ public class WriteManager <T>{
                 FileInputStream inputStream = new FileInputStream(new File("tmp.xml"));
                 ret = write(inputStream,docId,colId);
             } else {
-                throw new Exception("[WriteManager] Can't convert JAXB bean " + bean.toString() + " to XML.");
+                throw new Exception(" Can't convert JAXB bean["+docId +"] to XML.");
             }
         }
         catch (Exception e) {
-            logger.info("[WriteManager] ERROR: Unexpected error: " + e.getMessage());
-            //System.out.println("Unexpected error: " + e.getMessage());
+            logger.info("Could not write xml["+ docId+ "].");
+            logger.info("[ERROR] " + e.getMessage());
+            logger.info("[STACK TRACE] " + e.getStackTrace());
         }
         finally{
             return ret;
@@ -150,12 +157,13 @@ public class WriteManager <T>{
                 FileInputStream inputStream = new FileInputStream(new File("tmp.xml"));
                 ret = write(inputStream,colId);
             } else {
-                throw new Exception("[WriteManager] Can't convert JAXB bean " + bean.toString() + " to XML.");
+                throw new Exception(" Can't convert JAXB bean to XML.");
             }
         }
         catch (Exception e) {
-            logger.info("[WriteManager] ERROR: Unexpected error: " + e.getMessage());
-            //System.out.println("Unexpected error: " + e.getMessage());
+            logger.info("Could not write xml.");
+            logger.info("[ERROR] " + e.getMessage());
+            logger.info("[STACK TRACE] " + e.getStackTrace());
         }
         finally{
             return ret;
@@ -168,7 +176,7 @@ public class WriteManager <T>{
      * @param filePath Path to xml to be signed.
      * @return Indicator of success.
      */
-    private boolean singXml(String filePath){
+    public boolean singXml(String filePath){
 
         boolean ret = false;
 
@@ -187,7 +195,9 @@ public class WriteManager <T>{
             ret = true;
 
         } catch (Exception e){
-            System.out.println("[WriteManager] Unexpected error: " +e.getMessage());
+            logger.info("Could not sign xml from filepath " + filePath);
+            logger.info("[ERROR] " + e.getMessage());
+            logger.info("[STACK TRACE] " + e.getStackTrace());
         } finally {
             return  ret;
         }

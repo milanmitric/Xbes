@@ -2,6 +2,8 @@ package hello.app;
 
 import hello.Application;
 import hello.businessLogic.core.BeanManager;
+import hello.businessLogic.core.ReadManager;
+import hello.businessLogic.core.WriteManager;
 import hello.businessLogic.document.AktManager;
 import hello.entity.gov.gradskaskupstina.Akt;
 import hello.entity.gov.gradskaskupstina.Users;
@@ -9,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.util.ArrayList;
 
 /**
@@ -19,7 +22,7 @@ public class TestMain {
     private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
     public static void main(String[] args){
-        testAktManager();
+        testSignature();
     }
 
 
@@ -73,6 +76,24 @@ public class TestMain {
         aktManager.deleteAkt("4794372873215895682.xml");
         aktManager.deleteAkt("6354302967360018838.xml");
 
+
+    }
+
+    public static void testSignature(){
+
+        ReadManager<Akt> aktReadManager = new ReadManager<>();
+        WriteManager<Akt> aktWriteManager = new WriteManager<>();
+        BeanManager<Akt> aktBeanManager = new BeanManager<>();
+
+        try{
+            aktBeanManager.write(new FileInputStream("tmp.xml"),"test","test");
+            aktReadManager.validateXMLBySignature("tmp.xml");
+            aktBeanManager.read("test");
+            aktReadManager.validateXMLBySignature("tmp.xml");
+        } catch (Exception e){
+            logger.info("ERROR");
+        }
+        logger.info("SUCCESS");
 
     }
 }

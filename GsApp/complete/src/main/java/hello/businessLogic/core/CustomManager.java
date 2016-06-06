@@ -75,7 +75,9 @@ public class CustomManager <T>{
             xmlManager.delete(docId);
             ret = true;
         }catch (Exception e){
-            e.printStackTrace();
+            logger.info("Can't delete file[" + docId + "]");
+            logger.info("[ERROR] " + e.getMessage());
+            logger.info("[STACK TRACE] " + e.getStackTrace());
         } finally {
             return  ret;
         }
@@ -93,7 +95,9 @@ public class CustomManager <T>{
             xmlManager.patch(docId,patchHandle);
             ret = true;
         } catch (Exception e){
-            e.printStackTrace();
+            logger.info("Can't update file[" + docId + "]");
+            logger.info("[ERROR] " + e.getMessage());
+            logger.info("[STACK TRACE] " + e.getStackTrace());
         } finally {
             return  ret;
         }
@@ -120,8 +124,9 @@ public class CustomManager <T>{
             T tmpAkt = (T) JAXBIntrospector.getValue(unmarshaller.unmarshal(new File("tmp.xml")));
             ret = true;
         } catch (Exception e){
-            logger.info("[ERROR] Unexpected error: " +e.getMessage());
-            e.printStackTrace();
+            logger.info("Can't validate bean!");
+            logger.info("[ERROR] " + e.getMessage());
+            logger.info("[STACK TRACE] " + e.getStackTrace());
         }finally {
             return ret;
         }
@@ -144,8 +149,9 @@ public class CustomManager <T>{
             T tmpAkt = (T) JAXBIntrospector.getValue(unmarshaller.unmarshal(new File(filePath)));
             ret = true;
         } catch (Exception e){
-            logger.info("[ERROR] Unexpected error: " + e.getMessage());
-            //System.out.println("Unexpected error: " +e.getMessage());
+            logger.info("Can't validate bean on path " + filePath + ".");
+            logger.info("[ERROR] " + e.getMessage());
+            logger.info("[STACK TRACE] " + e.getStackTrace());
         }finally {
             return ret;
         }

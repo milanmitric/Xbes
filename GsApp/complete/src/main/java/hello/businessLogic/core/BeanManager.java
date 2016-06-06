@@ -94,7 +94,7 @@ public class BeanManager <T>{
             queryManager = new QueryManager(client, schema,converter);
 
         } catch (Exception e){
-            System.out.println("Can't initialize Bean manager.");
+            logger.info("[ERROR] Can't initialize.");
             e.printStackTrace();
         }
     }
@@ -115,7 +115,7 @@ public class BeanManager <T>{
             customManager = new CustomManager<>(client,xmlManager,schemaFactory,schema,converter);
             queryManager = new QueryManager(client,schema, converter);
         } catch (Exception e){
-            System.out.println("Can't initialize Bean manager.");
+            logger.info("[ERROR] Can't initialize.");
         }
     }
 
@@ -126,7 +126,7 @@ public class BeanManager <T>{
      * @param colId URI for collection if the docue.
      * @return Indicator of success.
      */
-    protected boolean write(FileInputStream inputStream, String docId, String colId) {
+    public boolean write(FileInputStream inputStream, String docId, String colId) {
         return  writeManager.write(inputStream,docId,colId);
     }
 
@@ -159,10 +159,10 @@ public class BeanManager <T>{
      */
     protected DocumentDescriptor write(T bean,String colId) {
         if (customManager.validateBeanBySchema(bean)){
-            logger.info("[BeanManager] Successfully validated bean!");
+            logger.info("Successfully validated bean!");
             return writeManager.write(bean,colId);
         } else {
-            logger.info("[BeanManager] Could not validate bean!");
+            logger.info("[ERROR] Could not validate bean!");
             return null;
         }
 
@@ -173,7 +173,7 @@ public class BeanManager <T>{
      * @param docId Document URI to read from database.
      * @return Read bean, <code>null</code> if not successful.
      */
-    protected T read(String docId){
+    public T read(String docId){
         return readManager.read(docId);
     }
 

@@ -17,8 +17,9 @@ public class UsersManager extends BeanManager<Users> {
      * @param docId Document URI to read from database.
      * @return
      */
+    @Override
     public Users read(String docId){
-        return read(docId);
+        return super.read(docId);
     }
 
     /**
@@ -28,7 +29,8 @@ public class UsersManager extends BeanManager<Users> {
      * @param colId URI for collection if the docue.
      * @return Indicator of success.
      */
+    @Override
     public  boolean write(Users  users, String docId, String colId) {
-        return write(users,docId,colId);
+        return super.write(users,docId,colId);
     }
 }

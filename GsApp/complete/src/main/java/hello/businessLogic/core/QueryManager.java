@@ -50,8 +50,9 @@ public class QueryManager <T> {
             this.schema = schema;
             invoker = client.newServerEval();
         } catch (Exception e){
-            logger.info("[ERROR] Can't initialize QueryManager!");
-            e.printStackTrace();
+            logger.info("Can't initialize QueryManager!");
+            logger.info("[ERROR] " + e.getMessage());
+            logger.info("[STACK TRACE] " + e.getStackTrace());
         }
     }
 
@@ -75,14 +76,16 @@ public class QueryManager <T> {
                     if (bean != null) {
                         ret.add(bean);
                     } else {
-                         logger.info("ERROR: Could not convert xml to JAXB bean!");
+                         logger.info("[ERROR] Could not convert xml to JAXB bean!");
                     }
                 } else {
-                    logger.info("ERROR: Could not write query result to file!");
+                    logger.info("[ERROR] Could not write query result to file!");
                 }
             }
         } catch (Exception e){
-            System.out.println("Unexpected error: " + e.getMessage());
+            logger.info("Can't execute query " + query+ ".");
+            logger.info("[ERROR] " + e.getMessage());
+            logger.info("[STACK TRACE] " + e.getStackTrace());
         }
         return ret;
     }

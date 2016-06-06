@@ -68,7 +68,7 @@ public class AktManager extends BeanManager<Akt> {
                 throw new Exception();
             }
         } catch (Exception e) {
-            logger.error("[AktManager] Could not propose AKT!");
+            logger.info("[ERROR] Could not propose AKT!");
         }
         return ret;
     }
@@ -81,7 +81,7 @@ public class AktManager extends BeanManager<Akt> {
      */
     public String approveAkt(Akt akt){
         if (!validateBeanBySchema(akt)){
-            logger.info("[AktManager] ERROR: Akt is not valid!");
+            logger.info("[ERROR] Document["+akt.getDocumentId()+"] is not valid!");
             return null;
         }
         String ret = null;
@@ -94,7 +94,7 @@ public class AktManager extends BeanManager<Akt> {
                 throw  new Exception();
             }
         } catch (Exception e) {
-            logger.error("[AktManager] Could not delete document with id [" + docId + "] from proposed!");
+            logger.info("[ERROR] Could not delete document[" + docId + "] from proposed!");
         }
         try {
             if (!write(akt,akt.getDocumentId(),MarkLogicStrings.AKTOVI_USVOJENI_COL_ID)){
@@ -105,7 +105,7 @@ public class AktManager extends BeanManager<Akt> {
             }
 
         } catch (Exception e) {
-            logger.error("[AktManager] Could not approve document!");
+            logger.info("[ERROR] Could not approve document["+docId+"]!");
         }
         return ret;
     }
@@ -122,7 +122,7 @@ public class AktManager extends BeanManager<Akt> {
             deleteDocument(docId);
             ret = true;
         } catch (Exception e){
-            logger.error("[AktManager] Could not delete document with id " + docId);
+            logger.info("[ERROR] Could not delete document[" + docId + "]!");
         }
         return ret;
     }
