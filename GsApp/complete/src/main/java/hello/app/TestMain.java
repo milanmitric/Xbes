@@ -85,9 +85,15 @@ public class TestMain {
         WriteManager<Akt> aktWriteManager = new WriteManager<>();
         BeanManager<Akt> aktBeanManager = new BeanManager<>();
 
+        Akt akt =  aktBeanManager.convertFromXml(new File("tmp.xml"));
+        aktBeanManager.convertToXml(akt);
+
+        aktReadManager.validateXMLBySignature("tmp.xml");
         try{
+            aktBeanManager.validateXmlBySchema("tmp.xml");
             aktBeanManager.write(new FileInputStream("tmp.xml"),"test","test");
             aktReadManager.validateXMLBySignature("tmp.xml");
+
             aktBeanManager.read("test");
             aktReadManager.validateXMLBySignature("tmp.xml");
         } catch (Exception e){
