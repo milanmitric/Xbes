@@ -1,6 +1,7 @@
 package hello.businessLogic.document;
 
 import hello.businessLogic.core.BeanManager;
+import hello.entity.gov.gradskaskupstina.User;
 import hello.entity.gov.gradskaskupstina.Users;
 
 /**
@@ -29,8 +30,9 @@ public class UsersManager extends BeanManager<Users> {
      * @param colId URI for collection if the docue.
      * @return Indicator of success.
      */
-    @Override
-    public  boolean write(Users  users, String docId, String colId) {
+    public  boolean write(Users  users, String docId, String colId, User user) {
+        // TODO: Generate certificate for user.
+
         return super.write(users,docId,colId);
     }
 

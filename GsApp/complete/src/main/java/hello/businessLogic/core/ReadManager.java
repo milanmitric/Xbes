@@ -81,7 +81,7 @@ public class ReadManager<T>{
             JAXBContext jc = JAXBContext.newInstance("hello.entity.gov.gradskaskupstina");
             JAXBHandle<T> handle = new JAXBHandle<>(jc);
 
-            /*
+
             // Input xml validation.
             if (!convertInputToTmp(docId)){
                 ret = null;
@@ -90,10 +90,10 @@ public class ReadManager<T>{
             // For now. Signature check is not working?
             // TODO: Refactor signature check.
 
-            if (!validateXMLBySignature("tmp.xml")){
+            if (!validateXMLBySignature("tmpForValidation.xml")){
                 ret = null;
                 throw  new Exception("Input bean signature is not well formated!");
-            }*/
+            }
 
             // A metadata handle for metadata retrieval
             DocumentMetadataHandle metadata = new DocumentMetadataHandle();
@@ -152,7 +152,7 @@ public class ReadManager<T>{
             xmlManager.read(docId, metadata, content);
 
             Document doc = content.get();
-            FileOutputStream fileOutputStream = new FileOutputStream("tmp.xml");
+            FileOutputStream fileOutputStream = new FileOutputStream("tmpForValidation.xml");
             transform(doc, fileOutputStream);
             ret = true;
 

@@ -11,7 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.util.ArrayList;
 
 /**
@@ -84,23 +83,19 @@ public class TestMain {
         ReadManager<Akt> aktReadManager = new ReadManager<>();
         WriteManager<Akt> aktWriteManager = new WriteManager<>();
         BeanManager<Akt> aktBeanManager = new BeanManager<>();
-
+        //aktReadManager.validateXMLBySignature("tmpForValidation.xml");
         Akt akt =  aktBeanManager.convertFromXml(new File("tmp.xml"));
         aktBeanManager.convertToXml(akt);
-
-        aktReadManager.validateXMLBySignature("tmp.xml");
         try{
             aktBeanManager.validateXmlBySchema("tmp.xml");
-            aktBeanManager.write(new FileInputStream("tmp.xml"),"test","test");
+            aktBeanManager.write(akt,"test","test");
             aktReadManager.validateXMLBySignature("tmp.xml");
 
             aktBeanManager.read("test");
-            aktReadManager.validateXMLBySignature("tmp.xml");
         } catch (Exception e){
             logger.info("ERROR");
         }
         logger.info("SUCCESS");
-
     }
 }
 

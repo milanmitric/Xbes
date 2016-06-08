@@ -5,5 +5,7 @@
 // Generated on: 2016.06.05 at 08:38:43 PM CEST 
 //
 
-@javax.xml.bind.annotation.XmlSchema(namespace = "http://www.w3.org/2000/09/xmldsig#", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
+@javax.xml.bind.annotation.XmlSchema(namespace = "http://www.w3.org/2000/09/xmldsig#",xmlns = {@XmlNs(prefix = "ds", namespaceURI = "http://www.w3.org/2000/09/xmldsig#")}, elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
 package hello.entity.org.w3._2000._09.xmldsig;
+
+import javax.xml.bind.annotation.XmlNs;

@@ -32,14 +32,7 @@ public class VerifySignatureEnveloped {
         Security.addProvider(new BouncyCastleProvider());
         org.apache.xml.security.Init.init();
     }
-	
-	public void testIt() {
-		//ucitava se dokument
-		Document doc = loadDocument(IN_FILE);
-		//proverava potpis
-		boolean res = verifySignature(doc);
-		System.out.println("Verification = " + res);
-	}
+
 	
 	/**
 	 * Kreira DOM od XML dokumenta
@@ -89,7 +82,7 @@ public class VerifySignatureEnveloped {
 			        Certificate cert = keyInfo.itemX509Data(0).itemCertificate(0).getX509Certificate();
 			        //ako postoji sertifikat, provera potpisa
 			        if(cert != null) 
-			        	return signature.checkSignatureValue((X509Certificate) cert);
+							return signature.checkSignatureValue((X509Certificate) cert);
 			        else
 			        	return false;
 			    }
