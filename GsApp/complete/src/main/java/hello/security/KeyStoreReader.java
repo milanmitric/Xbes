@@ -1,72 +1,104 @@
 package hello.security;
 
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.security.*;
 import java.security.cert.Certificate;
-import java.security.cert.CertificateException;
+import java.util.Enumeration;
 
 /**
- * 
- * Cita is keystore fajla
+ *
+ * Reads certificates and private keys from keystore.
  */
 public class KeyStoreReader {
 
-	private static final String KEY_STORE_FILE = "./keyStore/";
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	private char[] keyPass  = "".toCharArray();
+    /**
+     * Keystore instance.
+     */
+	private KeyStore ks;
 
-	
-	public void testIt() {
-		readKeyStore("djoka.jks","djoka".toCharArray(),"prvi","prvi".toCharArray());
-	}
-	
-	public Certificate readKeyStore(String nameOfFile,char[] password, String alias,char[] certPassword){
+    /**
+     * Initializes keystore from default location with default password.
+     */
+	public KeyStoreReader(KeyStore keyStore){
+        this.ks = keyStore;
+    }
+
+    /**
+     * Reads certificate from keystore.
+     * @param alias Certificate alias.
+     * @param password Certificate password.
+     * @return Certificate if found. <code>NULL</code> if doesn't exist.
+     */
+	public Certificate readCertificate(String alias,char[] password){
 		Certificate cert=null;
 		try {
-			//kreiramo instancu KeyStore
-			KeyStore ks = KeyStore.getInstance("JKS", "SUN");
-			//ucitavamo podatke
-			BufferedInputStream in = new BufferedInputStream(new FileInputStream(KEY_STORE_FILE+nameOfFile));
-			ks.load(in, password);
-			//citamo par sertifikat privatni kljuc
-			
 			if(ks.isKeyEntry(alias)) {
-				System.out.println("Sertifikat:");
 				cert = ks.getCertificate(alias);
-				System.out.println(cert);
-				PrivateKey privKey = (PrivateKey)ks.getKey(alias, certPassword);
-				System.out.println("Privatni kljuc:");
-				System.out.println(privKey);
+				PrivateKey privKey = (PrivateKey)ks.getKey(alias, password);
 			}
-
-			
-			
 		} catch (KeyStoreException e) {
-			e.printStackTrace();
-		} catch (NoSuchProviderException e) {
-			e.printStackTrace();
-		} 
-		catch (FileNotFoundException e) {
-			e.printStackTrace();
+            logger.info("[ERROR] Can't initialize.");
+            logger.info(e.getMessage());
 		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		} catch (CertificateException e) {
-			e.printStackTrace();
+            logger.info("[ERROR] Can't initialize.");
+            logger.info(e.getMessage());
 		} catch (UnrecoverableKeyException e) {
-			e.printStackTrace();
-		}
-		catch (IOException e) {
-			e.printStackTrace();
+            logger.info("[ERROR] Can't initialize.");
+            logger.info(e.getMessage());
 		}
 		return cert;
 	}
-	public static void main(String args[]){
-		KeyStoreReader str = new KeyStoreReader();
-		str.testIt();
-		
-	}
+
+    /**
+     * Read private key from keystore.
+     * @param alias Certificate alias.
+     * @param password Certificate password.
+     * @return Private key if found. <code>NULL</code> if doesn't exist.
+     */
+    public PrivateKey readPrivateKey(String alias, char[] password){
+        PrivateKey ret = null;
+        try {
+            if(ks.isKeyEntry(alias)) {
+                ret = (PrivateKey)ks.getKey(alias, password);
+            }
+        } catch (KeyStoreException e) {
+            logger.info("[ERROR] Can't initialize.");
+            logger.info(e.getMessage());
+        } catch (NoSuchAlgorithmException e) {
+            logger.info("[ERROR] Can't initialize.");
+            logger.info(e.getMessage());
+        } catch (UnrecoverableKeyException e) {
+            logger.info("[ERROR] Can't initialize.");
+            logger.info(e.getMessage());
+        }
+        return ret;
+    }
+
+    /**
+     * Returns number of aliases + 1.
+     * @return Next serial number.
+     */
+    public String getCertificateSerialNumber(){
+        String ret = "-1";
+
+        try {
+            int counter = 1;
+            Enumeration<String> aliases = ks.aliases();
+            while(aliases.hasMoreElements()){
+                counter++;
+                aliases.nextElement();
+            }
+            ret = Integer.toString(counter);
+        } catch (KeyStoreException e) {
+            logger.info("[ERROR] Can't get number of aliases!");
+            logger.info(e.getMessage());
+        }
+        return ret;
+    }
+
 
 }

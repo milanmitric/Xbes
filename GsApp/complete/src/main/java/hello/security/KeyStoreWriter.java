@@ -1,30 +1,27 @@
 package hello.security;
 
-import org.bouncycastle.asn1.x500.X500NameBuilder;
-import org.bouncycastle.asn1.x500.style.BCStyle;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.security.*;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.PrivateKey;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class KeyStoreWriter {
-	
+
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
 	private KeyStore keyStore;
 	
-	public KeyStoreWriter() {
-		try {
-			keyStore = KeyStore.getInstance("JKS");
-		} catch (KeyStoreException e) {
-			e.printStackTrace();
-		}
+	public KeyStoreWriter(KeyStore keyStore) {
+		this.keyStore = keyStore;
 	}
 	
 	public void loadKeyStore(String fileName, char[] password) {
@@ -37,90 +34,63 @@ public class KeyStoreWriter {
 				keyStore.load(null, password);
 		
 		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
+            logger.info("[ERROR] Can't load key store!");
+            logger.info(e.getMessage());
 		} catch (CertificateException e) {
-			e.printStackTrace();
+            logger.info("[ERROR] Can't load key store!");
+            logger.info(e.getMessage());
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+            logger.info("[ERROR] Can't load key store!");
+            logger.info(e.getMessage());
 		} catch (IOException e) {
-			e.printStackTrace();
+            logger.info("[ERROR] Can't load key store!");
+            logger.info(e.getMessage());
 		}
 	}
-	
+
+    /**
+     * Saves keyStore to disk.
+     * @param fileName Path to be saved.
+     * @param password Keystore password.
+     */
 	public void saveKeyStore(String fileName, char[] password) {
 		try {
 			keyStore.store(new FileOutputStream(fileName), password);
 		} catch (KeyStoreException e) {
-			e.printStackTrace();
+			logger.info("[ERROR] Can't save key store.");
+            logger.info(e.getMessage());
 		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
+            logger.info("[ERROR] Can't save key store.");
+            logger.info(e.getMessage());
 		} catch (CertificateException e) {
-			e.printStackTrace();
+            logger.info("[ERROR] Can't save key store.");
+            logger.info(e.getMessage());
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+            logger.info("[ERROR] Can't save key store.");
+            logger.info(e.getMessage());
 		} catch (IOException e) {
-			e.printStackTrace();
+            logger.info("[ERROR] Can't save key store.");
+            logger.info(e.getMessage());
 		}
 	}
-	
-	
+
+    /**
+     * Writes certificate to keystore.
+     * @param alias Certificate alias - name that will be used to load from keyStore (currently user username).
+     * @param privateKey Certificate private key.
+     * @param password Certificate password - password that will be used to load from keyStore (currently hashed user password).
+     * @param certificate Certificate to be written.
+     * @return Indicator of success.
+     */
 	public void write(String alias, PrivateKey privateKey, char[] password, Certificate certificate) {
 		try {
 			keyStore.setKeyEntry(alias, privateKey, password, new Certificate[] {certificate});
 		} catch (KeyStoreException e) {
-			e.printStackTrace();
+            logger.info("[ERROR] Can't write certificate to keystore!");
+            logger.info(e.getMessage());
 		}
 	}
-	
-	public void testIt() {
-		try {
-			//kreiramo generator i generisemo kljuceve i sertifiakt
-			CertificateGenerator gen = new CertificateGenerator();
-			//par kljuceva
-			KeyPair keyPair = gen.generateKeyPair();
-			
-			//datumi
-			SimpleDateFormat iso8601Formater = new SimpleDateFormat("yyyy-MM-dd");
-			Date startDate = iso8601Formater.parse("2007-12-31");
-			Date endDate = iso8601Formater.parse("2017-12-31");
-			
-			//podaci o vlasniku i izdavacu posto je self signed 
-			//klasa X500NameBuilder pravi X500Name objekat koji nam treba
-			X500NameBuilder builder = new X500NameBuilder(BCStyle.INSTANCE);
-		    builder.addRDN(BCStyle.CN, "Goran Sladic");
-		    builder.addRDN(BCStyle.SURNAME, "Sladic");
-		    builder.addRDN(BCStyle.GIVENNAME, "Goran");
-		    builder.addRDN(BCStyle.O, "UNS-FTN");
-		    builder.addRDN(BCStyle.OU, "Katedra za informatiku");
-		    builder.addRDN(BCStyle.C, "RS");
-		    builder.addRDN(BCStyle.E, "sladicg@uns.ac.rs");
-		    //UID (USER ID) je ID korisnika
-		    builder.addRDN(BCStyle.UID, "123445");
-			
-		    //Serijski broj sertifikata
-			String sn="1";
-			//kreiraju se podaci za issuer-a
-			IssuerData issuerData = new IssuerData(keyPair.getPrivate(), builder.build());
-			//kreiraju se podaci za vlasnika
-			SubjectData subjectData = new SubjectData(keyPair.getPublic(), builder.build(), sn, startDate, endDate);
-			
-			//generise se sertifikat
-			X509Certificate cert = gen.generateCertificate(issuerData, subjectData);
-			
-			//kreira se keystore, ucitava ks fajl, dodaje kljuc i sertifikat i sacuvaju se izmene
-			KeyStoreWriter keyStoreWriter = new KeyStoreWriter();
-			keyStoreWriter.loadKeyStore(null, "test".toCharArray());
-			keyStoreWriter.write("test", keyPair.getPrivate(), "test10".toCharArray(), cert);
-			keyStoreWriter.saveKeyStore("./data/test.jks", "test10".toCharArray());
-			
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public static void main(String[] args) {
-		KeyStoreWriter keyStoreWriter = new KeyStoreWriter();
-		keyStoreWriter.testIt();
-	}
+
+
 
 }

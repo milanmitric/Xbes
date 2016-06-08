@@ -1,39 +1,25 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Akt xmlns="http://www.gradskaskupstina.gov/" xmlns:ns2="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gradskaskupstina.gov/">
+<?xml version="1.0" encoding="UTF-8"?>
+<Akt xmlns="http://www.gradskaskupstina.gov/"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://www.gradskaskupstina.gov/ file:/C:/Users/FS-LB/Desktop/XMLProjekat/DJIT/Xbes/GsApp/complete/schema/Akt.xsd">
     <Naslov>Zakon o izmenama i dopunama zakona o javno-privatnom partnerstvu i koncesijama</Naslov>
     <Clan RedniBroj="1">
-        <Stav>
-            <Sadrzaj>U Zakonu o javno-privatnom partnerstvu i koncesijama („Službeni glasnik RS”, broj 88/11), u članu 2. stav 1. posle reči: „partnerom” dodaju se reči: „radi realizacije projekata javno-privatnog partnerstva”.</Sadrzaj>
-        </Stav>
+        <Stav><Sadrzaj>U Zakonu o javno-privatnom partnerstvu i koncesijama („Službeni glasnik RS”, broj 88/11), u članu 2. stav 1. posle reči: „partnerom” dodaju se reči: „radi realizacije projekata javno-privatnog partnerstva”.</Sadrzaj></Stav>
     </Clan>
     <Clan RedniBroj="2">
-        <Stav>
-            <Sadrzaj>U <Referenca ref_akt="ZOJPPIK" ref_clanovi="4" ref_tacke="6">članu 4. tačka 6)</Referenca> reči: „može osnivati” zamenjuju se rečju: „osniva”.</Sadrzaj>
-        </Stav>
+        <Stav><Sadrzaj>U <Referenca ref_akt="ZOJPPIK" ref_clanovi="4" ref_tacke="6">članu 4. tačka 6)</Referenca> reči: „može osnivati” zamenjuju se rečju: „osniva”.</Sadrzaj></Stav>
     </Clan>
     <Clan RedniBroj="3">
-        <Stav>
-            <Sadrzaj>U <Referenca ref_akt="ZOJPPIK" ref_clanovi="7" ref_stavovi="2" ref_tacke="1">članu 7. stav 2. tačka 1)</Referenca> posle reči: „drugog dobra” dodaju se reči: „niti isključiva isporuka dobara”.</Sadrzaj>
-        </Stav>
-        <Stav>
-            <Sadrzaj>U <Referenca ref_akt="ZOJPPIK" ref_clanovi="7" ref_stavovi="2" ref_tacke="3">stavu 2. tačka 3)</Referenca> reč: „projektovanje” i zapeta posle te reči brišu se.</Sadrzaj>
-        </Stav>
-        <Stav>
-            <Sadrzaj>U <Referenca ref_akt="ZOJPPIK" ref_clanovi="7" ref_stavovi="2" ref_tacke="6">tački 6)</Referenca> posle reči: „između javnog i privatnog partnera” dodaje se zapeta i reči: „a naročito preuzimanje rizika tražnje ili rizika raspoloživosti objekta, usluge, infrastrukture i sl.”.</Sadrzaj>
-        </Stav>
-        <Stav>
-            <Sadrzaj>U <Referenca ref_akt="ZOJPPIK" ref_clanovi="7" ref_stavovi="2" ref_tacke="7">tački 7)</Referenca> posle reči: "komercijalnu delatnost" dodaju se reči: "ili izgradi druge objekte"</Sadrzaj>
-        </Stav>
+        <Stav><Sadrzaj>U <Referenca ref_akt="ZOJPPIK" ref_clanovi="7" ref_stavovi="2" ref_tacke="1">članu 7. stav 2. tačka 1)</Referenca> posle reči: „drugog dobra” dodaju se reči: „niti isključiva isporuka dobara”.</Sadrzaj></Stav>
+        <Stav><Sadrzaj>U <Referenca ref_akt="ZOJPPIK" ref_clanovi="7" ref_stavovi="2" ref_tacke="3">stavu 2. tačka 3)</Referenca> reč: „projektovanje” i zapeta posle te reči brišu se.</Sadrzaj></Stav>
+        <Stav><Sadrzaj>U <Referenca ref_akt="ZOJPPIK" ref_clanovi="7" ref_stavovi="2" ref_tacke="6">tački 6)</Referenca> posle reči: „između javnog i privatnog partnera” dodaje se zapeta i reči: „a naročito preuzimanje rizika tražnje ili rizika raspoloživosti objekta, usluge, infrastrukture i sl.”.</Sadrzaj></Stav>
+        <Stav><Sadrzaj>U <Referenca ref_akt="ZOJPPIK" ref_clanovi="7" ref_stavovi="2" ref_tacke="7">tački 7)</Referenca> posle reči: "komercijalnu delatnost" dodaju se reči: "ili izgradi druge objekte"</Sadrzaj></Stav>
     </Clan>
     <Clan RedniBroj="4">
-        <Stav>
-            <Sadrzaj>U <Referenca ref_akt="ZOJPPIK" ref_clanovi="9" ref_stavovi="4">članu 9. stav 4.</Referenca> posle reči: „zaključuju” dodaju se reči: „javni ugovor i”.</Sadrzaj>
-        </Stav>
+        <Stav><Sadrzaj>U <Referenca ref_akt="ZOJPPIK" ref_clanovi="9" ref_stavovi="4">članu 9. stav 4.</Referenca> posle reči: „zaključuju” dodaju se reči: „javni ugovor i”.</Sadrzaj></Stav>
     </Clan>
     <Clan RedniBroj="5">
-        <Stav>
-            <Sadrzaj>U <Referenca ref_akt="ZOJPPIK" ref_clanovi="14" ref_stavovi="2">članu 14. stav 2.</Referenca> reči: „ne moraju tražiti” zamenjuju se rečima: „nemaju pravo da traže”.</Sadrzaj>
-        </Stav>
+        <Stav><Sadrzaj>U <Referenca ref_akt="ZOJPPIK" ref_clanovi="14" ref_stavovi="2">članu 14. stav 2.</Referenca> reči: „ne moraju tražiti” zamenjuju se rečima: „nemaju pravo da traže”.</Sadrzaj></Stav>
     </Clan>
     <Clan RedniBroj="10">
         <Stav>

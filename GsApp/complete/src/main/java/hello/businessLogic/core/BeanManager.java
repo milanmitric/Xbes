@@ -147,7 +147,7 @@ public class BeanManager <T>{
      * @param colId URI for collection to store document.
      * @return Indicator of success.
      */
-    protected boolean write(T bean, String docId, String colId) {
+    public boolean write(T bean, String docId, String colId) {
         return writeManager.write(bean,docId,colId);
     }
 

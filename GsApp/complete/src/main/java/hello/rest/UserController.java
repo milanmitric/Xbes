@@ -178,7 +178,7 @@ public class UserController {
         users.getUser().add(userTry);
         /*upisemo ceo doc nazad*/
         //TODO hashing password
-        usersManager.write(users, MarkLogicStrings.USERS_DOC_ID, MarkLogicStrings.USERS_COL_ID);
+        usersManager.write(users, MarkLogicStrings.USERS_DOC_ID, MarkLogicStrings.USERS_COL_ID,userTry);
 
         HashMap<String, String> res= new HashMap<>();
         res.put("success", "true");
