@@ -1,7 +1,7 @@
 package hello.rest;
 
 
-import hello.util.PasswordStorage;
+import hello.security.PasswordStorage;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;

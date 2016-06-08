@@ -5,12 +5,12 @@ package hello.StringResources;
  */
 public class Role {
 
-    public static String ROLE_GRADJANIN="ROLE_GRADJANIN";
+    public static final String ROLE_GRADJANIN="ROLE_GRADJANIN";
 
-    public static String ROLE_ODBORNIK="ROLE_ODBORNIK";
+    public static final String ROLE_ODBORNIK="ROLE_ODBORNIK";
 
-    public static String ROLE_PREDSEDNIK="ROLE_PREDSEDNIK";
+    public static final String ROLE_PREDSEDNIK="ROLE_PREDSEDNIK";
 
-    public static String ROLE_ANONYMOUS="ROLE_ANONYMOUS"; //spring's default role when accessing rest
+    public static final String ROLE_ANONYMOUS="ROLE_ANONYMOUS"; //spring's default role when accessing rest
 
 }

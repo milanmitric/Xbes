@@ -7,7 +7,7 @@ import hello.entity.gov.gradskaskupstina.User;
 import hello.entity.gov.gradskaskupstina.Users;
 import hello.StringResources.MarkLogicStrings;
 import hello.StringResources.Role;
-import hello.util.PasswordStorage;
+import hello.security.PasswordStorage;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

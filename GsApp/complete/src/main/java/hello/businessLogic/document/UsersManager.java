@@ -33,4 +33,7 @@ public class UsersManager extends BeanManager<Users> {
     public  boolean write(Users  users, String docId, String colId) {
         return super.write(users,docId,colId);
     }
+
+
+
 }
