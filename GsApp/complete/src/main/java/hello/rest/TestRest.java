@@ -1,18 +1,26 @@
 package hello.rest;
 
 
-import hello.util.PasswordStorage;
+import hello.businessLogic.document.AktManager;
+import hello.entity.gov.gradskaskupstina.Akt;
+import hello.security.EncryptKEK;
+import hello.security.KeyStoreManager;
 
+import hello.security.SignEnveloped;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
+import javax.crypto.SecretKey;
+
+import org.w3c.dom.Document;
+
+import java.security.cert.Certificate;
+import java.util.ArrayList;
 
 /**
  * Created by aloha on 24-May-16.
@@ -74,43 +82,53 @@ public class TestRest {
     }
 
 
-    @RequestMapping(value = "/rezervacijas/{id}")
-    public HttpStatus test4(@PathVariable Long id) {
 
-        System.out.println("USAO U METODU");
+    @RequestMapping(value = "/enc/")
+    public ResponseEntity test4() {
 
-        //PasswordStorage.
-        byte[] salt = new byte[0];
-        try {
-            salt= PasswordStorage.generateSalt();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
+        //USER: a with PASS: a
+        String usr="b";
+        String pass = "cwlSgmlVvpTFea3TACUBKoME8pI=";
 
+        AktManager akm = new AktManager();
+        ArrayList<Akt> akts= akm.getAllFilesProposed();
+        Akt akt1=akts.get(0);
+        /*make key*/
+        EncryptKEK encKEK=new EncryptKEK();
+        SecretKey secretKey = encKEK.generateDataEncryptionKey();
+        /*get user*/
+        //Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        //User user = (User) auth.getPrincipal();
+        /*get cet fot that user*/
+        KeyStoreManager ksm=new KeyStoreManager();
+        Certificate cert = ksm.readCertificate(usr, pass.toCharArray());
+        /*make xml file*/
+        boolean status = akm.convertToXml(akt1);
+        System.out.println("CONVERT STATUS:"+status);
+        /*load that xml file as Documet*/
+        //SignEnveloped signEnveloped = new SignEnveloped();
+        //Document doc=signEnveloped.loadDocument("tmp.xml");
+        Document doc = encKEK.loadDocument("./data/tmp.xml");
+        /*encrypt that doc*/
+        //////////////// prosirio sa USER doc=encKEK.encrypt(doc, secretKey, cert);
+        encKEK.saveDocument(doc, "./data/tmpENCR.xml");
 
+        System.out.println("ENCRYPTED DOC");
 
-        String pass="testpass";
-        System.out.println("PASS PLAIN:" +pass.toString());
-        System.out.println("SALT: " +salt.toString());
-        String so=salt.toString();
-        try {
-            System.out.println("HASNGIRANA" +PasswordStorage.hashPassword(pass, salt));
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (InvalidKeySpecException e) {
-            e.printStackTrace();
-        }
-        try {
-            System.out.println("HASNGIRANA OPET SA STRING SOLI" +PasswordStorage.hashPassword(pass, so.getBytes()));
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (InvalidKeySpecException e) {
-            e.printStackTrace();
-        }
-
-
-        return HttpStatus.OK;
+        return new ResponseEntity("springara", HttpStatus.ACCEPTED);
     }
+
+
+
+    @RequestMapping(value = "/enc2/")
+    public ResponseEntity test5() {
+
+        EncryptKEK e=new EncryptKEK();
+        e.encryptTEST();
+
+        return new ResponseEntity("springara2", HttpStatus.ACCEPTED);
+    }
+
 
 
 

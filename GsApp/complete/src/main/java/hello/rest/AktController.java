@@ -27,6 +27,8 @@ public class AktController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private AktManager aktManager = new AktManager();
 
+
+
     @RequestMapping(value = "/getallacts",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -34,6 +36,7 @@ public class AktController {
         ArrayList<Akt> aktovi = aktManager.getAllFilesProposed();
         return new ResponseEntity(aktovi, HttpStatus.OK);
     }
+
 
     @RequestMapping(value = "/akt",
             method = RequestMethod.POST,

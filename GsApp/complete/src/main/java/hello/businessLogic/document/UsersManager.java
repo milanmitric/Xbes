@@ -53,4 +53,7 @@ public class UsersManager extends BeanManager<Users> {
     protected boolean generateCertificate(User user){
         return super.generateCertificate(user);
     }
+
+
+
 }

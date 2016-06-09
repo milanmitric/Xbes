@@ -1,8 +1,17 @@
 package hello.app;
 
+import com.marklogic.client.DatabaseClient;
 import hello.Application;
+import hello.StringResources.MarkLogicStrings;
+import hello.businessLogic.core.BeanManager;
+import hello.entity.gov.gradskaskupstina.Akt;
+import hello.entity.gov.gradskaskupstina.Amandman;
+import hello.entity.gov.gradskaskupstina.Users;
+import hello.util.Database;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.File;
 
 /**
  * Created by milan on 4.6.2016..
@@ -11,17 +20,18 @@ public class TestsMainCogara {
 
     private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
-    /*
+
     public static void main(String[] args){
 
-        testAkt();
+        //testAkt();
         //testAmandman();
         //testUsers();
+
 
         DatabaseClient client = Database.getDbClient();
         client.release();
     }
-
+/*
 
 
     public static void testAkt(){
@@ -108,5 +118,9 @@ public class TestsMainCogara {
                     logger.info("Schema validation: " + users + "is NOT valid");
             }
         }
-    }*/
+    }
+    */
+
+
+
 }
