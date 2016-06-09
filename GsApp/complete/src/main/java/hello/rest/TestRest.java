@@ -1,14 +1,10 @@
 package hello.rest;
 
 
-import hello.businessLogic.core.ReadManager;
 import hello.businessLogic.document.AktManager;
 import hello.entity.gov.gradskaskupstina.Akt;
 import hello.security.EncryptKEK;
 import hello.security.KeyStoreManager;
-
-import hello.security.SignEnveloped;
-import org.springframework.cglib.core.Converter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -16,13 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
-
-import javax.crypto.SecretKey;
-
 import org.w3c.dom.Document;
 
+import javax.crypto.SecretKey;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.security.cert.Certificate;
 import java.util.ArrayList;
@@ -136,7 +129,7 @@ public class TestRest {
         AktManager am=new AktManager();
         am.convertFromXml(new File("./data/IDEMOOOO.xml"));
         InputStream is=am.convertDocumentToInputStream(doc);
-        //am.write(new FileInputStream(is), "arg", "arh", false, null);
+        am.write(is, "arg", "arh", false, null);
 
         return new ResponseEntity("springara2", HttpStatus.ACCEPTED);
     }

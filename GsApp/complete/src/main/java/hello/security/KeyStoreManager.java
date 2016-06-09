@@ -38,7 +38,7 @@ public class KeyStoreManager {
      * Initializes keystore.
      * @return Inidialized keyStore. <code>NULL</code> if not successful.
      */
-    private  static KeyStore initializeKeyStore(){
+    private   KeyStore initializeKeyStore(){
         KeyStore ks = null;
         try {
             ks = KeyStore.getInstance("JKS", "SUN");
@@ -198,7 +198,7 @@ public class KeyStoreManager {
     }
 
     /**
-     * Creates new keystore in data/keystore.jks.
+     * Creates new keystore with root certificate in data/keystore.jks.
      * @return Indicator of success.
      */
     public boolean reinitializeKeyStore(){

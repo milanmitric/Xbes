@@ -14,11 +14,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 
-import javax.crypto.SecretKey;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.security.PrivateKey;
 import java.security.cert.Certificate;
 
@@ -71,7 +71,7 @@ public class WriteManager <T>{
      * @param user User that proposes Akt, needs to sign it first.
      * @return Indicator of success.
      */
-    public boolean write(FileInputStream inputStream, String docId, String colId,boolean shouldSign, User user) {
+    public boolean write(InputStream inputStream, String docId, String colId,boolean shouldSign, User user) {
         boolean ret = false;
         try{
             if (shouldSign && !singXml(null, user)) {
@@ -98,7 +98,7 @@ public class WriteManager <T>{
      * @param colId URI for collection if the docue.
      * @return Generated URI. <code>NULL</code> if not successful.
      */
-    public DocumentDescriptor write(FileInputStream inputStream, String colId) {
+    public DocumentDescriptor write(InputStream inputStream, String colId) {
         DocumentDescriptor ret = null;
         try{
             // TODO: Solve this!

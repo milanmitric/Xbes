@@ -38,15 +38,8 @@ public class KeyStoreReader {
 		try {
 			if(ks.isKeyEntry(alias)) {
 				cert = ks.getCertificate(alias);
-				PrivateKey privKey = (PrivateKey)ks.getKey(alias, password);
 			}
 		} catch (KeyStoreException e) {
-            logger.info("[ERROR] Can't initialize.");
-            logger.info(e.getMessage());
-		} catch (NoSuchAlgorithmException e) {
-            logger.info("[ERROR] Can't initialize.");
-            logger.info(e.getMessage());
-		} catch (UnrecoverableKeyException e) {
             logger.info("[ERROR] Can't initialize.");
             logger.info(e.getMessage());
 		}

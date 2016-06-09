@@ -23,7 +23,7 @@ public class TestMain {
     private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
     public static void main(String[] args) throws FileNotFoundException {
-        testSignature();
+        reinitializeKeyStore();
     }
 
     public static void reinitializeKeyStore(){
