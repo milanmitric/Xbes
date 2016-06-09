@@ -31,7 +31,7 @@
         <Salt>X1eBX3DNI6M=</Salt>
         <Role>ROLE_GRADJANIN</Role>
     </User>
-<ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+<ds:Signature>
 <ds:SignedInfo>
 <ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
 <ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
@@ -73,4 +73,5 @@ a17te8mMamffCn3ySX5yZzEex5nueNAyhJkmWBcBCOvJw4+U+gSK50Xbcw==
 </ds:X509Certificate>
 </ds:X509Data>
 </ds:KeyInfo>
-</ds:Signature></Users>
+</ds:Signature>
+</Users>

@@ -6,7 +6,6 @@ import com.marklogic.client.document.DocumentUriTemplate;
 import com.marklogic.client.document.XMLDocumentManager;
 import com.marklogic.client.io.DocumentMetadataHandle;
 import com.marklogic.client.io.InputStreamHandle;
-import hello.StringResources.KeyStoreStrings;
 import hello.entity.gov.gradskaskupstina.User;
 import hello.security.EncryptKEK;
 import hello.security.KeyStoreReader;
@@ -81,17 +80,6 @@ public class WriteManager <T>{
             InputStreamHandle handle = new InputStreamHandle(inputStream);
             DocumentMetadataHandle metadata = new DocumentMetadataHandle();
             metadata.getCollections().add(colId);
-
-
-            //TODO - encription
-           // EncryptKEK encryptKEK = new EncryptKEK();
-            //KeyStoreReader keyStoreReader = new KeyStoreReader();
-            /*get current user from session*/
-            //Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-            //User user = (User)auth.getPrincipal();
-            //Certificate cert = keyStoreReader.readKeyStore("primer", user.getPassword(), user.getUsername())
-
-
 
             xmlManager.write(docId,metadata,handle);
             ret = true;

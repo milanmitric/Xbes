@@ -20,7 +20,7 @@ public class Application {
 
     public static void main(String[] args) throws IOException {
         SpringApplication.run(Application.class, args);
-        System.out.println("SERVER IS WORKING...");
+        System.out.println("[ https://localhost:8080/ ] SERVER IS WORKING...");
     }
 
 

@@ -120,6 +120,7 @@ public class UserController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity signup(@RequestBody User userTry) {
 
+        System.out.println("SIGNUP REST - IN");
         //TODO
         //validacija polja ovo ono, zbog tesriranja necemo sada
         //min pass length
@@ -132,12 +133,17 @@ public class UserController {
             return new ResponseEntity(res, HttpStatus.OK);
         }
 
+        System.out.println("SIGNUP REST - validation success");
+
         UsersManager usersManager = new UsersManager();
         /*citamo sve usere iz baze*/
-        Users users = usersManager.read(MarkLogicStrings.USERS_DOC_ID);
-
-        System.out.println();
-
+        Users users=null;
+        try {
+            users = usersManager.read(MarkLogicStrings.USERS_DOC_ID);
+        }catch (Exception e){
+            System.out.println("ERRORCINA");
+        }
+        System.out.println("SIGNUP REST - finding all users success" +users.getUser().size());
 
         for(User user : users.getUser()){
             System.out.println("USERNAME: "+user.getUsername());
