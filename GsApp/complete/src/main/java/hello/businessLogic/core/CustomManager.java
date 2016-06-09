@@ -3,6 +3,13 @@ package hello.businessLogic.core;
 import com.marklogic.client.DatabaseClient;
 import com.marklogic.client.document.DocumentMetadataPatchBuilder;
 import com.marklogic.client.document.XMLDocumentManager;
+import com.marklogic.client.io.DOMHandle;
+import com.marklogic.client.io.SearchHandle;
+import com.marklogic.client.query.MatchDocumentSummary;
+import com.marklogic.client.query.QueryManager;
+import com.marklogic.client.query.StringQueryDefinition;
+import com.marklogic.client.util.EditableNamespaceContext;
+import hello.StringResources.MarkLogicStrings;
 import hello.entity.gov.gradskaskupstina.Akt;
 import hello.entity.gov.gradskaskupstina.Amandman;
 import hello.entity.gov.gradskaskupstina.Users;
@@ -10,6 +17,7 @@ import hello.util.Converter;
 import hello.util.MyValidationEventHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.w3c.dom.Document;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBIntrospector;
@@ -156,4 +164,31 @@ public class CustomManager <T>{
             return ret;
         }
     }
+    /**
+     * Searches xml documents from collection for given parameters
+     * @param parameterOfSearch string with query for searching collection
+     * */
+    public MatchDocumentSummary[] searchByField(String parameterOfSearch, String uriOfCollection){
+
+        // Initialize query manager
+        QueryManager queryManager = client.newQueryManager();
+
+        // Query definition is used to specify Google-style query string
+        StringQueryDefinition queryDefinition = queryManager.newStringDefinition();
+
+        // Set the criteria
+        queryDefinition.setCriteria(parameterOfSearch);
+
+        // Search within a specific collection
+        queryDefinition.setCollections(uriOfCollection);
+
+        // Perform search
+        SearchHandle results = queryManager.search(queryDefinition, new SearchHandle());
+
+        // Serialize search results to the standard output
+        MatchDocumentSummary matches[] = results.getMatchResults();
+
+        return matches;
+    }
+
 }

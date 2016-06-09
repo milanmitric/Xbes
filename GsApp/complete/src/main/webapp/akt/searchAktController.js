@@ -7,5 +7,15 @@ angular.module('xapp')
 
         console.log("Sadrzaj polja:")
         console.log($scope.searchField);
+        aktService.searchActs($scope.searchField,function (response){
+         console.log("ODGOVOR SA SERVERA SA AKTIMA!");
+         console.log("ODGOVOR SA SERVERA SA AKTIMA!");
+         console.log(response.data);
+
+        },function(response){
+
+
+
+        })
     }
     });

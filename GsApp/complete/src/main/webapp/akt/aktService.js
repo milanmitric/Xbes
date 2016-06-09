@@ -12,6 +12,17 @@ angular.module('xapp')
 
              			$http(req).then(onSuccess, onError);
 		},
+		searchActs: function(parametar,onSuccess, onError){
+                     var req = {
+                                    method: 'GET',
+                                    url: '/api/searchacts/'+parametar,
+                                    headers: {
+                                        'Content-Type': 'application/x-www-form-urlencoded'
+                                    }
+                                }
+
+                     			$http(req).then(onSuccess, onError);
+        },
 		saveAct: function(act,onSuccess, onError){
                      var req = {
                      					method: 'POST',
