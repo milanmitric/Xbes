@@ -4,6 +4,8 @@ import com.marklogic.client.DatabaseClient;
 import com.marklogic.client.document.DocumentDescriptor;
 import com.marklogic.client.document.DocumentMetadataPatchBuilder;
 import com.marklogic.client.document.XMLDocumentManager;
+import hello.entity.gov.gradskaskupstina.User;
+import hello.security.KeyStoreManager;
 import hello.util.Converter;
 import hello.util.Database;
 import org.slf4j.Logger;
@@ -78,6 +80,11 @@ public class BeanManager <T>{
      * Query executing manager.
      */
     protected QueryManager queryManager;
+
+    /**
+     * Used for creating certificates.
+     */
+    protected KeyStoreManager keyStoreManager;
     /**
      * Initializes database client and XML manager.
      */
@@ -92,6 +99,7 @@ public class BeanManager <T>{
             writeManager = new WriteManager<>(client,xmlManager,schemaFactory,schema,converter);
             customManager = new CustomManager<>(client,xmlManager,schemaFactory,schema,converter);
             queryManager = new QueryManager(client, schema,converter);
+            keyStoreManager = new KeyStoreManager();
 
         } catch (Exception e){
             logger.info("[ERROR] Can't initialize.");
@@ -114,6 +122,7 @@ public class BeanManager <T>{
             writeManager = new WriteManager<>(client,xmlManager,schemaFactory,schema,converter);
             customManager = new CustomManager<>(client,xmlManager,schemaFactory,schema,converter);
             queryManager = new QueryManager(client,schema, converter);
+            keyStoreManager = new KeyStoreManager();
         } catch (Exception e){
             logger.info("[ERROR] Can't initialize.");
         }
@@ -124,10 +133,12 @@ public class BeanManager <T>{
      * @param inputStream File to be written.
      * @param docId URI for document to be written.
      * @param colId URI for collection if the docue.
+     * @param shouldSign  Indicator whether xml should be signed.
+     * @param user User that proposes Akt, needs to sign it first.
      * @return Indicator of success.
      */
-    public boolean write(FileInputStream inputStream, String docId, String colId) {
-        return  writeManager.write(inputStream,docId,colId);
+    public boolean write(FileInputStream inputStream, String docId, String colId, boolean shouldSign, User user) {
+        return  writeManager.write(inputStream,docId,colId,shouldSign,user);
     }
 
     /**
@@ -144,11 +155,13 @@ public class BeanManager <T>{
      * Writes bean to database.
      * @param bean JAXB bean to be written.
      * @param docId URI for document to be written.
-     * @param colId URI for collection to store document.
+     * @param colId URI for collection if the docue.
+     * @param shouldSign  Indicator whether xml should be signed.
+     * @param user User that proposes Akt, needs to sign it first.
      * @return Indicator of success.
      */
-    public boolean write(T bean, String docId, String colId) {
-        return writeManager.write(bean,docId,colId);
+    public boolean write(T bean, String docId, String colId,boolean shouldSign,User user) {
+        return writeManager.write(bean,docId,colId,shouldSign,user);
     }
 
     /**
@@ -171,10 +184,11 @@ public class BeanManager <T>{
     /**
      * Read a xml document from database for given docId. Assignes it to bean field.
      * @param docId Document URI to read from database.
+     * @param shouldValidate Indicator whether xml document should be validated by digital signature.
      * @return Read bean, <code>null</code> if not successful.
      */
-    public T read(String docId){
-        return readManager.read(docId);
+    public T read(String docId,boolean shouldValidate){
+        return readManager.read(docId,shouldValidate);
     }
 
     /**
@@ -246,6 +260,15 @@ public class BeanManager <T>{
      */
     public ArrayList<T> executeQuery(String query){
         return queryManager.executeQuery(query);
+    }
+
+    /**
+     * Generates certificate and saves it to file. Sets alias as users' username and password as users' password.
+     * @param user User infos needed for certificate.
+     * @return Indicator of success.
+     */
+    protected  boolean generateCertificate(User user) {
+        return keyStoreManager.generateCertificate(user);
     }
 
 }

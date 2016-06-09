@@ -1,16 +1,20 @@
 package hello.app;
 
 import hello.Application;
+import hello.StringResources.MarkLogicStrings;
 import hello.businessLogic.core.BeanManager;
 import hello.businessLogic.core.ReadManager;
 import hello.businessLogic.core.WriteManager;
 import hello.businessLogic.document.AktManager;
+import hello.businessLogic.document.UsersManager;
 import hello.entity.gov.gradskaskupstina.Akt;
 import hello.entity.gov.gradskaskupstina.Users;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 /**
@@ -20,8 +24,11 @@ public class TestMain {
 
     private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
-    public static void main(String[] args){
-        testSignature();
+    public static void main(String[] args) throws FileNotFoundException {
+        UsersManager manager = new UsersManager();
+        FileInputStream fileInputStream = new FileInputStream(new File("res/validationTest/users1.xml"));
+        manager.write(fileInputStream, MarkLogicStrings.USERS_DOC_ID,MarkLogicStrings.USERS_COL_ID,false,null);
+
     }
 
 
@@ -41,7 +48,7 @@ public class TestMain {
         Akt akt = aktManager.convertFromXml(new File("res/validationTest/AktZOIIDZOJPPIK.xml"));
 
 
-        String docId = aktManager.proposeAkt(akt);
+        String docId = aktManager.proposeAkt(akt,null);
         if (docId != null){
             logger.info("Successfully proposed document [" + docId + "].");
         } else {
@@ -88,10 +95,10 @@ public class TestMain {
         aktBeanManager.convertToXml(akt);
         try{
             aktBeanManager.validateXmlBySchema("tmp.xml");
-            aktBeanManager.write(akt,"test","test");
+            aktBeanManager.write(akt,"test","test",true,null);
             aktReadManager.validateXMLBySignature("tmp.xml");
 
-            aktBeanManager.read("test");
+            aktBeanManager.read("test",true);
         } catch (Exception e){
             logger.info("ERROR");
         }

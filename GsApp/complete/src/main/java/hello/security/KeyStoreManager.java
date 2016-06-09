@@ -143,7 +143,7 @@ public class KeyStoreManager {
 
             //datumi
             SimpleDateFormat iso8601Formater = new SimpleDateFormat("yyyy-MM-dd");
-            Date startDate = iso8601Formater.parse(new Date().toString());
+            Date startDate = iso8601Formater.parse("2007-12-31");
             Date endDate = iso8601Formater.parse("2017-12-31");
 
             X500NameBuilder builder = new X500NameBuilder(BCStyle.INSTANCE);
@@ -153,7 +153,8 @@ public class KeyStoreManager {
             builder.addRDN(BCStyle.O, "Grad Novi Sad");
             builder.addRDN(BCStyle.OU, "Skupstina grada");
             builder.addRDN(BCStyle.C, "RS");
-            builder.addRDN(BCStyle.E, user.getEMail());
+            // TODO: EMAIL IS HARDCODED!
+            builder.addRDN(BCStyle.E, "neki@mail.com");
             //UID (USER ID) je ID korisnika
             builder.addRDN(BCStyle.UID, user.getUsername());
             String sn= keyStoreReader.getCertificateSerialNumber();

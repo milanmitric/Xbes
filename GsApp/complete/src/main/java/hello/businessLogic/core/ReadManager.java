@@ -73,27 +73,28 @@ public class ReadManager<T>{
     /**
      * Read a xml document from database for given docId. Assignes it to bean field.
      * @param docId Document URI to read from database.
+     * @param shouldValidate Indicator whether xml document should be validated by digital signature.
      * @return Read bean, <code>null</code> if not successful.
      */
-    public T read(String docId){
+    public T read(String docId,boolean shouldValidate){
         T ret = null;
         try{
             JAXBContext jc = JAXBContext.newInstance("hello.entity.gov.gradskaskupstina");
             JAXBHandle<T> handle = new JAXBHandle<>(jc);
 
 
-            // Input xml validation.
-            if (!convertInputToTmp(docId)){
-                ret = null;
-                throw  new Exception("Can't read from database!");
+            if (shouldValidate){
+                // Input xml validation.
+                if (!convertInputToTmp(docId)){
+                    ret = null;
+                    throw  new Exception("Can't read from database!");
+                }
+                if (!validateXMLBySignature("tmpForValidation.xml")){
+                    ret = null;
+                    throw  new Exception("Input bean signature is not well formated!");
+                }
             }
-            // For now. Signature check is not working?
-            // TODO: Refactor signature check.
 
-            if (!validateXMLBySignature("tmpForValidation.xml")){
-                ret = null;
-                throw  new Exception("Input bean signature is not well formated!");
-            }
 
             // A metadata handle for metadata retrieval
             DocumentMetadataHandle metadata = new DocumentMetadataHandle();
