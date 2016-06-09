@@ -3,12 +3,16 @@ package hello.businessLogic.document;
 import hello.businessLogic.core.BeanManager;
 import hello.entity.gov.gradskaskupstina.User;
 import hello.entity.gov.gradskaskupstina.Users;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by Nebojsa on 6/5/2016.
  */
 public class UsersManager extends BeanManager<Users> {
 
+
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     public UsersManager(){
         super("schema/Users.xsd");
@@ -18,9 +22,10 @@ public class UsersManager extends BeanManager<Users> {
      * @param docId Document URI to read from database.
      * @return
      */
-    @Override
     public Users read(String docId){
-        return super.read(docId);
+        // Users xml document is not signed so it won't be validated by digital signature.
+        boolean shouldValidate = false;
+        return super.read(docId, shouldValidate);
     }
 
     /**
@@ -32,8 +37,22 @@ public class UsersManager extends BeanManager<Users> {
      */
     public  boolean write(Users  users, String docId, String colId, User user) {
         // TODO: Generate certificate for user.
+        if (!generateCertificate(user)){
+            logger.info("[ERROR] can't generate certificate for user.");
+            return false;
+        }
+        // Users xml should never be signed!
+        boolean shouldSign = false;
+        return super.write(users,docId,colId,shouldSign,null);
+    }
 
-        return super.write(users,docId,colId);
+    /**
+     * Generates certificate and saves it to file. Sets alias as users' username and password as users' password.
+     * @param user User infos needed for certificate.
+     * @return Indicator of success.
+     */
+    protected boolean generateCertificate(User user){
+        return super.generateCertificate(user);
     }
 
 

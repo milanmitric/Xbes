@@ -183,7 +183,6 @@ public class UserController {
         userTry.setRole(Role.ROLE_GRADJANIN);
         users.getUser().add(userTry);
         /*upisemo ceo doc nazad*/
-        //TODO hashing password
         usersManager.write(users, MarkLogicStrings.USERS_DOC_ID, MarkLogicStrings.USERS_COL_ID,userTry);
 
         HashMap<String, String> res= new HashMap<>();

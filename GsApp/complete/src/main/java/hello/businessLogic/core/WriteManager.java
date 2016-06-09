@@ -7,14 +7,11 @@ import com.marklogic.client.document.XMLDocumentManager;
 import com.marklogic.client.io.DocumentMetadataHandle;
 import com.marklogic.client.io.InputStreamHandle;
 import hello.entity.gov.gradskaskupstina.User;
-import hello.security.EncryptKEK;
-import hello.security.KeyStoreReader;
+import hello.security.KeyStoreManager;
 import hello.security.SignEnveloped;
 import hello.util.Converter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.w3c.dom.Document;
 
 import javax.xml.validation.Schema;
@@ -68,19 +65,20 @@ public class WriteManager <T>{
      * Writes file to database.
      * @param inputStream File to be written.
      * @param docId URI for document to be written.
-     * @param colId URI for collection if the docue.
+     * @param colId URI for collection for document.
+     * @param shouldSign Indicator whether xml should be signed.
+     * @param user User that proposes Akt, needs to sign it first.
      * @return Indicator of success.
      */
-    public boolean write(FileInputStream inputStream, String docId, String colId) {
+    public boolean write(FileInputStream inputStream, String docId, String colId,boolean shouldSign, User user) {
         boolean ret = false;
         try{
-            if (!singXml(null)) {
+            if (shouldSign && !singXml(null, user)) {
                 throw  new Exception("Could not sign xml!");
             }
             InputStreamHandle handle = new InputStreamHandle(inputStream);
             DocumentMetadataHandle metadata = new DocumentMetadataHandle();
             metadata.getCollections().add(colId);
-
             xmlManager.write(docId,metadata,handle);
             ret = true;
         }
@@ -126,15 +124,17 @@ public class WriteManager <T>{
      * @param bean JAXB bean to be written.
      * @param docId URI for document to be written.
      * @param colId URI for collection if the docue.
+     * @param shouldSign  Indicator whether xml should be signed.
+     * @param user User that proposes Akt, needs to sign it first.
      * @return Indicator of success.
      */
-    public boolean write(T bean, String docId, String colId) {
+    public boolean write(T bean, String docId, String colId,boolean shouldSign, User user) {
         boolean ret = false;
         try {
             // Try to convert to xml on default location.
             if (converter.convertToXml(bean)){
                 FileInputStream inputStream = new FileInputStream(new File("tmp.xml"));
-                ret = write(inputStream,docId,colId);
+                ret = write(inputStream,docId,colId,shouldSign,user);
             } else {
                 throw new Exception(" Can't convert JAXB bean["+docId +"] to XML.");
             }
@@ -180,9 +180,10 @@ public class WriteManager <T>{
      * Signs xml files currently with example private key and certificate.
      * TODO: Rewrite to accept custom private key, certificate and input file.
      * @param filePath Path to xml to be signed.
+     * @param user User that proposes Akt, needs to sign it first.
      * @return Indicator of success.
      */
-    public boolean singXml(String filePath){
+    public boolean singXml(String filePath, User user){
 
         boolean ret = false;
 
@@ -194,8 +195,9 @@ public class WriteManager <T>{
             }  else {
                 document = signEnveloped.loadDocument(filePath);
             }
-            PrivateKey pk = signEnveloped.readPrivateKey();
-            Certificate cert = signEnveloped.readCertificate();
+            KeyStoreManager manager = new KeyStoreManager();
+            PrivateKey pk = manager.readPrivateKey(user.getUsername(),user.getPassword().toCharArray());
+            Certificate cert = manager.readCertificate(user.getUsername(),user.getPassword().toCharArray());
             document = signEnveloped.signDocument(document,pk,cert);
             signEnveloped.saveDocument(document,"tmp.xml");
             ret = true;

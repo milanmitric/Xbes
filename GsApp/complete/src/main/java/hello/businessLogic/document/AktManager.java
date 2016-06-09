@@ -4,6 +4,7 @@ import com.marklogic.client.document.DocumentUriTemplate;
 import hello.StringResources.MarkLogicStrings;
 import hello.businessLogic.core.BeanManager;
 import hello.entity.gov.gradskaskupstina.Akt;
+import hello.entity.gov.gradskaskupstina.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -50,9 +51,10 @@ public class AktManager extends BeanManager<Akt> {
     /**
      * Proposes an document.
      * @param akt Bean to be proposed.
+     * @param user User that proposes Akt, needs to sign it first.
      * @return Generated URI. <code>NULL</code> if not successful.
      */
-    public String proposeAkt(Akt akt){
+    public String proposeAkt(Akt akt,User user){
 
         if (!validateBeanBySchema(akt)){
             logger.info("[AktManager] ERROR: Akt is not valid!");
@@ -63,7 +65,9 @@ public class AktManager extends BeanManager<Akt> {
         try {
             ret = this.write(akt,MarkLogicStrings.AKTOVI_PREDLOZEN_COL_ID).getUri();
             akt.setDocumentId(ret);
-            if (!this.write(akt,ret,MarkLogicStrings.AKTOVI_PREDLOZEN_COL_ID)){
+            // XML DOCUMENT IS READY TO BE SIGNED!
+            boolean shouldSign = true;
+            if (!this.write(akt,ret,MarkLogicStrings.AKTOVI_PREDLOZEN_COL_ID, shouldSign,user)){
                 ret = null;
                 throw new Exception();
             }
@@ -97,7 +101,9 @@ public class AktManager extends BeanManager<Akt> {
             logger.info("[ERROR] Could not delete document[" + docId + "] from proposed!");
         }
         try {
-            if (!write(akt,akt.getDocumentId(),MarkLogicStrings.AKTOVI_USVOJENI_COL_ID)){
+            // XML DOCUMENT IS READY TO BE SIGNED!
+            boolean shouldSign = false;
+            if (!write(akt,akt.getDocumentId(),MarkLogicStrings.AKTOVI_USVOJENI_COL_ID,shouldSign,null)){
                 ret = null;
                 throw  new Exception();
             } else {

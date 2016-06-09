@@ -1,24 +1,20 @@
 package hello.app;
 
 import hello.Application;
+import hello.StringResources.MarkLogicStrings;
 import hello.businessLogic.core.BeanManager;
 import hello.businessLogic.core.ReadManager;
 import hello.businessLogic.core.WriteManager;
 import hello.businessLogic.document.AktManager;
+import hello.businessLogic.document.UsersManager;
 import hello.entity.gov.gradskaskupstina.Akt;
-import hello.entity.gov.gradskaskupstina.User;
 import hello.entity.gov.gradskaskupstina.Users;
-import hello.security.EncryptKEK;
-import hello.security.KeyStoreManager;
-import hello.security.KeyStoreReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.io.File;
-import java.security.KeyStore;
-import java.security.cert.Certificate;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 /**
@@ -28,24 +24,10 @@ public class TestMain {
 
     private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
-    public static void main(String[] args){
-        //testSignature();
-        testEncr();
-    }
-
-    private static void testEncr() {
-
-        AktManager am=new AktManager();
-        ArrayList<Akt> akts = am.getAllFilesProposed();
-        EncryptKEK encryptKEK = new EncryptKEK();
-        KeyStoreManager km=new KeyStoreManager();
-        /*get current user from session*/
-        /*Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = (User)auth.getPrincipal();
-        System.out.println("USER:"+user.getRole());
-        Certificate cert = km.readCertificate(user.getUsername(), user.getPassword().toCharArray());
-        System.out.println("EVE GA CERT UCITAN");
-        System.out.println(cert.toString());*/
+    public static void main(String[] args) throws FileNotFoundException {
+        UsersManager manager = new UsersManager();
+        FileInputStream fileInputStream = new FileInputStream(new File("res/validationTest/users1.xml"));
+        manager.write(fileInputStream, MarkLogicStrings.USERS_DOC_ID,MarkLogicStrings.USERS_COL_ID,false,null);
 
     }
 
@@ -66,7 +48,7 @@ public class TestMain {
         Akt akt = aktManager.convertFromXml(new File("res/validationTest/AktZOIIDZOJPPIK.xml"));
 
 
-        String docId = aktManager.proposeAkt(akt);
+        String docId = aktManager.proposeAkt(akt,null);
         if (docId != null){
             logger.info("Successfully proposed document [" + docId + "].");
         } else {
@@ -113,10 +95,10 @@ public class TestMain {
         aktBeanManager.convertToXml(akt);
         try{
             aktBeanManager.validateXmlBySchema("tmp.xml");
-            aktBeanManager.write(akt,"test","test");
+            aktBeanManager.write(akt,"test","test",true,null);
             aktReadManager.validateXMLBySignature("tmp.xml");
 
-            aktBeanManager.read("test");
+            aktBeanManager.read("test",true);
         } catch (Exception e){
             logger.info("ERROR");
         }
