@@ -123,6 +123,9 @@ public class TestRest {
     @RequestMapping(value = "/enc2/")
     public ResponseEntity test5() {
 
+        //load doc from data/tmp.xlm
+        //enctypt it and save it to database
+
         EncryptKEK e=new EncryptKEK();
         Document doc = e.encryptTEST();
 

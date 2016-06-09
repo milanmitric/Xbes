@@ -211,12 +211,14 @@ public class EncryptKEK {
 
 	/**
 	 * Kriptuje sadrzaj prvog elementa odsek
+	 * @param doc that will be encrypted
 	 * @return encrypted doc
 	 */
-	public Document encrypt(User user, Document doc) {
+	public Document encrypt(Document doc) {
 
 		SecretKey secretKey = generateDataEncryptionKey();
 		KeyStoreManager ksm = new KeyStoreManager();
+		//TODO NE OD ROOT NEGO OD SER NA KOJI SALJEM
 		Certificate certificate = ksm.getRootCertificate();
 
 		try {
