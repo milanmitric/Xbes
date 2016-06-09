@@ -1,111 +1,51 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Akt xsi:schemaLocation="http://www.gradskaskupstina.gov/" xmlns="http://www.gradskaskupstina.gov/" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <Naslov>Zakon o izmenama i dopunama zakona o javno-privatnom partnerstvu i koncesijama</Naslov>
-    <DocumentId>16250548801149691694.xml</DocumentId>
-    <Clan RedniBroj="1">
-        <Stav>
-            <Sadrzaj>U Zakonu o javno-privatnom partnerstvu i koncesijama („Službeni glasnik RS”, broj 88/11), u članu 2. stav 1. posle reči: „partnerom” dodaju se reči: „radi realizacije projekata javno-privatnog partnerstva”.</Sadrzaj>
-        </Stav>
-    </Clan>
-    <Clan RedniBroj="2">
-        <Stav>
-            <Sadrzaj>U <Referenca ref_akt="ZOJPPIK" ref_clanovi="4" ref_tacke="6">članu 4. tačka 6)</Referenca> reči: „može osnivati” zamenjuju se rečju: „osniva”.</Sadrzaj>
-        </Stav>
-    </Clan>
-    <Clan RedniBroj="3">
-        <Stav>
-            <Sadrzaj>U <Referenca ref_akt="ZOJPPIK" ref_clanovi="7" ref_stavovi="2" ref_tacke="1">članu 7. stav 2. tačka 1)</Referenca> posle reči: „drugog dobra” dodaju se reči: „niti isključiva isporuka dobara”.</Sadrzaj>
-        </Stav>
-        <Stav>
-            <Sadrzaj>U <Referenca ref_akt="ZOJPPIK" ref_clanovi="7" ref_stavovi="2" ref_tacke="3">stavu 2. tačka 3)</Referenca> reč: „projektovanje” i zapeta posle te reči brišu se.</Sadrzaj>
-        </Stav>
-        <Stav>
-            <Sadrzaj>U <Referenca ref_akt="ZOJPPIK" ref_clanovi="7" ref_stavovi="2" ref_tacke="6">tački 6)</Referenca> posle reči: „između javnog i privatnog partnera” dodaje se zapeta i reči: „a naročito preuzimanje rizika tražnje ili rizika raspoloživosti objekta, usluge, infrastrukture i sl.”.</Sadrzaj>
-        </Stav>
-        <Stav>
-            <Sadrzaj>U <Referenca ref_akt="ZOJPPIK" ref_clanovi="7" ref_stavovi="2" ref_tacke="7">tački 7)</Referenca> posle reči: "komercijalnu delatnost" dodaju se reči: "ili izgradi druge objekte"</Sadrzaj>
-        </Stav>
-    </Clan>
-    <Clan RedniBroj="4">
-        <Stav>
-            <Sadrzaj>U <Referenca ref_akt="ZOJPPIK" ref_clanovi="9" ref_stavovi="4">članu 9. stav 4.</Referenca> posle reči: „zaključuju” dodaju se reči: „javni ugovor i”.</Sadrzaj>
-        </Stav>
-    </Clan>
-    <Clan RedniBroj="5">
-        <Stav>
-            <Sadrzaj>U <Referenca ref_akt="ZOJPPIK" ref_clanovi="14" ref_stavovi="2">članu 14. stav 2.</Referenca> reči: „ne moraju tražiti” zamenjuju se rečima: „nemaju pravo da traže”.</Sadrzaj>
-        </Stav>
-    </Clan>
-    <Clan RedniBroj="10">
-        <Stav>
-            <Sadrzaj>U <Referenca ref_akt="ZOJPPIK" ref_clanovi="22" ref_stavovi="3">članu 22. stav 3.</Referenca> reči: „u jednom međunarodnom listu i” brišu se.</Sadrzaj>
-        </Stav>
-    </Clan>
-    <Clan RedniBroj="12">
-        <Stav>
-            <Sadrzaj>U članu 29. posle stava 3. dodaje se novi stav 4, koji glasi:
-                „Ako je Republika Srbija davalac koncesije, odnosno kada su javna tela i
-                predmet koncesije u nadležnosti Republike Srbije i ako je procenjena vrednost te
-                koncesije veća od 50 miliona evra, Komisija za JPP, pre davanja svog mišljenja,
-                obavezno prethodno pribavlja mišljenje ministarstva nadležnog za poslove finansija.”.
-                Dosadašnji st. 4. i 5. postaju st. 5. i 6.</Sadrzaj>
-        </Stav>
-    </Clan>
-    <ZavrsniDeo>
-        <Organ>Serbia</Organ>
-        <Broj>1/16</Broj>
-        <Datum>03.06.2016.</Datum>
-        <Potpisnik>
-            <Ime>Branislav</Ime>
-            <Prezime>Čogić</Prezime>
-        </Potpisnik>
-    </ZavrsniDeo>
-<ds:Signature>
-<ds:SignedInfo>
-<ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
-<ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
-<ds:Reference URI="">
-<ds:Transforms>
-<ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
-<ds:Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments"/>
-</ds:Transforms>
-<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
-<ds:DigestValue>AhwiFBvPeeqHc+fGfvJeysj1jis=</ds:DigestValue>
-</ds:Reference>
-</ds:SignedInfo>
-<ds:SignatureValue>
-B/okLkKsZs29ztLhbrX+iEFLLcCr+I7DL9J3fFyjB49Q95qgIiMw1yeMCIEGNj9O268FsZTW44uE
-9SQ3IUfSWwUp7Z37YRaj8Xc7pPQeeQ4xDGcJHm3UtFOYbjTeO4rTyZdbjOBHBm7KaF6Izri25CZG
-NZe6NnFREM6igqR9gLw=
-</ds:SignatureValue>
-<ds:KeyInfo>
-<ds:KeyValue>
-<ds:RSAKeyValue>
-<ds:Modulus>
-46ueuWwDDbr5PYzML6qiF5eZtBJe6ZlyPAJ1WnOuejH0D6GufdIjqLlcvlhPniUnOCTKMOw6AwpV
-g1srcGBMFQdb4ILCJ/QO05xUq61WnTljb2Ei+Rwnhfa0VwfMApY+tHU8BGxBLAAATpjU8U+lYaIw
-nHSfZQN54xWmpByS0r8=
-</ds:Modulus>
-<ds:Exponent>AQAB</ds:Exponent>
-</ds:RSAKeyValue>
-</ds:KeyValue>
-<ds:X509Data>
-<ds:X509Certificate>
-MIIC8zCCAlygAwIBAgIBAjANBgkqhkiG9w0BAQsFADCBzjEjMCEGA1UEAwwaU2t1cHN0aW5hIGdy
-YWRhIE5vdm9nIFNhZGExEDAOBgNVBAQMB0dyYWRza2ExEjAQBgNVBCoMCVNrdXBzdGluYTEWMBQG
-A1UECgwNR3JhZCBOb3ZpIFNhZDEYMBYGA1UECwwPU2t1cHN0aW5hIGdyYWRhMQswCQYDVQQGEwJS
-UzEqMCgGCSqGSIb3DQEJARYbZ3JhZHNrYVNrdXBzdGluYUBub3Zpc2FkLnJzMRYwFAYKCZImiZPy
-LGQBAQwGMTIzNDQ1MB4XDTA3MTIzMDIzMDAwMFoXDTE3MTIzMDIzMDAwMFowga8xFjAUBgNVBAMM
-DW1hcmtvdmljbWFya28xETAPBgNVBAQMCG1hcmtvdmljMQ4wDAYDVQQqDAVtYXJrbzEWMBQGA1UE
-CgwNR3JhZCBOb3ZpIFNhZDEYMBYGA1UECwwPU2t1cHN0aW5hIGdyYWRhMQswCQYDVQQGEwJSUzEc
-MBoGCSqGSIb3DQEJARYNbmVraUBtYWlsLmNvbTEVMBMGCgmSJomT8ixkAQEMBW1hcmtvMIGfMA0G
-CSqGSIb3DQEBAQUAA4GNADCBiQKBgQDjq565bAMNuvk9jMwvqqIXl5m0El7pmXI8AnVac656MfQP
-oa590iOouVy+WE+eJSc4JMow7DoDClWDWytwYEwVB1vggsIn9A7TnFSrrVadOWNvYSL5HCeF9rRX
-B8wClj60dTwEbEEsAABOmNTxT6VhojCcdJ9lA3njFaakHJLSvwIDAQABMA0GCSqGSIb3DQEBCwUA
-A4GBAF+D9RAHUSE7842RDM9VXVIwwyAacTQDLhNjWGktxnBb20UK8U169TJqG5h31FAuAh/vNHFw
-OaXndrq0bvXN7Hz1z3sPAb19o7Zpv07yPQfnxuwN4barpftl+saVQzxUsLRLWdayLp9+TNQwKcdb
-93Y+u5fqNn9gtRNtnTRj7AAz
-</ds:X509Certificate>
-</ds:X509Data>
-</ds:KeyInfo>
-</ds:Signature></Akt>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Users xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns="http://www.gradskaskupstina.gov/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gradskaskupstina.gov/">
+    <User>
+        <Username>rusija</Username>
+        <Password>rusija</Password>
+        <Ime>Radomir</Ime>
+        <Prezime>Marinković</Prezime>
+        <Salt>X1eBX3DNI6M=</Salt>
+        <Role>ROLE_PREDSEDNIK</Role>
+    </User>
+    <User>
+        <Username>mitra</Username>
+        <Password>mitra</Password>
+        <Ime>Milan</Ime>
+        <Prezime>Mitrić</Prezime>
+        <Salt>X1eBX3DNI6M=</Salt>
+        <Role>ROLE_ODBORNIK</Role>
+    </User>
+    <User>
+        <Username>roki</Username>
+        <Password>roki</Password>
+        <Ime>Nebojša</Ime>
+        <Prezime>Popović</Prezime>
+        <Salt>X1eBX3DNI6M=</Salt>
+        <Role>ROLE_GRADJANIN</Role>
+    </User>
+    <User>
+        <Username>cho</Username>
+        <Password>cho</Password>
+        <Ime>Branislav</Ime>
+        <Prezime>Čogić</Prezime>
+        <Salt>X1eBX3DNI6M=</Salt>
+        <Role>ROLE_GRADJANIN</Role>
+    </User>
+    <User>
+        <Username>marko</Username>
+        <Password>7//CTqqefSpFRM4kQtUgJRFsJXc=</Password>
+        <Ime>marko</Ime>
+        <Prezime>markovic</Prezime>
+        <Salt>VdH62b6Gsj8=</Salt>
+        <Role>ROLE_GRADJANIN</Role>
+    </User>
+    <User>
+        <Username>a</Username>
+        <Password>rDmIHHQB6hY3opkY1ZIRieM5leI=</Password>
+        <Ime>a</Ime>
+        <Prezime>a</Prezime>
+        <Salt>+bXY+ZxEYsk=</Salt>
+        <Role>ROLE_GRADJANIN</Role>
+    </User>
+</Users>

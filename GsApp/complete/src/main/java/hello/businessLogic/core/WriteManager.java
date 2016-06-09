@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 
+import javax.crypto.SecretKey;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import java.io.File;
@@ -148,6 +149,15 @@ public class WriteManager <T>{
             return ret;
         }
     }
+
+    public void encryptThatDoc(User user){
+
+
+
+    }
+
+
+
 
     /**
      * Writes bean to database with template docId.

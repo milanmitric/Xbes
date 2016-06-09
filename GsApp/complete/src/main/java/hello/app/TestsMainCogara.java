@@ -25,12 +25,13 @@ public class TestsMainCogara {
 
         //testAkt();
         //testAmandman();
-        testUsers();
+        //testUsers();
+
 
         DatabaseClient client = Database.getDbClient();
         client.release();
     }
-
+/*
 
 
     public static void testAkt(){
@@ -118,4 +119,8 @@ public class TestsMainCogara {
             }
         }
     }
+    */
+
+
+
 }
