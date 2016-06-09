@@ -130,10 +130,9 @@ public class Converter<T> {
     /**
      * Converts document to input stream.
      * @param node Document to convert.
-     * @param inputStream Input stream to convert to.
      * @return Converted input stream. <code>NULL</code> if not successful.
      */
-    public InputStream convertDocumentToInputStream(Node node, InputStream inputStream){
+    public InputStream convertDocumentToInputStream(Node node){
         InputStream ret = null;
         try {
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();

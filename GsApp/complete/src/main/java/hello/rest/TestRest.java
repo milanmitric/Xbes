@@ -1,12 +1,14 @@
 package hello.rest;
 
 
+import hello.businessLogic.core.ReadManager;
 import hello.businessLogic.document.AktManager;
 import hello.entity.gov.gradskaskupstina.Akt;
 import hello.security.EncryptKEK;
 import hello.security.KeyStoreManager;
 
 import hello.security.SignEnveloped;
+import org.springframework.cglib.core.Converter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -19,6 +21,9 @@ import javax.crypto.SecretKey;
 
 import org.w3c.dom.Document;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.security.cert.Certificate;
 import java.util.ArrayList;
 
@@ -48,6 +53,8 @@ public class TestRest {
     @RequestMapping("/test2")
     public String test2() {
         //that link generates random JSON
+
+       // http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/client/RestTemplate.html#postForObject-java.lang.String-java.lang.Object-java.lang.Class-java.lang.Object...-
         RestTemplate restTemplate = new RestTemplate();
         String s=restTemplate.getForObject("http://gturnquist-quoters.cfapps.io/api/random", String.class);
         return s;
@@ -124,7 +131,12 @@ public class TestRest {
     public ResponseEntity test5() {
 
         EncryptKEK e=new EncryptKEK();
-        e.encryptTEST();
+        Document doc = e.encryptTEST();
+
+        AktManager am=new AktManager();
+        am.convertFromXml(new File("./data/IDEMOOOO.xml"));
+        InputStream is=am.convertDocumentToInputStream(doc);
+        //am.write(new FileInputStream(is), "arg", "arh", false, null);
 
         return new ResponseEntity("springara2", HttpStatus.ACCEPTED);
     }

@@ -11,12 +11,14 @@ import hello.util.Database;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
+import org.w3c.dom.Node;
 
 import javax.xml.XMLConstants;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 /**
@@ -281,4 +283,12 @@ public class BeanManager <T>{
         return keyStoreManager.generateCertificate(user);
     }
 
+    /**
+     * Converts document to input stream.
+     * @param node Document to convert.
+     * @return Converted input stream. <code>NULL</code> if not successful.
+     */
+    public InputStream convertDocumentToInputStream(Node node){
+        return converter.convertDocumentToInputStream(node);
+    }
 }

@@ -261,12 +261,12 @@ public class EncryptKEK {
 	}
 
 
-	public void encryptTEST() {
+	public Document encryptTEST() {
 
-		AktManager akm = new AktManager();
-		ArrayList<Akt> akts= akm.getAllFilesProposed();
-		Akt akt1=akts.get(0);
-		boolean status = akm.convertToXml(akt1);
+		//AktManager akm = new AktManager();
+		//ArrayList<Akt> akts= akm.getAllFilesProposed();
+		//Akt akt1=akts.get(0);
+		//boolean status = akm.convertToXml(akt1);
 		Document doc = loadDocument("./data/tmp.xml");
 
 
@@ -305,14 +305,14 @@ public class EncryptKEK {
 			xmlCipher.doFinal(doc, odsek, true); //kriptuje sa sadrzaj
 
 			saveDocument(doc,  "./data/IDEMOOOO.xml");
-			//return doc;
+			return doc;
 
 		} catch (XMLEncryptionException e) {
 			e.printStackTrace();
-			//return null;
+			return null;
 		} catch (Exception e) {
 			e.printStackTrace();
-			//return null;
+			return null;
 		}
 	}
 
