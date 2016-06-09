@@ -70,7 +70,7 @@ public class ReadManager<T>{
     }
 
     /**
-     * Read a xml document from database for given docId. Assignes it to bean field.
+     * Reads a xml document from database for given docId. Assignes it to bean field.
      * @param docId Document URI to read from database.
      * @param shouldValidate Indicator whether xml document should be validated by digital signature.
      * @return Read bean, <code>null</code> if not successful.
@@ -89,7 +89,6 @@ public class ReadManager<T>{
                     throw  new Exception("Input bean signature is not well formated!");
                 }
             }
-
 
             // A metadata handle for metadata retrieval
             DocumentMetadataHandle metadata = new DocumentMetadataHandle();
@@ -110,6 +109,31 @@ public class ReadManager<T>{
         } finally {
             return ret;
         }
+    }
+
+    /**
+     * Reads a xml document from database for given docId. Return read document.
+     * @param shouldValidate Indicator whether xml document should be validated by digital signature.
+     * @param docId ocument URI to read from database.
+     * @return Read document. <code>NULL</code> if not successful.
+     */
+    public Document read(boolean shouldValidate,String docId){
+        Document ret = null;
+        // A metadata handle for metadata retrieval
+        DocumentMetadataHandle metadata = new DocumentMetadataHandle();
+        // A handle to receive the document's content.
+        DOMHandle content = new DOMHandle();
+        xmlManager.read(docId, metadata, content);
+
+        ret = content.get();
+        if (shouldValidate){
+            VerifySignatureEnveloped verifySignatureEnveloped = new VerifySignatureEnveloped();
+            if (!verifySignatureEnveloped.verifySignature(ret)){
+                logger.info("[ERROR] Document is not valid by signature!");
+                ret = null;
+            }
+        }
+        return ret;
     }
     /**
      * Validates signed xml document from database,
