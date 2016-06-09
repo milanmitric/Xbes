@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="Password" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="Ime" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="Prezime" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="E-mail" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="Email" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="Salt" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="Role" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
@@ -59,8 +59,8 @@ public class User {
     protected String ime;
     @XmlElement(name = "Prezime", required = true)
     protected String prezime;
-    @XmlElement(name = "E-mail")
-    protected String eMail;
+    @XmlElement(name = "Email", required = true)
+    protected String email;
     @XmlElement(name = "Salt", required = true)
     protected String salt;
     @XmlElement(name = "Role", required = true, defaultValue = "ROLE_GRADJANIN")
@@ -183,7 +183,7 @@ public class User {
      *     
      */
     public void setEMail(String value) {
-        this.eMail = value;
+        this.email = value;
     }
 
     /**
