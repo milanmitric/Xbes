@@ -18,7 +18,6 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
-import java.io.FileOutputStream;
 import java.io.OutputStream;
 
 /**
@@ -71,7 +70,7 @@ public class ReadManager<T>{
     }
 
     /**
-     * Read a xml document from database for given docId. Assignes it to bean field.
+     * Reads a xml document from database for given docId. Assignes it to bean field.
      * @param docId Document URI to read from database.
      * @param shouldValidate Indicator whether xml document should be validated by digital signature.
      * @return Read bean, <code>null</code> if not successful.
@@ -85,16 +84,11 @@ public class ReadManager<T>{
 
             if (shouldValidate){
                 // Input xml validation.
-                if (!convertInputToTmp(docId)){
-                    ret = null;
-                    throw  new Exception("Can't read from database!");
-                }
-                if (!validateXMLBySignature("tmpForValidation.xml")){
+                if (!validateXMLBySignature(docId)){
                     ret = null;
                     throw  new Exception("Input bean signature is not well formated!");
                 }
             }
-
 
             // A metadata handle for metadata retrieval
             DocumentMetadataHandle metadata = new DocumentMetadataHandle();
@@ -118,32 +112,35 @@ public class ReadManager<T>{
     }
 
     /**
-     * Validates signed xml document from <b>tmp.xml</b>.
-     * @param filepath Path of xml file to be validated.s
-     * @return Indicator of success.
+     * Reads a xml document from database for given docId. Return read document.
+     * @param shouldValidate Indicator whether xml document should be validated by digital signature.
+     * @param docId ocument URI to read from database.
+     * @return Read document. <code>NULL</code> if not successful.
      */
-    public boolean validateXMLBySignature(String filepath){
-        boolean ret = false;
+    public Document read(boolean shouldValidate,String docId){
+        Document ret = null;
+        // A metadata handle for metadata retrieval
+        DocumentMetadataHandle metadata = new DocumentMetadataHandle();
+        // A handle to receive the document's content.
+        DOMHandle content = new DOMHandle();
+        xmlManager.read(docId, metadata, content);
 
-        try{
+        ret = content.get();
+        if (shouldValidate){
             VerifySignatureEnveloped verifySignatureEnveloped = new VerifySignatureEnveloped();
-            Document document = verifySignatureEnveloped.loadDocument(filepath);
-            ret =  verifySignatureEnveloped.verifySignature(document);
-        } catch(Exception e){
-            logger.info("Could not validate XML by signature on filepath "+ filepath+ ".");
-            logger.info("[ERROR] " + e.getMessage());
-            logger.info("[STACK TRACE] " + e.getStackTrace());
-        } finally {
-            return  ret;
+            if (!verifySignatureEnveloped.verifySignature(ret)){
+                logger.info("[ERROR] Document is not valid by signature!");
+                ret = null;
+            }
         }
+        return ret;
     }
-
     /**
-     * Read from database and stores to tmp.xml file so it can be validated.
-     * @param docId URI of document read from database.
+     * Validates signed xml document from database,
+     * @param docId Document id of file to be validated.
      * @return Indicator of success.
      */
-    private boolean convertInputToTmp(String docId){
+    public boolean validateXMLBySignature(String docId){
         boolean ret = false;
         try{
             // A metadata handle for metadata retrieval
@@ -153,12 +150,10 @@ public class ReadManager<T>{
             xmlManager.read(docId, metadata, content);
 
             Document doc = content.get();
-            FileOutputStream fileOutputStream = new FileOutputStream("tmpForValidation.xml");
-            transform(doc, fileOutputStream);
-            ret = true;
-
+            VerifySignatureEnveloped verifySignatureEnveloped = new VerifySignatureEnveloped();
+            ret =  verifySignatureEnveloped.verifySignature(doc);
         } catch (Exception e){
-            logger.info("Could not read xml["+ docId+ "] and store to tmp.xml!");
+            logger.info("Could not read xml["+ docId+ "] and validate!");
             logger.info("[ERROR] " + e.getMessage());
             logger.info("[STACK TRACE] " + e.getStackTrace());
         } finally {
@@ -181,8 +176,10 @@ public class ReadManager<T>{
             Transformer transformer = transformerFactory.newTransformer();
 
             // Indentacija serijalizovanog izlaza
-            transformer.setOutputProperty("{http://xml.apache.org/xalan}indent-amount", "2");
-            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+
+            // TODO try fix.
+            //transformer.setOutputProperty("{http://xml.apache.org/xalan}indent-amount", "2");
+            //transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 
             // Nad "source" objektom (DOM stablo) vrši se transformacija
             DOMSource source = new DOMSource(node);

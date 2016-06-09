@@ -10,6 +10,7 @@ import hello.util.Converter;
 import hello.util.Database;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.w3c.dom.Document;
 
 import javax.xml.XMLConstants;
 import javax.xml.validation.Schema;
@@ -190,6 +191,15 @@ public class BeanManager <T>{
     public T read(String docId,boolean shouldValidate){
         return readManager.read(docId,shouldValidate);
     }
+    /**
+     * Reads a xml document from database for given docId. Return read document.
+     * @param shouldValidate Indicator whether xml document should be validated by digital signature.
+     * @param docId ocument URI to read from database.
+     * @return Read document. <code>NULL</code> if not successful.
+     */
+    public Document read(boolean shouldValidate, String docId){
+        return readManager.read(shouldValidate,docId);
+    }
 
     /**
      * Coverts given File to JAXB bean.
@@ -245,12 +255,12 @@ public class BeanManager <T>{
     }
 
     /**
-     * Validates signed xml document from <b>tmp.xml</b>.
-     * @param filepath Path of xml file to be validated.s
+     * Validates signed xml document database.
+     * @param docId Document URI of file to be validated.
      * @return Indicator of success.
      */
-    public boolean validateXMLBySignature(String filepath){
-        return readManager.validateXMLBySignature(filepath);
+    public boolean validateXMLBySignature(String docId){
+        return readManager.validateXMLBySignature(docId);
     }
 
     /**
