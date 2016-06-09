@@ -1,14 +1,19 @@
 package hello.businessLogic.document;
 
 import com.marklogic.client.document.DocumentUriTemplate;
+import com.marklogic.client.query.MatchDocumentSummary;
+import com.marklogic.client.query.MatchLocation;
+import com.marklogic.client.query.MatchSnippet;
 import hello.StringResources.MarkLogicStrings;
 import hello.businessLogic.core.BeanManager;
 import hello.entity.gov.gradskaskupstina.Akt;
 import hello.entity.gov.gradskaskupstina.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.w3c.dom.Document;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by milan on 4.6.2016..
@@ -142,7 +147,57 @@ public class AktManager extends BeanManager<Akt> {
         return validateBeanBySchema(akt);
     }
 
+    /**
+     * Return document with search results
+     * @param parameterofSearch search parametar
+     * @param uriOfCollection id of collection
+     * @return Document with search results
+     */
+    public HashMap<String,ArrayList<String>> returnListOfDocumentsMatchedWithOneFieldSearch(String parameterofSearch, String uriOfCollection) {
+        MatchDocumentSummary matches[] = customManager.searchByField(parameterofSearch, uriOfCollection);
+
+        MatchDocumentSummary result;
+        MatchLocation locations[];
+        String text;
+
+        HashMap<String,ArrayList<String>> returnMap = new HashMap<>();
+
+        for (int i = 0; i < matches.length; i++) {
+            result = matches[i];
+            ArrayList<String> listOfMatched = new ArrayList<>();
 
 
+            locations = result.getMatchLocations();
+
+
+            for (MatchLocation location : locations) {
+
+
+                String item = "";
+                for (MatchSnippet snippet : location.getSnippets()) {
+                    text = snippet.getText().trim();
+
+                    if (!text.equals("")) {
+
+                        item +=snippet.isHighlighted() ? text.toUpperCase() : text;
+
+                        item +=" ";
+                    }
+                }
+                listOfMatched.add(item);
+
+            }
+
+
+
+            //  id, string u kom je mecovano
+            returnMap.put(result.getUri(),listOfMatched);
+
+            }
+//            System.out.println("PRINT SNIPETA SA DOKUMENTIMA");
+//            System.out.println(returnMap);
+
+            return returnMap;
+    }
 
 }

@@ -40,7 +40,19 @@ angular.module('xapp')
                                                                 controller: 'NavbarController'
                                                             }
                                                         }
-                                                });
+        }).state('actsearchresults', {
+                                              url: '/actsearchresults',
+                                              views: {
+                                                  'content': {
+                                                      templateUrl: 'akt/searchResults.html',
+                                                      controller: 'ActSearchResultsController'
+                                                  },
+                                                  'navbar':{
+                                                      templateUrl: 'navbar/navbar.html',
+                                                      controller: 'NavbarController'
+                                                  }
+                                              }
+          });
 
 
         //$locationProvider.html5Mode(true);

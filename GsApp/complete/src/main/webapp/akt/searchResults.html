@@ -1,0 +1,50 @@
+<div >
+
+
+
+    <!-- LIST OF MY PROJECTS -->
+
+    <h3>Rezultati pretrage
+
+    </h3>
+
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Predlozeni akti</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="model in collectionPredlozeni">
+                <td>{{model.}}</td>
+                <td>
+                    <button type="submit"
+                            ui-sref="aktdetail({id:model._id})"
+                            class="btn btn-info btn-sm">
+                        <span class="glyphicon glyphicon-blackboard"></span>&nbsp;<span>SEE PROJECT</span>
+                    </button>
+                </td>
+
+                <td>
+                    <button type="submit"
+                            ui-sref="dashboard({id:model._id})"
+                            class="btn btn-success btn-sm">
+                        <span class="glyphicon glyphicon-align-left"></span>&nbsp;<span>DASHBOARD</span>
+                    </button>
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+
+
+
+</div>

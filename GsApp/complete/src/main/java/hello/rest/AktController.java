@@ -1,5 +1,6 @@
 package hello.rest;
 
+import hello.StringResources.MarkLogicStrings;
 import hello.businessLogic.document.AktManager;
 import hello.entity.gov.gradskaskupstina.Akt;
 import hello.entity.gov.gradskaskupstina.User;
@@ -23,6 +24,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by Nebojsa on 6/4/2016.
@@ -45,6 +47,20 @@ public class AktController {
         return new ResponseEntity(aktovi, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/searchacts/{value}",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity searchActs(@PathVariable String value){
+        //ArrayList<Akt> aktovi = aktManager.getAllFilesProposed();
+        //return new ResponseEntity(aktovi, HttpStatus.OK);
+        logger.info("[AktController] LOG: ENTER TO API FOR SEARCHING  ACTS");
+        HashMap<String,ArrayList<String>> predlozeni = aktManager.returnListOfDocumentsMatchedWithOneFieldSearch(value, MarkLogicStrings.AKTOVI_PREDLOZEN_COL_ID);
+        HashMap<String,ArrayList<String>> usvojeni = aktManager.returnListOfDocumentsMatchedWithOneFieldSearch(value, MarkLogicStrings.AKTOVI_USVOJENI_COL_ID);
+        HashMap<String,HashMap<String,ArrayList<String>>> returnMap = new HashMap<String,HashMap<String,ArrayList<String>>>();
+        returnMap.put("predlozeni",predlozeni);
+        returnMap.put("usvojeni",usvojeni);
+        return new ResponseEntity(returnMap,HttpStatus.OK);
+    }
 
 
     @RequestMapping(value = "/akt",
