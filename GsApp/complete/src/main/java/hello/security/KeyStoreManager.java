@@ -70,8 +70,12 @@ public class KeyStoreManager {
      * Gets root private key.
      * @return Root private key. <code>NULL</code> if not successful.
      */
-    public static PrivateKey getRootPrivateKey(){
+    public  PrivateKey getRootPrivateKey(){
         return keyStoreReader.readPrivateKey(MarkLogicStrings.ROOT_CERTIFICATE_ALIAS,MarkLogicStrings.ROOT_CERTIFICATE_PASSWORD);
+    }
+
+    public Certificate getRootCertificate(){
+        return keyStoreReader.readCertificate(MarkLogicStrings.ROOT_CERTIFICATE_ALIAS,MarkLogicStrings.ROOT_CERTIFICATE_PASSWORD);
     }
 
     /**

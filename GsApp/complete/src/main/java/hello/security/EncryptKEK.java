@@ -14,6 +14,7 @@ import java.security.NoSuchProviderException;
 import java.security.Security;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
+import java.util.ArrayList;
 
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
@@ -29,6 +30,10 @@ import javax.xml.transform.TransformerFactoryConfigurationError;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import hello.StringResources.MarkLogicStrings;
+import hello.businessLogic.document.AktManager;
+import hello.entity.gov.gradskaskupstina.Akt;
+import hello.entity.gov.gradskaskupstina.User;
 import org.apache.xml.security.encryption.EncryptedData;
 import org.apache.xml.security.encryption.EncryptedKey;
 import org.apache.xml.security.encryption.XMLCipher;
@@ -46,19 +51,23 @@ import org.xml.sax.SAXException;
 //Kriptovani tajni kljuc se stavlja kao KeyInfo kriptovanog elementa
 public class EncryptKEK {
 	
-	private static final String IN_FILE = "./data/univerzitet.xml";
-	private static final String OUT_FILE = "./data/univerzitet_enc2.xml";
-	private static final String KEY_STORE_FILE = "./data/primer.jks";
-	
+	//private static final String IN_FILE = "./data/univerzitet.xml";
+	//private static final String OUT_FILE = "./data/univerzitet_enc2.xml";
+	//private static final String OUT_FILE2 = "./data/tmpENCR.xml";
+	//private static final String KEY_STORE_FILE = "./data/primer.jks";
+
+
     static {
     	//staticka inicijalizacija
         Security.addProvider(new BouncyCastleProvider());
         org.apache.xml.security.Init.init();
     }
-	
+
+
+
 	public void testIt() {
 		//ucitava se dokument
-		Document doc = loadDocument(IN_FILE);
+	//	Document doc = loadDocument(IN_FILE);
 		//generise tajni kljuc
 		System.out.println("Generating secret key ....");
 		SecretKey secretKey = generateDataEncryptionKey();
@@ -66,13 +75,14 @@ public class EncryptKEK {
 		Certificate cert = readCertificate();
 		//kriptuje se dokument
 		System.out.println("Encrypting....");
-		doc = encrypt(doc ,secretKey, cert);
+		//////////////////// PROSIRIO SA USER doc = encrypt(doc ,secretKey, cert);
 		//snima se tajni kljuc
 		//snima se dokument
-		saveDocument(doc, OUT_FILE);
+	//	saveDocument(doc, OUT_FILE2);
 		System.out.println("Encryption done");
 	}
-	
+
+
 	/**
 	 * Kreira DOM od XML dokumenta
 	 */
@@ -98,8 +108,11 @@ public class EncryptKEK {
 			return null;
 		}
 	}
-	
+
+
+
 	/**
+	 * DO NOT USE THIS - USE KEYSTORE MANAGER
 	 * Ucitava sertifikat is KS fajla
 	 * alias primer
 	 */
@@ -108,7 +121,7 @@ public class EncryptKEK {
 			//kreiramo instancu KeyStore
 			KeyStore ks = KeyStore.getInstance("JKS", "SUN");
 			//ucitavamo podatke
-			BufferedInputStream in = new BufferedInputStream(new FileInputStream(KEY_STORE_FILE));
+			BufferedInputStream in = new BufferedInputStream(new FileInputStream(MarkLogicStrings.KEYSTORE_FILEPATH));
 			ks.load(in, "primer".toCharArray());
 			
 			if(ks.isKeyEntry("primer")) {
@@ -139,7 +152,9 @@ public class EncryptKEK {
 			return null;
 		} 
 	}
-	
+
+
+
 	/**
 	 * Snima DOM u XML fajl 
 	 */
@@ -174,7 +189,9 @@ public class EncryptKEK {
 			e.printStackTrace();
 		}
 	}
-	
+
+
+
 	/**
 	 * Generise tajni kljuc
 	 */
@@ -189,24 +206,31 @@ public class EncryptKEK {
 			return null;
 		}
     }
-	
+
+
+
 	/**
 	 * Kriptuje sadrzaj prvog elementa odsek
+	 * @return encrypted doc
 	 */
-	public Document encrypt(Document doc, SecretKey key, Certificate certificate) {
-		
+	public Document encrypt(User user, Document doc) {
+
+		SecretKey secretKey = generateDataEncryptionKey();
+		KeyStoreManager ksm = new KeyStoreManager();
+		Certificate certificate = ksm.getRootCertificate();
+
 		try {
 			//cipher za kriptovanje tajnog kljuca,
 			//Koristi se Javni RSA kljuc za kriptovanje
 			XMLCipher keyCipher = XMLCipher.getInstance(XMLCipher.RSA_v1dot5);
 		      //inicijalizacija za kriptovanje tajnog kljuca javnim RSA kljucem
 		    keyCipher.init(XMLCipher.WRAP_MODE, certificate.getPublicKey());
-		    EncryptedKey encryptedKey = keyCipher.encryptKey(doc, key);
+		    EncryptedKey encryptedKey = keyCipher.encryptKey(doc, secretKey);
 			
 		    //cipher za kriptovanje XML-a
 		    XMLCipher xmlCipher = XMLCipher.getInstance(XMLCipher.TRIPLEDES);
 		    //inicijalizacija za kriptovanje
-		    xmlCipher.init(XMLCipher.ENCRYPT_MODE, key);
+		    xmlCipher.init(XMLCipher.ENCRYPT_MODE, secretKey);
 		    
 		    //u EncryptedData elementa koji se kriptuje kao KeyInfo stavljamo kriptovan tajni kljuc
 		    EncryptedData encryptedData = xmlCipher.getEncryptedData();
@@ -219,7 +243,8 @@ public class EncryptKEK {
 	        encryptedData.setKeyInfo(keyInfo);
 			
 			//trazi se element ciji sadrzaj se kriptuje
-			NodeList odseci = doc.getElementsByTagName("odsek");
+			//NodeList odseci = doc.getElementsByTagName("odsek");
+			NodeList odseci = doc.getElementsByTagName("Akt");
 			Element odsek = (Element) odseci.item(0);
 			
 			xmlCipher.doFinal(doc, odsek, true); //kriptuje sa sadrzaj
@@ -234,7 +259,67 @@ public class EncryptKEK {
 			return null;
 		}
 	}
-	
 
+
+	public void encryptTEST() {
+
+		AktManager akm = new AktManager();
+		ArrayList<Akt> akts= akm.getAllFilesProposed();
+		Akt akt1=akts.get(0);
+		boolean status = akm.convertToXml(akt1);
+		Document doc = loadDocument("./data/tmp.xml");
+
+
+		SecretKey secretKey = generateDataEncryptionKey();
+		KeyStoreManager ksm = new KeyStoreManager();
+		Certificate certificate = ksm.getRootCertificate();
+
+		try {
+			//cipher za kriptovanje tajnog kljuca,
+			//Koristi se Javni RSA kljuc za kriptovanje
+			XMLCipher keyCipher = XMLCipher.getInstance(XMLCipher.RSA_v1dot5);
+			//inicijalizacija za kriptovanje tajnog kljuca javnim RSA kljucem
+			keyCipher.init(XMLCipher.WRAP_MODE, certificate.getPublicKey());
+			EncryptedKey encryptedKey = keyCipher.encryptKey(doc, secretKey);
+
+			//cipher za kriptovanje XML-a
+			XMLCipher xmlCipher = XMLCipher.getInstance(XMLCipher.TRIPLEDES);
+			//inicijalizacija za kriptovanje
+			xmlCipher.init(XMLCipher.ENCRYPT_MODE, secretKey);
+
+			//u EncryptedData elementa koji se kriptuje kao KeyInfo stavljamo kriptovan tajni kljuc
+			EncryptedData encryptedData = xmlCipher.getEncryptedData();
+			//kreira se KeyInfo
+			KeyInfo keyInfo = new KeyInfo(doc);
+			keyInfo.addKeyName("Kriptovani tajni kljuc");
+			//postavljamo kriptovani kljuc
+			keyInfo.add(encryptedKey);
+			//postavljamo KeyInfo za element koji se kriptuje
+			encryptedData.setKeyInfo(keyInfo);
+
+			//trazi se element ciji sadrzaj se kriptuje
+			//NodeList odseci = doc.getElementsByTagName("odsek");
+			NodeList odseci = doc.getElementsByTagName("Akt");
+			Element odsek = (Element) odseci.item(0);
+
+			xmlCipher.doFinal(doc, odsek, true); //kriptuje sa sadrzaj
+
+			saveDocument(doc,  "./data/IDEMOOOO.xml");
+			//return doc;
+
+		} catch (XMLEncryptionException e) {
+			e.printStackTrace();
+			//return null;
+		} catch (Exception e) {
+			e.printStackTrace();
+			//return null;
+		}
+	}
+
+
+	public static void main(String[] args) {
+		EncryptKEK encrypt = new EncryptKEK();
+		encrypt.testIt();
+	}
 	
 }
