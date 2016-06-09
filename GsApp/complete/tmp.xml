@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Akt xsi:schemaLocation="http://www.gradskaskupstina.gov/" xmlns="http://www.gradskaskupstina.gov/" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Akt xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns="http://www.gradskaskupstina.gov/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gradskaskupstina.gov/">
     <Naslov>Zakon o izmenama i dopunama zakona o javno-privatnom partnerstvu i koncesijama</Naslov>
-    <DocumentId>16250548801149691694.xml</DocumentId>
     <Clan RedniBroj="1">
         <Stav>
             <Sadrzaj>U Zakonu o javno-privatnom partnerstvu i koncesijama („Službeni glasnik RS”, broj 88/11), u članu 2. stav 1. posle reči: „partnerom” dodaju se reči: „radi realizacije projekata javno-privatnog partnerstva”.</Sadrzaj>
@@ -60,52 +59,30 @@
             <Prezime>Čogić</Prezime>
         </Potpisnik>
     </ZavrsniDeo>
-<ds:Signature>
-<ds:SignedInfo>
-<ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
-<ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
-<ds:Reference URI="">
-<ds:Transforms>
-<ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
-<ds:Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments"/>
-</ds:Transforms>
-<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
-<ds:DigestValue>AhwiFBvPeeqHc+fGfvJeysj1jis=</ds:DigestValue>
-</ds:Reference>
-</ds:SignedInfo>
-<ds:SignatureValue>
-B/okLkKsZs29ztLhbrX+iEFLLcCr+I7DL9J3fFyjB49Q95qgIiMw1yeMCIEGNj9O268FsZTW44uE
-9SQ3IUfSWwUp7Z37YRaj8Xc7pPQeeQ4xDGcJHm3UtFOYbjTeO4rTyZdbjOBHBm7KaF6Izri25CZG
-NZe6NnFREM6igqR9gLw=
-</ds:SignatureValue>
-<ds:KeyInfo>
+    <ds:Signature>
+        <ds:SignedInfo>
+            <ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+            <ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
+            <ds:Reference URI="">
+                <ds:Transforms>
+                    <ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+                    <ds:Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments"/>
+                </ds:Transforms>
+                <ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+                <ds:DigestValue>iGBzE6x4zTdsLIHBuRCrHrwGniM=</ds:DigestValue>
+            </ds:Reference>
+        </ds:SignedInfo>
+        <ds:SignatureValue>H+ceg+lHuVR4k4jadgDLfmWrvEMJrU4qNYvdl4bjc57ZzYaDXMXlvdvczxm0sM34uP9bQxIcH6QFE8TgkLFFGm8pRaWeQuMX3Ns4iqL8DZE/IKZBitF22jRABAgJ99nPvbhjOFCdfasZF+sydicEmsizg+Rp1ikntnFrRpZxvco=</ds:SignatureValue>
+        <ds:KeyInfo>
 <ds:KeyValue>
 <ds:RSAKeyValue>
-<ds:Modulus>
-46ueuWwDDbr5PYzML6qiF5eZtBJe6ZlyPAJ1WnOuejH0D6GufdIjqLlcvlhPniUnOCTKMOw6AwpV
-g1srcGBMFQdb4ILCJ/QO05xUq61WnTljb2Ei+Rwnhfa0VwfMApY+tHU8BGxBLAAATpjU8U+lYaIw
-nHSfZQN54xWmpByS0r8=
-</ds:Modulus>
-<ds:Exponent>AQAB</ds:Exponent>
-</ds:RSAKeyValue>
+                    <ds:Modulus>gVO2E1m0ZXWX0/pMvs9S3nQ4QKuYq78ZhkV1t/GAWBThQws8hdvjbFoiUDjjPnuY5w0iUIexf63u/WMRbNrr0Bbq2xaUfozRrBPiyON3EAf1MxErmAucGJ9nt+LtsPVco/hZy0JwOUS3U4zfD/Cx858ZSSIlTD6u/uxQoPgfpsk=</ds:Modulus>
+                    <ds:Exponent>AQAB</ds:Exponent>
+                </ds:RSAKeyValue>
 </ds:KeyValue>
 <ds:X509Data>
-<ds:X509Certificate>
-MIIC8zCCAlygAwIBAgIBAjANBgkqhkiG9w0BAQsFADCBzjEjMCEGA1UEAwwaU2t1cHN0aW5hIGdy
-YWRhIE5vdm9nIFNhZGExEDAOBgNVBAQMB0dyYWRza2ExEjAQBgNVBCoMCVNrdXBzdGluYTEWMBQG
-A1UECgwNR3JhZCBOb3ZpIFNhZDEYMBYGA1UECwwPU2t1cHN0aW5hIGdyYWRhMQswCQYDVQQGEwJS
-UzEqMCgGCSqGSIb3DQEJARYbZ3JhZHNrYVNrdXBzdGluYUBub3Zpc2FkLnJzMRYwFAYKCZImiZPy
-LGQBAQwGMTIzNDQ1MB4XDTA3MTIzMDIzMDAwMFoXDTE3MTIzMDIzMDAwMFowga8xFjAUBgNVBAMM
-DW1hcmtvdmljbWFya28xETAPBgNVBAQMCG1hcmtvdmljMQ4wDAYDVQQqDAVtYXJrbzEWMBQGA1UE
-CgwNR3JhZCBOb3ZpIFNhZDEYMBYGA1UECwwPU2t1cHN0aW5hIGdyYWRhMQswCQYDVQQGEwJSUzEc
-MBoGCSqGSIb3DQEJARYNbmVraUBtYWlsLmNvbTEVMBMGCgmSJomT8ixkAQEMBW1hcmtvMIGfMA0G
-CSqGSIb3DQEBAQUAA4GNADCBiQKBgQDjq565bAMNuvk9jMwvqqIXl5m0El7pmXI8AnVac656MfQP
-oa590iOouVy+WE+eJSc4JMow7DoDClWDWytwYEwVB1vggsIn9A7TnFSrrVadOWNvYSL5HCeF9rRX
-B8wClj60dTwEbEEsAABOmNTxT6VhojCcdJ9lA3njFaakHJLSvwIDAQABMA0GCSqGSIb3DQEBCwUA
-A4GBAF+D9RAHUSE7842RDM9VXVIwwyAacTQDLhNjWGktxnBb20UK8U169TJqG5h31FAuAh/vNHFw
-OaXndrq0bvXN7Hz1z3sPAb19o7Zpv07yPQfnxuwN4barpftl+saVQzxUsLRLWdayLp9+TNQwKcdb
-93Y+u5fqNn9gtRNtnTRj7AAz
-</ds:X509Certificate>
-</ds:X509Data>
+                <ds:X509Certificate>MIIC7TCCAlagAwIBAgIBAjANBgkqhkiG9w0BAQsFADCBzjEjMCEGA1UEAwwaU2t1cHN0aW5hIGdyYWRhIE5vdm9nIFNhZGExEDAOBgNVBAQMB0dyYWRza2ExEjAQBgNVBCoMCVNrdXBzdGluYTEWMBQGA1UECgwNR3JhZCBOb3ZpIFNhZDEYMBYGA1UECwwPU2t1cHN0aW5hIGdyYWRhMQswCQYDVQQGEwJSUzEqMCgGCSqGSIb3DQEJARYbZ3JhZHNrYVNrdXBzdGluYUBub3Zpc2FkLnJzMRYwFAYKCZImiZPyLGQBAQwGMTIzNDQ1MB4XDTA3MTIzMDIzMDAwMFoXDTE3MTIzMDIzMDAwMFowgakxEzARBgNVBAMMCnNyZGpvc3Jkam8xDjAMBgNVBAQMBXNyZGpvMQ4wDAYDVQQqDAVzcmRqbzEWMBQGA1UECgwNR3JhZCBOb3ZpIFNhZDEYMBYGA1UECwwPU2t1cHN0aW5hIGdyYWRhMQswCQYDVQQGEwJSUzEcMBoGCSqGSIb3DQEJARYNbmVraUBtYWlsLmNvbTEVMBMGCgmSJomT8ixkAQEMBXNyZGpvMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCBU7YTWbRldZfT+ky+z1LedDhAq5irvxmGRXW38YBYFOFDCzyF2+NsWiJQOOM+e5jnDSJQh7F/re79YxFs2uvQFurbFpR+jNGsE+LI43cQB/UzESuYC5wYn2e34u2w9Vyj+FnLQnA5RLdTjN8P8LHznxlJIiVMPq7+7FCg+B+myQIDAQABMA0GCSqGSIb3DQEBCwUAA4GBAHksVXOFnbgtJ054i6SWSINKFfyJ1KnmCa630zHaXk/spoH4+yj6uY1bX9STNUKUKrQO54p5cW5Y8oDNU5qEW6PSN7RT8pKEWCkUmTF7+3EDE393MfH6OIwzPpu96iwpOH+fCxnCFy2m7SJKNzgqDbOUB1lnyDMww9a7UHq0N4mv</ds:X509Certificate>
+            </ds:X509Data>
 </ds:KeyInfo>
-</ds:Signature></Akt>
+    </ds:Signature>
+</Akt>

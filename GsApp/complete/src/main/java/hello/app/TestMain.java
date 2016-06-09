@@ -1,19 +1,18 @@
 package hello.app;
 
 import hello.Application;
-import hello.StringResources.MarkLogicStrings;
 import hello.businessLogic.core.BeanManager;
 import hello.businessLogic.core.ReadManager;
 import hello.businessLogic.core.WriteManager;
 import hello.businessLogic.document.AktManager;
-import hello.businessLogic.document.UsersManager;
 import hello.entity.gov.gradskaskupstina.Akt;
+import hello.entity.gov.gradskaskupstina.User;
 import hello.entity.gov.gradskaskupstina.Users;
+import hello.security.KeyStoreManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
@@ -25,13 +24,17 @@ public class TestMain {
     private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
     public static void main(String[] args) throws FileNotFoundException {
-        UsersManager manager = new UsersManager();
-        FileInputStream fileInputStream = new FileInputStream(new File("res/validationTest/users1.xml"));
-        manager.write(fileInputStream, MarkLogicStrings.USERS_DOC_ID,MarkLogicStrings.USERS_COL_ID,false,null);
-
+        testSignature();
     }
 
-
+    public static void reinitializeKeyStore(){
+        KeyStoreManager keyStoreManager = new KeyStoreManager();
+        if (!keyStoreManager.reinitializeKeyStore()){
+            logger.info("Error initializing keystore.");
+        } else {
+            logger.info("Successfully initialized keystore!");
+        }
+    }
     public static void testXQuery() {
         String query = "fn:collection(\"userscoll\")";
         BeanManager<Users> aktBeanManager = new BeanManager<>("schema/Users.xsd");
@@ -90,14 +93,18 @@ public class TestMain {
         ReadManager<Akt> aktReadManager = new ReadManager<>();
         WriteManager<Akt> aktWriteManager = new WriteManager<>();
         BeanManager<Akt> aktBeanManager = new BeanManager<>();
+        User user = new User();
+        user.setUsername("srdjo");
+        user.setPassword("sFeM8eL58ludmApNUroH7finPLo");
+
         //aktReadManager.validateXMLBySignature("tmpForValidation.xml");
+
         Akt akt =  aktBeanManager.convertFromXml(new File("tmp.xml"));
         aktBeanManager.convertToXml(akt);
         try{
             aktBeanManager.validateXmlBySchema("tmp.xml");
-            aktBeanManager.write(akt,"test","test",true,null);
+            aktBeanManager.write(akt,"test","test",true,user);
             aktReadManager.validateXMLBySignature("tmp.xml");
-
             aktBeanManager.read("test",true);
         } catch (Exception e){
             logger.info("ERROR");

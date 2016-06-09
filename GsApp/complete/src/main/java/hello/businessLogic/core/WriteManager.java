@@ -178,7 +178,6 @@ public class WriteManager <T>{
 
     /**
      * Signs xml files currently with example private key and certificate.
-     * TODO: Rewrite to accept custom private key, certificate and input file.
      * @param filePath Path to xml to be signed.
      * @param user User that proposes Akt, needs to sign it first.
      * @return Indicator of success.

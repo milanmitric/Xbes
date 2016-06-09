@@ -36,7 +36,6 @@ public class UsersManager extends BeanManager<Users> {
      * @return Indicator of success.
      */
     public  boolean write(Users  users, String docId, String colId, User user) {
-        // TODO: Generate certificate for user.
         if (!generateCertificate(user)){
             logger.info("[ERROR] can't generate certificate for user.");
             return false;

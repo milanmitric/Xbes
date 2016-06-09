@@ -181,8 +181,10 @@ public class ReadManager<T>{
             Transformer transformer = transformerFactory.newTransformer();
 
             // Indentacija serijalizovanog izlaza
-            transformer.setOutputProperty("{http://xml.apache.org/xalan}indent-amount", "2");
-            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+
+            // TODO try fix.
+            //transformer.setOutputProperty("{http://xml.apache.org/xalan}indent-amount", "2");
+            //transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 
             // Nad "source" objektom (DOM stablo) vrši se transformacija
             DOMSource source = new DOMSource(node);

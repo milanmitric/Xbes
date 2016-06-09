@@ -38,29 +38,29 @@ public class KeyStoreManager {
      * Initializes keystore.
      * @return Inidialized keyStore. <code>NULL</code> if not successful.
      */
-    private  KeyStore initializeKeyStore(){
+    private  static KeyStore initializeKeyStore(){
         KeyStore ks = null;
         try {
             ks = KeyStore.getInstance("JKS", "SUN");
             BufferedInputStream in = new BufferedInputStream(new FileInputStream(MarkLogicStrings.KEYSTORE_FILEPATH));
             ks.load(in, MarkLogicStrings.KEYSTORE_PASSWORD);
         } catch (KeyStoreException e) {
-            logger.info(e.getMessage());
+            //logger.info(e.getMessage());
         } catch (NoSuchProviderException e) {
-            logger.info("[ERROR] Can't initialize.");
-            logger.info(e.getMessage());
+            //logger.info("[ERROR] Can't initialize.");
+            //logger.info(e.getMessage());
         } catch (CertificateException e) {
-            logger.info("[ERROR] Can't initialize.");
-            logger.info(e.getMessage());
+            //logger.info("[ERROR] Can't initialize.");
+            //logger.info(e.getMessage());
         } catch (NoSuchAlgorithmException e) {
-            logger.info("[ERROR] Can't initialize.");
-            logger.info(e.getMessage());
+//            logger.info("[ERROR] Can't initialize.");
+//            logger.info(e.getMessage());
         } catch (FileNotFoundException e) {
-            logger.info("[ERROR] Can't initialize.");
-            logger.info(e.getMessage());
+//            logger.info("[ERROR] Can't initialize.");
+//            logger.info(e.getMessage());
         } catch (IOException e) {
-            logger.info("[ERROR] Can't initialize.");
-            logger.info(e.getMessage());
+//            logger.info("[ERROR] Can't initialize.");
+//            logger.info(e.getMessage());
         }
         return ks;
 
@@ -192,4 +192,77 @@ public class KeyStoreManager {
     public Certificate readCertificate(String alias, char[] password){
         return keyStoreReader.readCertificate(alias,password);
     }
+
+    /**
+     * Creates new keystore in data/keystore.jks.
+     * @return Indicator of success.
+     */
+    public boolean reinitializeKeyStore(){
+        boolean ret = false;
+        try{
+            keyStoreWriter.loadKeyStore(null,MarkLogicStrings.KEYSTORE_PASSWORD);
+            keyStoreWriter.saveKeyStore(MarkLogicStrings.KEYSTORE_FILEPATH,MarkLogicStrings.KEYSTORE_PASSWORD);
+            if (!generateRootCaCertificate()){
+                throw new Exception("Could not generate root certificate!");
+            } else {
+                ret = true;
+            }
+
+        } catch (Exception e){
+            logger.info("[ERROR] Can't initialize keyStore.");
+            logger.info(e.getMessage());
+        }
+        return ret;
+    }
+
+    /**
+     * Creates root certificate.
+     * @return Indicator of success.
+     */
+    private boolean generateRootCaCertificate(){
+        boolean ret = false;
+
+        try{
+            //kreiramo generator i generisemo kljuceve i sertifiakt
+            CertificateGenerator gen = new CertificateGenerator();
+            //par kljuceva
+            KeyPair keyPair = gen.generateKeyPair();
+
+            //datumi
+            SimpleDateFormat iso8601Formater = new SimpleDateFormat("yyyy-MM-dd");
+            Date startDate = iso8601Formater.parse("2007-12-31");
+            Date endDate = iso8601Formater.parse("2017-12-31");
+
+            //podaci o vlasniku i izdavacu posto je self signed
+            //klasa X500NameBuilder pravi X500Name objekat koji nam treba
+            X500NameBuilder builder = new X500NameBuilder(BCStyle.INSTANCE);
+            builder.addRDN(BCStyle.CN, "Skupstina grada Novog Sada");
+            builder.addRDN(BCStyle.SURNAME, "Gradska");
+            builder.addRDN(BCStyle.GIVENNAME, "Skupstina");
+            builder.addRDN(BCStyle.O, "Grad Novi Sad");
+            builder.addRDN(BCStyle.OU, "Skupstina grada");
+            builder.addRDN(BCStyle.C, "RS");
+            builder.addRDN(BCStyle.E, "gradskaSkupstina@novisad.rs");
+            //UID (USER ID) je ID korisnika
+            builder.addRDN(BCStyle.UID, "123445");
+
+            //Serijski broj sertifikata
+            String sn="1";
+            //kreiraju se podaci za issuer-a
+            IssuerData issuerData = new IssuerData(keyPair.getPrivate(), builder.build());
+            //kreiraju se podaci za vlasnika
+            SubjectData subjectData = new SubjectData(keyPair.getPublic(), builder.build(), sn, startDate, endDate);
+            //generise se sertifikat
+            X509Certificate cert = gen.generateCertificate(issuerData, subjectData);
+            keyStoreWriter.write(MarkLogicStrings.ROOT_CERTIFICATE_ALIAS, keyPair.getPrivate(), MarkLogicStrings.ROOT_CERTIFICATE_PASSWORD, cert);
+            keyStoreWriter.saveKeyStore(MarkLogicStrings.KEYSTORE_FILEPATH,MarkLogicStrings.KEYSTORE_PASSWORD);
+            ret = true;
+        } catch (Exception e){
+            logger.info("[ERROR] Can't create root CA certificate.");
+            logger.info(e.getMessage());
+        }
+        return ret;
+    }
 }
+
+

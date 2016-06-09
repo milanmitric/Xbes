@@ -43,7 +43,7 @@ public class AktController {
         logger.info("[CONTENT OF ADDED ACT]:"+akt.toString());
 
         if(!aktManager.validateAkt(akt)){
-            logger.info("[AktController] ERROR: NOT VALIDATED");
+            logger.info("[ERROR] NOT VALIDATED");
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
 
@@ -51,10 +51,10 @@ public class AktController {
         User user = (User)auth.getPrincipal();
         String docID = aktManager.proposeAkt(akt,user);
         if(docID==null){
-            logger.info("[AktController] ERROR: NOT PROPOSED");
+            logger.info("[ERROR] NOT PROPOSED");
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         } else {
-            logger.info("[AktController] Successfully proposed akt: " + akt.toString() + " with id " + docID);
+            logger.info("Successfully proposed akt: " + akt.toString() + " with id " + docID);
         }
 
         return new ResponseEntity(HttpStatus.OK);
