@@ -6,7 +6,6 @@ import hello.businessLogic.core.ReadManager;
 import hello.businessLogic.core.WriteManager;
 import hello.businessLogic.document.AktManager;
 import hello.entity.gov.gradskaskupstina.Akt;
-import hello.entity.gov.gradskaskupstina.User;
 import hello.entity.gov.gradskaskupstina.Users;
 import hello.security.KeyStoreManager;
 import org.slf4j.Logger;
@@ -93,18 +92,8 @@ public class TestMain {
         ReadManager<Akt> aktReadManager = new ReadManager<>();
         WriteManager<Akt> aktWriteManager = new WriteManager<>();
         BeanManager<Akt> aktBeanManager = new BeanManager<>();
-        User user = new User();
-        user.setUsername("srdjo");
-        user.setPassword("sFeM8eL58ludmApNUroH7finPLo");
 
-        //aktReadManager.validateXMLBySignature("tmpForValidation.xml");
-
-        Akt akt =  aktBeanManager.convertFromXml(new File("tmp.xml"));
-        aktBeanManager.convertToXml(akt);
         try{
-            aktBeanManager.validateXmlBySchema("tmp.xml");
-            aktBeanManager.write(akt,"test","test",true,user);
-            aktReadManager.validateXMLBySignature("tmp.xml");
             aktBeanManager.read("test",true);
         } catch (Exception e){
             logger.info("ERROR");

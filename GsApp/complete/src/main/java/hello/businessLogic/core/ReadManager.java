@@ -18,7 +18,6 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
-import java.io.FileOutputStream;
 import java.io.OutputStream;
 
 /**
@@ -85,11 +84,7 @@ public class ReadManager<T>{
 
             if (shouldValidate){
                 // Input xml validation.
-                if (!convertInputToTmp(docId)){
-                    ret = null;
-                    throw  new Exception("Can't read from database!");
-                }
-                if (!validateXMLBySignature("tmpForValidation.xml")){
+                if (!validateXMLBySignature(docId)){
                     ret = null;
                     throw  new Exception("Input bean signature is not well formated!");
                 }
@@ -116,34 +111,12 @@ public class ReadManager<T>{
             return ret;
         }
     }
-
     /**
-     * Validates signed xml document from <b>tmp.xml</b>.
-     * @param filepath Path of xml file to be validated.s
+     * Validates signed xml document from database,
+     * @param docId Document id of file to be validated.
      * @return Indicator of success.
      */
-    public boolean validateXMLBySignature(String filepath){
-        boolean ret = false;
-
-        try{
-            VerifySignatureEnveloped verifySignatureEnveloped = new VerifySignatureEnveloped();
-            Document document = verifySignatureEnveloped.loadDocument(filepath);
-            ret =  verifySignatureEnveloped.verifySignature(document);
-        } catch(Exception e){
-            logger.info("Could not validate XML by signature on filepath "+ filepath+ ".");
-            logger.info("[ERROR] " + e.getMessage());
-            logger.info("[STACK TRACE] " + e.getStackTrace());
-        } finally {
-            return  ret;
-        }
-    }
-
-    /**
-     * Read from database and stores to tmp.xml file so it can be validated.
-     * @param docId URI of document read from database.
-     * @return Indicator of success.
-     */
-    private boolean convertInputToTmp(String docId){
+    public boolean validateXMLBySignature(String docId){
         boolean ret = false;
         try{
             // A metadata handle for metadata retrieval
@@ -153,12 +126,10 @@ public class ReadManager<T>{
             xmlManager.read(docId, metadata, content);
 
             Document doc = content.get();
-            FileOutputStream fileOutputStream = new FileOutputStream("tmpForValidation.xml");
-            transform(doc, fileOutputStream);
-            ret = true;
-
+            VerifySignatureEnveloped verifySignatureEnveloped = new VerifySignatureEnveloped();
+            ret =  verifySignatureEnveloped.verifySignature(doc);
         } catch (Exception e){
-            logger.info("Could not read xml["+ docId+ "] and store to tmp.xml!");
+            logger.info("Could not read xml["+ docId+ "] and validate!");
             logger.info("[ERROR] " + e.getMessage());
             logger.info("[STACK TRACE] " + e.getStackTrace());
         } finally {
