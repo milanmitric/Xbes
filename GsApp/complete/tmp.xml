@@ -88,4 +88,12 @@
         <Salt>/G2EWjDjzAM=</Salt>
         <Role>ROLE_GRADJANIN</Role>
     </User>
+    <User>
+        <Username>lp</Username>
+        <Password>jm2fhi/hOqkf/OuiJxjJgOebNbA=</Password>
+        <Ime>lp</Ime>
+        <Prezime>lp</Prezime>
+        <Salt>p07OPTkTNeA=</Salt>
+        <Role>ROLE_GRADJANIN</Role>
+    </User>
 </Users>

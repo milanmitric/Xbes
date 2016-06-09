@@ -123,7 +123,7 @@ public class AktController {
         //EncryptKEK enc = new EncryptKEK();
         Document doc=enkryption.encrypt(d);
         /*CONVERT DOCUMET TO INPUTSTREAM*/
-        InputStream is=aktManager.convertDocumentToInputStream(doc);
+        FileInputStream is= (FileInputStream) aktManager.convertDocumentToInputStream(doc);
 
         //todo - kako mitric pravi random ID?!
         aktManager.write(is, "ARCHIVED: "+docID, "archive", false, null);

@@ -132,7 +132,7 @@ public class TestRest {
         AktManager am=new AktManager();
         am.convertFromXml(new File("./data/IDEMOOOO.xml"));
         InputStream is=am.convertDocumentToInputStream(doc);
-        am.write(is, "arg", "arh", false, null);
+       // am.write(is, "arg", "arh", false, null);
 
         return new ResponseEntity("springara2", HttpStatus.ACCEPTED);
     }

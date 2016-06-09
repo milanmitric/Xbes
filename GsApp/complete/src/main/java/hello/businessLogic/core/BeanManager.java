@@ -4,6 +4,7 @@ import com.marklogic.client.DatabaseClient;
 import com.marklogic.client.document.DocumentDescriptor;
 import com.marklogic.client.document.DocumentMetadataPatchBuilder;
 import com.marklogic.client.document.XMLDocumentManager;
+import com.marklogic.client.query.MatchDocumentSummary;
 import hello.entity.gov.gradskaskupstina.User;
 import hello.security.KeyStoreManager;
 import hello.util.Converter;
