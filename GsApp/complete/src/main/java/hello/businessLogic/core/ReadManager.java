@@ -10,15 +10,10 @@ import hello.util.Converter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
-import org.w3c.dom.Node;
 
 import javax.xml.bind.JAXBContext;
-import javax.xml.transform.*;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
-import java.io.OutputStream;
 
 /**
  * Created by milan on 31.5.2016..
@@ -47,16 +42,14 @@ public class ReadManager<T>{
      */
     private DatabaseClient client;
 
-    private static TransformerFactory transformerFactory;
+
 
     /**
      * Support class for xml-bean conversion.
      */
     private Converter<T> converter;
 
-    static {
-        transformerFactory = TransformerFactory.newInstance();
-    }
+
 
     public ReadManager(){
 
@@ -161,41 +154,5 @@ public class ReadManager<T>{
         }
     }
 
-    /**
-     * Serializes DOM tree to an arbitrary OutputStream.
-     *
-     * @param node a node to be serialized
-     * @param out an output stream to write the serialized
-     * DOM representation to
-     *
-     */
-    private static void transform(Node node, OutputStream out) {
-        try {
 
-            // Kreiranje instance objekta zaduzenog za serijalizaciju DOM modela
-            Transformer transformer = transformerFactory.newTransformer();
-
-            // Indentacija serijalizovanog izlaza
-
-            // TODO try fix.
-            //transformer.setOutputProperty("{http://xml.apache.org/xalan}indent-amount", "2");
-            //transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-
-            // Nad "source" objektom (DOM stablo) vrši se transformacija
-            DOMSource source = new DOMSource(node);
-
-            // Rezultujući stream (argument metode)
-            StreamResult result = new StreamResult(out);
-
-            // Poziv metode koja vrši opisanu transformaciju
-            transformer.transform(source, result);
-
-        } catch (TransformerConfigurationException e) {
-            e.printStackTrace();
-        } catch (TransformerFactoryConfigurationError e) {
-            e.printStackTrace();
-        } catch (TransformerException e) {
-            e.printStackTrace();
-        }
-    }
 }

@@ -1,9 +1,13 @@
 package hello.util;
 
+import org.w3c.dom.Node;
+
 import javax.xml.bind.*;
+import javax.xml.transform.*;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import javax.xml.validation.Schema;
-import java.io.File;
-import java.io.FileOutputStream;
+import java.io.*;
 
 /**
  * Created by milan on 31.5.2016..
@@ -11,6 +15,10 @@ import java.io.FileOutputStream;
  */
 public class Converter<T> {
 
+    private static TransformerFactory transformerFactory;
+    static {
+        transformerFactory = TransformerFactory.newInstance();
+    }
     /**
      * Converts JAXB bean to XML file on tmp location.
      * @param bean  JAXB bean to be converted.
@@ -81,7 +89,63 @@ public class Converter<T> {
         }
     }
 
+    /**
+     * Serializes DOM tree to an arbitrary OutputStream.
+     *
+     * @param node a node to be serialized
+     * @param out an output stream to write the serialized
+     * DOM representation to
+     *
+     */
+    public  void transform(Node node, OutputStream out) {
+        try {
 
+            // Kreiranje instance objekta zaduzenog za serijalizaciju DOM modela
+            Transformer transformer = transformerFactory.newTransformer();
+
+            // Indentacija serijalizovanog izlaza
+
+            // TODO try fix.
+            //transformer.setOutputProperty("{http://xml.apache.org/xalan}indent-amount", "2");
+            //transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+
+            // Nad "source" objektom (DOM stablo) vrši se transformacija
+            DOMSource source = new DOMSource(node);
+
+            // Rezultujući stream (argument metode)
+            StreamResult result = new StreamResult(out);
+
+            // Poziv metode koja vrši opisanu transformaciju
+            transformer.transform(source, result);
+
+        } catch (TransformerConfigurationException e) {
+            e.printStackTrace();
+        } catch (TransformerFactoryConfigurationError e) {
+            e.printStackTrace();
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Converts document to input stream.
+     * @param node Document to convert.
+     * @param inputStream Input stream to convert to.
+     * @return Converted input stream. <code>NULL</code> if not successful.
+     */
+    public InputStream convertDocumentToInputStream(Node node, InputStream inputStream){
+        InputStream ret = null;
+        try {
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            Source xmlSource = new DOMSource(node);
+            Result outputTarget = new StreamResult(outputStream);
+            TransformerFactory.newInstance().newTransformer().transform(xmlSource, outputTarget);
+            ret = new ByteArrayInputStream(outputStream.toByteArray());
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        }
+        return ret;
+    }
     /**
      * Write string content to xml.
      * @param fileContent Content to be written.
