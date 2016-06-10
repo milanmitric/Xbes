@@ -34,6 +34,7 @@ public class KeyStoreManager {
         keyStoreWriter = new KeyStoreWriter(keyStore);
     }
 
+
     /**
      * Initializes keystore.
      * @return Inidialized keyStore. <code>NULL</code> if not successful.
@@ -66,6 +67,7 @@ public class KeyStoreManager {
 
     }
 
+
     /**
      * Gets root private key.
      * @return Root private key. <code>NULL</code> if not successful.
@@ -77,6 +79,7 @@ public class KeyStoreManager {
     public Certificate getRootCertificate(){
         return keyStoreReader.readCertificate(MarkLogicStrings.ROOT_CERTIFICATE_ALIAS,MarkLogicStrings.ROOT_CERTIFICATE_PASSWORD);
     }
+
 
     /**
      * Gets root issuer data.
@@ -113,6 +116,7 @@ public class KeyStoreManager {
         return  ret;
     }
 
+    
     /**
      * Writes certificate to keystore.
      * @param alias Certificate alias - name that will be used to load from keyStore (currently user username).
