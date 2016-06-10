@@ -10,16 +10,10 @@ import hello.util.Converter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
-import org.w3c.dom.Node;
 
 import javax.xml.bind.JAXBContext;
-import javax.xml.transform.*;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
 
 /**
  * Created by milan on 31.5.2016..
@@ -48,16 +42,14 @@ public class ReadManager<T>{
      */
     private DatabaseClient client;
 
-    private static TransformerFactory transformerFactory;
+
 
     /**
      * Support class for xml-bean conversion.
      */
     private Converter<T> converter;
 
-    static {
-        transformerFactory = TransformerFactory.newInstance();
-    }
+
 
     public ReadManager(){
 
@@ -71,29 +63,25 @@ public class ReadManager<T>{
     }
 
     /**
-     * Read a xml document from database for given docId. Assignes it to bean field.
+     * Reads a xml document from database for given docId. Assignes it to bean field.
      * @param docId Document URI to read from database.
+     * @param shouldValidate Indicator whether xml document should be validated by digital signature.
      * @return Read bean, <code>null</code> if not successful.
      */
-    public T read(String docId){
+    public T read(String docId,boolean shouldValidate){
         T ret = null;
         try{
             JAXBContext jc = JAXBContext.newInstance("hello.entity.gov.gradskaskupstina");
             JAXBHandle<T> handle = new JAXBHandle<>(jc);
 
-            /*
-            // Input xml validation.
-            if (!convertInputToTmp(docId)){
-                ret = null;
-                throw  new Exception("Can't read from database!");
-            }
-            // For now. Signature check is not working?
-            // TODO: Refactor signature check.
 
-            if (!validateXMLBySignature("tmp.xml")){
-                ret = null;
-                throw  new Exception("Input bean signature is not well formated!");
-            }*/
+            if (shouldValidate){
+                // Input xml validation.
+                if (!validateXMLBySignature(docId)){
+                    ret = null;
+                    throw  new Exception("Input bean signature is not well formated!");
+                }
+            }
 
             // A metadata handle for metadata retrieval
             DocumentMetadataHandle metadata = new DocumentMetadataHandle();
@@ -117,32 +105,35 @@ public class ReadManager<T>{
     }
 
     /**
-     * Validates signed xml document from <b>tmp.xml</b>.
-     * @param filepath Path of xml file to be validated.s
-     * @return Indicator of success.
+     * Reads a xml document from database for given docId. Return read document.
+     * @param shouldValidate Indicator whether xml document should be validated by digital signature.
+     * @param docId ocument URI to read from database.
+     * @return Read document. <code>NULL</code> if not successful.
      */
-    public boolean validateXMLBySignature(String filepath){
-        boolean ret = false;
+    public Document read(boolean shouldValidate,String docId){
+        Document ret = null;
+        // A metadata handle for metadata retrieval
+        DocumentMetadataHandle metadata = new DocumentMetadataHandle();
+        // A handle to receive the document's content.
+        DOMHandle content = new DOMHandle();
+        xmlManager.read(docId, metadata, content);
 
-        try{
+        ret = content.get();
+        if (shouldValidate){
             VerifySignatureEnveloped verifySignatureEnveloped = new VerifySignatureEnveloped();
-            Document document = verifySignatureEnveloped.loadDocument(filepath);
-            ret =  verifySignatureEnveloped.verifySignature(document);
-        } catch(Exception e){
-            logger.info("Could not validate XML by signature on filepath "+ filepath+ ".");
-            logger.info("[ERROR] " + e.getMessage());
-            logger.info("[STACK TRACE] " + e.getStackTrace());
-        } finally {
-            return  ret;
+            if (!verifySignatureEnveloped.verifySignature(ret)){
+                logger.info("[ERROR] Document is not valid by signature!");
+                ret = null;
+            }
         }
+        return ret;
     }
-
     /**
-     * Read from database and stores to tmp.xml file so it can be validated.
-     * @param docId URI of document read from database.
+     * Validates signed xml document from database,
+     * @param docId Document id of file to be validated.
      * @return Indicator of success.
      */
-    private boolean convertInputToTmp(String docId){
+    public boolean validateXMLBySignature(String docId){
         boolean ret = false;
         try{
             // A metadata handle for metadata retrieval
@@ -152,12 +143,10 @@ public class ReadManager<T>{
             xmlManager.read(docId, metadata, content);
 
             Document doc = content.get();
-            FileOutputStream fileOutputStream = new FileOutputStream("tmp.xml");
-            transform(doc, fileOutputStream);
-            ret = true;
-
+            VerifySignatureEnveloped verifySignatureEnveloped = new VerifySignatureEnveloped();
+            ret =  verifySignatureEnveloped.verifySignature(doc);
         } catch (Exception e){
-            logger.info("Could not read xml["+ docId+ "] and store to tmp.xml!");
+            logger.info("Could not read xml["+ docId+ "] and validate!");
             logger.info("[ERROR] " + e.getMessage());
             logger.info("[STACK TRACE] " + e.getStackTrace());
         } finally {
@@ -165,39 +154,5 @@ public class ReadManager<T>{
         }
     }
 
-    /**
-     * Serializes DOM tree to an arbitrary OutputStream.
-     *
-     * @param node a node to be serialized
-     * @param out an output stream to write the serialized
-     * DOM representation to
-     *
-     */
-    private static void transform(Node node, OutputStream out) {
-        try {
 
-            // Kreiranje instance objekta zaduzenog za serijalizaciju DOM modela
-            Transformer transformer = transformerFactory.newTransformer();
-
-            // Indentacija serijalizovanog izlaza
-            transformer.setOutputProperty("{http://xml.apache.org/xalan}indent-amount", "2");
-            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-
-            // Nad "source" objektom (DOM stablo) vrši se transformacija
-            DOMSource source = new DOMSource(node);
-
-            // Rezultujući stream (argument metode)
-            StreamResult result = new StreamResult(out);
-
-            // Poziv metode koja vrši opisanu transformaciju
-            transformer.transform(source, result);
-
-        } catch (TransformerConfigurationException e) {
-            e.printStackTrace();
-        } catch (TransformerFactoryConfigurationError e) {
-            e.printStackTrace();
-        } catch (TransformerException e) {
-            e.printStackTrace();
-        }
-    }
 }

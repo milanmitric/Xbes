@@ -6,6 +6,8 @@ import com.marklogic.client.document.DocumentUriTemplate;
 import com.marklogic.client.document.XMLDocumentManager;
 import com.marklogic.client.io.DocumentMetadataHandle;
 import com.marklogic.client.io.InputStreamHandle;
+import hello.entity.gov.gradskaskupstina.User;
+import hello.security.KeyStoreManager;
 import hello.security.SignEnveloped;
 import hello.util.Converter;
 import org.slf4j.Logger;
@@ -16,6 +18,7 @@ import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.security.PrivateKey;
 import java.security.cert.Certificate;
 
@@ -63,13 +66,15 @@ public class WriteManager <T>{
      * Writes file to database.
      * @param inputStream File to be written.
      * @param docId URI for document to be written.
-     * @param colId URI for collection if the docue.
+     * @param colId URI for collection for document.
+     * @param shouldSign Indicator whether xml should be signed.
+     * @param user User that proposes Akt, needs to sign it first.
      * @return Indicator of success.
      */
-    public boolean write(FileInputStream inputStream, String docId, String colId) {
+    public boolean write(InputStream inputStream, String docId, String colId,boolean shouldSign, User user) {
         boolean ret = false;
         try{
-            if (!singXml(null)) {
+            if (shouldSign && !singXml(null, user)) {
                 throw  new Exception("Could not sign xml!");
             }
             InputStreamHandle handle = new InputStreamHandle(inputStream);
@@ -93,7 +98,7 @@ public class WriteManager <T>{
      * @param colId URI for collection if the docue.
      * @return Generated URI. <code>NULL</code> if not successful.
      */
-    public DocumentDescriptor write(FileInputStream inputStream, String colId) {
+    public DocumentDescriptor write(InputStream inputStream, String colId) {
         DocumentDescriptor ret = null;
         try{
             // TODO: Solve this!
@@ -120,15 +125,17 @@ public class WriteManager <T>{
      * @param bean JAXB bean to be written.
      * @param docId URI for document to be written.
      * @param colId URI for collection if the docue.
+     * @param shouldSign  Indicator whether xml should be signed.
+     * @param user User that proposes Akt, needs to sign it first.
      * @return Indicator of success.
      */
-    public boolean write(T bean, String docId, String colId) {
+    public boolean write(T bean, String docId, String colId,boolean shouldSign, User user) {
         boolean ret = false;
         try {
             // Try to convert to xml on default location.
             if (converter.convertToXml(bean)){
                 FileInputStream inputStream = new FileInputStream(new File("tmp.xml"));
-                ret = write(inputStream,docId,colId);
+                ret = write(inputStream,docId,colId,shouldSign,user);
             } else {
                 throw new Exception(" Can't convert JAXB bean["+docId +"] to XML.");
             }
@@ -142,6 +149,15 @@ public class WriteManager <T>{
             return ret;
         }
     }
+
+    public void encryptThatDoc(User user){
+
+
+
+    }
+
+
+
 
     /**
      * Writes bean to database with template docId.
@@ -172,11 +188,11 @@ public class WriteManager <T>{
 
     /**
      * Signs xml files currently with example private key and certificate.
-     * TODO: Rewrite to accept custom private key, certificate and input file.
      * @param filePath Path to xml to be signed.
+     * @param user User that proposes Akt, needs to sign it first.
      * @return Indicator of success.
      */
-    public boolean singXml(String filePath){
+    public boolean singXml(String filePath, User user){
 
         boolean ret = false;
 
@@ -188,8 +204,9 @@ public class WriteManager <T>{
             }  else {
                 document = signEnveloped.loadDocument(filePath);
             }
-            PrivateKey pk = signEnveloped.readPrivateKey();
-            Certificate cert = signEnveloped.readCertificate();
+            KeyStoreManager manager = new KeyStoreManager();
+            PrivateKey pk = manager.readPrivateKey(user.getUsername(),user.getPassword().toCharArray());
+            Certificate cert = manager.readCertificate(user.getUsername(),user.getPassword().toCharArray());
             document = signEnveloped.signDocument(document,pk,cert);
             signEnveloped.saveDocument(document,"tmp.xml");
             ret = true;

@@ -4,16 +4,22 @@ import com.marklogic.client.DatabaseClient;
 import com.marklogic.client.document.DocumentDescriptor;
 import com.marklogic.client.document.DocumentMetadataPatchBuilder;
 import com.marklogic.client.document.XMLDocumentManager;
+import com.marklogic.client.query.MatchDocumentSummary;
+import hello.entity.gov.gradskaskupstina.User;
+import hello.security.KeyStoreManager;
 import hello.util.Converter;
 import hello.util.Database;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
 
 import javax.xml.XMLConstants;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 /**
@@ -78,6 +84,11 @@ public class BeanManager <T>{
      * Query executing manager.
      */
     protected QueryManager queryManager;
+
+    /**
+     * Used for creating certificates.
+     */
+    protected KeyStoreManager keyStoreManager;
     /**
      * Initializes database client and XML manager.
      */
@@ -92,6 +103,7 @@ public class BeanManager <T>{
             writeManager = new WriteManager<>(client,xmlManager,schemaFactory,schema,converter);
             customManager = new CustomManager<>(client,xmlManager,schemaFactory,schema,converter);
             queryManager = new QueryManager(client, schema,converter);
+            keyStoreManager = new KeyStoreManager();
 
         } catch (Exception e){
             logger.info("[ERROR] Can't initialize.");
@@ -114,6 +126,7 @@ public class BeanManager <T>{
             writeManager = new WriteManager<>(client,xmlManager,schemaFactory,schema,converter);
             customManager = new CustomManager<>(client,xmlManager,schemaFactory,schema,converter);
             queryManager = new QueryManager(client,schema, converter);
+            keyStoreManager = new KeyStoreManager();
         } catch (Exception e){
             logger.info("[ERROR] Can't initialize.");
         }
@@ -124,10 +137,12 @@ public class BeanManager <T>{
      * @param inputStream File to be written.
      * @param docId URI for document to be written.
      * @param colId URI for collection if the docue.
+     * @param shouldSign  Indicator whether xml should be signed.
+     * @param user User that proposes Akt, needs to sign it first.
      * @return Indicator of success.
      */
-    public boolean write(FileInputStream inputStream, String docId, String colId) {
-        return  writeManager.write(inputStream,docId,colId);
+    public boolean write(FileInputStream inputStream, String docId, String colId, boolean shouldSign, User user) {
+        return  writeManager.write(inputStream,docId,colId,shouldSign,user);
     }
 
     /**
@@ -144,11 +159,13 @@ public class BeanManager <T>{
      * Writes bean to database.
      * @param bean JAXB bean to be written.
      * @param docId URI for document to be written.
-     * @param colId URI for collection to store document.
+     * @param colId URI for collection if the docue.
+     * @param shouldSign  Indicator whether xml should be signed.
+     * @param user User that proposes Akt, needs to sign it first.
      * @return Indicator of success.
      */
-    protected boolean write(T bean, String docId, String colId) {
-        return writeManager.write(bean,docId,colId);
+    public boolean write(T bean, String docId, String colId,boolean shouldSign,User user) {
+        return writeManager.write(bean,docId,colId,shouldSign,user);
     }
 
     /**
@@ -171,10 +188,20 @@ public class BeanManager <T>{
     /**
      * Read a xml document from database for given docId. Assignes it to bean field.
      * @param docId Document URI to read from database.
+     * @param shouldValidate Indicator whether xml document should be validated by digital signature.
      * @return Read bean, <code>null</code> if not successful.
      */
-    public T read(String docId){
-        return readManager.read(docId);
+    public T read(String docId,boolean shouldValidate){
+        return readManager.read(docId,shouldValidate);
+    }
+    /**
+     * Reads a xml document from database for given docId. Return read document.
+     * @param shouldValidate Indicator whether xml document should be validated by digital signature.
+     * @param docId ocument URI to read from database.
+     * @return Read document. <code>NULL</code> if not successful.
+     */
+    public Document read(boolean shouldValidate, String docId){
+        return readManager.read(shouldValidate,docId);
     }
 
     /**
@@ -231,12 +258,12 @@ public class BeanManager <T>{
     }
 
     /**
-     * Validates signed xml document from <b>tmp.xml</b>.
-     * @param filepath Path of xml file to be validated.s
+     * Validates signed xml document database.
+     * @param docId Document URI of file to be validated.
      * @return Indicator of success.
      */
-    public boolean validateXMLBySignature(String filepath){
-        return readManager.validateXMLBySignature(filepath);
+    public boolean validateXMLBySignature(String docId){
+        return readManager.validateXMLBySignature(docId);
     }
 
     /**
@@ -248,4 +275,30 @@ public class BeanManager <T>{
         return queryManager.executeQuery(query);
     }
 
+    /**
+     * Generates certificate and saves it to file. Sets alias as users' username and password as users' password.
+     * @param user User infos needed for certificate.
+     * @return Indicator of success.
+     */
+    protected  boolean generateCertificate(User user) {
+        return keyStoreManager.generateCertificate(user);
+    }
+
+    /**
+     * Converts document to input stream.
+     * @param node Document to convert.
+     * @return Converted input stream. <code>NULL</code> if not successful.
+     */
+    public InputStream convertDocumentToInputStream(Node node){
+        return converter.convertDocumentToInputStream(node);
+    }
+    /**
+     * Return document with search results
+     * @param parameterofSearch search parametar
+     * @param uriOfCollection id of collection
+     * @return Document with search results
+     */
+    protected MatchDocumentSummary[] searchByField(String parameterofSearch, String uriOfCollection){
+        return customManager.searchByField(parameterofSearch,uriOfCollection);
+    }
 }

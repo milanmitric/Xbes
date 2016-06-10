@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Akt xmlns="http://www.gradskaskupstina.gov/"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.gradskaskupstina.gov/ file:/C:/Users/FS-LB/Desktop/XMLProjekat/DJIT/Xbes/GsApp/complete/schema/Akt.xsd">
+    <Naslov>Akt</Naslov>
+    <Glava RedniBroj="50" Naziv="Naziv1">
+        <Odeljak RedniBroj="50" Naziv="Naziv3">
+            <Clan RedniBroj="50">
+                <Stav>
+                    <Sadrzaj/>
+                </Stav>
+                <Stav>
+                    <Sadrzaj/>
+                </Stav>
+            </Clan>
+            <Clan RedniBroj="50">
+                <Stav>
+                    <Sadrzaj/>
+                </Stav>
+                <Stav>
+                    <Sadrzaj/>
+                </Stav>
+            </Clan>
+        </Odeljak>
+        <Odeljak RedniBroj="50" Naziv="Naziv9">
+            <Clan RedniBroj="50">
+                <Stav>
+                    <Tacka RedniBroj="50">
+                        <Sadrzaj>Sadrzaj0</Sadrzaj>
+                    </Tacka>
+                    <Tacka RedniBroj="50">
+                        <Sadrzaj>Sadrzaj1</Sadrzaj>
+                    </Tacka>
+                </Stav>
+                <Stav>
+                    <Sadrzaj/>
+                </Stav>
+            </Clan>
+            <Clan RedniBroj="50">
+                <Stav>
+                    <Sadrzaj/>
+                </Stav>
+                <Stav>
+                    <Tacka RedniBroj="50">
+                        <Sadrzaj>Sadrzaj2</Sadrzaj>
+                    </Tacka>
+                    <Tacka RedniBroj="50">
+                        <Sadrzaj>Sadrzaj3</Sadrzaj>
+                    </Tacka>
+                </Stav>
+            </Clan>
+        </Odeljak>
+    </Glava>
+    <Glava RedniBroj="50" Naziv="Naziv15">
+        <Odeljak RedniBroj="50" Naziv="Naziv17">
+            <Clan RedniBroj="50">
+                <Stav>
+                    <Tacka RedniBroj="50">
+                        <Sadrzaj>Sadrzaj4</Sadrzaj>
+                    </Tacka>
+                    <Tacka RedniBroj="50">
+                        <Sadrzaj>Sadrzaj5</Sadrzaj>
+                    </Tacka>
+                </Stav>
+                <Stav>
+                    <Tacka RedniBroj="50">
+                        <Sadrzaj>Sadrzaj6</Sadrzaj>
+                    </Tacka>
+                    <Tacka RedniBroj="50">
+                        <Sadrzaj>Sadrzaj7</Sadrzaj>
+                    </Tacka>
+                </Stav>
+            </Clan>
+            <Clan RedniBroj="50">
+                <Stav>
+                    <Sadrzaj/>
+                </Stav>
+                <Stav>
+                    <Tacka RedniBroj="50">
+                        <Sadrzaj>Sadrzaj8</Sadrzaj>
+                    </Tacka>
+                    <Tacka RedniBroj="50">
+                        <Sadrzaj>Sadrzaj9</Sadrzaj>
+                    </Tacka>
+                </Stav>
+            </Clan>
+        </Odeljak>
+        <Odeljak RedniBroj="50" Naziv="Naziv23">
+            <Clan RedniBroj="50">
+                <Stav>
+                    <Sadrzaj/>
+                </Stav>
+                <Stav>
+                    <Sadrzaj/>
+                </Stav>
+            </Clan>
+            <Clan RedniBroj="50">
+                <Stav>
+                    <Sadrzaj/>
+                </Stav>
+                <Stav>
+                    <Tacka RedniBroj="50">
+                        <Sadrzaj>Sadrzaj10</Sadrzaj>
+                    </Tacka>
+                    <Tacka RedniBroj="50">
+                        <Sadrzaj>Sadrzaj11</Sadrzaj>
+                    </Tacka>
+                </Stav>
+            </Clan>
+        </Odeljak>
+    </Glava>
+    <ZavrsniDeo>
+        <Organ>Organ0</Organ>
+        <Broj>Broj0</Broj>
+        <Datum>Datum0</Datum>
+        <Potpisnik>
+            <Ime>Ime0</Ime>
+            <Prezime>Prezime0</Prezime>
+        </Potpisnik>
+    </ZavrsniDeo>
+</Akt>

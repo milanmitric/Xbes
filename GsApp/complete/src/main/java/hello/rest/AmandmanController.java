@@ -1,13 +1,15 @@
 package hello.rest;
 
 import hello.businessLogic.document.AmandmanManager;
-import hello.entity.gov.gradskaskupstina.Akt;
 import hello.entity.gov.gradskaskupstina.Amandman;
+import hello.entity.gov.gradskaskupstina.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -44,7 +46,9 @@ public class AmandmanController {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
 
-        String docID = amandmanManager.proposeAmandman(amandman);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User)auth.getPrincipal();
+        String docID = amandmanManager.proposeAmandman(amandman,user);
         if(docID==null){
             logger.info("[AmandmanController] ERROR: NOT PROPOSED");
             return new ResponseEntity(HttpStatus.BAD_REQUEST);

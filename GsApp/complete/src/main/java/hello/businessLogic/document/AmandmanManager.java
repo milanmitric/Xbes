@@ -4,6 +4,7 @@ import com.marklogic.client.document.DocumentUriTemplate;
 import hello.StringResources.MarkLogicStrings;
 import hello.businessLogic.core.BeanManager;
 import hello.entity.gov.gradskaskupstina.Amandman;
+import hello.entity.gov.gradskaskupstina.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -53,7 +54,7 @@ public class AmandmanManager extends BeanManager<Amandman> {
      * @param amandman Bean to be proposed.
      * @return Generated URI. <code>NULL</code> if not successful.
      */
-    public String proposeAmandman(Amandman amandman){
+    public String proposeAmandman(Amandman amandman,User user){
 
         if (!validateBeanBySchema(amandman)){
             logger.info("[AmandmanManager] ERROR: Amandman is not valid!");
@@ -64,7 +65,9 @@ public class AmandmanManager extends BeanManager<Amandman> {
         try {
             ret = this.write(amandman,MarkLogicStrings.AMANDMANI_PREDLOZEN_COL_ID).getUri();
             amandman.setDocumentId(ret);
-            if (!this.write(amandman,ret,MarkLogicStrings.AMANDMANI_PREDLOZEN_COL_ID)){
+            // XML DOCUMENT IS READY TO BE SIGNED!
+            boolean shouldSign = true;
+            if (!this.write(amandman,ret,MarkLogicStrings.AMANDMANI_PREDLOZEN_COL_ID,shouldSign,user)){
                 ret = null;
                 throw new Exception();
             }
@@ -97,7 +100,9 @@ public class AmandmanManager extends BeanManager<Amandman> {
             logger.info("[ERROR] Could not delete amendment[" + docId + "] from proposed!");
         }
         try {
-            if (!write(amandman,amandman.getDocumentId(),MarkLogicStrings.AMANDMANI_USVOJENI_COL_ID)){
+            // XML DOCUMENT IS READY TO BE SIGNED!
+            boolean shouldSign = true;
+            if (!write(amandman,amandman.getDocumentId(),MarkLogicStrings.AMANDMANI_USVOJENI_COL_ID,shouldSign,null)){
                 ret = null;
                 throw  new Exception();
             } else {

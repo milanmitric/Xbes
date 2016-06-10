@@ -7,11 +7,12 @@ import hello.businessLogic.core.WriteManager;
 import hello.businessLogic.document.AktManager;
 import hello.entity.gov.gradskaskupstina.Akt;
 import hello.entity.gov.gradskaskupstina.Users;
+import hello.security.KeyStoreManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 /**
@@ -21,11 +22,18 @@ public class TestMain {
 
     private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
-    public static void main(String[] args){
-        testSignature();
+    public static void main(String[] args) throws FileNotFoundException {
+        reinitializeKeyStore();
     }
 
-
+    public static void reinitializeKeyStore(){
+        KeyStoreManager keyStoreManager = new KeyStoreManager();
+        if (!keyStoreManager.reinitializeKeyStore()){
+            logger.info("Error initializing keystore.");
+        } else {
+            logger.info("Successfully initialized keystore!");
+        }
+    }
     public static void testXQuery() {
         String query = "fn:collection(\"userscoll\")";
         BeanManager<Users> aktBeanManager = new BeanManager<>("schema/Users.xsd");
@@ -42,7 +50,7 @@ public class TestMain {
         Akt akt = aktManager.convertFromXml(new File("res/validationTest/AktZOIIDZOJPPIK.xml"));
 
 
-        String docId = aktManager.proposeAkt(akt);
+        String docId = aktManager.proposeAkt(akt,null);
         if (docId != null){
             logger.info("Successfully proposed document [" + docId + "].");
         } else {
@@ -85,22 +93,12 @@ public class TestMain {
         WriteManager<Akt> aktWriteManager = new WriteManager<>();
         BeanManager<Akt> aktBeanManager = new BeanManager<>();
 
-        Akt akt =  aktBeanManager.convertFromXml(new File("tmp.xml"));
-        aktBeanManager.convertToXml(akt);
-
-        aktReadManager.validateXMLBySignature("tmp.xml");
         try{
-            aktBeanManager.validateXmlBySchema("tmp.xml");
-            aktBeanManager.write(new FileInputStream("tmp.xml"),"test","test");
-            aktReadManager.validateXMLBySignature("tmp.xml");
-
-            aktBeanManager.read("test");
-            aktReadManager.validateXMLBySignature("tmp.xml");
+            aktBeanManager.read("test",true);
         } catch (Exception e){
             logger.info("ERROR");
         }
         logger.info("SUCCESS");
-
     }
 }
 

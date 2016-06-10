@@ -227,7 +227,7 @@ public class SignEnveloped {
 			    
 			//potpisivanje
 			sig.sign(privateKey);
-			
+
 			return doc;
 			
 		} catch (TransformationException e) {
