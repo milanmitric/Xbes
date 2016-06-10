@@ -41,7 +41,7 @@ angular.module('xapp')
                                                             }
                                                         }
         }).state('actsearchresults', {
-                                              url: '/actsearchresults',
+                                              url: '/actsearchresults/{pretraga}',
                                               views: {
                                                   'content': {
                                                       templateUrl: 'akt/searchResults.html',

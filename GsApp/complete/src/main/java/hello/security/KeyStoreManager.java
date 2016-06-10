@@ -184,7 +184,7 @@ public class KeyStoreManager {
      * @return Private key if found. <code>NULL</code> if doesn't exist.
      */
     public PrivateKey readPrivateKey(String alias, char[] password){
-       return keyStoreReader.readPrivateKey(alias,password);
+        return keyStoreReader.readPrivateKey(alias,password);
     }
 
     /**
@@ -268,5 +268,3 @@ public class KeyStoreManager {
         return ret;
     }
 }
-
-
