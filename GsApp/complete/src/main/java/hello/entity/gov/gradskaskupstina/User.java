@@ -45,7 +45,7 @@ import javax.xml.bind.annotation.XmlType;
     "password",
     "ime",
     "prezime",
-    "eMail",
+    "email",
     "salt",
     "role"
 })
@@ -170,8 +170,8 @@ public class User {
      *     {@link String }
      *     
      */
-    public String getEMail() {
-        return eMail;
+    public String getEmail() {
+        return email;
     }
 
     /**
@@ -182,7 +182,7 @@ public class User {
      *     {@link String }
      *     
      */
-    public void setEMail(String value) {
+    public void setEmail(String value) {
         this.email = value;
     }
 
