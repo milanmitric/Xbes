@@ -8,7 +8,6 @@
 
     </h3>
 
-
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
@@ -18,29 +17,60 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="model in collectionPredlozeni">
-                <td>{{model.}}</td>
+            <tr ng-repeat="(key, value) in collectionPredlozeni">
                 <td>
-                    <button type="submit"
-                            ui-sref="aktdetail({id:model._id})"
-                            class="btn btn-info btn-sm">
-                        <span class="glyphicon glyphicon-blackboard"></span>&nbsp;<span>SEE PROJECT</span>
-                    </button>
+                    <table class="table table-striped">
+                            <thead>
+                                <th>{{key}}</th>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="model in value">
+                                    <td>{{model}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                     </table >
                 </td>
-
-                <td>
-                    <button type="submit"
-                            ui-sref="dashboard({id:model._id})"
-                            class="btn btn-success btn-sm">
-                        <span class="glyphicon glyphicon-align-left"></span>&nbsp;<span>DASHBOARD</span>
-                    </button>
-                </td>
-
+            <td>
+                <button type="submit"
+                        ui-sref="aktdetail({id:key})"
+                        class="btn btn-info btn-sm">
+                    <span class="glyphicon glyphicon-blackboard"></span>&nbsp;<span>Pogledaj akt</span>
+                </button>
+            </td>
             </tr>
             </tbody>
         </table>
     </div>
 
+
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Usvojeni akti</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="(key, value) in collectionUsvojeni">
+                <td><th>{{key}}</th>
+                    <tr ng-repeat="model in value">
+                        <td>model</td>
+                    </tr>
+                </td>
+                <td>
+                    <button type="submit"
+                            ui-sref="aktdetail({id:key})"
+                            class="btn btn-info btn-sm">
+                        <span class="glyphicon glyphicon-blackboard"></span>&nbsp;<span>Pogledaj akt</span>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
 
 
