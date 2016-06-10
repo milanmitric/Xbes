@@ -1,3 +1,3 @@
 # XML & BSEP project
 
-DJOKOVIC POBEDIOOOOOOOOOOOOOOOOOOO
+IDITE NA TRELLO! ! ! ! ! ! ! ! ! ! ! ! ! ! !
