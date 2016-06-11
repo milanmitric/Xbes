@@ -24,7 +24,7 @@ angular.module('xapp', ['ngResource', 'ui.router'])
     }).run(function($rootScope,  $state) {
           $rootScope.$on("$locationChangeStart", function(event, next, current) {
               // handle route changes
-              console.log(event);
+             // console.log(event);
 
               //$state.go('signup');
 

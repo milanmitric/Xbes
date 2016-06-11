@@ -1,6 +1,8 @@
 package hello.rest;
 
+import hello.businessLogic.document.AktManager;
 import hello.businessLogic.document.AmandmanManager;
+import hello.entity.gov.gradskaskupstina.Akt;
 import hello.entity.gov.gradskaskupstina.Amandman;
 import hello.entity.gov.gradskaskupstina.User;
 import org.slf4j.Logger;
@@ -10,11 +12,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 /**
@@ -26,6 +26,8 @@ public class AmandmanController {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private AmandmanManager amandmanManager = new AmandmanManager();
+    private AktManager aktManager=new AktManager();
+
 
     @RequestMapping(value = "/getallamandmans",
             method = RequestMethod.GET,
@@ -58,5 +60,34 @@ public class AmandmanController {
 
         return new ResponseEntity(HttpStatus.OK);
     }
+
+
+
+    @RequestMapping(value = "/getamandmantsforakt",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity getamandmantsforakt(@RequestParam("docID") String docID) {
+        System.out.println("USATO, ID: "+docID);
+
+        Akt a =aktManager.read(docID, false);
+        ArrayList<Amandman> amandmens = amandmanManager.getAllAmandmansForAkt(a);
+        System.out.print(amandmens.size());
+        return new ResponseEntity(amandmens, HttpStatus.OK);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

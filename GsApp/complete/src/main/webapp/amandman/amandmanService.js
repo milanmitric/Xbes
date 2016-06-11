@@ -23,7 +23,20 @@ angular.module('xapp')
                              				}
                              				$http(req).then(onSuccess, onError);
         },
-		delete: function(onSuccess,onError){
+		getAmandmantsForAKt: function(aktID, onSuccess,onError){
+
+                var req = {
+                    method: 'POST',
+                    url: '/api/getamandmantsforakt',
+                    headers: {
+                                    'Content-Type': 'application/xml'
+                    },
+                    params : {docID:aktID},
+
+                }
+                $http(req).then(onSuccess, onError);
+
+
 
 		},
 		get:function(onSuccess, onError){

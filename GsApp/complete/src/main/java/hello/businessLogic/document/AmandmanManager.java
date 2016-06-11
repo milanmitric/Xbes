@@ -142,8 +142,7 @@ public class AmandmanManager extends BeanManager<Amandman> {
         return validateBeanBySchema(amandman);
     }
 
-    public ArrayList<Amandman> getAllAmandmansForAkt(String docId){
-        Akt akt = (Akt)this.read(false,docId);
+    public ArrayList<Amandman> getAllAmandmansForAkt(Akt akt){
         StringBuilder builder = new StringBuilder();
         builder.append("declare namespace a=\"http://www.gradskaskupstina.gov/\";");
         builder.append("for $x in collection(\"/predlozeniAmandmani\")");

@@ -1,39 +1,59 @@
 <div>
 
-    <!--TITLE-->
-    <div class="alert alert-info" role="alert">
-        <h3>AKTOVI AMANDMANA</h3>
-    </div>
 
-
-
-    </br>
     <!--ALL AMANDMANTS FOR AKT-->
-    <h4>SVI AMANDMANI NA AKT</h4>
+    <h4>PREDLOZENI AMANDMANI NA AKT</h4>
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>Naslov</th>
+                <!--<th>Naslov</th>-->
                 <th>Doc Id</th>
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="model in amandmants">
-                <td>
-                    {{model.naslov}}
-                </td>
+            <tr ng-repeat="model in amandmands">
+               <!-- <td>
+                    {{model.akt.value}}
+                </td>-->
                 <td>
                     {{model.documentId}}
                 </td>
                 <td>
-                    <button type="submit" class="btn btn-success btn-sm" ng-click="prihvati()">
-                        <span class="glyphicon glyphicon-ok"></span>&nbsp;<span>PRIHVATI</span>
-                    </button>
+                    <!------------------------------------------------->
+                    <!--NEW TABLE-->
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Redni broj</th>
+                                <th>Tip izmene</th>
+                                <th>Detalji</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="model2 in model.amandman">
+                                <td>
+                                    {{model2.redniBroj}}
+                                </td>
+                                <td>
+                                    {{model2.predmetIzmeneAndTipIzmeneAndObrazlozenje[1]}}
+                                </td>
+                                <td>
+                                    {{model2.predmetIzmeneAndTipIzmeneAndObrazlozenje[2].content[0]}}
+                                    <br>
+                                    {{model2.predmetIzmeneAndTipIzmeneAndObrazlozenje[2].content[2]}}
+                                </td>
+
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!------------------------------------------------->
                 </td>
                 <td>
-                    <button type="submit" class="btn btn-info btn-sm" ui-sref="amandmaniAkta({id:model.documentId})">
-                        <span class="glyphicon glyphicon-th-list"></span>&nbsp;<span>VIDI AMANDMANE</span>
+                    <button type="submit" class="btn btn-success btn-sm" ng-click="prihvati()">
+                        <span class="glyphicon glyphicon-ok"></span>&nbsp;<span>PRIHVATI</span>
                     </button>
                 </td>
                 <td>
