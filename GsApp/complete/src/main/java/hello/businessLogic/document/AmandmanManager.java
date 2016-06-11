@@ -3,6 +3,7 @@ package hello.businessLogic.document;
 import com.marklogic.client.document.DocumentUriTemplate;
 import hello.StringResources.MarkLogicStrings;
 import hello.businessLogic.core.BeanManager;
+import hello.entity.gov.gradskaskupstina.Akt;
 import hello.entity.gov.gradskaskupstina.Amandman;
 import hello.entity.gov.gradskaskupstina.User;
 import org.slf4j.Logger;
@@ -139,6 +140,17 @@ public class AmandmanManager extends BeanManager<Amandman> {
      */
     public boolean validateAkt(Amandman amandman){
         return validateBeanBySchema(amandman);
+    }
+
+    public ArrayList<Amandman> getAllAmandmansForAkt(String docId){
+        Akt akt = (Akt)this.read(false,docId);
+        StringBuilder builder = new StringBuilder();
+        builder.append("declare namespace a=\"http://www.gradskaskupstina.gov/\";");
+        builder.append("for $x in collection(\"/predlozeniAmandmani\")");
+        builder.append("  where $x/a:Amandman/a:Akt/text() = \"");
+        builder.append(akt.getNaslov() + "\"");
+        builder.append(" return $x");
+        return queryManager.executeQuery(builder.toString());
     }
 
 }
