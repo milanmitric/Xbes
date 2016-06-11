@@ -1,5 +1,5 @@
 <div>
-    <h3>Aktovi
+    <h3>Predlozeni Aktovi
     </h3>
 
 
@@ -8,13 +8,50 @@
             <thead>
             <tr>
                 <th>Naslov</th>
-                <th>Doc Id</th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
             <tr ng-repeat="model in collection">
                 <td>{{model.naslov}}</td>
-                <td>{{model.documentId}}</td>
+                <!--<td>{{model.documentId}}</td>-->
+                <td>
+                    <button type="submit"
+                            ui-sref="aktdetail({id:model.documentId})"
+                            class="btn btn-info btn-sm">
+                        <span class="glyphicon glyphicon-blackboard"></span>&nbsp;<span>Otvori akt</span>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div>
+    <h3>Odobreni Aktovi
+    </h3>
+
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Naslov</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="model in collectionOdobreni">
+                <td>{{model.naslov}}</td>
+                <!--<td>{{model.documentId}}</td>-->
+                <td>
+                    <button type="submit"
+                            ui-sref="aktdetail({id:model.documentId})"
+                            class="btn btn-info btn-sm">
+                        <span class="glyphicon glyphicon-blackboard"></span>&nbsp;<span>Otvori akt</span>
+                    </button>
+                </td>
             </tr>
             </tbody>
         </table>
