@@ -14,7 +14,7 @@ angular.module('xapp', ['ngResource', 'ui.router'])
                        },
                        'navbar':{
                            templateUrl: 'navbar/navbar.html',
-                           //controller: 'WelcomeController'
+                           controller: 'NavbarController'
                        }
                    }
                });

@@ -2,9 +2,11 @@ package hello.rest;
 
 
 import hello.businessLogic.document.AktManager;
+import hello.entity.Sednica;
 import hello.entity.gov.gradskaskupstina.Akt;
 import hello.security.EncryptKEK;
 import hello.security.KeyStoreManager;
+import hello.util.SednicaManager;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -28,17 +30,27 @@ import java.util.ArrayList;
 public class TestRest {
 
 
+    private int count=0;
 
+
+    @PreAuthorize("hasAuthority('XXX')")
     @RequestMapping("/test0")
     public HttpStatus test0() {
         /*test - to see if rest is working*/
+        SednicaManager sm = new SednicaManager();
+        sm.updateSednica(false);
+        count++;
+        System.out.println("COUNT:"+count);
         return HttpStatus.OK;
     }
 
-    @PreAuthorize("hasAuthority('GOST')")
+
+
+    @PreAuthorize("hasRole('XXX'")
     @RequestMapping("/test1")
     public HttpStatus test1() {
         //notacije ne rade uopste WTFFFFFFFFFFFFFFF
+        System.out.println(new SednicaManager().getSednicaStatus());
         return HttpStatus.OK;
     }
 

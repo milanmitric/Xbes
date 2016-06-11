@@ -68,6 +68,7 @@ public class AktController {
             produces = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity postAct(@RequestBody Akt akt) {
 
+        //TODO - if sednica false
         logger.info("[CONTENT OF ADDED ACT]:"+akt.toString());
 
         if(!aktManager.validateAkt(akt)){
@@ -124,9 +125,7 @@ public class AktController {
         Document doc=enkryption.encrypt(d);
         /*CONVERT DOCUMET TO INPUTSTREAM*/
         FileInputStream is= (FileInputStream) aktManager.convertDocumentToInputStream(doc);
-
-        //todo - kako mitric pravi random ID?!
-        aktManager.write(is, "ARCHIVED: "+docID, "archive", false, null);
+        aktManager.write(is, MarkLogicStrings.ARCHIVE_PREFIX+docID, MarkLogicStrings.ARCHIVE_COL_ID, false, null);
         System.out.println("UPISANOOOOOOOOOOOOOOOOO");
 
         return new ResponseEntity(docID, HttpStatus.OK);

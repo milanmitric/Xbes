@@ -21,6 +21,12 @@ public class MarkLogicStrings {
     public static String KEYSTORE_FILEPATH = "data/keystore.jks";
     public static char[] KEYSTORE_PASSWORD = "keystorepass".toCharArray();
 
+    // Archive prefix and collection ID
+    public static String ARCHIVE_PREFIX = "ARCHIVED:";
+    public static String ARCHIVE_COL_ID = "archive";
+
+
+
     // Root CA alias and password.
     public static String ROOT_CERTIFICATE_ALIAS = "root";
     public static char[] ROOT_CERTIFICATE_PASSWORD = "roow".toCharArray();
