@@ -38,7 +38,7 @@ public class AktController {
     private EncryptKEK enkryption = new EncryptKEK();
 
 
-    //TODO - preimenuj ovo i izmeni u servisina i izmeni ovde da vraca SVE a ne samo proposed
+
     @RequestMapping(value = "/getallacts",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -52,7 +52,7 @@ public class AktController {
     }
 
 
-    //OVO JE GET PROPOSED A NE OVO GORE ^ SONETOVO :D
+
     @RequestMapping(value = "/getproposed",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -62,15 +62,16 @@ public class AktController {
     }
 
 
-    //OVO JE GET PROPOSED A NE OVO GORE ^ SONETOVO :D
+    //TODO
     @RequestMapping(value = "/getmyproposedakts",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity getmyproposed() {
 
         ArrayList<Akt> aktovi = aktManager.getAllFilesProposed();
-        for(int i =aktovi.size(); i>=0; i--){
+        for(int i=aktovi.size()-1; i>=0; i--){
 
+            //if(aktovi.get(i).get)
             
         }
 
