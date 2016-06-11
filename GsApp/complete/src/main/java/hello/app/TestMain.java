@@ -11,6 +11,9 @@ import hello.security.KeyStoreManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.xml.transform.*;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -23,7 +26,11 @@ public class TestMain {
     private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
     public static void main(String[] args) throws FileNotFoundException {
-        reinitializeKeyStore();
+        try{
+            transform();
+        } catch (Exception e){
+
+        }
     }
 
     public static void reinitializeKeyStore(){
@@ -99,6 +106,15 @@ public class TestMain {
             logger.info("ERROR");
         }
         logger.info("SUCCESS");
+    }
+
+    public static void transform() throws TransformerException {
+        TransformerFactory factory = TransformerFactory.newInstance();
+        Source xslt = new StreamSource(new File("transform/Akt.xsl"));
+        Transformer transformer = factory.newTransformer(xslt);
+
+        Source text = new StreamSource(new File("transform/Akt.xml"));
+        transformer.transform(text, new StreamResult(new File("transform/Akt.html")));
     }
 }
 
