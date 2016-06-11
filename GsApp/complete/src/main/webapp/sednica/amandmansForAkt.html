@@ -1,0 +1,54 @@
+<div>
+
+    <!--TITLE-->
+    <div class="alert alert-info" role="alert">
+        <h3>AKTOVI AMANDMANA</h3>
+    </div>
+
+
+
+    </br>
+    <!--ALL AMANDMANTS FOR AKT-->
+    <h4>SVI AMANDMANI NA AKT</h4>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Naslov</th>
+                <th>Doc Id</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="model in amandmants">
+                <td>
+                    {{model.naslov}}
+                </td>
+                <td>
+                    {{model.documentId}}
+                </td>
+                <td>
+                    <button type="submit" class="btn btn-success btn-sm" ng-click="prihvati()">
+                        <span class="glyphicon glyphicon-ok"></span>&nbsp;<span>PRIHVATI</span>
+                    </button>
+                </td>
+                <td>
+                    <button type="submit" class="btn btn-info btn-sm" ui-sref="amandmaniAkta({id:model.documentId})">
+                        <span class="glyphicon glyphicon-th-list"></span>&nbsp;<span>VIDI AMANDMANE</span>
+                    </button>
+                </td>
+                <td>
+                    <button type="submit" class="btn btn-danger btn-sm" ng-click="odbij()">
+                        <span class="glyphicon glyphicon-remove"></span>&nbsp;<span>ODBIJ</span>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+
+
+</div>

@@ -7,17 +7,23 @@ import hello.entity.gov.gradskaskupstina.Akt;
 import hello.security.EncryptKEK;
 import hello.security.KeyStoreManager;
 import hello.util.SednicaManager;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.w3c.dom.Document;
 
 import javax.crypto.SecretKey;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.security.cert.Certificate;
 import java.util.ArrayList;
@@ -148,6 +154,28 @@ public class TestRest {
 
         return new ResponseEntity("springara2", HttpStatus.ACCEPTED);
     }
+
+
+    @RequestMapping(value = "/pdf", method = RequestMethod.GET, produces = "application/octet-stream")
+    public ResponseEntity<InputStreamResource> downloadPDFFile()
+            throws IOException {
+
+        ClassPathResource pdfFile = new ClassPathResource("akt1.xml");
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
+        headers.add("Pragma", "no-cache");
+        headers.add("Expires", "0");
+
+        return ResponseEntity
+                .ok()
+                .headers(headers)
+                .contentLength(pdfFile.contentLength())
+                .contentType(MediaType.parseMediaType("application/octet-stream"))
+                .body(new InputStreamResource(pdfFile.getInputStream()));
+    }
+
+
 
 
 

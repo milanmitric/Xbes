@@ -3,6 +3,7 @@
 angular.module('xapp')
     .controller('SednicaHomeController', function ($scope, $state, authService, amandmanService, sednicaService, aktService) {
 
+
      //load sednica status
      sednicaService.getSednicaStatus(
                 function(res){
@@ -14,7 +15,7 @@ angular.module('xapp')
                         }else{
                             $scope.buttonColor="success";
                             $scope.buttonTxt="ZAPOCNI SEDNICU";
-                             $scope.akts=[];
+                            $scope.akts=[];
                         }
                 },
                 function(res){
@@ -31,7 +32,7 @@ angular.module('xapp')
         }else{
             $scope.buttonColor="success";
             $scope.buttonTxt="ZAPOCNI SEDNICU";
-             $scope.akts=[];
+            $scope.akts=[];
         }
         $scope.sednicaState=!$scope.sednicaState;
         sednicaService.setSednicaStatus(

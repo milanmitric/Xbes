@@ -58,6 +58,21 @@ public class AktController {
     }
 
 
+    //OVO JE GET PROPOSED A NE OVO GORE ^ SONETOVO :D
+    @RequestMapping(value = "/getmyproposedakts",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity getmyproposed() {
+
+        ArrayList<Akt> aktovi = aktManager.getAllFilesProposed();
+        for(int i =aktovi.size(); i>=0; i--){
+
+            
+        }
+
+        return new ResponseEntity(aktovi, HttpStatus.OK);
+    }
+
 
 
     //tagsearch

@@ -20,4 +20,15 @@ angular.module('xapp', ['ngResource', 'ui.router'])
                });
         //$locationProvider.html5Mode(true);
 
-    });
+
+    }).run(function($rootScope,  $state) {
+          $rootScope.$on("$locationChangeStart", function(event, next, current) {
+              // handle route changes
+              console.log(event);
+
+              //$state.go('signup');
+
+
+
+          });
+          });
