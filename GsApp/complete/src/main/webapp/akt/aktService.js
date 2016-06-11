@@ -22,7 +22,18 @@ angular.module('xapp')
                                 }
 
                      			$http(req).then(onSuccess, onError);
-        },
+        },searchActsByTag: function(tagParam,parametarParam,onSuccess, onError){
+                              var req = {
+                                             method: 'GET',
+                                             url: '/api/tagsearch',
+                                             params : {tag:tagParam , parametar:parametarParam},
+                                             headers: {
+                                                 'Content-Type': 'application/x-www-form-urlencoded'
+                                             }
+                                         }
+
+                              			$http(req).then(onSuccess, onError);
+                 },
 		saveAct: function(act,onSuccess, onError){
                      var req = {
                      					method: 'POST',

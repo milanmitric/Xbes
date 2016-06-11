@@ -52,7 +52,19 @@ angular.module('xapp')
                                                       controller: 'NavbarController'
                                                   }
                                               }
-          });
+          }).state('actsearchbytagresults', {
+                                                          url: '/actsearchbytagresults/:pretraga?tag',
+                                                          views: {
+                                                              'content': {
+                                                                  templateUrl: 'akt/searchResults.html',
+                                                                  controller: 'ActSearchByTagResultsController'
+                                                              },
+                                                              'navbar':{
+                                                                  templateUrl: 'navbar/navbar.html',
+                                                                  controller: 'NavbarController'
+                                                              }
+                                                          }
+                      });
 
 
         //$locationProvider.html5Mode(true);

@@ -17,3 +17,29 @@
     </div>
 
 </div>
+<div class="col-md-4 col-md-offset-4">
+
+    <h3>Pretrazi akte po tagovima</h3>
+
+
+    <div class="input-group">
+        <span class="input-group-addon" id="basic-addon2">Unesite kljucnu rec</span>
+        <input type="text" class="form-control"  ng-model="searchField1">
+
+    </div>
+    </br>
+    <div class="input-group">
+        <span class="input-group-addon" id="basic-addon3">Odaberite tag</span>
+        <select name="repeatSelect" id="repeatSelect" ng-model="selectedOption" class="form-control">
+            <option ng-repeat="option in options" value="{{option}}">{{option}}</option>
+        </select>
+    </div>
+    </br>
+    <div class="col-md-4 col-md-offset-4">
+
+        <button class="btn btn-primary" type="button" ui-sref="actsearchbytagresults({tag:selectedOption, pretraga:searchField1})">
+            Pretraga
+        </button>
+    </div>
+
+</div>
