@@ -48,7 +48,7 @@ public class AktManager extends BeanManager<Akt> {
     public ArrayList<Akt> getAllFilesApproved(){
         StringBuilder query = new StringBuilder();
         query.append("fn:collection(\"");
-        query.append(MarkLogicStrings.AKTOVI_PREDLOZEN_COL_ID);
+        query.append(MarkLogicStrings.AKTOVI_USVOJENI_COL_ID);
         query.append("\")");
         return queryManager.executeQuery(query.toString());
     }

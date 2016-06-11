@@ -44,7 +44,11 @@ public class AktController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity getAllAct() {
         ArrayList<Akt> aktovi = aktManager.getAllFilesProposed();
-        return new ResponseEntity(aktovi, HttpStatus.OK);
+        ArrayList<Akt> aktovi2 = aktManager.getAllFilesApproved();
+        HashMap<String,ArrayList<Akt>> returnTwoLists = new HashMap<String,ArrayList<Akt>>();
+        returnTwoLists.put("proposed",aktovi);
+        returnTwoLists.put("approved",aktovi2);
+        return new ResponseEntity(returnTwoLists, HttpStatus.OK);
     }
 
 

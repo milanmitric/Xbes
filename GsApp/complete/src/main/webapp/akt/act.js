@@ -64,7 +64,19 @@ angular.module('xapp')
                                                                   controller: 'NavbarController'
                                                               }
                                                           }
-                      });
+          }).state('aktdetail', {
+                                                                      url: '/aktdetail/{id}',
+                                                                      views: {
+                                                                          'content': {
+                                                                              templateUrl: 'akt/aktdetail.html',
+                                                                              controller: 'ActDetailController'
+                                                                          },
+                                                                          'navbar':{
+                                                                              templateUrl: 'navbar/navbar.html',
+                                                                              controller: 'NavbarController'
+                                                                          }
+                                                                      }
+                                  });
 
 
         //$locationProvider.html5Mode(true);
