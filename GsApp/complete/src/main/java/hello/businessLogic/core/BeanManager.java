@@ -18,7 +18,6 @@ import javax.xml.XMLConstants;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 
@@ -141,7 +140,7 @@ public class BeanManager <T>{
      * @param user User that proposes Akt, needs to sign it first.
      * @return Indicator of success.
      */
-    public boolean write(FileInputStream inputStream, String docId, String colId, boolean shouldSign, User user) {
+    public boolean write(InputStream inputStream, String docId, String colId, boolean shouldSign, User user) {
         return  writeManager.write(inputStream,docId,colId,shouldSign,user);
     }
 
@@ -151,7 +150,7 @@ public class BeanManager <T>{
      * @param colId URI for collection if the docue.
      * @return Generated URI. <code>NULL</code> if not successful.
      */
-    protected DocumentDescriptor write(FileInputStream inputStream, String colId) {
+    protected DocumentDescriptor write(InputStream inputStream, String colId) {
         return writeManager.write(inputStream,colId);
     }
 

@@ -29,11 +29,13 @@ public class AktManager extends BeanManager<Akt> {
     public AktManager(){
         super();
     }
+
     /**
      * Returns all files that are proposed from database.
+     *
      * @return List of files in database. <code>NULL</code> if not successful.
      */
-    public ArrayList<Akt> getAllFilesProposed(){
+    public ArrayList<Akt> getAllFilesProposed() {
         StringBuilder query = new StringBuilder();
         query.append("fn:collection(\"");
         query.append(MarkLogicStrings.AKTOVI_PREDLOZEN_COL_ID);
@@ -59,20 +61,20 @@ public class AktManager extends BeanManager<Akt> {
      * @param user User that proposes Akt, needs to sign it first.
      * @return Generated URI. <code>NULL</code> if not successful.
      */
-    public String proposeAkt(Akt akt,User user){
+    public String proposeAkt(Akt akt, User user) {
 
-        if (!validateBeanBySchema(akt)){
+        if (!validateBeanBySchema(akt)) {
             logger.info("[AktManager] ERROR: Akt is not valid!");
             return null;
         }
         String ret = null;
         DocumentUriTemplate template = xmlManager.newDocumentUriTemplate("xml");
         try {
-            ret = this.write(akt,MarkLogicStrings.AKTOVI_PREDLOZEN_COL_ID).getUri();
+            ret = this.write(akt, MarkLogicStrings.AKTOVI_PREDLOZEN_COL_ID).getUri();
             akt.setDocumentId(ret);
             // XML DOCUMENT IS READY TO BE SIGNED!
             boolean shouldSign = true;
-            if (!this.write(akt,ret,MarkLogicStrings.AKTOVI_PREDLOZEN_COL_ID, shouldSign,user)){
+            if (!this.write(akt, ret, MarkLogicStrings.AKTOVI_PREDLOZEN_COL_ID, shouldSign, user)) {
                 ret = null;
                 throw new Exception();
             }
@@ -106,7 +108,7 @@ public class AktManager extends BeanManager<Akt> {
             logger.info("[ERROR] Could not delete document[" + docId + "] from proposed!");
         }
         try {
-            // XML DOCUMENT IS READY TO BE SIGNED!
+            // XML DOCUMENT SHOULD NOT BE SIGNED!
             boolean shouldSign = false;
             if (!write(akt,akt.getDocumentId(),MarkLogicStrings.AKTOVI_USVOJENI_COL_ID,shouldSign,null)){
                 ret = null;
@@ -116,7 +118,7 @@ public class AktManager extends BeanManager<Akt> {
             }
 
         } catch (Exception e) {
-            logger.info("[ERROR] Could not approve document["+docId+"]!");
+            logger.info("[ERROR] Could not approve document[" + docId + "]!");
         }
         return ret;
     }

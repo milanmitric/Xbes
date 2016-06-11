@@ -18,6 +18,8 @@ import org.w3c.dom.Document;
 
 import javax.crypto.SecretKey;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.security.cert.Certificate;
 import java.util.ArrayList;
@@ -149,6 +151,12 @@ public class TestRest {
         return new ResponseEntity("springara2", HttpStatus.ACCEPTED);
     }
 
+    @RequestMapping(value = "/rethtml/" , produces = "text/xml;charset=UTF-8")
+    public ResponseEntity test6() throws FileNotFoundException {
+
+        FileInputStream fileInputStream = new FileInputStream(new File("tmp.xml"));
+        return new ResponseEntity(new File("tmp.xml"),HttpStatus.ACCEPTED);
+    }
 
 
 
