@@ -1,17 +1,54 @@
 <div>
-    <h3>SEDNICA</h3>
-    <div class="col-md-4 col-md-offset-4">
 
+    <!--TITLE-->
+    <div class="alert alert-success" role="alert"><h3>SEDNICA</h3></div>
 
-
-
-        </br>
-        <div class="col-md-4 col-md-offset-4">
-            <button class="btn btn-{{buttonColor}}" type="button" ng-click="startStopSednica()">
-                {{buttonTxt}}
-            </button>
+    <!--START/STOP SEDNICA BUTTON-->
+    <button class="btn btn-{{buttonColor}}" type="button" ng-click="startStopSednica()">
+        {{buttonTxt}}
+    </button>
+    </br>
+    <!--ALL PROPOSED AKTS-->
+    <h4>SVI PREDLOZI AKTOVI</h4>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Naslov</th>
+                    <th>Doc Id</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="model in akts">
+                    <td>
+                        {{model.naslov}}
+                    </td>
+                    <td>
+                        {{model.documentId}}
+                    </td>
+                    <td>
+                        <button type="submit" class="btn btn-success btn-sm" ng-click="prihvati()">
+                            <span class="glyphicon glyphicon-ok"></span>&nbsp;<span>PRIHVATI</span>
+                        </button>
+                    </td>
+                    <td>
+                        <button type="submit" class="btn btn-info btn-sm" ui-sref="amandmaniAkta({id:model.documentId})">
+                            <span class="glyphicon glyphicon-th-list"></span>&nbsp;<span>VIDI AMANDMANE</span>
+                        </button>
+                    </td>
+                    <td>
+                        <button type="submit" class="btn btn-danger btn-sm" ng-click="odbij()">
+                            <span class="glyphicon glyphicon-remove"></span>&nbsp;<span>ODBIJ</span>
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
 
 
-    </div>
+
+
+
+
 </div>

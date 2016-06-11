@@ -37,7 +37,17 @@ angular.module('xapp')
 		delete: function(onSuccess,onError){
 
 		},
-		get:function(onSuccess, onError){
+		getProposed:function(onSuccess, onError){
+
+		var req = {
+                                    method: 'GET',
+                                    url: '/api/getproposed',
+                                    headers: {
+                                        'Content-Type': 'application/x-www-form-urlencoded'
+                                    }
+                                }
+
+                     			$http(req).then(onSuccess, onError);
 
 		},
 		update:function(onSuccess, onError){
