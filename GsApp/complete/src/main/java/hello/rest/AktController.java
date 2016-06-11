@@ -47,6 +47,22 @@ public class AktController {
         return new ResponseEntity(aktovi, HttpStatus.OK);
     }
 
+    //tagsearch
+
+    @RequestMapping(value = "/tagsearch",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity searchActs(@RequestParam("parametar") String parametar,@RequestParam("tag") String tag){
+        logger.info("[AktController] LOG: ENTER TO API FOR SEARCHING  ACTS");
+        HashMap<String,ArrayList<String>> predlozeni = aktManager.returnListOfDocumentsMatchedWithOneFieldSearchAndTag(tag,parametar,MarkLogicStrings.AKTOVI_PREDLOZEN_COL_ID);
+        HashMap<String,ArrayList<String>> usvojeni = aktManager.returnListOfDocumentsMatchedWithOneFieldSearchAndTag(tag,parametar,MarkLogicStrings.AKTOVI_USVOJENI_COL_ID);
+        HashMap<String,HashMap<String,ArrayList<String>>> returnMap = new HashMap<String,HashMap<String,ArrayList<String>>>();
+        returnMap.put("predlozeni",predlozeni);
+        returnMap.put("usvojeni",usvojeni);
+        return new ResponseEntity(returnMap,HttpStatus.OK);
+    }
+
+
     @RequestMapping(value = "/searchacts/{value}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)

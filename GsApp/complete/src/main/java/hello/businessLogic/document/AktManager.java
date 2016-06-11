@@ -200,4 +200,52 @@ public class AktManager extends BeanManager<Akt> {
             return returnMap;
     }
 
+    public HashMap<String,ArrayList<String>> returnListOfDocumentsMatchedWithOneFieldSearchAndTag(String tag,String parameterofSearch, String uriOfCollection){
+        MatchDocumentSummary matches[] = customManager.searchByField(parameterofSearch, uriOfCollection);
+
+        MatchDocumentSummary result;
+        MatchLocation locations[];
+        String text;
+
+        HashMap<String,ArrayList<String>> returnMap = new HashMap<>();
+
+        for (int i = 0; i < matches.length; i++) {
+            result = matches[i];
+            ArrayList<String> listOfMatched = new ArrayList<>();
+
+
+            locations = result.getMatchLocations();
+
+
+            for (MatchLocation location : locations) {
+                String putanja = location.getPath();
+                String retSplit [] = putanja.split(":");
+
+                if(retSplit[retSplit.length-1].split("\\[")[0].equals(tag)) {
+                    String item = "";
+                    for (MatchSnippet snippet : location.getSnippets()) {
+                        text = snippet.getText().trim();
+
+                        if (!text.equals("")) {
+
+                            item += snippet.isHighlighted() ? text.toUpperCase() : text;
+
+                            item += " ";
+                        }
+                    }
+                    listOfMatched.add(item);
+                }
+
+            }
+
+
+
+            //  id, string u kom je mecovano
+            returnMap.put(result.getUri(),listOfMatched);
+
+        }
+
+        return returnMap;
+    }
+
 }
