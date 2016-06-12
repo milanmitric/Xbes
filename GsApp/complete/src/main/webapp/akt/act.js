@@ -42,6 +42,7 @@ angular.module('xapp')
                                                         }
         }).state('actsearchresults', {
                                               url: '/actsearchresults/{pretraga}',
+                                              params: {akt: null},
                                               views: {
                                                   'content': {
                                                       templateUrl: 'akt/searchResults.html',

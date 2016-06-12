@@ -62,6 +62,7 @@ angular.module('xapp')
 
                     }
             );
+            $state.go('sednicahome');
 
     }
 
@@ -84,6 +85,7 @@ angular.module('xapp')
                      }
         );
 
+        $state.go('sednicahome');
     }
 
     /*SVE*/
@@ -104,7 +106,7 @@ angular.module('xapp')
                          }
          );
 
-
+         $state.go('sednicahome');
     }
 
 
