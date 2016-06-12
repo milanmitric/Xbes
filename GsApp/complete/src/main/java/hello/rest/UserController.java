@@ -180,7 +180,7 @@ public class UserController {
         userTry.setPassword(PasswordStorage.base64Encode(hashedPassword));
 
         /*user's default role*/
-        userTry.setRole(Role.ROLE_GRADJANIN);
+        //userTry.setRole(Role.ROLE_GRADJANIN);
         users.getUser().add(userTry);
         /*upisemo ceo doc nazad*/
         usersManager.write(users, MarkLogicStrings.USERS_DOC_ID, MarkLogicStrings.USERS_COL_ID,userTry);

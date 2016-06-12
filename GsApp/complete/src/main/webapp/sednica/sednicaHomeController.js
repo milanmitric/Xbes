@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('xapp')
-    .controller('SednicaHomeController', function ($scope, $state, authService, amandmanService, sednicaService, aktService) {
+    .controller('SednicaHomeController', function ($scope, $state, authService, amandmanService, sednicaService, aktService, ModalService) {
 
 
      //load sednica status
@@ -43,7 +43,7 @@ angular.module('xapp')
         });
     }
 
-     //fun for getting acts(proposed ones)
+     //func for getting acts(proposed ones)
      var getProposedAkts=function(){
         aktService.getProposed(function(response){
                     $scope.akts = response.data;
@@ -51,8 +51,25 @@ angular.module('xapp')
         });
     }
 
-    /*INIT: SHOW ALL PROP AKTS*/
-    //getProposedAkts();
+
+   //prihvati btn
+   $scope.prihvati=function(){
+    alert("prihvati");
+   }
+
+   //odbij btn
+   $scope.odbij=function(){
+       alert("odbij");
+   }
+
+
+
+
+
+
+
+
+
 
 
 

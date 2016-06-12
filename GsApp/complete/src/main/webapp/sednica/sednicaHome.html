@@ -12,8 +12,10 @@
     <!--START/STOP SEDNICA BUTTON-->
 
     </br>
-    <!--ALL PROPOSED AKTS-->
-    <h4>SVI PREDLOZI AKTOVI</h4>
+
+        <h3>Svi predlozeni aktovi:</h3>
+
+
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
@@ -30,21 +32,21 @@
                     <td>
                         {{model.documentId}}
                     </td>
-                    <td>
+                   <!-- <td>
                         <button type="submit" class="btn btn-success btn-sm" ng-click="prihvati()">
-                            <span class="glyphicon glyphicon-ok"></span>&nbsp;<span>PRIHVATI</span>
+                            <span class="glyphicon glyphicon-ok"></span>&nbsp;<span>Prihvati u celosti</span>
                         </button>
-                    </td>
+                    </td>-->
                     <td>
                         <button type="submit" class="btn btn-info btn-sm" ui-sref="amandmantsforakt({id:model.documentId})">
-                            <span class="glyphicon glyphicon-th-list"></span>&nbsp;<span>VIDI AMANDMANE</span>
+                            <span class="glyphicon glyphicon-th-list"></span>&nbsp;<span>Vidi amandmane</span>
                         </button>
                     </td>
-                    <td>
+                   <!-- <td>
                         <button type="submit" class="btn btn-danger btn-sm" ng-click="odbij()">
-                            <span class="glyphicon glyphicon-remove"></span>&nbsp;<span>ODBIJ</span>
+                            <span class="glyphicon glyphicon-remove"></span>&nbsp;<span>Odbij</span>
                         </button>
-                    </td>
+                    </td>-->
                 </tr>
                 </tbody>
             </table>

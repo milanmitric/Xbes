@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('xapp', ['ngResource', 'ui.router'])
+angular.module('xapp', ['ngResource', 'ui.router', 'angularModalService'])
     .config(function ($stateProvider, $urlRouterProvider) {
 
         $urlRouterProvider.otherwise('/home');

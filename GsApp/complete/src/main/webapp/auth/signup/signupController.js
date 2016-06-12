@@ -3,6 +3,9 @@
 angular.module('xapp')
     .controller('SignupController', function ($scope, authService, $location) {
 
+        $scope.user={};
+        $scope.user.role='Odbornik';
+
  		//button clicked
 	    $scope.signup = function(){
             console.log($scope.user);

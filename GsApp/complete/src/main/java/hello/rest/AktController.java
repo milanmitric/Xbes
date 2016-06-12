@@ -62,6 +62,7 @@ public class AktController {
     }
 
 
+
     //TODO
     @RequestMapping(value = "/getmyproposedakts",
             method = RequestMethod.GET,
@@ -79,8 +80,6 @@ public class AktController {
     }
 
 
-
-    //tagsearch
 
     @RequestMapping(value = "/tagsearch",
             method = RequestMethod.GET,
@@ -179,6 +178,25 @@ public class AktController {
 
         return new ResponseEntity(docID, HttpStatus.OK);
     }
+
+
+
+
+
+    /*prihvati akt nekako*/
+    @RequestMapping(value = "/aktbre",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity aktmadafaka(@RequestParam("parametar") String parametar,@RequestParam("tag") String tag){
+
+
+
+
+        return new ResponseEntity("",HttpStatus.OK);
+    }
+
+
+
 
 
 
