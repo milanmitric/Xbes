@@ -67,11 +67,11 @@ public class AmandmanController {
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity getamandmantsforakt(@RequestParam("docID") String docID) {
-        System.out.println("USATO, ID: "+docID);
+       // System.out.println("USATO, ID: "+docID);
 
         Akt a =aktManager.read(docID, false);
         ArrayList<Amandman> amandmens = amandmanManager.getAllAmandmansForAkt(a);
-        System.out.print(amandmens.size());
+        //System.out.print(amandmens.size());
         return new ResponseEntity(amandmens, HttpStatus.OK);
     }
 

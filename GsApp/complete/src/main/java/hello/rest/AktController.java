@@ -183,12 +183,26 @@ public class AktController {
 
 
 
-    /*prihvati akt nekako*/
-    @RequestMapping(value = "/aktbre",
-            method = RequestMethod.GET,
+    /*prihvati akt nekako ili nemoj*/
+    @RequestMapping(value = "/prihvatiovono",
+            method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity aktmadafaka(@RequestParam("parametar") String parametar,@RequestParam("tag") String tag){
+    public ResponseEntity aktmadafaka(@RequestBody ArrayList<String> amandmants){
 
+        System.out.println("AMANDMANI: "+amandmants);
+        //uvek stigne lista, 0. u nizu je UVEK ID od AKTA, a nakon toga idu ID od amandmana
+        String aktID=amandmants.get(0);
+        if(amandmants.size()==1){
+            //TODO - ODBIJA SE AKT
+            //AKT ID : amandmants.get(0)
+
+        }else {
+            //TODO - USVAJA SE DELIMICNO/POTPUNO
+            //AKT ID : amandmants.get(0)
+            //1. , 2. , 3. ... ID od AMANDMANA
+
+
+        }
 
 
 

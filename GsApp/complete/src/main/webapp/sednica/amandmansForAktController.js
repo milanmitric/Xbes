@@ -10,6 +10,13 @@ angular.module('xapp')
                 console.log("AMANDMANI: ");
                 console.log(res.data);
                 $scope.amandmands=res.data;
+
+                $scope.amandmandsAll=[];
+                for(var i=0; i<$scope.amandmands.length; i++){
+                    $scope.amandmandsAll.push($scope.amandmands[i].documentId);
+                }
+
+
             },
             function(res){
 
@@ -17,7 +24,9 @@ angular.module('xapp')
     );
 
     /*CLICKING LOGIC :D*/
+
     $scope.amandmantsToAdd=[];
+
     $scope.dodaj=function(amID){
 
         if($scope.amandmantsToAdd.indexOf(amID)==-1){
@@ -32,21 +41,69 @@ angular.module('xapp')
 
 
     /*
-    MAIN LOGIC HERE
+    //-----MAIN LOGIC HERE-------//
     */
-    
+
     /*DELIMICNO*/
     $scope.prihvatiDelimicno=function(){
+
+            var list=[];
+            list.push($stateParams.id);
+            list = list.concat($scope.amandmantsToAdd);
+
+            sednicaService.prihvati(
+                    list,
+                    function(res){
+
+
+                    },
+                    function(res){
+
+
+                    }
+            );
 
     }
 
     /*SVE*/
     $scope.prihvatiSve=function(){
 
+        var list=[];
+        list.push($stateParams.id);
+        list = list.concat($scope.amandmandsAll);
+        console.log(list);
+        sednicaService.prihvati(
+                     list,
+                     function(res){
+
+
+                     },
+                     function(res){
+
+
+                     }
+        );
+
     }
 
     /*SVE*/
     $scope.odbij=function(){
+
+        var list=[];
+        list.push($stateParams.id);
+
+        sednicaService.prihvati(
+                         list,
+                         function(res){
+
+
+                         },
+                         function(res){
+
+
+                         }
+         );
+
 
     }
 
