@@ -12,6 +12,18 @@ angular.module('xapp')
 
              			$http(req).then(onSuccess, onError);
 		},
+		getMyAllActs: function(onSuccess, onError){
+                     var req = {
+                                    method: 'GET',
+                                    url: '/api/getmyallacts',
+                                    headers: {
+                                        'Content-Type': 'application/x-www-form-urlencoded'
+                                    }
+                                }
+
+                     			$http(req).then(onSuccess, onError);
+        },
+
 		searchActs: function(parametar,onSuccess, onError){
                      var req = {
                                     method: 'GET',

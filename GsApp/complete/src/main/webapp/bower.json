@@ -14,8 +14,9 @@
     "angular-resource": "1.4.8",
     "angular-sanitize": "1.4.8",
     "angular-ui-router": "0.2.15",
-    "bootstrap": "3.3.5"
-    },
+    "bootstrap": "3.3.5",
+    "angular-modal-service": "^0.9.10"
+  },
   "description": "najjaci",
   "main": "",
   "license": "MIT",

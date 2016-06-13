@@ -16,10 +16,18 @@ angular.module('xapp')
                              			}
                              				$http(req).then(onSuccess, onError);
         },
-		delete: function(onSuccess,onError){
-
-		},
-		get:function(onSuccess, onError){
+		prihvati: function(amaList, onSuccess,onError){
+            var req = {
+                    method: 'POST',
+                    url: '/api/prihvatiovono',
+                    headers: {
+                                    'Content-Type': 'application/json'
+                    },
+                    data: amaList
+                }
+                $http(req).then(onSuccess, onError);
+        },
+		lal:function(onSuccess, onError){
 
 		},
 		update:function(onSuccess, onError){

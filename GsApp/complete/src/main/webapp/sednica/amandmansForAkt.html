@@ -2,23 +2,32 @@
 
 
     <!--ALL AMANDMANTS FOR AKT-->
-    <h4>PREDLOZENI AMANDMANI NA AKT</h4>
+
+
+    <h3>Svi predlozeni amandmani na akt:</h3>
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
-            <tr>
-                <!--<th>Naslov</th>-->
-                <th>Doc Id</th>
-            </tr>
+                <tr>
+                    <!--<th>Naslov</th>-->
+                    <th>Izbor</th>
+                    <th>Doc Id</th>
+                    <th>Amandman</th>
+                </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="model in amandmands">
-               <!-- <td>
-                    {{model.akt.value}}
-                </td>-->
+            <tr ng-repeat="model in amandmands track by $index">
+                <!--BTN-->
+                <td>
+                    <button type="submit" class="btn btn-{{btns[$index]}} btn-sm" ng-click="dodaj(model.documentId, $index)">
+                        <span class="glyphicon glyphicon-{{btns2[$index]}}"></span>&nbsp;<span><!--txthere--></span>
+                    </button>
+                </td>
+                <!--ID-->
                 <td>
                     {{model.documentId}}
                 </td>
+                <!--NED TABLE-->
                 <td>
                     <!------------------------------------------------->
                     <!--NEW TABLE-->
@@ -29,6 +38,7 @@
                                 <th>Redni broj</th>
                                 <th>Tip izmene</th>
                                 <th>Detalji</th>
+
                             </tr>
                             </thead>
                             <tbody>
@@ -51,24 +61,47 @@
                     </div>
                     <!------------------------------------------------->
                 </td>
-                <td>
-                    <button type="submit" class="btn btn-success btn-sm" ng-click="prihvati()">
-                        <span class="glyphicon glyphicon-ok"></span>&nbsp;<span>PRIHVATI</span>
-                    </button>
-                </td>
-                <td>
-                    <button type="submit" class="btn btn-danger btn-sm" ng-click="odbij()">
-                        <span class="glyphicon glyphicon-remove"></span>&nbsp;<span>ODBIJ</span>
-                    </button>
-                </td>
             </tr>
             </tbody>
         </table>
     </div>
 
 
+    <div class="alert alert-success" role="alert">
+        Izabrani za prihvatanje:
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Doc Id</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="model3 in amandmantsToAdd">
+                    <td>
+                        {{model3}}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
 
-
+    <br><br>
+    <div class="alert alert-success" role="alert">
+    <button type="submit" class="btn btn-success btn-sm" ng-click="prihvatiSve()">
+        <span class="glyphicon glyphicon-ok"></span>&nbsp;<span>Prihvati sve amandmane</span>
+    </button>
+    &nbsp;
+    <button type="submit" class="btn btn-success btn-sm" ng-click="prihvatiDelimicno()">
+        <span class="glyphicon glyphicon-ok"></span>&nbsp;<span>Prihvati delimicno</span>
+    </button>
+    &nbsp;
+    <button type="submit" class="btn btn-danger btn-sm" ng-click="odbij()">
+        <span class="glyphicon glyphicon-remove"></span>&nbsp;<span>Odbij sve amandmane</span>
+    </button>
+    </div>
+    <br><br>
 
 </div>

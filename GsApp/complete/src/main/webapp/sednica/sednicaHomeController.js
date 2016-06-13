@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('xapp')
-    .controller('SednicaHomeController', function ($scope, $state, authService, amandmanService, sednicaService, aktService) {
+    .controller('SednicaHomeController', function ($scope, $state, authService, amandmanService, sednicaService, aktService, ModalService) {
 
 
      //load sednica status
@@ -43,16 +43,76 @@ angular.module('xapp')
         });
     }
 
-     //fun for getting acts(proposed ones)
+     //func for getting acts(proposed ones)
      var getProposedAkts=function(){
-        aktService.getProposed(function(response){
-                    $scope.akts = response.data;
+        aktService.getProposed(
+                    function(response){
+
+                        $scope.akts = response.data;
+                        $scope.btns=[];
+                        for(var i=0; i<$scope.akts.length; i++){
+                            $scope.btns.push(false);
+                        }
+
                     },function(response){
-        });
+
+                    }
+        );
     }
 
-    /*INIT: SHOW ALL PROP AKTS*/
-    //getProposedAkts();
+
+   //prihvati btn
+   $scope.prihvatiUNacelu=function(aktID, idx){
+    //alert(aktID);
+    $scope.btns[idx]=true;
+    var list=[];
+    list.push(aktID);
+     sednicaService.prihvati(
+                         list,
+                         function(res){
+
+
+                         },
+                         function(res){
+
+
+                         }
+            );
+
+
+
+   }
+
+   //odbij btn
+   $scope.odbij=function(aktID){
+       //alert("odbij");
+       var list=[];
+       list.push('AKTSEODBIJA');
+       list.push(aktID);
+            sednicaService.prihvati(
+                                list,
+                                function(res){
+
+
+                                },
+                                function(res){
+
+
+                                }
+                   );
+
+
+
+   }
+
+
+
+
+
+
+
+
+
 
 
 

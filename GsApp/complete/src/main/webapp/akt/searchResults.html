@@ -4,8 +4,8 @@
 
     <!-- LIST OF MY PROJECTS -->
 
-    <h3>Rezultati pretrage
-
+    <h3>
+        Rezultati pretrage: <b>{{poOvome}}</b>
     </h3>
 
     <div class="table-responsive">
@@ -24,7 +24,7 @@
                                 <th>{{key}}</th>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="model in value">
+                                <tr ng-repeat="model in value track by $index">
                                     <td>{{model}}
                                     </td>
                                 </tr>
@@ -56,7 +56,7 @@
             <tbody>
             <tr ng-repeat="(key, value) in collectionUsvojeni">
                 <td><th>{{key}}</th>
-                    <tr ng-repeat="model in value">
+                    <tr ng-repeat="model in value track by $index">
                         <td>model</td>
                     </tr>
                 </td>

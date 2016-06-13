@@ -35,6 +35,13 @@ public class AmandmanController {
         ArrayList<Amandmani> amandmani = amandmanManager.getAllAmendmentProposed();
         return new ResponseEntity(amandmani, HttpStatus.OK);
     }
+    @RequestMapping(value = "/getmyallamandmans",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity getMyAllAmandmans() {
+
+        return new ResponseEntity(HttpStatus.OK);
+    }
 
     @RequestMapping(value = "/amandman",
             method = RequestMethod.POST,
@@ -66,7 +73,7 @@ public class AmandmanController {
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity getamandmantsforakt(@RequestParam("docID") String docID) {
-        System.out.println("USATO, ID: "+docID);
+       // System.out.println("USATO, ID: "+docID);
 
         Akt a =aktManager.read(docID, false);
         ArrayList<Amandmani> amandmens = amandmanManager.getAllAmandmansForAkt(a);

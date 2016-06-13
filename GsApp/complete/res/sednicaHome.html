@@ -25,28 +25,28 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="model in akts track by $index">
+                <tr ng-repeat="model in akts">
                     <td>
                         {{model.naslov}}
                     </td>
                     <td>
                         {{model.documentId}}
                     </td>
-                   <td>
-                        <button  type="submit" class="btn btn-success btn-sm" ng-click="prihvatiUNacelu(model.documentId, $index)">
-                            <span class="glyphicon glyphicon-ok"></span>&nbsp;<span>Akt se prihvata u nacelu</span>
+                   <!-- <td>
+                        <button type="submit" class="btn btn-success btn-sm" ng-click="prihvati()">
+                            <span class="glyphicon glyphicon-ok"></span>&nbsp;<span>Prihvati u celosti</span>
                         </button>
-                    </td>
+                    </td>-->
                     <td>
-                        <button ng-show=(btns[$index]) type="submit" class="btn btn-info btn-sm" ui-sref="amandmantsforakt({id:model.documentId})">
+                        <button type="submit" class="btn btn-info btn-sm" ui-sref="amandmantsforakt({id:model.documentId})">
                             <span class="glyphicon glyphicon-th-list"></span>&nbsp;<span>Vidi amandmane</span>
                         </button>
                     </td>
-                    <td>
-                        <button type="submit" class="btn btn-danger btn-sm" ng-click="odbij(model.documentId)">
+                   <!-- <td>
+                        <button type="submit" class="btn btn-danger btn-sm" ng-click="odbij()">
                             <span class="glyphicon glyphicon-remove"></span>&nbsp;<span>Odbij</span>
                         </button>
-                    </td>
+                    </td>-->
                 </tr>
                 </tbody>
             </table>
