@@ -2,6 +2,7 @@ package hello.security;
 
 import hello.StringResources.MarkLogicStrings;
 import hello.entity.gov.gradskaskupstina.User;
+import org.bouncycastle.asn1.x500.X500Name;
 import org.bouncycastle.asn1.x500.X500NameBuilder;
 import org.bouncycastle.asn1.x500.style.BCStyle;
 import org.slf4j.Logger;
@@ -270,5 +271,21 @@ public class KeyStoreManager {
             logger.info(e.getMessage());
         }
         return ret;
+    }
+
+    public X500Name getRootData(){
+        X500NameBuilder builder = new X500NameBuilder(BCStyle.INSTANCE);
+        builder.addRDN(BCStyle.CN, "Skupstina grada Novog Sada");
+        builder.addRDN(BCStyle.SURNAME, "Gradska");
+        builder.addRDN(BCStyle.GIVENNAME, "Skupstina");
+        builder.addRDN(BCStyle.O, "Grad Novi Sad");
+        builder.addRDN(BCStyle.OU, "Skupstina grada");
+        builder.addRDN(BCStyle.C, "RS");
+        builder.addRDN(BCStyle.E, "gradskaSkupstina@novisad.rs");
+        //UID (USER ID) je ID korisnika
+        builder.addRDN(BCStyle.UID, "123445");
+        //Serijski broj sertifikata
+        String sn="1";
+        return builder.build();
     }
 }

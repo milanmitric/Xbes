@@ -3,21 +3,17 @@ package hello.businessLogic.core;
 import com.marklogic.client.DatabaseClient;
 import com.marklogic.client.document.DocumentMetadataPatchBuilder;
 import com.marklogic.client.document.XMLDocumentManager;
-import com.marklogic.client.io.DOMHandle;
 import com.marklogic.client.io.SearchHandle;
 import com.marklogic.client.query.MatchDocumentSummary;
 import com.marklogic.client.query.QueryManager;
 import com.marklogic.client.query.StringQueryDefinition;
-import com.marklogic.client.util.EditableNamespaceContext;
-import hello.StringResources.MarkLogicStrings;
 import hello.entity.gov.gradskaskupstina.Akt;
-import hello.entity.gov.gradskaskupstina.Amandman;
+import hello.entity.gov.gradskaskupstina.Amandmani;
 import hello.entity.gov.gradskaskupstina.Users;
 import hello.util.Converter;
 import hello.util.MyValidationEventHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.w3c.dom.Document;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBIntrospector;
@@ -120,8 +116,8 @@ public class CustomManager <T>{
         boolean ret = false;
 
         try{
-            if (!(bean instanceof Akt) && !(bean instanceof Amandman) && !(bean instanceof Users)){
-                throw  new Exception("Can't validateBeanBySchema element that is not Akt!");
+            if (!(bean instanceof Akt) && !(bean instanceof Amandmani) && !(bean instanceof Users)){
+                throw  new Exception("Can't validateBeanBySchema element that is not Akt or Amandman or Users!");
             }
             JAXBContext context = JAXBContext.newInstance("hello.entity.gov.gradskaskupstina");
             Unmarshaller unmarshaller = context.createUnmarshaller();

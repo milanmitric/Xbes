@@ -2,7 +2,6 @@ package hello.rest;
 
 
 import hello.businessLogic.document.AktManager;
-import hello.entity.Sednica;
 import hello.entity.gov.gradskaskupstina.Akt;
 import hello.security.EncryptKEK;
 import hello.security.KeyStoreManager;

@@ -71,7 +71,6 @@ public class AktController {
     }
 
 
-
     //TODO
     @RequestMapping(value = "/getmyproposedakts",
             method = RequestMethod.GET,

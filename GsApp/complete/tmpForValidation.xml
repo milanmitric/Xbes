@@ -1,77 +1,30 @@
-<?xml version="1.0" encoding="UTF-8"?><Users xmlns="http://www.gradskaskupstina.gov/" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gradskaskupstina.gov/">
-    <User>
-        <Username>rusija</Username>
-        <Password>rusija</Password>
-        <Ime>Radomir</Ime>
-        <Prezime>Marinković</Prezime>
-        <Salt>X1eBX3DNI6M=</Salt>
-        <Role>ROLE_PREDSEDNIK</Role>
-    </User>
-    <User>
-        <Username>mitra</Username>
-        <Password>mitra</Password>
-        <Ime>Milan</Ime>
-        <Prezime>Mitrić</Prezime>
-        <Salt>X1eBX3DNI6M=</Salt>
-        <Role>ROLE_ODBORNIK</Role>
-    </User>
-    <User>
-        <Username>roki</Username>
-        <Password>roki</Password>
-        <Ime>Nebojša</Ime>
-        <Prezime>Popović</Prezime>
-        <Salt>X1eBX3DNI6M=</Salt>
-        <Role>ROLE_GRADJANIN</Role>
-    </User>
-    <User>
-        <Username>cho</Username>
-        <Password>cho</Password>
-        <Ime>Branislav</Ime>
-        <Prezime>Čogić</Prezime>
-        <Salt>X1eBX3DNI6M=</Salt>
-        <Role>ROLE_GRADJANIN</Role>
-    </User>
-<ds:Signature>
-<ds:SignedInfo>
-<ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
-<ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
-<ds:Reference URI="">
-<ds:Transforms>
-<ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
-<ds:Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments"/>
-</ds:Transforms>
-<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
-<ds:DigestValue>3419Vc+kz0xmtXeus5DjjKhCRAM=</ds:DigestValue>
-</ds:Reference>
-</ds:SignedInfo>
-<ds:SignatureValue>
-W04TUJbLkPLNz+BXuJ1MN9EZP7F2c1zipBp+yOdjzWTlydTSn1mFovmk732CzJemvg2YMXY8OZOr
-1iiW4HDai6/MDnRb46ZajsYcHZFkcvqMEbGOwt5AoofGdR1gMAfCtBYpHro4vAc/bdaLuthVRRZC
-s+BWwkknDjKkCzUyf6Q=
-</ds:SignatureValue>
-<ds:KeyInfo>
-<ds:KeyValue>
-<ds:RSAKeyValue>
-<ds:Modulus>
-zQ9KJLShafi/S2HkWlfnRpKcuLB4BgeJ5y2wBafGRRNz5kss0gjzzQZIDf684gwQ2WYEDlH2s+OX
-fbX4v6KTKJ4ug0wfY05sciJ7Dx+HOPUw6KU5aWvbBIKAXJE+MCSaO/FSk+ujgXSZAY/epUsSqBo2
-EZgUl90oEpTRbV+xX8E=
-</ds:Modulus>
-<ds:Exponent>AQAB</ds:Exponent>
-</ds:RSAKeyValue>
-</ds:KeyValue>
-<ds:X509Data>
-<ds:X509Certificate>
-MIIBtjCCAR8CBEZasCQwDQYJKoZIhvcNAQEFBQAwIjEPMA0GA1UECwwGcHJpbWVyMQ8wDQYDVQQD
-DAZwcmltZXIwHhcNMDcwNTI4MTAzNDEyWhcNMjcwNTIzMTAzNDEyWjAiMQ8wDQYDVQQLDAZwcmlt
-ZXIxDzANBgNVBAMMBnByaW1lcjCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAzQ9KJLShafi/
-S2HkWlfnRpKcuLB4BgeJ5y2wBafGRRNz5kss0gjzzQZIDf684gwQ2WYEDlH2s+OXfbX4v6KTKJ4u
-g0wfY05sciJ7Dx+HOPUw6KU5aWvbBIKAXJE+MCSaO/FSk+ujgXSZAY/epUsSqBo2EZgUl90oEpTR
-bV+xX8ECAwEAATANBgkqhkiG9w0BAQUFAAOBgQB2HjPI427zRaVfLTaeNVcjH9hoTkl9OUJAAmEa
-6EQdbdqZ75ca3IfuLHJFJ8zzyBP4LUGSxgA4OpnKs6Ej5w2n0GHmu0g4YqxInfpv/kCwswoia4Oz
-a17te8mMamffCn3ySX5yZzEex5nueNAyhJkmWBcBCOvJw4+U+gSK50Xbcw==
-</ds:X509Certificate>
-</ds:X509Data>
-</ds:KeyInfo>
-</ds:Signature>
-</Users>
+<?xml version="1.0" encoding="UTF-8"?>
+<Amandmani xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+           xmlns="http://www.gradskaskupstina.gov/"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://www.gradskaskupstina.gov/ file:/D:/GitRepos/Xbes/GsApp/complete/schema/Amandmani.xsd">
+    <PravniOsnov>PravniOsnov0</PravniOsnov>
+    <Akt>Akt0</Akt>
+    <Amandman>
+        <PredmetIzmene>PredmetIzmene0</PredmetIzmene>
+        <TipIzmene>izmena</TipIzmene>
+        <Obrazlozenje/>
+    </Amandman>
+    <Amandman>
+        <PredmetIzmene>PredmetIzmene1</PredmetIzmene>
+        <TipIzmene>izmena</TipIzmene>
+        <Obrazlozenje/>
+    </Amandman>
+    <Potpisnici>
+        <Potpisnik>
+            <Ime>Ime0</Ime>
+            <Prezime>Prezime0</Prezime>
+        </Potpisnik>
+        <Potpisnik>
+            <Ime>Ime1</Ime>
+            <Prezime>Prezime1</Prezime>
+        </Potpisnik>
+    </Potpisnici>
+    <UserName>UserName0</UserName>
+    <TimeStamp>2006-05-04T18:13:51.0</TimeStamp>
+</Amandmani>

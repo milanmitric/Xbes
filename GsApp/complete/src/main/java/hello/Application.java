@@ -1,6 +1,8 @@
 package hello;
 
 
+import com.marklogic.client.DatabaseClient;
+import hello.util.Database;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -19,8 +21,10 @@ public class Application {
     /* tomcat http://tomcat.apache.org/tomcat-5.5-doc/ssl-howto.html#Prepare_the_Certificate_Keystore */
 
     public static void main(String[] args) throws IOException {
+        DatabaseClient client = Database.getDbClient();
         SpringApplication.run(Application.class, args);
         System.out.println("[ https://localhost:8080/ ] SERVER IS WORKING...");
+        client.release();
     }
 
 

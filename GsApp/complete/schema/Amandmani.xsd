@@ -1,37 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema  xmlns:xs="http://www.w3.org/2001/XMLSchema"
-			xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
-            xmlns="http://www.gradskaskupstina.gov/"
-            targetNamespace="http://www.gradskaskupstina.gov/"
-            elementFormDefault="qualified">
-	
-	<xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="http://www.w3.org/TR/2002/REC-xmldsig-core-20020212/xmldsig-core-schema.xsd"/>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+    targetNamespace="http://www.gradskaskupstina.gov/" elementFormDefault="qualified"
+    xmlns:gov="http://www.gradskaskupstina.gov/">
 
-    <xs:element name="Amandman">
+    <xs:import namespace="http://www.w3.org/2000/09/xmldsig#"
+        schemaLocation="http://www.w3.org/TR/2002/REC-xmldsig-core-20020212/xmldsig-core-schema.xsd"/>
+
+    <xs:element name="Amandmani">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="DocumentId" type="xs:string" minOccurs="1" maxOccurs="1"/>
-                <xs:element name="PravniOsnov" type="TReferenca" minOccurs="1" maxOccurs="1"/>
-                <xs:element name="Akt" type="TReferenca" minOccurs="1" maxOccurs="1"/>
-                <xs:element name="Amandman" type="TAmandman" minOccurs="1" maxOccurs="unbounded"></xs:element>
-                <xs:element name="Potpisnici" type="TPotpisnici" minOccurs="1" maxOccurs="1"></xs:element>
-            	<xs:element ref="ds:Signature" minOccurs="0" maxOccurs="1"></xs:element>
+                <xs:element name="DocumentId" type="xs:string" minOccurs="0" maxOccurs="1"
+                    form="qualified"/>
+                <xs:element name="PravniOsnov" type="gov:TReferenca" minOccurs="1" maxOccurs="1"/>
+                <xs:element name="Akt" type="gov:TReferenca" minOccurs="1" maxOccurs="1"/>
+                <xs:element name="Amandman" type="gov:TAmandman" minOccurs="1" maxOccurs="unbounded"/>
+                <xs:element name="Potpisnici" type="gov:TPotpisnici" minOccurs="1" maxOccurs="1"/>
+                <xs:element name="UserName" type="xs:string"/>
+                <xs:element name="TimeStamp" type="xs:dateTime"/>
+                <xs:element ref="ds:Signature" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
 
     <xs:complexType name="TAmandman">
-        <xs:sequence minOccurs="1" maxOccurs="unbounded">
-            <xs:element name="PredmetIzmene" type="TReferenca" minOccurs="1" maxOccurs="1"></xs:element>
-            <xs:element name="TipIzmene" type="TTipIzmene" minOccurs="1" maxOccurs="1" />
-            <xs:element name="Obrazlozenje" type="TSemiStruktuiraniTekst" minOccurs="1" maxOccurs="1"></xs:element>
+        <xs:sequence minOccurs="1" maxOccurs="1">
+            <xs:element name="PredmetIzmene" type="gov:TReferenca" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="TipIzmene" type="gov:TTipIzmene" minOccurs="1" maxOccurs="1"/>
+            <xs:element minOccurs="0" name="Sadrzaj" type="xs:string"/>
+            <xs:element name="Obrazlozenje" type="gov:TSemiStruktuiraniTekst" minOccurs="1"
+                maxOccurs="1"/>
         </xs:sequence>
-        <xs:attribute name="RedniBroj" type="xs:positiveInteger" use="optional"></xs:attribute>
+        <xs:attribute name="RedniBroj" type="xs:positiveInteger" use="optional"/>
     </xs:complexType>
 
     <xs:complexType name="TPotpisnici">
         <xs:sequence>
-            <xs:element name="Potpisnik" type="TPotpisnik" minOccurs="1" maxOccurs="unbounded"></xs:element>
+            <xs:element name="Potpisnik" type="gov:TPotpisnik" minOccurs="1" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
 
@@ -58,16 +62,22 @@
     -->
     <xs:attributeGroup name="AGReferenca">
         <xs:attribute name="ref_akt" type="xs:string" use="optional" default="ovaj_akt"/>
-        <xs:attribute name="ref_clanovi" type="TNiz_referenci" use="optional"/>
-        <xs:attribute name="ref_stavovi" type="TNiz_referenci" use="optional"/>
-        <xs:attribute name="ref_tacke" type="TNiz_referenci" use="optional"/>
+        <xs:attribute name="ref_clanovi" type="gov:TNiz_referenci" use="optional"/>
+        <xs:attribute name="ref_stavovi" type="gov:TNiz_referenci" use="optional"/>
+        <xs:attribute name="ref_tacke" type="gov:TNiz_referenci" use="optional"/>
+        <xs:attribute name="ref_deo" type="gov:TNiz_referenci"/>
+        <xs:attribute name="ref_glava" type="gov:TNiz_referenci"/>
+        <xs:attribute name="ref_odeljak" type="gov:TNiz_referenci"/>
+        <xs:attribute name="ref_pododeljak" type="gov:TNiz_referenci"/>
+        <xs:attribute name="ref_podtacka" type="gov:TNiz_referenci"/>
+        <xs:attribute name="ref_alineja" type="gov:TNiz_referenci"/>
     </xs:attributeGroup>
 
     <!-- Tip reference. Prakticno element koji je string sa atributima iz grupe referenca -->
     <xs:complexType name="TReferenca">
         <xs:simpleContent>
             <xs:extension base="xs:string">
-                <xs:attributeGroup ref="AGReferenca"/>
+                <xs:attributeGroup ref="gov:AGReferenca"/>
             </xs:extension>
         </xs:simpleContent>
     </xs:complexType>
@@ -82,7 +92,7 @@
                     </xs:restriction>
                 </xs:simpleType>
             </xs:element>
-            <xs:element name="Referenca" type="TReferenca"/>
+            <xs:element name="Referenca" type="gov:TReferenca"/>
             <xs:element name="Datum" type="xs:date"/>
         </xs:choice>
     </xs:complexType>
