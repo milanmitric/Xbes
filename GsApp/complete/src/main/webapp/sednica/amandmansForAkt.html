@@ -2,25 +2,6 @@
 
 
     <!--ALL AMANDMANTS FOR AKT-->
-    <div class="alert alert-success" role="alert">
-        Izabrani za prihvatanje:
-        <div class="table-responsive">
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th>Doc Id</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr ng-repeat="model3 in amandmantsToAdd">
-                    <td>
-                        {{model3}}
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
 
 
     <h3>Svi predlozeni amandmani na akt:</h3>
@@ -84,6 +65,28 @@
             </tbody>
         </table>
     </div>
+
+
+    <div class="alert alert-success" role="alert">
+        Izabrani za prihvatanje:
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Doc Id</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="model3 in amandmantsToAdd">
+                    <td>
+                        {{model3}}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
 
     <br><br>
     <div class="alert alert-success" role="alert">

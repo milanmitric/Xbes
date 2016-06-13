@@ -105,6 +105,9 @@ angular.module('xapp')
         var list=[];
         list.push('ODBIJAJUSE');
         list.push($stateParams.id);
+        list = list.concat($scope.amandmandsAll);
+        console.log(list);
+
 
         sednicaService.prihvati(
                          list,

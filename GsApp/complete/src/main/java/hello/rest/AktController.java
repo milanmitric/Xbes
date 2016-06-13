@@ -206,14 +206,16 @@ public class AktController {
             System.out.println("SVI AMANDMAN ZA AKT SE ODBIJAJU");
             //TODO - SVI AMANDMAN ZA AKT SE ODBIJAJU
             //AKT ID: amandmants.get(1) //AKT JE PRIHVACEN U NACELU VEC
+            //AMANDMANI ID get(2+n) n=0,1,2...Size
 
 
 
-        }else
+        } else
         if(amandmants.get(0).equals("AKTSEODBIJA")){
             System.out.println("AKT SE ODBIJA");
             //TODO - AKT SE ODBIJA
             //AKT ID: amandmants.get(1)
+            //AMANDMANI ID get(2+n) n=0,1,2...Size
 
 
 
