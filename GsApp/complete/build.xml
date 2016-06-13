@@ -13,6 +13,7 @@
   	<property name="bin.dir" value="${basedir}/bin"/>
   	<property name="data.dir" value="${basedir}/schema"/>
 	<property name="gen.dir" value="${basedir}/src/main/java/hello/entity/"/>
+	<property name="proba.dir" value="${basedir}/src/main/java/hello/entity/proba"/>
 
 	<!-- Task za generisanje objektnog modela na osnovu XSD seme -->
 	<taskdef name="xjc" classname="com.sun.tools.xjc.XJCTask">
@@ -36,7 +37,7 @@
 	</target>
 
 	<target name="generateAkt" depends="init">
-		<xjc schema="${data.dir}/Akt.xsd" destdir="${gen.dir}"/>
+		<xjc schema="${data.dir}/Akt.xsd" destdir="${proba.dir}"/>
 	</target>
 
 	<target name="generateAmandman" depends="init">

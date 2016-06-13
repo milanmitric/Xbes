@@ -3,7 +3,7 @@ package hello.rest;
 import hello.businessLogic.document.AktManager;
 import hello.businessLogic.document.AmandmanManager;
 import hello.entity.gov.gradskaskupstina.Akt;
-import hello.entity.gov.gradskaskupstina.Amandman;
+import hello.entity.gov.gradskaskupstina.Amandmani;
 import hello.entity.gov.gradskaskupstina.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +14,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 /**
@@ -33,17 +32,17 @@ public class AmandmanController {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity getAllAmandmans() {
-        ArrayList<Amandman> amandmani = amandmanManager.getAllAmendmentProposed();
+        ArrayList<Amandmani> amandmani = amandmanManager.getAllAmendmentProposed();
         return new ResponseEntity(amandmani, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/amandman",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity postAmandman(@RequestBody Amandman amandman){
+    public ResponseEntity postAmandman(@RequestBody Amandmani amandman){
         logger.info("[CONTENT OF ADDED AMANDMAN]:"+amandman.toString());
 
-        if(!amandmanManager.validateAkt(amandman)){
+        if(!amandmanManager.validateAmandman(amandman)){
             logger.info("[AmandmanController] ERROR: NOT VALIDATED");
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
@@ -70,7 +69,7 @@ public class AmandmanController {
         System.out.println("USATO, ID: "+docID);
 
         Akt a =aktManager.read(docID, false);
-        ArrayList<Amandman> amandmens = amandmanManager.getAllAmandmansForAkt(a);
+        ArrayList<Amandmani> amandmens = amandmanManager.getAllAmandmansForAkt(a);
         System.out.print(amandmens.size());
         return new ResponseEntity(amandmens, HttpStatus.OK);
     }

@@ -14,7 +14,6 @@ import java.security.NoSuchProviderException;
 import java.security.Security;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
-import java.util.ArrayList;
 
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
@@ -31,8 +30,6 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 import hello.StringResources.MarkLogicStrings;
-import hello.businessLogic.document.AktManager;
-import hello.entity.gov.gradskaskupstina.Akt;
 import hello.entity.gov.gradskaskupstina.User;
 import org.apache.xml.security.encryption.EncryptedData;
 import org.apache.xml.security.encryption.EncryptedKey;

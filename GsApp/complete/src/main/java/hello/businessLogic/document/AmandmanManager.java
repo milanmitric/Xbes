@@ -4,7 +4,7 @@ import com.marklogic.client.document.DocumentUriTemplate;
 import hello.StringResources.MarkLogicStrings;
 import hello.businessLogic.core.BeanManager;
 import hello.entity.gov.gradskaskupstina.Akt;
-import hello.entity.gov.gradskaskupstina.Amandman;
+import hello.entity.gov.gradskaskupstina.Amandmani;
 import hello.entity.gov.gradskaskupstina.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
  * Created by milan on 5.6.2016..
  * Class that handles all amendment related operations.
  */
-public class AmandmanManager extends BeanManager<Amandman> {
+public class AmandmanManager extends BeanManager<Amandmani> {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -30,7 +30,7 @@ public class AmandmanManager extends BeanManager<Amandman> {
      * Returns all amendments that are proposed from database.
      * @return List of amendments in database. <code>NULL</code> if not successful.
      */
-    public ArrayList<Amandman> getAllAmendmentProposed(){
+    public ArrayList<Amandmani> getAllAmendmentProposed(){
         StringBuilder query = new StringBuilder();
         query.append("fn:collection(\"");
         query.append(MarkLogicStrings.AMANDMANI_PREDLOZEN_COL_ID);
@@ -42,7 +42,7 @@ public class AmandmanManager extends BeanManager<Amandman> {
      * Return all amendments that are approved from database.
      * @return List of amendments in database. <code>NULL</code> if not successful.
      */
-    public ArrayList<Amandman> getAllAmendmentsApproved(){
+    public ArrayList<Amandmani> getAllAmendmentsApproved(){
         StringBuilder query = new StringBuilder();
         query.append("fn:collection(\"");
         query.append(MarkLogicStrings.AMANDMANI_USVOJENI_COL_ID);
@@ -55,7 +55,7 @@ public class AmandmanManager extends BeanManager<Amandman> {
      * @param amandman Bean to be proposed.
      * @return Generated URI. <code>NULL</code> if not successful.
      */
-    public String proposeAmandman(Amandman amandman,User user){
+    public String proposeAmandman(Amandmani amandman,User user){
 
         if (!validateBeanBySchema(amandman)){
             logger.info("[AmandmanManager] ERROR: Amandman is not valid!");
@@ -83,7 +83,7 @@ public class AmandmanManager extends BeanManager<Amandman> {
      * @param amandman Bean to be approved.
      * @return Generated URI. <code>NULL</code> if not successful.
      */
-    public String approveAmandman(Amandman amandman){
+    public String approveAmandman(Amandmani amandman){
         if (!validateBeanBySchema(amandman)){
             logger.info("[ERROR] Amendment[" + amandman.getDocumentId() + "] is not valid!");
             return null;
@@ -138,11 +138,11 @@ public class AmandmanManager extends BeanManager<Amandman> {
      * @param amandman Amendment to be validated.
      * @return Indicator of success.
      */
-    public boolean validateAkt(Amandman amandman){
+    public boolean validateAmandman(Amandmani amandman){
         return validateBeanBySchema(amandman);
     }
 
-    public ArrayList<Amandman> getAllAmandmansForAkt(Akt akt){
+    public ArrayList<Amandmani> getAllAmandmansForAkt(Akt akt){
         StringBuilder builder = new StringBuilder();
         builder.append("declare namespace a=\"http://www.gradskaskupstina.gov/\";");
         builder.append("for $x in collection(\"/predlozeniAmandmani\")");

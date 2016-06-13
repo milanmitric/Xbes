@@ -25,7 +25,7 @@ public class MarkLogicStrings {
     public static String ARCHIVE_PREFIX = "ARCHIVED:";
     public static String ARCHIVE_COL_ID = "archive";
 
-
+    public static String AKTOVI_PRIMENJENI_COL_ID = "/primenjeniAktovi";
 
     // Root CA alias and password.
     public static String ROOT_CERTIFICATE_ALIAS = "root";

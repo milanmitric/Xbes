@@ -5,7 +5,6 @@ import hello.businessLogic.document.AktManager;
 import hello.entity.gov.gradskaskupstina.Akt;
 import hello.entity.gov.gradskaskupstina.User;
 import hello.security.EncryptKEK;
-import jdk.internal.org.xml.sax.InputSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -17,8 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
-import javax.print.Doc;
-import javax.ws.rs.Path;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
