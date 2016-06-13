@@ -13,6 +13,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,20 +40,20 @@ public class TestRest {
     private int count=0;
 
 
-    @PreAuthorize("hasAuthority('XXX')")
+    @Secured({"ROLE_REGULAR_USER","ROLE_ADMIN"})
     @RequestMapping("/test0")
-    public HttpStatus test0() {
+    public String test0() {
         /*test - to see if rest is working*/
         SednicaManager sm = new SednicaManager();
         sm.updateSednica(false);
         count++;
         System.out.println("COUNT:"+count);
-        return HttpStatus.OK;
+        return "<b>adsasdad</b>";
     }
 
 
 
-    @PreAuthorize("hasRole('XXX'")
+    @PreAuthorize("hasRole('XXX')")
     @RequestMapping("/test1")
     public HttpStatus test1() {
         //notacije ne rade uopste WTFFFFFFFFFFFFFFF
@@ -75,27 +76,9 @@ public class TestRest {
     @RequestMapping("/test3")
     public HttpStatus test3(@RequestBody String s) {
 
-        //http://www.mkyong.com/java/jaxb-hello-world-example/
 
-    /*    JSONObject obj = null;
-        try {
-             obj=new JSONObject(s);
-            System.out.println(obj.toString());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
 
-        Akt document=new Akt();
-        try {
-            document.setNaslov(obj.getString("naslov"));
-            //gde validacija ?!
-            //moze da se marshal pa da se naprvi XML doc
-            //pa to saljemo mark bazi?
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        System.out.println("NASLOV IZ OBJ AKT: "+document.getNaslov());*/
+       // System.out.println("NASLOV IZ OBJ AKT: "+document.getNaslov());*/
         return HttpStatus.OK;
     }
 
