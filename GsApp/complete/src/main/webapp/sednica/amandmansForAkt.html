@@ -20,10 +20,6 @@
                 </tbody>
             </table>
         </div>
-        <button type="submit" class="btn btn-success btn-sm" ng-click="prihvatiDelimicno()">
-            <span class="glyphicon glyphicon-ok"></span>&nbsp;<span>Prihvati delimicno</span>
-        </button>
-
     </div>
 
 
@@ -39,11 +35,11 @@
                 </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="model in amandmands">
+            <tr ng-repeat="model in amandmands track by $index">
                 <!--BTN-->
                 <td>
-                    <button type="submit" class="btn btn-success btn-sm" ng-click="dodaj(model.documentId)">
-                        <span class="glyphicon glyphicon-ok"></span>&nbsp;<span><!--txthere--></span>
+                    <button type="submit" class="btn btn-{{btns[$index]}} btn-sm" ng-click="dodaj(model.documentId, $index)">
+                        <span class="glyphicon glyphicon-{{btns2[$index]}}"></span>&nbsp;<span><!--txthere--></span>
                     </button>
                 </td>
                 <!--ID-->
@@ -92,11 +88,15 @@
     <br><br>
     <div class="alert alert-success" role="alert">
     <button type="submit" class="btn btn-success btn-sm" ng-click="prihvatiSve()">
-        <span class="glyphicon glyphicon-ok"></span>&nbsp;<span>Prihvati sve</span>
+        <span class="glyphicon glyphicon-ok"></span>&nbsp;<span>Prihvati sve amandmane</span>
+    </button>
+    &nbsp;
+    <button type="submit" class="btn btn-success btn-sm" ng-click="prihvatiDelimicno()">
+        <span class="glyphicon glyphicon-ok"></span>&nbsp;<span>Prihvati delimicno</span>
     </button>
     &nbsp;
     <button type="submit" class="btn btn-danger btn-sm" ng-click="odbij()">
-        <span class="glyphicon glyphicon-remove"></span>&nbsp;<span>Odbij</span>
+        <span class="glyphicon glyphicon-remove"></span>&nbsp;<span>Odbij sve amandmane</span>
     </button>
     </div>
     <br><br>

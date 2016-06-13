@@ -6,6 +6,7 @@ import hello.entity.gov.gradskaskupstina.Akt;
 import hello.entity.gov.gradskaskupstina.User;
 import hello.security.EncryptKEK;
 import jdk.internal.org.xml.sax.InputSource;
+import org.apache.logging.log4j.core.util.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,7 @@ import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 import javax.print.Doc;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Path;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -191,16 +193,38 @@ public class AktController {
 
         System.out.println("AMANDMANI: "+amandmants);
         //uvek stigne lista, 0. u nizu je UVEK ID od AKTA, a nakon toga idu ID od amandmana
-        String aktID=amandmants.get(0);
-        if(amandmants.size()==1){
-            //TODO - ODBIJA SE AKT
-            //AKT ID : amandmants.get(0)
+        //String aktID=amandmants.get(0);
+
+        if(amandmants.get(0).equals("ODBIJAJUSE")){
+            System.out.println("SVI AMANDMAN ZA AKT SE ODBIJAJU");
+            //TODO - SVI AMANDMAN ZA AKT SE ODBIJAJU
+            //AKT ID: amandmants.get(1) //AKT JE PRIHVACEN U NACELU VEC
+
+
+
+        }else
+        if(amandmants.get(0).equals("AKTSEODBIJA")){
+            System.out.println("AKT SE ODBIJA");
+            //TODO - AKT SE ODBIJA
+            //AKT ID: amandmants.get(1)
+
+
 
         }else {
-            //TODO - USVAJA SE DELIMICNO/POTPUNO
-            //AKT ID : amandmants.get(0)
-            //1. , 2. , 3. ... ID od AMANDMANA
 
+                if (amandmants.size() == 1) {
+                    System.out.println("AKT SE PRIHVATA SE U NACELU");
+                    //TODO - AKT SE PRIHVATA SE U NACELU
+                    //AKT ID : amandmants.get(0)
+
+
+                } else {
+                    System.out.println("USVAJAJU SE AMNDMANI NA AKT");
+                    //TODO - USVAJAJU SE AMNDMANI NA AKT
+                    //AKT ID : amandmants.get(0) //AKT JE PRIHVACEN U NACELU VEC
+                    //1. , 2. , 3. ... ID od AMANDMANA
+
+                }
 
         }
 
@@ -208,6 +232,66 @@ public class AktController {
 
         return new ResponseEntity("",HttpStatus.OK);
     }
+
+
+    /*serving static html*/
+    @RequestMapping(value = "/givemeakt",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public String serveakt(){
+
+
+      /*  try {
+
+            if ((new File("E:\\F_A_X\\4.GOD\\Xbes\\GsApp\\complete\\sednicaHome.html")).exists()) {
+
+                Process p = Runtime
+                        .getRuntime()
+                        .exec("rundll32 url.dll,FileProtocolHandler E:\\F_A_X\\4.GOD\\Xbes\\GsApp\\complete\\sednicaHome.html");
+                p.waitFor();
+
+            } else {
+
+                System.out.println("File is not exists");
+
+            }
+
+            System.out.println("Done");
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+    */
+
+
+
+
+        return "forward:/myWebpage.html";
+    }
+
+
+    @RequestMapping(value="download", method=RequestMethod.GET)
+    public void getDownload(HttpServletResponse response) {
+
+        // Get your file stream from wherever.
+        //InputStream myStream = new //someClass.returnFile();
+
+        // Set the content type and attachment header.
+        response.addHeader("Content-disposition", "attachment;filename=sednicaHome.html");
+        response.setContentType("txt/plain");
+
+        // Copy the stream to the response's output stream.
+        //IOUtils.copy(myStream, response.getOutputStream());
+        try {
+            response.flushBuffer();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
 
 
 

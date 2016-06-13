@@ -4,6 +4,7 @@ angular.module('xapp')
     .controller('AmandmansForAktController', function ($stateParams, $scope, $state, authService, amandmanService, sednicaService, aktService) {
 
     /*GET AMANDMANST*/
+
     amandmanService.getAmandmantsForAKt(
             $stateParams.id,
             function(res){
@@ -12,8 +13,12 @@ angular.module('xapp')
                 $scope.amandmands=res.data;
 
                 $scope.amandmandsAll=[];
+                $scope.btns=[];
+                $scope.btns2=[];
                 for(var i=0; i<$scope.amandmands.length; i++){
                     $scope.amandmandsAll.push($scope.amandmands[i].documentId);
+                    $scope.btns.push('danger');
+                    $scope.btns2.push('remove');
                 }
 
 
@@ -27,14 +32,20 @@ angular.module('xapp')
 
     $scope.amandmantsToAdd=[];
 
-    $scope.dodaj=function(amID){
+    $scope.dodaj=function(amID, idx){
+
+        //alert(idx);
 
         if($scope.amandmantsToAdd.indexOf(amID)==-1){
             $scope.amandmantsToAdd.push(amID);
-            alertify.success('Dodato!');
+            //alertify.success('Dodato!');
+            $scope.btns[idx]='success';
+            $scope.btns2[idx]='ok';
         }else{
             $scope.amandmantsToAdd.splice($scope.amandmantsToAdd.indexOf(amID), 1);
-             alertify.warning('Uklonjeno!');
+            // alertify.warning('Uklonjeno!');
+              $scope.btns[idx]='danger';
+              $scope.btns2[idx]='remove';
         }
 
     }
@@ -92,6 +103,7 @@ angular.module('xapp')
     $scope.odbij=function(){
 
         var list=[];
+        list.push('ODBIJAJUSE');
         list.push($stateParams.id);
 
         sednicaService.prihvati(

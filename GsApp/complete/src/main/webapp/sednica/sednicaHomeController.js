@@ -45,21 +45,64 @@ angular.module('xapp')
 
      //func for getting acts(proposed ones)
      var getProposedAkts=function(){
-        aktService.getProposed(function(response){
-                    $scope.akts = response.data;
+        aktService.getProposed(
+                    function(response){
+
+                        $scope.akts = response.data;
+                        $scope.btns=[];
+                        for(var i=0; i<$scope.akts.length; i++){
+                            $scope.btns.push(false);
+                        }
+
                     },function(response){
-        });
+
+                    }
+        );
     }
 
 
    //prihvati btn
-   $scope.prihvati=function(){
-    alert("prihvati");
+   $scope.prihvatiUNacelu=function(aktID, idx){
+    //alert(aktID);
+    $scope.btns[idx]=true;
+    var list=[];
+    list.push(aktID);
+     sednicaService.prihvati(
+                         list,
+                         function(res){
+
+
+                         },
+                         function(res){
+
+
+                         }
+            );
+
+
+
    }
 
    //odbij btn
-   $scope.odbij=function(){
-       alert("odbij");
+   $scope.odbij=function(aktID){
+       //alert("odbij");
+       var list=[];
+       list.push('AKTSEODBIJA');
+       list.push(aktID);
+            sednicaService.prihvati(
+                                list,
+                                function(res){
+
+
+                                },
+                                function(res){
+
+
+                                }
+                   );
+
+
+
    }
 
 
