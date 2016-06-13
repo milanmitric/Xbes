@@ -36,6 +36,13 @@ public class AmandmanController {
         ArrayList<Amandman> amandmani = amandmanManager.getAllAmendmentProposed();
         return new ResponseEntity(amandmani, HttpStatus.OK);
     }
+    @RequestMapping(value = "/getmyallamandmans",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity getMyAllAmandmans() {
+
+        return new ResponseEntity(HttpStatus.OK);
+    }
 
     @RequestMapping(value = "/amandman",
             method = RequestMethod.POST,

@@ -12,6 +12,17 @@ angular.module('xapp')
 
              			$http(req).then(onSuccess, onError);
 		},
+		 getMyAllAmandmans: function(onSuccess, onError){
+                                     var req = {
+                                                    method: 'GET',
+                                                    url: '/api/getmyallamandmans',
+                                                    headers: {
+                                                        'Content-Type': 'application/x-www-form-urlencoded'
+                                                    }
+                                                }
+
+                                     			$http(req).then(onSuccess, onError);
+         },
 		saveAmandman: function(amandman,onSuccess, onError){
                              var req = {
                              					method: 'POST',

@@ -1,0 +1,38 @@
+<div>
+    <h3>Moji amandmani
+    </h3>
+
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Naslov</th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="model in collection">
+                <td>{{model.naslov}}</td>
+                <!--<td>{{model.documentId}}</td>-->
+                <td>
+                    <button type="submit"
+                            ui-sref="amandmandetail({id:model.documentId})"
+                            class="btn btn-info btn-sm">
+                        <span class="glyphicon glyphicon-blackboard"></span>&nbsp;<span>Otvori amandman</span>
+                    </button>
+                </td>
+                <td>
+                    <button type="submit"
+
+                            class="btn btn-danger btn-sm">
+                        <span class="glyphicon glyphicon-blackboard"></span>&nbsp;<span>Povuci amandman</span>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+

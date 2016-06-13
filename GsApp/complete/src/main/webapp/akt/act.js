@@ -77,7 +77,19 @@ angular.module('xapp')
                                                                               controller: 'NavbarController'
                                                                           }
                                                                       }
-                                  });
+          }).state('myacts', {
+                                                                                  url: '/myacts',
+                                                                                  views: {
+                                                                                      'content': {
+                                                                                          templateUrl: 'akt/showMyActs.html',
+                                                                                          controller: 'ShowMyActsController'
+                                                                                      },
+                                                                                      'navbar':{
+                                                                                          templateUrl: 'navbar/navbar.html',
+                                                                                          controller: 'NavbarController'
+                                                                                      }
+                                                                                  }
+          });
 
 
         //$locationProvider.html5Mode(true);

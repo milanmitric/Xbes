@@ -53,6 +53,13 @@ public class AktController {
         return new ResponseEntity(returnTwoLists, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/getmyallacts",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity getMyAllAct() {
+
+        return new ResponseEntity(HttpStatus.OK);
+    }
 
 
     @RequestMapping(value = "/getproposed",
