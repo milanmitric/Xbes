@@ -1,28 +1,120 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Amandmani xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
-           xmlns="http://www.gradskaskupstina.gov/"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="http://www.gradskaskupstina.gov/ file:/D:/GitRepos/Xbes/GsApp/complete/schema/Amandmani.xsd">
-    <PravniOsnov>PravniOsnov0</PravniOsnov>
-    <Akt ref_akt="2746325830753861621.xml">Akt0</Akt>
-    <Amandman>
-        <PredmetIzmene ref_clanovi="1" ref_stavovi="99" ref_tacke="1"></PredmetIzmene>
-        <TipIzmene>dopuna</TipIzmene>
-        <Sadrzaj>
-            &lt;Podtacka RedniBroj= &quot;1&quot; xmlns=&quot;http://www.gradskaskupstina.gov/&quot; &gt;SAdrzaj podtacke;&lt;/Podtacka&gt;
-        </Sadrzaj>
-        <Obrazlozenje/>
-    </Amandman>
-    <Potpisnici>
+<Akt xsi:schemaLocation="http://www.gradskaskupstina.gov/" xmlns="http://www.gradskaskupstina.gov/" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <Naslov>Akt</Naslov>
+    <DocumentId>2746325830753861621.xml</DocumentId>
+    <Deo RedniBroj="1">
+        <Glava Naziv="Naziv3" RedniBroj="1">
+            <Clan RedniBroj="1">
+                
+                
+            <Stav RedniBroj="99"><Tekst>Adwdawdwdwadwaawdawd</Tekst><Tacka RedniBroj="1"><Sadrzaj>Adwdawdwdwadwaawdawd</Sadrzaj><Podtacka RedniBroj="1">SAdrzaj podtacke;</Podtacka></Tacka><Tacka RedniBroj="2"><Sadrzaj>Dwadaw</Sadrzaj></Tacka></Stav></Clan>
+            <Clan RedniBroj="2">
+                
+                <Stav RedniBroj="99"><Tekst>Tekst stava.</Tekst><Tacka><Sadrzaj>Tekst tacke.</Sadrzaj><Podtacka>TekstPodtacke.</Podtacka></Tacka></Stav>
+            </Clan>
+        </Glava>
+        <Glava Naziv="Naziv9" RedniBroj="2">
+            <Clan RedniBroj="3">
+                <Stav RedniBroj="50">
+                    <Sadrzaj/>
+                </Stav>
+                <Stav RedniBroj="50">
+                    <Sadrzaj/>
+                </Stav>
+            </Clan>
+            <Clan RedniBroj="4">
+                <Stav RedniBroj="50">
+                    <Sadrzaj/>
+                </Stav>
+                <Stav RedniBroj="50">
+                    <Sadrzaj/>
+                </Stav>
+            </Clan>
+        </Glava>
+    </Deo>
+    <Deo RedniBroj="2">
+        <Glava Naziv="Naziv17" RedniBroj="3">
+            
+            <Clan RedniBroj="6">
+                
+                
+            </Clan>
+        </Glava>
+        <Glava Naziv="Naziv23" RedniBroj="4">
+            <Clan RedniBroj="50">
+                <Stav RedniBroj="50">
+                    <Sadrzaj/>
+                </Stav>
+                <Stav RedniBroj="50">
+                    <Sadrzaj/>
+                </Stav>
+            </Clan>
+            <Clan RedniBroj="50">
+                <Stav RedniBroj="50">
+                    <Sadrzaj/>
+                </Stav>
+                <Stav RedniBroj="50">
+                    <Sadrzaj/>
+                </Stav>
+            </Clan>
+        </Glava>
+    </Deo>
+    <ZavrsniDeo>
+        <Organ>Organ0</Organ>
+        <Broj>Broj0</Broj>
+        <Datum>Datum0</Datum>
         <Potpisnik>
             <Ime>Ime0</Ime>
             <Prezime>Prezime0</Prezime>
         </Potpisnik>
-        <Potpisnik>
-            <Ime>Ime1</Ime>
-            <Prezime>Prezime1</Prezime>
-        </Potpisnik>
-    </Potpisnici>
+    </ZavrsniDeo>
     <UserName>UserName0</UserName>
     <TimeStamp>2006-05-04T18:13:51.0</TimeStamp>
-</Amandmani>
+<ds:Signature>
+<ds:SignedInfo>
+<ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+<ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
+<ds:Reference URI="">
+<ds:Transforms>
+<ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+<ds:Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments"/>
+</ds:Transforms>
+<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+<ds:DigestValue>8GaB2jZy3mGJoXV1283p8U9bkqQ=</ds:DigestValue>
+</ds:Reference>
+</ds:SignedInfo>
+<ds:SignatureValue>
+NoppI/o0I5VY0PI9Xunhy4EqROgn4PycnWOuZSiUVZmhlKu8GKEKURRs65XLTHiCYEnfytUXDSJa
+sP1Fla2wfN4DHroc2NCX6aLYu0+3rDcMUjTmp7Jbum41iPsja5/jjx+NWPLFFpJJQO1zJ2YnhjQ7
+w7OeabtN3S/2tHmUmVo=
+</ds:SignatureValue>
+<ds:KeyInfo>
+<ds:KeyValue>
+<ds:RSAKeyValue>
+<ds:Modulus>
+uuy6LW7FwJamnrImboLzh56mLV8iKYRONVMXao0yK1+22ykDmGUhrNhJocdx/AQ2MK/PrCOI346d
+lYxpk96qsO0NjTo1MGqLWeseomAMuktdzmGha3OieHqF42QnpBZ4lfkIbaOSEhL+qFK0oXnbowAv
+yYIBb6MHpRZaNl06iM0=
+</ds:Modulus>
+<ds:Exponent>AQAB</ds:Exponent>
+</ds:RSAKeyValue>
+</ds:KeyValue>
+<ds:X509Data>
+<ds:X509Certificate>
+MIIC2TCCAkKgAwIBAgIBAjANBgkqhkiG9w0BAQsFADCBzjEjMCEGA1UEAwwaU2t1cHN0aW5hIGdy
+YWRhIE5vdm9nIFNhZGExEDAOBgNVBAQMB0dyYWRza2ExEjAQBgNVBCoMCVNrdXBzdGluYTEWMBQG
+A1UECgwNR3JhZCBOb3ZpIFNhZDEYMBYGA1UECwwPU2t1cHN0aW5hIGdyYWRhMQswCQYDVQQGEwJS
+UzEqMCgGCSqGSIb3DQEJARYbZ3JhZHNrYVNrdXBzdGluYUBub3Zpc2FkLnJzMRYwFAYKCZImiZPy
+LGQBAQwGMTIzNDQ1MB4XDTA3MTIzMDIzMDAwMFoXDTE3MTIzMDIzMDAwMFowgZUxCzAJBgNVBAMM
+AmNjMQowCAYDVQQEDAFjMQowCAYDVQQqDAFjMRYwFAYDVQQKDA1HcmFkIE5vdmkgU2FkMRgwFgYD
+VQQLDA9Ta3Vwc3RpbmEgZ3JhZGExCzAJBgNVBAYTAlJTMRwwGgYJKoZIhvcNAQkBFg1uZWtpQG1h
+aWwuY29tMREwDwYKCZImiZPyLGQBAQwBYzCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAuuy6
+LW7FwJamnrImboLzh56mLV8iKYRONVMXao0yK1+22ykDmGUhrNhJocdx/AQ2MK/PrCOI346dlYxp
+k96qsO0NjTo1MGqLWeseomAMuktdzmGha3OieHqF42QnpBZ4lfkIbaOSEhL+qFK0oXnbowAvyYIB
+b6MHpRZaNl06iM0CAwEAATANBgkqhkiG9w0BAQsFAAOBgQBKf7Et03GfnTgOxSqoDGj3ghmXrdEs
+gOI2ubextY4s12Ky0WF4K24lIiVBlcR9CdowNnMdM40RGr+MVQuxBgkrK9vdhokfj6Bc41/TDIoA
+hZ8DWIb0HUMIq2X8QG9Wob05rntCnvNsXiZSM/2ZlZJmuMWjRcO7ZVf6LaTUIalN8w==
+</ds:X509Certificate>
+</ds:X509Data>
+</ds:KeyInfo>
+</ds:Signature></Akt>
