@@ -30,7 +30,7 @@ public class TestMain {
 
     public static void main(String[] args) throws FileNotFoundException {
         try{
-            deleteAkts();
+            transform();
         } catch (Exception e){
 
         }
@@ -112,11 +112,11 @@ public class TestMain {
 
     public static void transform() throws TransformerException {
         TransformerFactory factory = TransformerFactory.newInstance();
-        Source xslt = new StreamSource(new File("transform/Amandman.xsl"));
+        Source xslt = new StreamSource(new File("transform/Akt.xsl"));
         Transformer transformer = factory.newTransformer(xslt);
 
-        Source text = new StreamSource(new File("transform/Amandman.xml"));
-        transformer.transform(text, new StreamResult(new File("transform/Amandman.html")));
+        Source text = new StreamSource(new File("transform/testAkt.xml"));
+        transformer.transform(text, new StreamResult(new File("transform/Akt.html")));
     }
 
     public static void testApply(){
