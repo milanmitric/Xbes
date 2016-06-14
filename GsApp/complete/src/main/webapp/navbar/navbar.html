@@ -7,7 +7,7 @@
 
         <li><a ui-sref="home">Pocetna </a></li>
 
-        <li class="dropdown" >
+        <li class="dropdown" ng-show="USER.role=='ROLE_ODBORNIK'">
           <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pogledaj moje<span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a ui-sref="myacts">AKTOVE</a></li>
@@ -15,7 +15,7 @@
           </ul>
         </li>
 
-        <li class="dropdown" ng-show="sednicaStatus==false">
+        <li class="dropdown" ng-show="sednicaStatus==false && USER.role=='ROLE_ODBORNIK'">
           <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Predlozi novi<span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a ui-sref="newakt">AKT</a></li>
@@ -24,7 +24,7 @@
         </li>
 
 
-         <li class="dropdown">
+         <li class="dropdown" >
           <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pretrazi<span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a ui-sref="searchacts">AKTOVE</a></li>
@@ -42,15 +42,16 @@
 
 
 
-        <li><a style="color:deepSkyBlue;" ui-sref="sednicahome" >Sednica</a></li>
+        <li ng-show="USER.role=='ROLE_PREDSEDNIK'"><a style="color:deepSkyBlue;" ui-sref="sednicahome" >Sednica</a></li>
 
       </ul>
 
+
       <ul class="nav navbar-nav navbar-right">
-        {{USER.ime}} {{USER.prezime}}
-        <li><a ui-sref="signup">Registracija</a></li>
-        <li><a ui-sref="signin">Prijava</a></li>
-        <li><a ui-sref="signout" >Odjava</a></li>
+        <li ng-show="USER.role=='ROLE_ANONYMOUS'"><a ui-sref="signup">Registracija</a></li>
+        <li ng-show="USER.role=='ROLE_ANONYMOUS'"><a ui-sref="signin">Prijava</a></li>
+        <li ng-show="USER.role!='ROLE_ANONYMOUS'"><a ui-sref="signout" >Odjava</a></li>
+        <li><a style="color:deepSkyBlue;" >Dobrodosli {{USER.ime}} {{USER.prezime}}!</a></li>
       </ul>
 
 

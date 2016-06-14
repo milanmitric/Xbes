@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -52,6 +53,8 @@ public class AktController {
         return new ResponseEntity(returnTwoLists, HttpStatus.OK);
     }
 
+
+    @PreAuthorize("hasRole('ROLE_ODBORNIK')")
     @RequestMapping(value = "/getmyallacts",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -71,12 +74,13 @@ public class AktController {
 
 
 
-    //TODO
+    @PreAuthorize("hasRole('ROLE_ODBORNIK')")
     @RequestMapping(value = "/getmyproposedakts",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity getmyproposed() {
 
+        //TODO
         ArrayList<Akt> aktovi = aktManager.getAllFilesProposed();
         for(int i=aktovi.size()-1; i>=0; i--){
 
@@ -119,6 +123,7 @@ public class AktController {
     }
 
 
+    @PreAuthorize("hasRole('ROLE_ODBORNIK')")
     @RequestMapping(value = "/akt",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_XML_VALUE)
@@ -192,6 +197,7 @@ public class AktController {
 
 
     /*prihvati akt nekako ili nemoj*/
+    @PreAuthorize("hasRole('ROLE_PREDSEDNIK')")
     @RequestMapping(value = "/prihvatiovono",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)

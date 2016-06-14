@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +36,9 @@ public class AmandmanController {
         ArrayList<Amandmani> amandmani = amandmanManager.getAllAmendmentProposed();
         return new ResponseEntity(amandmani, HttpStatus.OK);
     }
+
+
+    @PreAuthorize("hasRole('ROLE_ODBORNIK')")
     @RequestMapping(value = "/getmyallamandmans",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -43,6 +47,7 @@ public class AmandmanController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ROLE_ODBORNIK')")
     @RequestMapping(value = "/amandman",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_XML_VALUE)
@@ -68,7 +73,7 @@ public class AmandmanController {
     }
 
 
-
+    @PreAuthorize("hasRole('ROLE_PREDSEDNIK')")
     @RequestMapping(value = "/getamandmantsforakt",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)

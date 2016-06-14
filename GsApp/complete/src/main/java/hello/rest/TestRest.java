@@ -52,7 +52,7 @@ public class TestRest {
 
 
 
-    @PreAuthorize("hasRole('XXX')")
+    @PreAuthorize("hasRole('ROLE_ODBORNIK')")
     @RequestMapping("/test1")
     public HttpStatus test1() {
         //notacije ne rade uopste WTFFFFFFFFFFFFFFF

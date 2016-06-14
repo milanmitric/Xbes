@@ -8,10 +8,11 @@ angular.module('xapp')
 
 		   authService.signin(
                $scope.user,
-			   function(response){
-				   console.log(response);
-				   if(response.data.success=='true'){
+			   function(res){
+				   console.log(res);
+				   if(res.data.success=='true'){
 				   alertify.success("SUCCESS");
+				   console.log(res.data);
 				    $rootScope.USER={
                                            username:res.data.username,
                                            ime:res.data.ime,
@@ -21,6 +22,8 @@ angular.module('xapp')
 				   }else{
 				   alertify.error("FAIL");
 				   }
+				   $scope.user={};
+				   $state.go("home");
 			   }
 			   ,function(response){
 					alertify.error("ERROR");

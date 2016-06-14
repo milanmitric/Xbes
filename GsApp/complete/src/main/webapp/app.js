@@ -37,9 +37,7 @@ angular.module('xapp', ['ngResource', 'ui.router', 'angularModalService'])
                         prezime:res.data.prezime,
                         role:res.data.role
                     };
-
                     console.log($rootScope.user);
-
                 },
                 function(res){
                     $rootScope.USER={

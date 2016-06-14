@@ -16,8 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class SednicaController {
 
-    //TODO - na frontu skloniti 'SEDNICA' za ostale role
 
+
+    @PreAuthorize("hasRole('ROLE_PREDSEDNIK')")
     @RequestMapping("/startstopsednica/{sednicaSwitch}")
     public HttpStatus startStopSednica(@PathVariable boolean sednicaSwitch) {
         SednicaManager sm=new SednicaManager();

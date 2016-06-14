@@ -78,6 +78,8 @@ public class UserController {
                             res.put("success", "true");
                             res.put("username", user.getUsername());
                             res.put("role", user.getRole());
+                            res.put("prezime", user.getPrezime());
+                            res.put("ime", user.getIme());
                             return new ResponseEntity(res, HttpStatus.OK);
 
                         }

@@ -21,10 +21,10 @@ public class UserDTO {
 
     }
     public UserDTO(){
-        username="ANONYMOUS";
+        username="";
         role="ROLE_ANONYMOUS";
-        ime="ANONYMOUS";
-        prezime="ANONYMOUS";
+        ime="";
+        prezime="";
     }
 
     public String getUsername() {

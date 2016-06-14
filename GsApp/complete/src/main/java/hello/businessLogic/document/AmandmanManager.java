@@ -146,8 +146,8 @@ public class AmandmanManager extends BeanManager<Amandmani> {
         StringBuilder builder = new StringBuilder();
         builder.append("declare namespace a=\"http://www.gradskaskupstina.gov/\";");
         builder.append("for $x in collection(\"/predlozeniAmandmani\")");
-        builder.append("  where $x/a:Amandman/a:Akt/text() = \"");
-        builder.append(akt.getNaslov() + "\"");
+        builder.append("  where $x/a:Amandmani/a:Akt/text() = \"");
+        builder.append(akt.getDocumentId() + "\"");
         builder.append(" return $x");
         return queryManager.executeQuery(builder.toString());
     }
