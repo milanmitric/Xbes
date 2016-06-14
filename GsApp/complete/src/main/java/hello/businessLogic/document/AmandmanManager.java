@@ -6,9 +6,11 @@ import hello.businessLogic.core.BeanManager;
 import hello.entity.gov.gradskaskupstina.Akt;
 import hello.entity.gov.gradskaskupstina.Amandmani;
 import hello.entity.gov.gradskaskupstina.User;
+import hello.security.CRLVerifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.security.cert.Certificate;
 import java.util.ArrayList;
 
 /**
@@ -18,6 +20,8 @@ import java.util.ArrayList;
 public class AmandmanManager extends BeanManager<Amandmani> {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    private CRLVerifier crlVerifier = new CRLVerifier();
 
     /**
      * Initializes a new intance of AmandmanManager. Uses schema in schema/Amandmani.xsd
@@ -57,6 +61,12 @@ public class AmandmanManager extends BeanManager<Amandmani> {
      */
     public String proposeAmandman(Amandmani amandman,User user){
 
+        // Check if users' certificate is revoked
+        Certificate cert = keyStoreManager.readCertificate(user.getUsername(),user.getPassword().toCharArray());
+        if (crlVerifier.isRevoked(cert)){
+            logger.info("Certificate is revoked for user " + user.getUsername()+", can't propose.");
+        }
+
         if (!validateBeanBySchema(amandman)){
             logger.info("[AmandmanManager] ERROR: Amandman is not valid!");
             return null;
@@ -81,9 +91,16 @@ public class AmandmanManager extends BeanManager<Amandmani> {
     /**
      * Approves an document.
      * @param amandman Bean to be approved.
+     * @param user User to verify ceritificate.
      * @return Generated URI. <code>NULL</code> if not successful.
      */
-    public String approveAmandman(Amandmani amandman){
+    public String approveAmandman(Amandmani amandman,User user){
+        // Check if users' certificate is revoked
+        Certificate cert = keyStoreManager.readCertificate(user.getUsername(),user.getPassword().toCharArray());
+        if (crlVerifier.isRevoked(cert)){
+            logger.info("Certificate is revoked for user " + user.getUsername()+", can't propose.");
+        }
+
         if (!validateBeanBySchema(amandman)){
             logger.info("[ERROR] Amendment[" + amandman.getDocumentId() + "] is not valid!");
             return null;

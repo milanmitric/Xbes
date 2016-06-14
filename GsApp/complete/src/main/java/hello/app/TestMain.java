@@ -55,27 +55,7 @@ public class TestMain {
         }
     }
 
-    public static void testAktManager(){
-        AktManager aktManager = new AktManager();
-        Akt akt = aktManager.convertFromXml(new File("res/validationTest/AktZOIIDZOJPPIK.xml"));
 
-
-        String docId = aktManager.proposeAkt(akt,null);
-        if (docId != null){
-            logger.info("Successfully proposed document [" + docId + "].");
-        } else {
-            logger.info("[ERROR] Could not propose document [" + docId + "].");
-        }
-
-        docId  = aktManager.approveAkt(akt);
-        if (docId != null){
-            logger.info("Successfully approved document [" + docId + "].");
-        } else {
-            logger.info("[ERROR] Could not approve document [" + docId + "].");
-        }
-
-
-    }
 
     public static void deleteAkts(){
         AmandmanManager amandmanManager = new AmandmanManager();

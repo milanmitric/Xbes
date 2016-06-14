@@ -8,9 +8,11 @@ import hello.StringResources.MarkLogicStrings;
 import hello.StringResources.TipIzmene;
 import hello.businessLogic.core.BeanManager;
 import hello.entity.gov.gradskaskupstina.*;
+import hello.security.CRLVerifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.security.cert.Certificate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -22,6 +24,8 @@ public class AktManager extends BeanManager<Akt> {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+
+    private CRLVerifier crlVerifier = new CRLVerifier();
     /**
      * Initializes a new intance of AktManager.
      */
@@ -62,6 +66,11 @@ public class AktManager extends BeanManager<Akt> {
      */
     public String proposeAkt(Akt akt, User user) {
 
+        // Check if users' certificate is revoked
+        Certificate cert = keyStoreManager.readCertificate(user.getUsername(),user.getPassword().toCharArray());
+        if (crlVerifier.isRevoked(cert)){
+            logger.info("Certificate is revoked for user " + user.getUsername()+", can't propose.");
+        }
         if (!validateBeanBySchema(akt)) {
             logger.info("[AktManager] ERROR: Akt is not valid!");
             return null;
@@ -87,9 +96,17 @@ public class AktManager extends BeanManager<Akt> {
     /**
      * Approves an document.
      * @param akt Bean to be approved.
+     * @param user User to verify ceritificate.
      * @return Generated URI. <code>NULL</code> if not successful.
      */
-    public String approveAkt(Akt akt){
+    public String approveAkt(Akt akt,User user){
+
+        // Check if users' certificate is revoked
+        Certificate cert = keyStoreManager.readCertificate(user.getUsername(),user.getPassword().toCharArray());
+        if (crlVerifier.isRevoked(cert)){
+            logger.info("Certificate is revoked for user " + user.getUsername()+", can't propose.");
+        }
+
         if (!validateBeanBySchema(akt)){
             logger.info("[ERROR] Document["+akt.getDocumentId()+"] is not valid!");
             return null;
