@@ -3,111 +3,86 @@
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  xsi:schemaLocation="http://www.gradskaskupstina.gov/ file:/C:/Users/FS-LB/Desktop/XMLProjekat/DJIT/Xbes/GsApp/complete/schema/Akt.xsd">
     <Naslov>Akt</Naslov>
-    <Glava RedniBroj="50" Naziv="Naziv1">
-        <Odeljak RedniBroj="50" Naziv="Naziv3">
-            <Clan RedniBroj="50">
-                <Stav>
-                    <Sadrzaj/>
-                </Stav>
-                <Stav>
-                    <Sadrzaj/>
-                </Stav>
-            </Clan>
-            <Clan RedniBroj="50">
-                <Stav>
-                    <Sadrzaj/>
-                </Stav>
-                <Stav>
-                    <Sadrzaj/>
-                </Stav>
-            </Clan>
+    <Glava RedniBroj="1" Naziv="Glava1">
+        <Odeljak RedniBroj="1" Naziv="Odeljak1">
+            <Pododeljak RednoSlovo="a">
+                <Clan RedniBroj="1">
+                    <Stav RedniBroj="1">
+                        <Tekst>Tekst clana 1 stava 1</Tekst>
+                    </Stav>
+                    <Stav RedniBroj="2">
+                        <Tekst>Tekst clana 1 stava 2</Tekst>
+                    </Stav>
+                    <Stav RedniBroj="3">
+                        <Tekst>Tekst clana 1 stava 3</Tekst>
+                    </Stav>
+                </Clan>
+                <Clan RedniBroj="2">
+                    <Stav RedniBroj="1">
+                        <Tekst>Tekst clana 2 stava 1</Tekst>
+                    </Stav>
+                    <Stav RedniBroj="2">
+                        <Tekst>Tekst clana 2 stava 2</Tekst>
+                    </Stav>
+                    <Stav RedniBroj="3">
+                        <Tekst>Tekst clana 2 stava 3</Tekst>
+                    </Stav>
+                </Clan>
+            </Pododeljak>
+            <Pododeljak RednoSlovo="b">
+                <Clan RedniBroj="3">
+                    <Stav RedniBroj="1">
+                        <Tekst>Tekst clana 3 stava 1</Tekst>
+                    </Stav>
+                    <Stav RedniBroj="2">
+                        <Tekst>Tekst clana 3 stava 2</Tekst>
+                    </Stav>
+                    <Stav RedniBroj="3">
+                        <Tekst>Tekst clana 3 stava 3</Tekst>
+                    </Stav>
+                </Clan>
+            </Pododeljak>
         </Odeljak>
-        <Odeljak RedniBroj="50" Naziv="Naziv9">
-            <Clan RedniBroj="50">
-                <Stav>
-                    <Tacka RedniBroj="50">
-                        <Sadrzaj>Sadrzaj0</Sadrzaj>
+        <Odeljak RedniBroj="2" Naziv="Odeljak2">
+            <Clan RedniBroj="4">
+                <Stav RedniBroj="1">
+                    <Tekst>Tekst CLANA 4 STAVA 1</Tekst>
+                    <Tacka RedniBroj="1">
+                        <Sadrzaj>Tekst CLANA 4 STAVA 1 TACKE 1</Sadrzaj>
+                        <Podtacka RedniBroj="1">Tekst CLANA 4 STAVA 1 TACKE 1 PODTACKE 1</Podtacka>
+                        <Podtacka RedniBroj="2">Tekst CLANA 4 STAVA 1 TACKE 1 PODTACKE 2</Podtacka>
                     </Tacka>
-                    <Tacka RedniBroj="50">
-                        <Sadrzaj>Sadrzaj1</Sadrzaj>
+                    <Tacka RedniBroj="2">
+                        <Sadrzaj>Tekst CLANA 4 STAVA 1 TACKE 2</Sadrzaj>
+                        <Podtacka RedniBroj="1">Tekst CLANA 4 STAVA 1 TACKE 2 PODTACKE 1</Podtacka>
+                        <Podtacka RedniBroj="2">Tekst CLANA 4 STAVA 1 TACKE 2 PODTACKE 2</Podtacka>
                     </Tacka>
-                </Stav>
-                <Stav>
-                    <Sadrzaj/>
                 </Stav>
             </Clan>
-            <Clan RedniBroj="50">
-                <Stav>
-                    <Sadrzaj/>
-                </Stav>
-                <Stav>
-                    <Tacka RedniBroj="50">
-                        <Sadrzaj>Sadrzaj2</Sadrzaj>
-                    </Tacka>
-                    <Tacka RedniBroj="50">
-                        <Sadrzaj>Sadrzaj3</Sadrzaj>
-                    </Tacka>
+            <Clan RedniBroj="5">
+                <Stav RedniBroj="1">
+                    <Tekst>Tekst CLANA 5 STAVA 1</Tekst>
                 </Stav>
             </Clan>
         </Odeljak>
     </Glava>
-    <Glava RedniBroj="50" Naziv="Naziv15">
-        <Odeljak RedniBroj="50" Naziv="Naziv17">
-            <Clan RedniBroj="50">
-                <Stav>
-                    <Tacka RedniBroj="50">
-                        <Sadrzaj>Sadrzaj4</Sadrzaj>
-                    </Tacka>
-                    <Tacka RedniBroj="50">
-                        <Sadrzaj>Sadrzaj5</Sadrzaj>
-                    </Tacka>
-                </Stav>
-                <Stav>
-                    <Tacka RedniBroj="50">
-                        <Sadrzaj>Sadrzaj6</Sadrzaj>
-                    </Tacka>
-                    <Tacka RedniBroj="50">
-                        <Sadrzaj>Sadrzaj7</Sadrzaj>
-                    </Tacka>
-                </Stav>
-            </Clan>
-            <Clan RedniBroj="50">
-                <Stav>
-                    <Sadrzaj/>
-                </Stav>
-                <Stav>
-                    <Tacka RedniBroj="50">
-                        <Sadrzaj>Sadrzaj8</Sadrzaj>
-                    </Tacka>
-                    <Tacka RedniBroj="50">
-                        <Sadrzaj>Sadrzaj9</Sadrzaj>
-                    </Tacka>
-                </Stav>
-            </Clan>
-        </Odeljak>
-        <Odeljak RedniBroj="50" Naziv="Naziv23">
-            <Clan RedniBroj="50">
-                <Stav>
-                    <Sadrzaj/>
-                </Stav>
-                <Stav>
-                    <Sadrzaj/>
-                </Stav>
-            </Clan>
-            <Clan RedniBroj="50">
-                <Stav>
-                    <Sadrzaj/>
-                </Stav>
-                <Stav>
-                    <Tacka RedniBroj="50">
-                        <Sadrzaj>Sadrzaj10</Sadrzaj>
-                    </Tacka>
-                    <Tacka RedniBroj="50">
-                        <Sadrzaj>Sadrzaj11</Sadrzaj>
-                    </Tacka>
-                </Stav>
-            </Clan>
-        </Odeljak>
+    <Glava RedniBroj="2" Naziv="Glava2">
+        <Clan RedniBroj="6">
+            <Stav RedniBroj="1">
+                <Tekst>Tekst CLANA 6 STAVA 1</Tekst>
+            </Stav>
+            <Stav RedniBroj="2">
+                <Tekst>Tekst CLANA 6 STAVA 2</Tekst>
+            </Stav>
+        </Clan>
+        <Clan RedniBroj="7">
+            <Stav RedniBroj="1">
+                <Tekst>Tekst CLANA 7 STAVA 1</Tekst>
+            </Stav>
+            <Stav RedniBroj="2">
+                <Tekst>Tekst CLANA 7 STAVA 2</Tekst>
+            </Stav>
+        </Clan>
     </Glava>
     <ZavrsniDeo>
         <Organ>Organ0</Organ>
@@ -118,4 +93,6 @@
             <Prezime>Prezime0</Prezime>
         </Potpisnik>
     </ZavrsniDeo>
+    <UserName>b</UserName>
+    <TimeStamp>2002-05-30T09:00:00</TimeStamp>
 </Akt>

@@ -76,6 +76,7 @@ public class AmandmanController {
        // System.out.println("USATO, ID: "+docID);
 
         Akt a =aktManager.read(docID, false);
+        //System.out.print(amandmens.size());
         ArrayList<Amandmani> amandmens = amandmanManager.getAllAmandmansForAkt(a);
         System.out.print(amandmens.size());
         return new ResponseEntity(amandmens, HttpStatus.OK);
