@@ -1,11 +1,15 @@
 package hello.app;
 
 import java.io.File;
+import java.util.ArrayList;
+
 import hello.Application;
 import hello.StringResources.MarkLogicStrings;
 import hello.businessLogic.document.AktManager;
+import hello.businessLogic.document.AmandmanManager;
 import hello.businessLogic.document.UsersManager;
 import hello.entity.gov.gradskaskupstina.Akt;
+import hello.entity.gov.gradskaskupstina.Amandmani;
 import hello.entity.gov.gradskaskupstina.User;
 import hello.entity.gov.gradskaskupstina.Users;
 import org.slf4j.Logger;
@@ -31,7 +35,8 @@ public class TestsMainCogara {
     }
 
     public static void main(String[] args){
-        proposeAkt();
+        deleteAmandmans();
+        applyAmandmans();
     }
 
     public static void deleteAllUsers(){
@@ -52,7 +57,13 @@ public class TestsMainCogara {
 
     public static void deleteAkts(){
         AktManager aktManager = new AktManager();
-        aktManager.deleteAkt("2746325830753861621.xml");
+        aktManager.deleteAkt("");
+    }
+
+    public static void deleteAmandmans(){
+        AmandmanManager amandmanManager = new AmandmanManager();
+        amandmanManager.deleteAmandman("1136342900533315589.xml");
+        amandmanManager.deleteAmandman("5637100032808720681.xml");
     }
 
     public static void proposeAkt(){
@@ -61,5 +72,21 @@ public class TestsMainCogara {
         File xmlFile = new File("res/validationTest/akt1.xml");
         Akt akt = aktManager.convertFromXml(xmlFile);
         aktManager.proposeAkt(akt, user);
+    }
+
+    public static void proposeAmandman(){
+        // User test dodaje probni akt koji se nalazi u fajlu res/validationTest/akt1.xml
+        AmandmanManager amandmanManager = new AmandmanManager();
+        File xmlFile = new File("res/validationTest/amandmanProba1.xml");
+        Amandmani amandman = amandmanManager.convertFromXml(xmlFile);
+        amandmanManager.proposeAmandman(amandman, user);
+    }
+
+    public static void applyAmandmans() {
+        AktManager aktManager = new AktManager();
+        AmandmanManager amandmanManager = new AmandmanManager();
+        ArrayList<Amandmani> amandmani = amandmanManager.getAllAmendmentProposed();
+        Akt akt = aktManager.read("8348725606370910161.xml", false);
+        aktManager.applyAmendments(amandmani, akt, user);
     }
 }

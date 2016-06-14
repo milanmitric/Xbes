@@ -3,8 +3,7 @@
     targetNamespace="http://www.gradskaskupstina.gov/" elementFormDefault="qualified"
     xmlns:gov="http://www.gradskaskupstina.gov/">
 
-    <xs:import namespace="http://www.w3.org/2000/09/xmldsig#"
-        schemaLocation="http://www.w3.org/TR/2002/REC-xmldsig-core-20020212/xmldsig-core-schema.xsd"/>
+    <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="http://www.w3.org/TR/2002/REC-xmldsig-core-20020212/xmldsig-core-schema.xsd"/>
 
     <xs:element name="Akt">
         <xs:complexType>

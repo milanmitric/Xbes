@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Akt xmlns="http://www.gradskaskupstina.gov/"
- xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xsi:schemaLocation="http://www.gradskaskupstina.gov/ file:/C:/Users/FS-LB/Desktop/XMLProjekat/DJIT/Xbes/GsApp/complete/schema/Akt.xsd">
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.gradskaskupstina.gov/ file:/C:/Users/FS-LB/Desktop/XMLProjekat/DJIT/Xbes/GsApp/complete/schema/Akt.xsd">
     <Naslov>Akt</Naslov>
     <Glava RedniBroj="1" Naziv="Glava1">
         <Odeljak RedniBroj="1" Naziv="Odeljak1">

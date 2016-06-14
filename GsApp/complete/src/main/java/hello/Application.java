@@ -22,6 +22,4 @@ public class Application {
         SpringApplication.run(Application.class, args);
         System.out.println("[ https://localhost:8080/ ] SERVER IS WORKING...");
     }
-
-
 }

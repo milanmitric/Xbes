@@ -281,7 +281,7 @@ public class AktManager extends BeanManager<Akt> {
             for (Amandmani amandmani: listaAmandmana){
                 for (TAmandman amandman : amandmani.getAmandman()){
                     String tmp = amandman.getSadrzaj();
-                    String query = generateXquery(amandman.getPredmetIzmene(),amandman.getTipIzmene().value(),amandman.getSadrzaj(), "2746325830753861621.xml");
+                    String query = generateXquery(amandman.getPredmetIzmene(),amandman.getTipIzmene().value(),amandman.getSadrzaj(), amandmani.getDocumentId());
                     this.executeQuery(query);
                 }
             }
@@ -370,11 +370,11 @@ public class AktManager extends BeanManager<Akt> {
             else {
                 builder.append("return  xdmp:node-insert-before($x/a:Akt/a:ZavrsniDeo");
             }
+            builder.append(",");
+            builder.append(tekst);
+            builder.append(")");
         }
 
-        builder.append(",");
-        builder.append(tekst);
-        builder.append(")");
         return builder.toString();
     }
 }

@@ -1,33 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Amandman xmlns="http://www.gradskaskupstina.gov/"
+<Amandmani xmlns="http://www.gradskaskupstina.gov/"
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  xsi:schemaLocation="http://www.gradskaskupstina.gov/ file:/C:/Users/FS-LB/Desktop/XMLProjekat/DJIT/Xbes/GsApp/complete/schema/Amandmani.xsd">
-    <PravniOsnov>PravniOsnov0</PravniOsnov>
-    <Akt>Akt0</Akt>
-    <Amandman>
-        <PredmetIzmene>PredmetIzmene0</PredmetIzmene>
+    <PravniOsnov>Pravni osnov 1</PravniOsnov>
+    <Akt>8348725606370910161.xml</Akt>
+    <Amandman RedniBroj="1">
+        <PredmetIzmene ref_clanovi="1" ref_stavovi="1">STAV broj 1 CLANA broj 1</PredmetIzmene>
         <TipIzmene>izmena</TipIzmene>
-        <Obrazlozenje/>
-        <PredmetIzmene>PredmetIzmene1</PredmetIzmene>
-        <TipIzmene>izmena</TipIzmene>
-        <Obrazlozenje/>
+        <Sadrzaj><Stav>Tekst iz amandmana primenjen je na ovaj clan</Stav></Sadrzaj>
+        <Obrazlozenje>Ne valja ovo sto je predlozio test clan. Tj. kad bolje razmislim ja sam isto test clan. Ne svidja mi se ono sto sam napisao u aktu ovde u stavu 1 clana 1 pa ga sad menjam.</Obrazlozenje>
     </Amandman>
-    <Amandman>
-        <PredmetIzmene>PredmetIzmene2</PredmetIzmene>
-        <TipIzmene>izmena</TipIzmene>
-        <Obrazlozenje/>
-        <PredmetIzmene>PredmetIzmene3</PredmetIzmene>
-        <TipIzmene>izmena</TipIzmene>
-        <Obrazlozenje/>
+    <Amandman RedniBroj="2">
+        <PredmetIzmene ref_clanovi="5">CLAN broj 5</PredmetIzmene>
+        <TipIzmene>brisanje</TipIzmene>
+        <Obrazlozenje>Brise mi se za clan broj 5</Obrazlozenje>
+    </Amandman>
+    <Amandman RedniBroj="3">
+        <PredmetIzmene ref_clanovi="8">CLAN broj 5</PredmetIzmene>
+        <TipIzmene>dopuna</TipIzmene>
+        <Sadrzaj><Clan>Tekst clana kao dupune na akt.</Clan></Sadrzaj>
+        <Obrazlozenje>Zafalilo nam nesto clanova, pa reko aj.</Obrazlozenje>
     </Amandman>
     <Potpisnici>
         <Potpisnik>
-            <Ime>Ime0</Ime>
-            <Prezime>Prezime0</Prezime>
+            <Ime>Novak</Ime>
+            <Prezime>Djokovic</Prezime>
         </Potpisnik>
         <Potpisnik>
-            <Ime>Ime1</Ime>
-            <Prezime>Prezime1</Prezime>
+            <Ime>Zoran</Ime>
+            <Prezime>Precednik</Prezime>
         </Potpisnik>
     </Potpisnici>
-</Amandman>
+    <UserName>test</UserName>
+    <TimeStamp>2016-06-14T16:40:23</TimeStamp>
+</Amandmani>
