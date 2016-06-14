@@ -5,6 +5,7 @@ import com.marklogic.client.query.MatchDocumentSummary;
 import com.marklogic.client.query.MatchLocation;
 import com.marklogic.client.query.MatchSnippet;
 import hello.StringResources.MarkLogicStrings;
+import hello.StringResources.TipIzmene;
 import hello.businessLogic.core.BeanManager;
 import hello.entity.gov.gradskaskupstina.*;
 import org.slf4j.Logger;
@@ -285,7 +286,7 @@ public class AktManager extends BeanManager<Akt> {
 
         builder.append("declare namespace a=\"http://www.gradskaskupstina.gov/\";");
         builder.append("let $x := doc(\"" + docId + "\")");
-        if (type.toUpperCase().equals("BRISANJE")){
+        if (type.toUpperCase().equals(TipIzmene.BRISANJE)){
             builder.append("return xdmp:node-delete($x/a:Akt//a:Clan[@RedniBroj=\"" + redniBrojClana +"\"]");
             if(redniBrojStava != null)
                 builder.append("/a:Stav[@RedniBroj = \"" + redniBrojStava + "\"]");
@@ -294,7 +295,7 @@ public class AktManager extends BeanManager<Akt> {
             if(redniBrojPodtacke != null)
                 builder.append("/a:Podtacka[@RedniBroj = \"" + redniBrojPodtacke + "\"]");
             builder.append(")");
-        } else if (type.toUpperCase().equals("IZMENA")) {
+        } else if (type.toUpperCase().equals(TipIzmene.IZMENA)) {
             builder.append("return xdmp:node-replace($x/a:Akt//a:Clan[@RedniBroj=\"" + redniBrojClana +"\"]");
             builder.append("/a:Stav[@RedniBroj = \"" + redniBrojStava + "\"]");
             if(redniBrojTacke != null){
@@ -306,7 +307,7 @@ public class AktManager extends BeanManager<Akt> {
             builder.append(",");
             builder.append(tekst);
             builder.append(")");
-        } else if (type.toUpperCase().equals("DOPUNA")){
+        } else if (type.toUpperCase().equals(TipIzmene.DOPUNA)){
 
             // Clan treba da se doda u glavu.
             if (redniBrojGlave!= null){
