@@ -16,8 +16,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 @EnableGlobalMethodSecurity(securedEnabled=true, prePostEnabled=true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private static final String LOGOUT_URL = "/signout";
-    private static final String SESSION_COOKIE = "JSESSIONID";
 
     @Override
     public void configure(HttpSecurity http) throws Exception {

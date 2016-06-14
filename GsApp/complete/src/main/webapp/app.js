@@ -21,14 +21,34 @@ angular.module('xapp', ['ngResource', 'ui.router', 'angularModalService'])
         //$locationProvider.html5Mode(true);
 
 
-    }).run(function($rootScope,  $state) {
+    }).run(function($rootScope,  $state, authService) {
+
           $rootScope.$on("$locationChangeStart", function(event, next, current) {
-              // handle route changes
+             // handle route changes
              // console.log(event);
-
-              //$state.go('signup');
-
-
-
+             //$state.go('signup');
           });
-          });
+
+            authService.authenticate(
+                function(res){
+                    $rootScope.USER={
+                        username:res.data.username,
+                        ime:res.data.ime,
+                        prezime:res.data.prezime,
+                        role:res.data.role
+                    };
+
+                    console.log($rootScope.user);
+
+                },
+                function(res){
+                    $rootScope.USER={
+                        username:"",
+                        ime:"",
+                        prezime:"",
+                        role:""
+                    };
+                }
+            );
+
+        });

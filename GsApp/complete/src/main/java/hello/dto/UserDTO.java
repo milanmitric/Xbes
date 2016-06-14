@@ -11,17 +11,20 @@ public class UserDTO {
     private String username;
     private String role;
     private String ime;
+    private String prezime;
 
     public UserDTO(User user) {
         this.username = user.getUsername();
         this.role=user.getRole();
         this.ime=user.getIme();
+        this.prezime=user.getPrezime();
 
     }
     public UserDTO(){
         username="ANONYMOUS";
         role="ROLE_ANONYMOUS";
         ime="ANONYMOUS";
+        prezime="ANONYMOUS";
     }
 
     public String getUsername() {
@@ -44,13 +47,18 @@ public class UserDTO {
 
     public void setIme(String ime){this.ime=ime;}
 
+    public String getPrezime() {
+        return prezime;
+    }
+
+    public void setPrezime(String prezime) {
+        this.prezime = prezime;
+    }
+
     @Override
     public String toString() {
         return "[ username = " + username +" ]";
     }
-    //TODO
-    // function for:
-    // IN(real user obj)
-    // OUT(userDTO)
+
 
 }

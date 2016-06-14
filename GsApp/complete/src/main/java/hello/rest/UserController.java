@@ -76,7 +76,8 @@ public class UserController {
 
                             HashMap<String, String> res= new HashMap<>();
                             res.put("success", "true");
-                            res.put("data", user.getUsername());
+                            res.put("username", user.getUsername());
+                            res.put("role", user.getRole());
                             return new ResponseEntity(res, HttpStatus.OK);
 
                         }
@@ -136,10 +137,12 @@ public class UserController {
         System.out.println("SIGNUP REST - validation success");
 
         UsersManager usersManager = new UsersManager();
+
         /*citamo sve usere iz baze*/
         Users users=null;
         try {
             users = usersManager.read(MarkLogicStrings.USERS_DOC_ID);
+            System.out.println("all users"+ users.toString());
         }catch (Exception e){
             System.out.println("ERRORCINA");
         }

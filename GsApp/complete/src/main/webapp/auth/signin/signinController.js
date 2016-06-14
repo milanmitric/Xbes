@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('xapp')
-    .controller('SigninController', function ($scope, authService, $location, $state) {
+    .controller('SigninController', function ($rootScope, $scope, authService, $location, $state) {
 
 		//button clicked
 	    $scope.signin = function(){
@@ -12,6 +12,12 @@ angular.module('xapp')
 				   console.log(response);
 				   if(response.data.success=='true'){
 				   alertify.success("SUCCESS");
+				    $rootScope.USER={
+                                           username:res.data.username,
+                                           ime:res.data.ime,
+                                           prezime:res.data.prezime,
+                                           role:res.data.role
+                                       };
 				   }else{
 				   alertify.error("FAIL");
 				   }
