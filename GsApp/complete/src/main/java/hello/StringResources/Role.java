@@ -11,6 +11,8 @@ public class Role {
 
     public static final String ROLE_PREDSEDNIK="ROLE_PREDSEDNIK";
 
+    public static final String ROLE_ADMINISTRATOR="ROLE_ADMINISTRATOR";
+
     public static final String ROLE_ANONYMOUS="ROLE_ANONYMOUS"; //spring's default role when accessing rest
 
 }
