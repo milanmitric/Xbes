@@ -101,8 +101,6 @@ angular.module('xapp')
                                 }
                    );
 
-
-
    }
 
 

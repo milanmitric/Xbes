@@ -87,16 +87,13 @@ angular.module('xapp')
         sednicaService.prihvati(
                      list,
                      function(res){
-
-
+                        $state.go('sednicahome');
                      },
                      function(res){
-
 
                      }
         );
 
-        $state.go('sednicahome');
     }
 
     /*SVE*/

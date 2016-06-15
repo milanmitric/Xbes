@@ -11,6 +11,7 @@ import hello.security.PasswordStorage;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -86,6 +87,7 @@ public class UserController {
 
 
 
+    @PreAuthorize("hasRole('ROLE_ADMINISTRATOR')")
     @RequestMapping(value = "/signup",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -181,7 +183,5 @@ public class UserController {
         SecurityContextHolder.clearContext();
         return HttpStatus.OK;
     }
-
-
 
 }

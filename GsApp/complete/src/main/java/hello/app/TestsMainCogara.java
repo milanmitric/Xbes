@@ -1,10 +1,13 @@
 package hello.app;
 
 import java.io.File;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.util.ArrayList;
 
 import hello.Application;
 import hello.StringResources.MarkLogicStrings;
+import hello.StringResources.Role;
 import hello.businessLogic.document.AktManager;
 import hello.businessLogic.document.AmandmanManager;
 import hello.businessLogic.document.UsersManager;
@@ -12,6 +15,7 @@ import hello.entity.gov.gradskaskupstina.Akt;
 import hello.entity.gov.gradskaskupstina.Amandmani;
 import hello.entity.gov.gradskaskupstina.User;
 import hello.entity.gov.gradskaskupstina.Users;
+import hello.security.PasswordStorage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.client.RestTemplate;
@@ -26,15 +30,32 @@ public class TestsMainCogara {
 
     static {
         user = new User();
-        user.setIme("test");
-        user.setPrezime("test");
+        user.setIme("TestIme");
+        user.setPrezime("TestPrezime");
         user.setEmail("test@gradskaskupstina.gov");
         user.setUsername("test");
-        user.setPassword("A18MXitD+Dynjr+mbSnU8Zqir5M=");
-        user.setSalt("xAxoT8uwGUA=");
-        user.setRole("ROLE_PREDSEDNIK");
+        user.setPassword("test");
+        byte[] salt = new byte[0];
+        try {
+            salt = PasswordStorage.generateSalt();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        user.setSalt(PasswordStorage.base64Encode(salt));
+        /*hash pass*/
+        byte[] hashedPassword = new byte[0];
+        try {
+            hashedPassword = PasswordStorage.hashPassword(user.getPassword(), salt);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            System.out.println(e.toString());
+        } catch (InvalidKeySpecException e) {
+            e.printStackTrace();
+            System.out.println(e.toString());
+        }
+        user.setPassword(PasswordStorage.base64Encode(hashedPassword));
+        user.setRole(Role.ROLE_ODBORNIK);
     }
-
 
     static {
         //for localhost testing only
@@ -52,19 +73,7 @@ public class TestsMainCogara {
     }
 
     public static void main(String[] args){
-        //proposeAkt();
-       /* try {
-            callRest();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
-
-        RestTemplate restTemplate = new RestTemplate();
-        String s=restTemplate.getForObject("http://localhost:8080/api/getsednicastatus/", String.class);
-        System.out.println("RESPONSE: "+s);
-
-        deleteAmandmans();
-        applyAmandmans();
+        return;
     }
 
     public static void deleteAllUsers(){
@@ -80,6 +89,188 @@ public class TestsMainCogara {
         Users users = null;
         users = usersManager.read(MarkLogicStrings.USERS_DOC_ID);
         users.getUser().add(user);
+        User user2 = new User();
+        user2.setIme("Zoran");
+        user2.setPrezime("Precednik");
+        user2.setEmail("shone@gradskaskupstina.gov");
+        user2.setUsername("zoki");
+        user2.setPassword("zoki");
+        byte[] salt = new byte[0];
+        try {
+            salt = PasswordStorage.generateSalt();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        user2.setSalt(PasswordStorage.base64Encode(salt));
+        /*hash pass*/
+        byte[] hashedPassword = new byte[0];
+        try {
+            hashedPassword = PasswordStorage.hashPassword(user2.getPassword(), salt);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            System.out.println(e.toString());
+        } catch (InvalidKeySpecException e) {
+            e.printStackTrace();
+            System.out.println(e.toString());
+        }
+        user2.setPassword(PasswordStorage.base64Encode(hashedPassword));
+        user2.setRole(Role.ROLE_PREDSEDNIK);
+        users.getUser().add(user2);
+
+        usersManager.write(users,MarkLogicStrings.USERS_DOC_ID,MarkLogicStrings.USERS_COL_ID,user);
+    }
+
+    public static void reverseUsersToInitial(){
+        UsersManager usersManager = new UsersManager();
+        Users users = new Users();
+        users.getUser().add(user);
+
+        {
+            User user2 = new User();
+            user2.setIme("Zoran");
+            user2.setPrezime("Precednik");
+            user2.setEmail("shone@gradskaskupstina.gov");
+            user2.setUsername("zoki");
+            user2.setPassword("zoki");
+            byte[] salt2 = new byte[0];
+            try {
+                salt2 = PasswordStorage.generateSalt();
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            }
+            user2.setSalt(PasswordStorage.base64Encode(salt2));
+        /*hash pass*/
+            byte[] hashedPassword2 = new byte[0];
+            try {
+                hashedPassword2 = PasswordStorage.hashPassword(user2.getPassword(), salt2);
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+                System.out.println(e.toString());
+            } catch (InvalidKeySpecException e) {
+                e.printStackTrace();
+                System.out.println(e.toString());
+            }
+            user2.setPassword(PasswordStorage.base64Encode(hashedPassword2));
+            user2.setRole(Role.ROLE_PREDSEDNIK);
+            users.getUser().add(user2);
+        }
+        {
+            User user2 = new User();
+            user2.setIme("Бранислав");
+            user2.setPrezime("Чогић");
+            user2.setEmail("chogara@gradskaskupstina.gov");
+            user2.setUsername("chogara");
+            user2.setPassword("chogara");
+            byte[] salt2 = new byte[0];
+            try {
+                salt2 = PasswordStorage.generateSalt();
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            }
+            user2.setSalt(PasswordStorage.base64Encode(salt2));
+        /*hash pass*/
+            byte[] hashedPassword2 = new byte[0];
+            try {
+                hashedPassword2 = PasswordStorage.hashPassword(user2.getPassword(), salt2);
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+                System.out.println(e.toString());
+            } catch (InvalidKeySpecException e) {
+                e.printStackTrace();
+                System.out.println(e.toString());
+            }
+            user2.setPassword(PasswordStorage.base64Encode(hashedPassword2));
+            user2.setRole(Role.ROLE_ADMINISTRATOR);
+            users.getUser().add(user2);
+        }
+        {
+            User user2 = new User();
+            user2.setIme("Radomir");
+            user2.setPrezime("Marinkovic");
+            user2.setEmail("rasha@gradskaskupstina.gov");
+            user2.setUsername("rasha");
+            user2.setPassword("rasha");
+            byte[] salt2 = new byte[0];
+            try {
+                salt2 = PasswordStorage.generateSalt();
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            }
+            user2.setSalt(PasswordStorage.base64Encode(salt2));
+        /*hash pass*/
+            byte[] hashedPassword2 = new byte[0];
+            try {
+                hashedPassword2 = PasswordStorage.hashPassword(user2.getPassword(), salt2);
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+                System.out.println(e.toString());
+            } catch (InvalidKeySpecException e) {
+                e.printStackTrace();
+                System.out.println(e.toString());
+            }
+            user2.setPassword(PasswordStorage.base64Encode(hashedPassword2));
+            user2.setRole(Role.ROLE_ADMINISTRATOR);
+            users.getUser().add(user2);
+        }
+        {
+            User user2 = new User();
+            user2.setIme("Nebojsa");
+            user2.setPrezime("Popovic");
+            user2.setEmail("shone@gradskaskupstina.gov");
+            user2.setUsername("shone");
+            user2.setPassword("shone");
+            byte[] salt2 = new byte[0];
+            try {
+                salt2 = PasswordStorage.generateSalt();
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            }
+            user2.setSalt(PasswordStorage.base64Encode(salt2));
+        /*hash pass*/
+            byte[] hashedPassword2 = new byte[0];
+            try {
+                hashedPassword2 = PasswordStorage.hashPassword(user2.getPassword(), salt2);
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+                System.out.println(e.toString());
+            } catch (InvalidKeySpecException e) {
+                e.printStackTrace();
+                System.out.println(e.toString());
+            }
+            user2.setPassword(PasswordStorage.base64Encode(hashedPassword2));
+            user2.setRole(Role.ROLE_ADMINISTRATOR);
+            users.getUser().add(user2);
+        }
+        {
+            User user2 = new User();
+            user2.setIme("Milan");
+            user2.setPrezime("Mitric");
+            user2.setEmail("mitra@gradskaskupstina.gov");
+            user2.setUsername("mitra");
+            user2.setPassword("mitra");
+            byte[] salt2 = new byte[0];
+            try {
+                salt2 = PasswordStorage.generateSalt();
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            }
+            user2.setSalt(PasswordStorage.base64Encode(salt2));
+        /*hash pass*/
+            byte[] hashedPassword2 = new byte[0];
+            try {
+                hashedPassword2 = PasswordStorage.hashPassword(user2.getPassword(), salt2);
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+                System.out.println(e.toString());
+            } catch (InvalidKeySpecException e) {
+                e.printStackTrace();
+                System.out.println(e.toString());
+            }
+            user2.setPassword(PasswordStorage.base64Encode(hashedPassword2));
+            user2.setRole(Role.ROLE_ADMINISTRATOR);
+            users.getUser().add(user2);
+        }
+
         usersManager.write(users,MarkLogicStrings.USERS_DOC_ID,MarkLogicStrings.USERS_COL_ID,user);
     }
 
