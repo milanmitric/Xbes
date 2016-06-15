@@ -2,7 +2,10 @@ package hello.rest;
 
 import hello.StringResources.MarkLogicStrings;
 import hello.businessLogic.document.AktManager;
+import hello.businessLogic.document.AmandmanManager;
+import hello.businessLogic.document.UsersManager;
 import hello.entity.gov.gradskaskupstina.Akt;
+import hello.entity.gov.gradskaskupstina.Amandmani;
 import hello.entity.gov.gradskaskupstina.User;
 import hello.security.EncryptKEK;
 import org.json.JSONException;
@@ -41,17 +44,18 @@ import java.util.HashMap;
 @RestController
 @RequestMapping("/api")
 public class AktController {
-
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private AktManager aktManager = new AktManager();
+    private AmandmanManager amandmanManager = new AmandmanManager();
+    private UsersManager usersManager = new UsersManager();
     private EncryptKEK enkryption = new EncryptKEK();
-
-
 
     @RequestMapping(value = "/getallacts",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity getAllAct() {
+        logger.info("Called REST for getting all acts");
+
         ArrayList<Akt> aktovi = aktManager.getAllFilesProposed();
         ArrayList<Akt> aktovi2 = aktManager.getAllFilesApproved();
         HashMap<String,ArrayList<Akt>> returnTwoLists = new HashMap<String,ArrayList<Akt>>();
@@ -60,18 +64,16 @@ public class AktController {
         return new ResponseEntity(returnTwoLists, HttpStatus.OK);
     }
 
-// BRATE NISAM GLEDAO ALI RADI OVO NASE JEBOTE, TO NEMA VEZE SA TIM
     @RequestMapping(value = "/getactbyid",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity getActById(@RequestBody String data) {
-        System.out.println("USAO SAM ");
-//        data = data.substring(0, data.length()-1);
-        System.out.println("ID je : "+data);
+        logger.info("Called REST for getting act by id "+ "data");
+
         TransformerFactory factory = TransformerFactory.newInstance();
         Source xslt = new StreamSource(new File("Akt.xsl"));
         if(xslt==null){
-            System.out.println("NULL JE XSLT");
+            logger.info("NULL JE XSLT");
         }
         try {
             Transformer transformer = factory.newTransformer(xslt);
@@ -92,11 +94,10 @@ public class AktController {
             for (String line : Files.readAllLines(Paths.get("tmp.html"))) {
                 akt+=line;
             }
-            System.out.println("SAdrzaj akta!");
-
+            logger.info("Content of act: ");
             JSONObject returnValue = new JSONObject();
             returnValue.put("akt",akt);
-            System.out.println(returnValue);
+            logger.info(akt);
 
             return new ResponseEntity(akt,HttpStatus.OK);
         } catch (FileNotFoundException e) {
@@ -109,32 +110,32 @@ public class AktController {
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
-
     @PreAuthorize("hasRole('ROLE_ODBORNIK')")
     @RequestMapping(value = "/getmyallacts",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity getMyAllAct() {
+        logger.info("Called REST for getting act of a person (getmyallacts)");
 
         return new ResponseEntity(HttpStatus.OK);
     }
-
 
     @RequestMapping(value = "/getproposed",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity getProposed() {
+        logger.info("Called REST for getting all proposed acts");
+
         ArrayList<Akt> aktovi = aktManager.getAllFilesProposed();
         return new ResponseEntity(aktovi, HttpStatus.OK);
     }
-
-
 
     @PreAuthorize("hasRole('ROLE_ODBORNIK')")
     @RequestMapping(value = "/getmyproposedakts",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity getmyproposed() {
+        logger.info("Called REST for getting proposed acts of a user: (getmyproposed)");
 
         //TODO
         ArrayList<Akt> aktovi = aktManager.getAllFilesProposed();
@@ -143,17 +144,15 @@ public class AktController {
             //if(aktovi.get(i).get)
             
         }
-
         return new ResponseEntity(aktovi, HttpStatus.OK);
     }
-
-
 
     @RequestMapping(value = "/tagsearch",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity searchActs(@RequestParam("parametar") String parametar,@RequestParam("tag") String tag){
-        logger.info("[AktController] LOG: ENTER TO API FOR SEARCHING  ACTS");
+        logger.info("Called REST for searching acts");
+
         HashMap<String,ArrayList<String>> predlozeni = aktManager.returnListOfDocumentsMatchedWithOneFieldSearchAndTag(tag,parametar,MarkLogicStrings.AKTOVI_PREDLOZEN_COL_ID);
         HashMap<String,ArrayList<String>> usvojeni = aktManager.returnListOfDocumentsMatchedWithOneFieldSearchAndTag(tag,parametar,MarkLogicStrings.AKTOVI_USVOJENI_COL_ID);
         HashMap<String,HashMap<String,ArrayList<String>>> returnMap = new HashMap<String,HashMap<String,ArrayList<String>>>();
@@ -162,14 +161,12 @@ public class AktController {
         return new ResponseEntity(returnMap,HttpStatus.OK);
     }
 
-
     @RequestMapping(value = "/searchacts/{value}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity searchActs(@PathVariable String value){
-        //ArrayList<Akt> aktovi = aktManager.getAllFilesProposed();
-        //return new ResponseEntity(aktovi, HttpStatus.OK);
-        logger.info("[AktController] LOG: ENTER TO API FOR SEARCHING  ACTS");
+        logger.info("Called REST for searching acts");
+
         HashMap<String,ArrayList<String>> predlozeni = aktManager.returnListOfDocumentsMatchedWithOneFieldSearch(value, MarkLogicStrings.AKTOVI_PREDLOZEN_COL_ID);
         HashMap<String,ArrayList<String>> usvojeni = aktManager.returnListOfDocumentsMatchedWithOneFieldSearch(value, MarkLogicStrings.AKTOVI_USVOJENI_COL_ID);
         HashMap<String,HashMap<String,ArrayList<String>>> returnMap = new HashMap<String,HashMap<String,ArrayList<String>>>();
@@ -177,7 +174,6 @@ public class AktController {
         returnMap.put("usvojeni",usvojeni);
         return new ResponseEntity(returnMap,HttpStatus.OK);
     }
-
 
     @PreAuthorize("hasRole('ROLE_ODBORNIK')")
     @RequestMapping(value = "/akt",
@@ -206,15 +202,14 @@ public class AktController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-
-
     @RequestMapping(value = "/archiveit",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity test5(@RequestParam("docID") String docID) throws FileNotFoundException {
+        logger.info("Called REST for archiving act with an id: " + docID);
 
         //DOCID EXAMPLE: 16250548801149691694.xml
-        System.out.println("ID JE: "+docID);
+        //System.out.println("ID JE: "+docID);
         Akt akt = aktManager.read(docID, false);
         if(akt==null) {
             return new ResponseEntity(docID, HttpStatus.BAD_REQUEST);
@@ -243,82 +238,72 @@ public class AktController {
         /*CONVERT DOCUMET TO INPUTSTREAM*/
         FileInputStream is= (FileInputStream) aktManager.convertDocumentToInputStream(doc);
         aktManager.write(is, MarkLogicStrings.ARCHIVE_PREFIX+docID, MarkLogicStrings.ARCHIVE_COL_ID, false, null);
-        System.out.println("UPISANOOOOOOOOOOOOOOOOO");
+
+        logger.info("Act wih an id: " + docID + " successfully archived");
 
         return new ResponseEntity(docID, HttpStatus.OK);
     }
-
-
-
-
 
     /*prihvati akt nekako ili nemoj*/
     @PreAuthorize("hasRole('ROLE_PREDSEDNIK')")
     @RequestMapping(value = "/prihvatiovono",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity aktmadafaka(@RequestBody ArrayList<String> amandmants){
+    public ResponseEntity aktmadafaka(@RequestBody ArrayList<String> params){
+        logger.info("Called REST for PRIHVATIOVOONO");
 
-        System.out.println("AMANDMANI: "+amandmants);
+        //System.out.println("AMANDMANI: "+amandmants);
         //uvek stigne lista, 0. u nizu je UVEK ID od AKTA, a nakon toga idu ID od amandmana
         //String aktID=amandmants.get(0);
 
-        if(amandmants.get(0).equals("ODBIJAJUSE")){
-            System.out.println("SVI AMANDMAN ZA AKT SE ODBIJAJU");
+        if(params.get(0).equals("ODBIJAJUSE")){
+            logger.info("All amandments are being rejected");
             //TODO - SVI AMANDMAN ZA AKT SE ODBIJAJU
             //AKT ID: amandmants.get(1) //AKT JE PRIHVACEN U NACELU VEC
             //AMANDMANI ID get(2+n) n=0,1,2...Size
-
-
-
         } else
-        if(amandmants.get(0).equals("AKTSEODBIJA")){
-            System.out.println("AKT SE ODBIJA");
+        if(params.get(0).equals("AKTSEODBIJA")){
+            logger.info("Act is being rejected");
             //TODO - AKT SE ODBIJA
             //AKT ID: amandmants.get(1)
             //AMANDMANI ID get(2+n) n=0,1,2...Size
-
-
-
         }else {
-
-                if (amandmants.size() == 1) {
-                    System.out.println("AKT SE PRIHVATA SE U NACELU");
-                    //TODO - AKT SE PRIHVATA SE U NACELU
-                    //AKT ID : amandmants.get(0)
-
-
-                } else {
-                    System.out.println("USVAJAJU SE AMNDMANI NA AKT");
-                    //TODO - USVAJAJU SE AMNDMANI NA AKT
-                    //AKT ID : amandmants.get(0) //AKT JE PRIHVACEN U NACELU VEC
-                    //1. , 2. , 3. ... ID od AMANDMANA
-
+            if (params.size() == 1) {
+                logger.info("Act is accepted in principle");
+                //TODO - AKT SE PRIHVATA SE U NACELU
+                //AKT ID : amandmants.get(0)
+            } else {
+                logger.info("Amandments are being accepted");
+                //TODO - USVAJAJU SE AMNDMANI NA AKT
+                //AKT ID : amandmants.get(0) //AKT JE PRIHVACEN U NACELU VEC
+                //1. , 2. , 3. ... ID od AMANDMANA
+                ArrayList<Amandmani> amandmani = new ArrayList<>();
+                for(int i = 1 ; i<params.size() ; i++) {
+                    Amandmani amandman = amandmanManager.read(params.get(i), false);
+                    amandmani.add(amandman);
                 }
-
+                Akt akt = aktManager.read(params.get(0), false);
+                User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+                aktManager.applyAmendments(amandmani, akt, user);
+            }
         }
-
-
 
         return new ResponseEntity("",HttpStatus.OK);
     }
-
 
     /*serving static html*/
     @RequestMapping(value = "/givemeakt",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public String serveakt(){
-
-
+        logger.info("Called REST for SERVEAKT (givemeakt)");
         return "forward:/myWebpage.html";
     }
-
-
 
     //WORKING
     @RequestMapping(value="download", method=RequestMethod.GET)
     public void getDownload(HttpServletResponse response) {
+        logger.info("Called REST for downloading");
 
         // Get your file stream from wherever.
         //InputStream myStream = new //someClass.returnFile();
@@ -335,14 +320,5 @@ public class AktController {
             e.printStackTrace();
         }
     }
-
-
-
-
-
-
-
-
-
 
 }

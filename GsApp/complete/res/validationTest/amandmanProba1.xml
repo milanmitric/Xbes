@@ -3,11 +3,11 @@
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  xsi:schemaLocation="http://www.gradskaskupstina.gov/ file:/C:/Users/FS-LB/Desktop/XMLProjekat/DJIT/Xbes/GsApp/complete/schema/Amandmani.xsd">
     <PravniOsnov>Pravni osnov 1</PravniOsnov>
-    <Akt>8348725606370910161.xml</Akt>
+    <Akt>4330496548285334957.xml</Akt>
     <Amandman RedniBroj="1">
         <PredmetIzmene ref_clanovi="1" ref_stavovi="1">STAV broj 1 CLANA broj 1</PredmetIzmene>
         <TipIzmene>izmena</TipIzmene>
-        <Sadrzaj><Stav>Tekst iz amandmana primenjen je na ovaj clan</Stav></Sadrzaj>
+        <Sadrzaj><Stav xmlns="http://www.gradskaskupstina.gov/" RedniBroj="1"><Tekst xmlns="http://www.gradskaskupstina.gov/" RedniBroj="1">Tekst iz amandmana primenjen je na ovaj clan</Tekst></Stav></Sadrzaj>
         <Obrazlozenje>Ne valja ovo sto je predlozio test clan. Tj. kad bolje razmislim ja sam isto test clan. Ne svidja mi se ono sto sam napisao u aktu ovde u stavu 1 clana 1 pa ga sad menjam.</Obrazlozenje>
     </Amandman>
     <Amandman RedniBroj="2">
@@ -16,9 +16,9 @@
         <Obrazlozenje>Brise mi se za clan broj 5</Obrazlozenje>
     </Amandman>
     <Amandman RedniBroj="3">
-        <PredmetIzmene ref_clanovi="8">CLAN broj 5</PredmetIzmene>
+        <PredmetIzmene ref_glava="2">CLAN broj 5</PredmetIzmene>
         <TipIzmene>dopuna</TipIzmene>
-        <Sadrzaj><Clan>Tekst clana kao dupune na akt.</Clan></Sadrzaj>
+        <Sadrzaj><Clan xmlns="http://www.gradskaskupstina.gov/" RedniBroj="8"><Stav xmlns="http://www.gradskaskupstina.gov/" RedniBroj="1"><Tekst  xmlns="http://www.gradskaskupstina.gov/" RedniBroj="1">Tekst clana kao dupune na akt.</Tekst></Stav></Clan></Sadrzaj>
         <Obrazlozenje>Zafalilo nam nesto clanova, pa reko aj.</Obrazlozenje>
     </Amandman>
     <Potpisnici>

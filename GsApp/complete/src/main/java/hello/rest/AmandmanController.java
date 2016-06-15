@@ -24,7 +24,6 @@ import java.util.ArrayList;
 @RestController
 @RequestMapping("/api")
 public class AmandmanController {
-
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private AmandmanManager amandmanManager = new AmandmanManager();
     private AktManager aktManager=new AktManager();
@@ -34,16 +33,17 @@ public class AmandmanController {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity getAllAmandmans() {
+        logger.info("Called REST for getting all amandments");
         ArrayList<Amandmani> amandmani = amandmanManager.getAllAmendmentProposed();
         return new ResponseEntity(amandmani, HttpStatus.OK);
     }
-
 
     @PreAuthorize("hasRole('ROLE_ODBORNIK')")
     @RequestMapping(value = "/getmyallamandmans",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity getMyAllAmandmans() {
+        logger.info("Called REST for getting all amandments by a person: ");
 
         return new ResponseEntity(HttpStatus.OK);
     }
@@ -54,7 +54,8 @@ public class AmandmanController {
             consumes = MediaType.TEXT_PLAIN_VALUE,
             produces = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity postAmandman(@RequestBody String amandmanString) {
-        logger.info("[CONTENT OF ADDED AMANDMAN]:" + amandmanString);
+        logger.info("Called REST for proposing an amandment");
+        logger.info("Content of an amandment: " + amandmanString);
         try (PrintWriter pw = new PrintWriter("tmp.xml") ) {
             pw.println(amandmanString);
         } catch (FileNotFoundException e) {
@@ -62,7 +63,7 @@ public class AmandmanController {
         }
         Amandmani amandmani = amandmanManager.convertFromXml(new File("tmp.xml"));
         if(!amandmanManager.validateAmandman(amandmani)){
-            logger.info("[AmandmanController] ERROR: NOT VALIDATED");
+            logger.info("ERROR: Not validated!");
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
 
@@ -70,22 +71,21 @@ public class AmandmanController {
         User user = (User)auth.getPrincipal();
         String docID = amandmanManager.proposeAmandman(amandmani,user);
         if(docID==null){
-            logger.info("[AmandmanController] ERROR: NOT PROPOSED");
+            logger.info("ERROR: Not proposed!");
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         } else {
-            logger.info("[AmandmanController] Successfully proposed amandman: " + amandmani.toString() + " with id " + docID);
+            logger.info("Successfully proposed amandment: " + amandmani.toString() + " with id " + docID);
         }
 
         return new ResponseEntity(HttpStatus.OK);
     }
-
 
     @PreAuthorize("hasRole('ROLE_PREDSEDNIK')")
     @RequestMapping(value = "/getamandmantsforakt",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity getamandmantsforakt(@RequestParam("docID") String docID) {
-       // System.out.println("USATO, ID: "+docID);
+        logger.info("Called REST for getting amandments refering to act with id: " + docID);
 
         Akt a =aktManager.read(docID, false);
         //System.out.print(amandmens.size());
@@ -93,20 +93,4 @@ public class AmandmanController {
         System.out.print(amandmens.size());
         return new ResponseEntity(amandmens, HttpStatus.OK);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

@@ -14,6 +14,7 @@ import hello.entity.gov.gradskaskupstina.User;
 import hello.entity.gov.gradskaskupstina.Users;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.client.RestTemplate;
 
 /**
  * Created by milan on 4.6.2016..
@@ -32,7 +33,7 @@ public class TestsMainCogara {
         user.setPassword("A18MXitD+Dynjr+mbSnU8Zqir5M=");
         user.setSalt("xAxoT8uwGUA=");
         user.setRole("ROLE_PREDSEDNIK");
-    }*/
+    }
 
 
     static {

@@ -39,34 +39,19 @@ import java.util.HashMap;
 public class UserController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-
-
     @RequestMapping(value = "/signin",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity signin(@RequestBody LoginUser loginTry) {
+        logger.info("Called REST for signing in. Username: " + loginTry.getUsername());
 
         UsersManager usersManager = new UsersManager();
-        /*citamo sve usere iz baze*/
+
         Users users = usersManager.read(MarkLogicStrings.USERS_DOC_ID);
         for(User user : users.getUser()){
             if(loginTry.getUsername().equals(user.getUsername())){
                 try {
-                    //-----------
-
-                /*    byte[] hashedPassword = new byte[0];
                     try {
-                        hashedPassword = PasswordStorage.hashPassword(loginTry.getPassword(), user.getSalt().getBytes());
-                        System.out.println("OVO STO SAM UNEO HESIRANO: "+hashedPassword.toString());
-                        System.out.println("A IZ BAZE JE:            : "+user.getPassword());
-                    } catch (NoSuchAlgorithmException e) {
-                        e.printStackTrace();
-                    } catch (InvalidKeySpecException e) {
-                        e.printStackTrace();
-                    }*/
-                    //------------
-                    try {
-
                         if(PasswordStorage.authenticate(loginTry.getPassword(), PasswordStorage.base64Decode(user.getPassword()), PasswordStorage.base64Decode(user.getSalt()))){
                             System.out.println("ULOGOVAO SE SABAN:" +user.getUsername()+ " " +user.getRole());
                             final Collection<GrantedAuthority> authorities = new ArrayList<>();
@@ -81,34 +66,17 @@ public class UserController {
                             res.put("prezime", user.getPrezime());
                             res.put("ime", user.getIme());
                             return new ResponseEntity(res, HttpStatus.OK);
-
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-
                 } catch (NoSuchAlgorithmException e) {
                     e.printStackTrace();
                 } catch (InvalidKeySpecException e) {
                     e.printStackTrace();
                 }
-
             }
-
         }
-
-
-        /*
-        //*SIMULATION*//*
-        logger.info("REST request for signing in");
-        UserDTO user=new UserDTO("usernameTEST", Role.ROLE_GRADJANIN);  //this is user that is found in database
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        final Collection<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority(user.getRole()));
-        final Authentication authentication = new PreAuthenticatedAuthenticationToken(user, null, authorities);
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        logger.info("Returning user : " + user);
-        */
 
         HashMap<String, String> res= new HashMap<>();
         res.put("success", "false");
@@ -122,12 +90,11 @@ public class UserController {
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity signup(@RequestBody User userTry) {
+        logger.info("Called REST for registration. Username: " + userTry.getUsername());
 
-        System.out.println("SIGNUP REST - IN");
         //TODO
         //validacija polja ovo ono, zbog tesriranja necemo sada
         //min pass length
-
         if(userTry.getUsername() == null
                 || userTry.getPassword()== null){
             HashMap<String, String> res= new HashMap<>();
@@ -135,23 +102,17 @@ public class UserController {
             res.put("msg", "sabane unesi pass ili username");
             return new ResponseEntity(res, HttpStatus.OK);
         }
-
-        System.out.println("SIGNUP REST - validation success");
+        logger.info("Sign up - validation success.");
 
         UsersManager usersManager = new UsersManager();
-
-        /*citamo sve usere iz baze*/
-        Users users=null;
+        Users users = null;
         try {
             users = usersManager.read(MarkLogicStrings.USERS_DOC_ID);
-            System.out.println("all users"+ users.toString());
         }catch (Exception e){
-            System.out.println("ERRORCINA");
+            e.printStackTrace();
         }
-        System.out.println("SIGNUP REST - finding all users success" +users.getUser().size());
 
         for(User user : users.getUser()){
-            System.out.println("USERNAME: "+user.getUsername());
             if(user.getUsername().equals(userTry.getUsername())){
                 HashMap<String, String> res= new HashMap<>();
                 res.put("success", "false");
@@ -160,15 +121,14 @@ public class UserController {
             }
         }
 
-
         /*dodamo novog usera*/
         /*add salt*/
+        logger.info("Sign up - applying hash and salt");
         byte[] salt = new byte[0];
         try {
             salt=PasswordStorage.generateSalt();
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
-            System.out.println(e.toString());
         }
         userTry.setSalt(PasswordStorage.base64Encode(salt));
         /*hash pass*/
@@ -193,22 +153,21 @@ public class UserController {
         HashMap<String, String> res= new HashMap<>();
         res.put("success", "true");
         res.put("msg", "Sve kul");
+        logger.info("User " + userTry.getUsername() + " successfully registered.");
         return new ResponseEntity(res, HttpStatus.OK);
     }
 
-
-
     @RequestMapping(value = "/authenticate")
     public ResponseEntity<UserDTO> auth() {
+        logger.info("Called REST for authentication");
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println("AUTH DATA(ALL): " + auth.toString());
         UserDTO userDTO;
         try{
             User user = (User)auth.getPrincipal();
-            userDTO=new UserDTO(user);
+            userDTO = new UserDTO(user);
         }catch (Exception e){
-            userDTO=new UserDTO();
+            userDTO = new UserDTO();
         }
 
         return ResponseEntity.ok(userDTO);
@@ -217,6 +176,8 @@ public class UserController {
 
     @RequestMapping(value = "/signout")
     public HttpStatus signout() {
+        logger.info("Called REST for signing out. Username: " + SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString());
+
         SecurityContextHolder.clearContext();
         return HttpStatus.OK;
     }
