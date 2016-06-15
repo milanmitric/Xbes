@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
+import javax.print.attribute.standard.Media;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -63,6 +64,15 @@ public class AktController {
         returnTwoLists.put("approved",aktovi2);
         return new ResponseEntity(returnTwoLists, HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/generatepdf",
+    method = RequestMethod.GET,
+    produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity generatePdf(){
+
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
 
     @RequestMapping(value = "/getactbyid",
             method = RequestMethod.POST,
