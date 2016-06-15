@@ -101,10 +101,6 @@ public class WriteManager <T>{
     public DocumentDescriptor write(InputStream inputStream, String colId) {
         DocumentDescriptor ret = null;
         try{
-            // TODO: Solve this!
-            //if (!singXml(null)) {
-            //    throw  new Exception("Could not sign xml, check tmp.xml.");
-            //}
             DocumentUriTemplate template = xmlManager.newDocumentUriTemplate("xml");
             DocumentMetadataHandle metadata = new DocumentMetadataHandle();
             metadata.getCollections().add(colId);

@@ -105,7 +105,6 @@ public class Converter<T> {
 
             // Indentacija serijalizovanog izlaza
 
-            // TODO try fix.
             //transformer.setOutputProperty("{http://xml.apache.org/xalan}indent-amount", "2");
             //transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 

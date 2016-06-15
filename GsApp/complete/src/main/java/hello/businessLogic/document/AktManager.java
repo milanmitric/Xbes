@@ -60,6 +60,20 @@ public class AktManager extends BeanManager<Akt> {
     }
 
     /**
+     * Gets all proposed akts for current user.
+     * @param user Current session user.
+     * @return List of proposed files.
+     */
+    public ArrayList<Akt> getMyFilesProposed(User user){
+        StringBuilder query = new StringBuilder();
+        query.append("declare namespace a=\"http://www.gradskaskupstina.gov/\";");
+        query.append("for $x in fn:collection(\"/predlozeniAktovi\")");
+        query.append("where $x//a:UserName/text() = \"" + user.getUsername() + "\"");
+        query.append(("return $x"));
+        return queryManager.executeQuery(query.toString());
+    }
+
+    /**
      * Proposes an document.
      * @param akt Bean to be proposed.
      * @param user User that proposes Akt, needs to sign it first.

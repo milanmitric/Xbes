@@ -77,11 +77,21 @@ public class KeyStoreManager {
         return keyStoreReader.readPrivateKey(MarkLogicStrings.ROOT_CERTIFICATE_ALIAS,MarkLogicStrings.ROOT_CERTIFICATE_PASSWORD);
     }
 
+    /**
+     * Gets root certificate.
+     * @return Root certificate.
+     */
     public Certificate getRootCertificate(){
         return keyStoreReader.readCertificate(MarkLogicStrings.ROOT_CERTIFICATE_ALIAS,MarkLogicStrings.ROOT_CERTIFICATE_PASSWORD);
     }
 
-
+    /**
+     * Gets arhiva certificate.
+     * @return Arhiva certificate.
+     */
+    public  Certificate getArhivaCertificate(){
+        return  keyStoreReader.readCertificate(MarkLogicStrings.ARHIVA_CERITIFICATE_ALIAS,MarkLogicStrings.ARHIVA_CERTIFICATE_PASSWORD);
+    }
     /**
      * Gets root issuer data.
      * @return Root issuer data. <code>NULL</code> if not successful.
@@ -92,21 +102,9 @@ public class KeyStoreManager {
 
         SimpleDateFormat iso8601Formater = new SimpleDateFormat("yyyy-MM-dd");
         try {
-            X500NameBuilder builder = new X500NameBuilder(BCStyle.INSTANCE);
-            builder.addRDN(BCStyle.CN, "Skupstina grada Novog Sada");
-            builder.addRDN(BCStyle.SURNAME, "Gradska");
-            builder.addRDN(BCStyle.GIVENNAME, "Skupstina");
-            builder.addRDN(BCStyle.O, "Grad Novi Sad");
-            builder.addRDN(BCStyle.OU, "Skupstina grada");
-            builder.addRDN(BCStyle.C, "RS");
-            builder.addRDN(BCStyle.E, "gradskaSkupstina@novisad.rs");
-            //UID (USER ID) je ID korisnika
-            builder.addRDN(BCStyle.UID, "123445");
-            //Serijski broj sertifikata
-            String sn="1";
             Date startDate = iso8601Formater.parse("2007-12-31");
             Date endDate = iso8601Formater.parse("2017-12-31");
-            ret = new IssuerData(getRootPrivateKey(), builder.build());
+            ret = new IssuerData(getRootPrivateKey(), getRootData());
         } catch (ParseException e) {
             logger.info("[ERROR] Can't get root issuer data.");
             logger.info(e.getMessage());
@@ -213,10 +211,12 @@ public class KeyStoreManager {
             keyStoreWriter.saveKeyStore(MarkLogicStrings.KEYSTORE_FILEPATH,MarkLogicStrings.KEYSTORE_PASSWORD);
             if (!generateRootCaCertificate()){
                 throw new Exception("Could not generate root certificate!");
-            } else {
+            }
+            else if (!generateArhivaCertificate()){
+                throw new Exception("Could not generate arhiva certificate!");
+            }else {
                 ret = true;
             }
-
         } catch (Exception e){
             logger.info("[ERROR] Can't initialize keyStore.");
             logger.info(e.getMessage());
@@ -242,25 +242,12 @@ public class KeyStoreManager {
             Date startDate = iso8601Formater.parse("2007-12-31");
             Date endDate = iso8601Formater.parse("2017-12-31");
 
-            //podaci o vlasniku i izdavacu posto je self signed
-            //klasa X500NameBuilder pravi X500Name objekat koji nam treba
-            X500NameBuilder builder = new X500NameBuilder(BCStyle.INSTANCE);
-            builder.addRDN(BCStyle.CN, "Skupstina grada Novog Sada");
-            builder.addRDN(BCStyle.SURNAME, "Gradska");
-            builder.addRDN(BCStyle.GIVENNAME, "Skupstina");
-            builder.addRDN(BCStyle.O, "Grad Novi Sad");
-            builder.addRDN(BCStyle.OU, "Skupstina grada");
-            builder.addRDN(BCStyle.C, "RS");
-            builder.addRDN(BCStyle.E, "gradskaSkupstina@novisad.rs");
-            //UID (USER ID) je ID korisnika
-            builder.addRDN(BCStyle.UID, "123445");
-
             //Serijski broj sertifikata
             String sn="1";
             //kreiraju se podaci za issuer-a
-            IssuerData issuerData = new IssuerData(keyPair.getPrivate(), builder.build());
+            IssuerData issuerData = new IssuerData(keyPair.getPrivate(), getRootData());
             //kreiraju se podaci za vlasnika
-            SubjectData subjectData = new SubjectData(keyPair.getPublic(), builder.build(), sn, startDate, endDate);
+            SubjectData subjectData = new SubjectData(keyPair.getPublic(), getRootData(), sn, startDate, endDate);
             //generise se sertifikat
             X509Certificate cert = gen.generateCertificate(issuerData, subjectData);
             keyStoreWriter.write(MarkLogicStrings.ROOT_CERTIFICATE_ALIAS, keyPair.getPrivate(), MarkLogicStrings.ROOT_CERTIFICATE_PASSWORD, cert);
@@ -273,6 +260,50 @@ public class KeyStoreManager {
         return ret;
     }
 
+    /**
+     * Generates certificate for arhiva and stores it to keystore.
+     * @return Indicator of success.
+     */
+    private boolean generateArhivaCertificate(){
+        boolean ret = false;
+        try{
+            CertificateGenerator certificateGenerator = new CertificateGenerator();
+            KeyPair  keyPair = certificateGenerator.generateKeyPair();
+
+            //datumi
+            SimpleDateFormat iso8601Formater = new SimpleDateFormat("yyyy-MM-dd");
+            Date startDate = iso8601Formater.parse("2007-12-31");
+            Date endDate = iso8601Formater.parse("2017-12-31");
+
+            X500NameBuilder builder = new X500NameBuilder(BCStyle.INSTANCE);
+            builder.addRDN(BCStyle.CN, "Istorijska arhiva grada Novog Sada");
+            builder.addRDN(BCStyle.SURNAME, "Istorijska");
+            builder.addRDN(BCStyle.GIVENNAME, "Arhiva");
+            builder.addRDN(BCStyle.O, "Grad Novi Sad");
+            builder.addRDN(BCStyle.OU, "Skupstina grada");
+            builder.addRDN(BCStyle.C, "RS");
+            builder.addRDN(BCStyle.E, "arhiva@novisad.rs");
+            //UID (USER ID) je ID korisnika
+            builder.addRDN(BCStyle.UID, "54321");
+            String sn= keyStoreReader.getCertificateSerialNumber();
+
+            SubjectData subjectData = new SubjectData(keyPair.getPublic(),builder.build(),sn,startDate,endDate);
+            //generise se sertifikat
+            X509Certificate cert = certificateGenerator.generateCertificate(getRootIssuerData(), subjectData);
+
+            keyStoreWriter.write(MarkLogicStrings.ARHIVA_CERITIFICATE_ALIAS,getRootPrivateKey(),MarkLogicStrings.ARHIVA_CERTIFICATE_PASSWORD,cert);
+            keyStoreWriter.saveKeyStore(MarkLogicStrings.KEYSTORE_FILEPATH,MarkLogicStrings.KEYSTORE_PASSWORD);
+            ret = true;
+        } catch (Exception e){
+            logger.info("[ERROR] Could not generate certificate for arhiva.");
+        }
+        return  ret;
+    }
+
+    /**
+     * Gets root name data.
+     * @return Root name data.
+     */
     public X500Name getRootData(){
         X500NameBuilder builder = new X500NameBuilder(BCStyle.INSTANCE);
         builder.addRDN(BCStyle.CN, "Skupstina grada Novog Sada");

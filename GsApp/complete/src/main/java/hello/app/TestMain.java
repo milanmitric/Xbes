@@ -1,6 +1,5 @@
 package hello.app;
 
-import com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl;
 import hello.Application;
 import hello.businessLogic.core.BeanManager;
 import hello.businessLogic.core.ReadManager;
@@ -9,18 +8,17 @@ import hello.businessLogic.document.AktManager;
 import hello.businessLogic.document.AmandmanManager;
 import hello.entity.gov.gradskaskupstina.*;
 import hello.security.KeyStoreManager;
-import org.apache.fop.apps.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.xml.sax.SAXException;
-import org.apache.fop.apps.FOUserAgent;
-import org.apache.fop.apps.FopFactory;
 
-import javax.xml.transform.*;
-import javax.xml.transform.sax.SAXResult;
+import javax.xml.transform.Source;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 /**
@@ -183,6 +181,7 @@ public class TestMain {
     }
 
     public static  void generatingPdf(){
+        /*
         FopFactory fopFactory=null;
         // Initialize FOP factory object
         try {
@@ -258,7 +257,7 @@ public class TestMain {
             out.close();
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
 
 
     }
