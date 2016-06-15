@@ -11,7 +11,7 @@ public class ScheduledTask extends TimerTask{
     @Override
     public void run() {
         //ADD TASKT HERE
-        System.out.println("EVO MEEEEE!");
+        System.out.println("TASK: ARCHIVING ACTS IS IN PROGRESS...");
 
     }
 

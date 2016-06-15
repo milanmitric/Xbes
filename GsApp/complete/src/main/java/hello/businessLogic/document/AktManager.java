@@ -481,22 +481,16 @@ public class AktManager extends BeanManager<Akt> {
 
 
 
-    public void encryptDoc(Akt akt1){
+    public Document encryptDoc(Akt akt1){
         /*init*/
         EncryptKEK encKEK=new EncryptKEK();
-        /*make xml*/
+        /*make xml (save to filesystem)*/
         boolean status = convertToXml(akt1);
         System.out.println("Converting to xml status: "+status);
-        /*load it*/
+        /*load it from file system*/
         Document doc = encKEK.loadDocument("./data/tmp.xml");
         doc=encKEK.encrypt(doc);
-
-
-        //CONSUMING REST
-        //http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/client/RestTemplate.html#put-java.lang.String-java.lang.Object-java.lang.Object...-
-
-
-
+        return doc;
     }
 
 

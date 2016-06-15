@@ -15,7 +15,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
@@ -208,6 +210,7 @@ public class AktController {
 
 
 
+    /*SEND ENCRYPTED DOC TO OTHER APP*/
     @RequestMapping(value = "/archiveit",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -219,33 +222,44 @@ public class AktController {
         if(akt==null) {
             return new ResponseEntity(docID, HttpStatus.BAD_REQUEST);
         }
-        /* convert AKT OBJ to XML */
-        aktManager.convertToXml(akt);
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder = null;
-        try {
-            builder = factory.newDocumentBuilder();
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        }
-        Document d=null;
-        try {
-            /* CONVERT XML TO DOCUMENT OBJ */
-            d= builder.parse(new FileInputStream(new File("tmp.xml")));
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
-        //EncryptKEK enc = new EncryptKEK();
-        Document doc=enkryption.encrypt(d);
-        /*CONVERT DOCUMET TO INPUTSTREAM*/
+        Document doc =aktManager.encryptDoc(akt);
+        RestTemplate rt2=new RestTemplate();
+        String s2 = rt2.postForObject("http://localhost:9090/api/test0", doc, String.class);
+
+
+
+        /*
         FileInputStream is= (FileInputStream) aktManager.convertDocumentToInputStream(doc);
         aktManager.write(is, MarkLogicStrings.ARCHIVE_PREFIX+docID, MarkLogicStrings.ARCHIVE_COL_ID, false, null);
         System.out.println("UPISANOOOOOOOOOOOOOOOOO");
+        */
 
         return new ResponseEntity(docID, HttpStatus.OK);
+    }
+
+
+
+    //THIS IS REST FOR OTHER APP! ! ! !
+    //RECIEVES ENCRYPTED DOC AND SAVE IT TO DB
+    @RequestMapping(value = "/archiving",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity smor(@RequestParam HashMap encDocMAP) {
+        System.out.println("TEST_0");
+
+        System.out.println("DOC ID:"+encDocMAP.get("docID"));
+        String docID= (String) encDocMAP.get("docID");
+        EncryptKEK eee = new EncryptKEK();
+        eee.saveDocument((Document) encDocMAP.get("encDoc"),  "./data/IDEMOOOO_ARHIVA_GORI "+docID+".xml");
+
+
+       /* FileInputStream is= (FileInputStream) aktManager.convertDocumentToInputStream(doc);
+        aktManager.write(is, MarkLogicStrings.ARCHIVE_PREFIX+docID, MarkLogicStrings.ARCHIVE_COL_ID, false, null);
+        System.out.println("UPISANOOOOOOOOOOOOOOOOO");*/
+
+
+        return new ResponseEntity(HttpStatus.OK);
     }
 
 
