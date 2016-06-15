@@ -5,6 +5,8 @@ import hello.businessLogic.document.AktManager;
 import hello.entity.gov.gradskaskupstina.Akt;
 import hello.entity.gov.gradskaskupstina.User;
 import hello.security.EncryptKEK;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -21,10 +23,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.*;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -51,6 +58,55 @@ public class AktController {
         returnTwoLists.put("proposed",aktovi);
         returnTwoLists.put("approved",aktovi2);
         return new ResponseEntity(returnTwoLists, HttpStatus.OK);
+    }
+
+// BRATE NISAM GLEDAO ALI RADI OVO NASE JEBOTE, TO NEMA VEZE SA TIM
+    @RequestMapping(value = "/getactbyid",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity getActById(@RequestBody String data) {
+        System.out.println("USAO SAM ");
+//        data = data.substring(0, data.length()-1);
+        System.out.println("ID je : "+data);
+        TransformerFactory factory = TransformerFactory.newInstance();
+        Source xslt = new StreamSource(new File("Akt.xsl"));
+        if(xslt==null){
+            System.out.println("NULL JE XSLT");
+        }
+        try {
+            Transformer transformer = factory.newTransformer(xslt);
+            Akt aktHtml = aktManager.read(data,false);
+            aktManager.convertToXml(aktHtml);
+            Source text = new StreamSource(new File("tmp.xml"));
+            transformer.transform(text, new StreamResult(new File("tmp.html")));
+        } catch (TransformerConfigurationException e) {
+            e.printStackTrace();
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        }
+
+        File htmlFile = new File("tmp.html");
+        try {
+            FileInputStream fis = new FileInputStream(htmlFile);
+            String akt = "";
+            for (String line : Files.readAllLines(Paths.get("tmp.html"))) {
+                akt+=line;
+            }
+            System.out.println("SAdrzaj akta!");
+
+            JSONObject returnValue = new JSONObject();
+            returnValue.put("akt",akt);
+            System.out.println(returnValue);
+
+            return new ResponseEntity(akt,HttpStatus.OK);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
 

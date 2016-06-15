@@ -92,10 +92,10 @@ public class TestMain {
 
     public static void transform() throws TransformerException {
         TransformerFactory factory = TransformerFactory.newInstance();
-        Source xslt = new StreamSource(new File("transform/Akt.xsl"));
+        Source xslt = new StreamSource(new File("Akt.xsl"));
         Transformer transformer = factory.newTransformer(xslt);
 
-        Source text = new StreamSource(new File("transform/testAkt.xml"));
+        Source text = new StreamSource(new File("tmp.xml"));
         transformer.transform(text, new StreamResult(new File("transform/Akt.html")));
     }
 

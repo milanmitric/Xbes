@@ -75,6 +75,23 @@ angular.module('xapp')
 		},
 		update:function(onSuccess, onError){
 
-		}
-	}
+		},
+		getActById:function(docID,onSuccess, onError){
+
+        		var req = {
+                                            method: 'POST',
+                                            url: '/api/getactbyid',
+                                            headers: {
+                                                'Content-Type': 'text/html'
+                                            },
+                                            transformResponse: [function (data) {
+                                                                        return data;
+                                                                    }]
+                                            ,data:docID
+                                        }
+
+                             			$http(req).then(onSuccess, onError);
+
+        		} /// NE TREBA ZAREZ OVDE???
+	    }
 });
