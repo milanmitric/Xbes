@@ -1,0 +1,22 @@
+// Delete document with uri
+*** xdmp:document-delete(uri) ***
+// Example:
+*** xdmp:document-delete("4857634093591031521.xml") ***
+
+// Insert child node at the end of parent node:
+*** xdmp:node-insert-child(doc(uri)/nodeParent, nodeChild); ***
+// Example:
+*** declare namespace gov="http://www.gradskaskupstina.gov/"; ***
+*** xdmp:node-insert-child(doc("4857634093591031521.xml")/gov:Akt/gov:Glava[@RedniBroj="2"],<Clan RedniBroj="10">Tekst clana kao dopune na akt.</Clan>); ***
+
+// Delete node
+xdmp:node-delete(doc("uri")/pathToNode);
+// Example
+*** declare namespace gov="http://www.gradskaskupstina.gov/"; ***
+*** xdmp:node-delete(doc("4857634093591031521.xml")/gov:Akt/gov:Clan[@RedniBroj="10"]); ***
+
+// Update node
+*** xdmp:node-replace(doc("uri")/pathToNode, newNode); ***
+// Example
+*** declare namespace gov="http://www.gradskaskupstina.gov/"; ***
+*** xdmp:node-replace(doc("4857634093591031521.xml")/gov:Akt/gov:Clan[@RedniBroj="10"], <Clan RedniBroj="10">Updateovan tekst clana</Clan>); ***
