@@ -66,9 +66,14 @@ public class TestRest {
         //that link generates random JSON
 
        // http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/client/RestTemplate.html#postForObject-java.lang.String-java.lang.Object-java.lang.Class-java.lang.Object...-
-        RestTemplate restTemplate = new RestTemplate();
-        String s=restTemplate.getForObject("http://gturnquist-quoters.cfapps.io/api/random", String.class);
-        return s;
+        //RestTemplate restTemplate = new RestTemplate();
+        //String s=restTemplate.getForObject("http://gturnquist-quoters.cfapps.io/api/random", String.class);
+
+        RestTemplate rt=new RestTemplate();
+        rt.put("https://localhost:8080/api/getsednicastatus/", "", "");
+
+
+        return "";
     }
 
 
@@ -110,7 +115,8 @@ public class TestRest {
         //Document doc=signEnveloped.loadDocument("tmp.xml");
         Document doc = encKEK.loadDocument("./data/tmp.xml");
         /*encrypt that doc*/
-        //////////////// prosirio sa USER doc=encKEK.encrypt(doc, secretKey, cert);
+        //////////////// prosirio sa USER
+        //doc=encKEK.encrypt(doc, secretKey, cert);
         encKEK.saveDocument(doc, "./data/tmpENCR.xml");
 
         System.out.println("ENCRYPTED DOC");

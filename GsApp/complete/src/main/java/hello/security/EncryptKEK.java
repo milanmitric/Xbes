@@ -215,6 +215,7 @@ public class EncryptKEK {
 
 		SecretKey secretKey = generateDataEncryptionKey();
 		KeyStoreManager ksm = new KeyStoreManager();
+
 		//TODO - NE OD ROOT NEGO OD SERVERA	NA KOJI SALJEM
 		Certificate certificate = ksm.getRootCertificate();
 

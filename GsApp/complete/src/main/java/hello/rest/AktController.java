@@ -255,36 +255,12 @@ public class AktController {
     public String serveakt(){
 
 
-      /*  try {
-
-            if ((new File("E:\\F_A_X\\4.GOD\\Xbes\\GsApp\\complete\\sednicaHome.html")).exists()) {
-
-                Process p = Runtime
-                        .getRuntime()
-                        .exec("rundll32 url.dll,FileProtocolHandler E:\\F_A_X\\4.GOD\\Xbes\\GsApp\\complete\\sednicaHome.html");
-                p.waitFor();
-
-            } else {
-
-                System.out.println("File is not exists");
-
-            }
-
-            System.out.println("Done");
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-
-    */
-
-
-
-
         return "forward:/myWebpage.html";
     }
 
 
+
+    //WORKING
     @RequestMapping(value="download", method=RequestMethod.GET)
     public void getDownload(HttpServletResponse response) {
 

@@ -1,6 +1,8 @@
 package hello;
 
 
+import hello.AutoTask.ScheduledTask;
+import hello.AutoTask.ScheduledTaskController;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -21,7 +23,13 @@ public class Application {
     public static void main(String[] args) throws IOException {
         SpringApplication.run(Application.class, args);
         System.out.println("[ https://localhost:8080/ ] SERVER IS WORKING...");
+
+        long time=60000;
+        System.out.println("Running scheduled task: Archiving acts every "+time+" milliseconds.");
+        ScheduledTaskController controller=new ScheduledTaskController();
+        controller.time.schedule(new ScheduledTask(), 0, time);
     }
+
 
 
 }

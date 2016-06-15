@@ -8,9 +8,14 @@ import hello.StringResources.MarkLogicStrings;
 import hello.StringResources.TipIzmene;
 import hello.businessLogic.core.BeanManager;
 import hello.entity.gov.gradskaskupstina.*;
+import hello.security.EncryptKEK;
+import hello.security.KeyStoreManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.w3c.dom.Document;
 
+import javax.crypto.SecretKey;
+import java.security.cert.Certificate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -448,4 +453,29 @@ public class AktManager extends BeanManager<Akt> {
 
         return ret;
     }
+
+
+
+    public void encryptDoc(Akt akt1){
+        /*init*/
+        EncryptKEK encKEK=new EncryptKEK();
+        /*make xml*/
+        boolean status = convertToXml(akt1);
+        System.out.println("Converting to xml status: "+status);
+        /*load it*/
+        Document doc = encKEK.loadDocument("./data/tmp.xml");
+        doc=encKEK.encrypt(doc);
+
+
+        //CONSUMING REST
+        //http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/client/RestTemplate.html#put-java.lang.String-java.lang.Object-java.lang.Object...-
+
+
+
+    }
+
+
+
+
+
 }

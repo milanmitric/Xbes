@@ -1,6 +1,6 @@
 package hello.app;
 
-import java.io.File;
+import java.io.*;
 import hello.Application;
 import hello.StringResources.MarkLogicStrings;
 import hello.businessLogic.document.AktManager;
@@ -8,8 +8,11 @@ import hello.businessLogic.document.UsersManager;
 import hello.entity.gov.gradskaskupstina.Akt;
 import hello.entity.gov.gradskaskupstina.User;
 import hello.entity.gov.gradskaskupstina.Users;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.client.RestTemplate;
+
 
 /**
  * Created by milan on 4.6.2016..
@@ -19,7 +22,7 @@ public class TestsMainCogara {
     private static final Logger logger = LoggerFactory.getLogger(Application.class);
     private static User user = null;
 
-    static {
+   /* static {
         user = new User();
         user.setIme("test");
         user.setPrezime("test");
@@ -28,11 +31,40 @@ public class TestsMainCogara {
         user.setPassword("A18MXitD+Dynjr+mbSnU8Zqir5M=");
         user.setSalt("xAxoT8uwGUA=");
         user.setRole("ROLE_PREDSEDNIK");
+    }*/
+
+
+    static {
+        //for localhost testing only
+        javax.net.ssl.HttpsURLConnection.setDefaultHostnameVerifier(
+                new javax.net.ssl.HostnameVerifier(){
+
+                    public boolean verify(String hostname,
+                                          javax.net.ssl.SSLSession sslSession) {
+                        if (hostname.equals("localhost")) {
+                            return true;
+                        }
+                        return false;
+                    }
+                });
     }
 
+
+
     public static void main(String[] args){
-        proposeAkt();
+        //proposeAkt();
+       /* try {
+            callRest();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }*/
+
+        RestTemplate restTemplate = new RestTemplate();
+        String s=restTemplate.getForObject("http://localhost:8080/api/getsednicastatus/", String.class);
+        System.out.println("RESPONSE: "+s);
+
     }
+
 
     public static void deleteAllUsers(){
         UsersManager usersManager = new UsersManager();
@@ -62,4 +94,31 @@ public class TestsMainCogara {
         Akt akt = aktManager.convertFromXml(xmlFile);
         aktManager.proposeAkt(akt, user);
     }
+
+    public static void callRest() throws Exception {
+
+        RestTemplate restTemplate = new RestTemplate();
+        String s=restTemplate.getForObject("https://localhost:9090/api/getsednicastatus/", String.class);
+        System.out.println("RESPONSE: "+s);
+
+    }
+
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
