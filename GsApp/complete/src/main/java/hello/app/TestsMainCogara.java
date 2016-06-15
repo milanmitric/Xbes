@@ -1,11 +1,15 @@
 package hello.app;
 
 import java.io.*;
+import java.util.ArrayList;
+
 import hello.Application;
 import hello.StringResources.MarkLogicStrings;
 import hello.businessLogic.document.AktManager;
+import hello.businessLogic.document.AmandmanManager;
 import hello.businessLogic.document.UsersManager;
 import hello.entity.gov.gradskaskupstina.Akt;
+import hello.entity.gov.gradskaskupstina.Amandmani;
 import hello.entity.gov.gradskaskupstina.User;
 import hello.entity.gov.gradskaskupstina.Users;
 
@@ -63,6 +67,8 @@ public class TestsMainCogara {
         String s=restTemplate.getForObject("http://localhost:8080/api/getsednicastatus/", String.class);
         System.out.println("RESPONSE: "+s);
 
+        deleteAmandmans();
+        applyAmandmans();
     }
 
 
@@ -84,7 +90,13 @@ public class TestsMainCogara {
 
     public static void deleteAkts(){
         AktManager aktManager = new AktManager();
-        aktManager.deleteAkt("2746325830753861621.xml");
+        aktManager.deleteAkt("");
+    }
+
+    public static void deleteAmandmans(){
+        AmandmanManager amandmanManager = new AmandmanManager();
+        amandmanManager.deleteAmandman("1136342900533315589.xml");
+        amandmanManager.deleteAmandman("5637100032808720681.xml");
     }
 
     public static void proposeAkt(){
@@ -103,22 +115,18 @@ public class TestsMainCogara {
 
     }
 
-
-
-
-
-
-
-
-
+    public static void proposeAmandman(){
+        // User test dodaje probni akt koji se nalazi u fajlu res/validationTest/akt1.xml
+        AmandmanManager amandmanManager = new AmandmanManager();
+        File xmlFile = new File("res/validationTest/amandmanProba1.xml");
+        Amandmani amandman = amandmanManager.convertFromXml(xmlFile);
+        amandmanManager.proposeAmandman(amandman, user);
+    }
+    public static void applyAmandmans() {
+        AktManager aktManager = new AktManager();
+        AmandmanManager amandmanManager = new AmandmanManager();
+        ArrayList<Amandmani> amandmani = amandmanManager.getAllAmendmentProposed();
+        Akt akt = aktManager.read("8348725606370910161.xml", false);
+        aktManager.applyAmendments(amandmani, akt, user);
+    }
 }
-
-
-
-
-
-
-
-
-
-

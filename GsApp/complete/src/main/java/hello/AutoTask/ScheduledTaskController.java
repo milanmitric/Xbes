@@ -1,4 +1,4 @@
-package hello.AutoTask;
+package hello.autoTask;
 
 import java.util.Timer;
 
@@ -8,8 +8,5 @@ import java.util.Timer;
 public class ScheduledTaskController {
 
     public Timer time = new Timer();
-
-
-
 
 }

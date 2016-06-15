@@ -15,6 +15,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.*;
 import java.util.ArrayList;
 
 /**
@@ -50,23 +51,29 @@ public class AmandmanController {
     @PreAuthorize("hasRole('ROLE_ODBORNIK')")
     @RequestMapping(value = "/amandman",
             method = RequestMethod.POST,
+            consumes = MediaType.TEXT_PLAIN_VALUE,
             produces = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity postAmandman(@RequestBody Amandmani amandman){
-        logger.info("[CONTENT OF ADDED AMANDMAN]:"+amandman.toString());
-
-        if(!amandmanManager.validateAmandman(amandman)){
+    public ResponseEntity postAmandman(@RequestBody String amandmanString) {
+        logger.info("[CONTENT OF ADDED AMANDMAN]:" + amandmanString);
+        try (PrintWriter pw = new PrintWriter("tmp.xml") ) {
+            pw.println(amandmanString);
+        } catch (FileNotFoundException e) {
+            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        Amandmani amandmani = amandmanManager.convertFromXml(new File("tmp.xml"));
+        if(!amandmanManager.validateAmandman(amandmani)){
             logger.info("[AmandmanController] ERROR: NOT VALIDATED");
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = (User)auth.getPrincipal();
-        String docID = amandmanManager.proposeAmandman(amandman,user);
+        String docID = amandmanManager.proposeAmandman(amandmani,user);
         if(docID==null){
             logger.info("[AmandmanController] ERROR: NOT PROPOSED");
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         } else {
-            logger.info("[AmandmanController] Successfully proposed amandman: " + amandman.toString() + " with id " + docID);
+            logger.info("[AmandmanController] Successfully proposed amandman: " + amandmani.toString() + " with id " + docID);
         }
 
         return new ResponseEntity(HttpStatus.OK);

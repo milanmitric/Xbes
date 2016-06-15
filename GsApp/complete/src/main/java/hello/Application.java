@@ -1,8 +1,8 @@
 package hello;
 
 
-import hello.AutoTask.ScheduledTask;
-import hello.AutoTask.ScheduledTaskController;
+import hello.autoTask.ScheduledTask;
+import hello.autoTask.ScheduledTaskController;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -29,7 +29,5 @@ public class Application {
         ScheduledTaskController controller=new ScheduledTaskController();
         controller.time.schedule(new ScheduledTask(), 0, time);
     }
-
-
 
 }

@@ -10,12 +10,14 @@ import hello.businessLogic.core.BeanManager;
 import hello.entity.gov.gradskaskupstina.*;
 import hello.security.EncryptKEK;
 import hello.security.KeyStoreManager;
+import hello.security.CRLVerifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 
 import javax.crypto.SecretKey;
 import java.security.cert.Certificate;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -27,6 +29,8 @@ public class AktManager extends BeanManager<Akt> {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+
+    private CRLVerifier crlVerifier = new CRLVerifier();
     /**
      * Initializes a new intance of AktManager.
      */
@@ -67,6 +71,11 @@ public class AktManager extends BeanManager<Akt> {
      */
     public String proposeAkt(Akt akt, User user) {
 
+        // Check if users' certificate is revoked
+        Certificate cert = keyStoreManager.readCertificate(user.getUsername(),user.getPassword().toCharArray());
+        if (crlVerifier.isRevoked(cert)){
+            logger.info("Certificate is revoked for user " + user.getUsername()+", can't propose.");
+        }
         if (!validateBeanBySchema(akt)) {
             logger.info("[AktManager] ERROR: Akt is not valid!");
             return null;
@@ -92,9 +101,17 @@ public class AktManager extends BeanManager<Akt> {
     /**
      * Approves an document.
      * @param akt Bean to be approved.
+     * @param user User to verify ceritificate.
      * @return Generated URI. <code>NULL</code> if not successful.
      */
-    public String approveAkt(Akt akt){
+    public String approveAkt(Akt akt,User user){
+
+        // Check if users' certificate is revoked
+        Certificate cert = keyStoreManager.readCertificate(user.getUsername(),user.getPassword().toCharArray());
+        if (crlVerifier.isRevoked(cert)){
+            logger.info("Certificate is revoked for user " + user.getUsername()+", can't propose.");
+        }
+
         if (!validateBeanBySchema(akt)){
             logger.info("[ERROR] Document["+akt.getDocumentId()+"] is not valid!");
             return null;
@@ -262,18 +279,25 @@ public class AktManager extends BeanManager<Akt> {
      */
     public boolean applyAmendments(ArrayList<Amandmani> listaAmandmana, Akt akt, User user){
         boolean ret = false;
+        try{
+            akt.setSignature(null);
+            this.write(akt,"usv" +akt.getDocumentId(),MarkLogicStrings.AKTOVI_PRIMENJENI_COL_ID,false,null);
 
-        //akt.setSignature(null);
-        //this.write(akt,akt.getDocumentId(),MarkLogicStrings.AKTOVI_PRIMENJENI_COL_ID,false,null);
-
-        for (Amandmani amandmani: listaAmandmana){
-            for (TAmandman amandman : amandmani.getAmandman()){
-                String tmp = amandman.getSadrzaj();
-                String query = generateXquery(amandman.getPredmetIzmene(),amandman.getTipIzmene().value(),amandman.getSadrzaj(), "2746325830753861621.xml");
-                this.executeQuery(query);
+            for (Amandmani amandmani: listaAmandmana){
+                for (TAmandman amandman : amandmani.getAmandman()){
+                    String tmp = amandman.getSadrzaj();
+                    String query = generateXquery(amandman.getPredmetIzmene(),amandman.getTipIzmene().value(),amandman.getSadrzaj(), amandmani.getDocumentId());
+                    this.executeQuery(query);
+                }
             }
+            Akt tmpAkt = read("usv" +akt.getDocumentId(),false);
+            tmpAkt.setDocumentId("usv" +akt.getDocumentId());
+
+            write(tmpAkt,"usv" +akt.getDocumentId(),MarkLogicStrings.AKTOVI_USVOJENI_COL_ID,true,user);
+            ret = true;
+        } catch (Exception e){
+            logger.info("[ERROR] Could not apply amandemnts on document " + akt.getDocumentId());
         }
-        ret = true;
         return ret;
     }
 
@@ -351,14 +375,15 @@ public class AktManager extends BeanManager<Akt> {
             else {
                 builder.append("return  xdmp:node-insert-before($x/a:Akt/a:ZavrsniDeo");
             }
+            builder.append(",");
+            builder.append(tekst);
+            builder.append(")");
         }
 
-        builder.append(",");
-        builder.append(tekst);
-        builder.append(")");
         return builder.toString();
     }
-
+    // NE ZNAM DA LI SE KORISTI KOD MOG KOMITA JE BILA TU
+    // U MOM LOKALU NA NA REMOTE JE NIJE BILO
     /**
      * Update clan from akt.
      * @param akt Document containing clan.

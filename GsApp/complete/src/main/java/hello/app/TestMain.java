@@ -30,7 +30,7 @@ public class TestMain {
 
     public static void main(String[] args) throws FileNotFoundException {
         try{
-            deleteAkts();
+            transform();
         } catch (Exception e){
 
         }
@@ -55,27 +55,7 @@ public class TestMain {
         }
     }
 
-    public static void testAktManager(){
-        AktManager aktManager = new AktManager();
-        Akt akt = aktManager.convertFromXml(new File("res/validationTest/AktZOIIDZOJPPIK.xml"));
 
-
-        String docId = aktManager.proposeAkt(akt,null);
-        if (docId != null){
-            logger.info("Successfully proposed document [" + docId + "].");
-        } else {
-            logger.info("[ERROR] Could not propose document [" + docId + "].");
-        }
-
-        docId  = aktManager.approveAkt(akt);
-        if (docId != null){
-            logger.info("Successfully approved document [" + docId + "].");
-        } else {
-            logger.info("[ERROR] Could not approve document [" + docId + "].");
-        }
-
-
-    }
 
     public static void deleteAkts(){
         AmandmanManager amandmanManager = new AmandmanManager();
@@ -112,11 +92,11 @@ public class TestMain {
 
     public static void transform() throws TransformerException {
         TransformerFactory factory = TransformerFactory.newInstance();
-        Source xslt = new StreamSource(new File("transform/Amandman.xsl"));
+        Source xslt = new StreamSource(new File("Akt.xsl"));
         Transformer transformer = factory.newTransformer(xslt);
 
-        Source text = new StreamSource(new File("transform/Amandman.xml"));
-        transformer.transform(text, new StreamResult(new File("transform/Amandman.html")));
+        Source text = new StreamSource(new File("tmp.xml"));
+        transformer.transform(text, new StreamResult(new File("transform/Akt.html")));
     }
 
     public static void testApply(){

@@ -3,8 +3,7 @@
     targetNamespace="http://www.gradskaskupstina.gov/" elementFormDefault="qualified"
     xmlns:gov="http://www.gradskaskupstina.gov/">
 
-    <xs:import namespace="http://www.w3.org/2000/09/xmldsig#"
-        schemaLocation="http://www.w3.org/TR/2002/REC-xmldsig-core-20020212/xmldsig-core-schema.xsd"/>
+    <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="http://www.w3.org/TR/2002/REC-xmldsig-core-20020212/xmldsig-core-schema.xsd"/>
 
     <xs:element name="Amandmani">
         <xs:complexType>
@@ -27,8 +26,7 @@
             <xs:element name="PredmetIzmene" type="gov:TReferenca" minOccurs="1" maxOccurs="1"/>
             <xs:element name="TipIzmene" type="gov:TTipIzmene" minOccurs="1" maxOccurs="1"/>
             <xs:element minOccurs="0" name="Sadrzaj" type="xs:string"/>
-            <xs:element name="Obrazlozenje" type="gov:TSemiStruktuiraniTekst" minOccurs="1"
-                maxOccurs="1"/>
+            <xs:element name="Obrazlozenje" type="gov:TSemiStruktuiraniTekst" minOccurs="1" maxOccurs="1"/>
         </xs:sequence>
         <xs:attribute name="RedniBroj" type="xs:positiveInteger" use="optional"/>
     </xs:complexType>

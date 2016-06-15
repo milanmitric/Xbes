@@ -1,4 +1,4 @@
-package hello.AutoTask;
+package hello.autoTask;
 
 import java.util.TimerTask;
 
