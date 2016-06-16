@@ -2,13 +2,13 @@
 <Akt xmlns="http://www.gradskaskupstina.gov/"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.gradskaskupstina.gov/ file:/C:/Users/FS-LB/Desktop/XMLProjekat/DJIT/Xbes/GsApp/complete/schema/Akt.xsd">
-    <Naslov>Akt</Naslov>
+    <Naslov>Akt proba stava u vise redova</Naslov>
     <Glava RedniBroj="1" Naziv="Naziv glave 1">
         <Odeljak RedniBroj="1" Naziv="Prelazne odredbe">
             <Pododeljak RednoSlovo="a" Naziv="Ovlascenja nadleznog organa">
                 <Clan RedniBroj="1">
                     <Stav RedniBroj="1">
-                        <Tekst>Tekst clana 1 stava 1</Tekst>
+                        <Tekst>Tekst clana 1 stava 1 j aosdijfoasjdfo iasdjfoi nsadoif nmsadonf oasdinfoiasdnfoiasndiofnas doidfnasoidnf ioasdn foinasdiof nasodinf oiasdnf oiasdnf aosidnf ioasdnf ioasdnf ioajsdiof jasdio foisadjf oiasjf iosa aosdijfoasjdfo iasdjfoi nsadoif nmsadonf oasdinfoiasdnfoiasndiofnas doidfnasoidnf ioasdn foinasdiadofkoadijfoaijfoiadjfoiadjfoiadhfniuadfahufadhofiauhafidhaoiafhiadof nasodinf oiasdnf oiasdnf aosidnf ioasdnf ioasdnf ioajsdiof jasdio foisadjf oiasjf iosa</Tekst>
                     </Stav>
                     <Stav RedniBroj="2">
                         <Tekst>Tekst clana 1 stava 2</Tekst>

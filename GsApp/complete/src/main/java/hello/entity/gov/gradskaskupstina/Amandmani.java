@@ -31,8 +31,8 @@ import java.util.List;
  *         &lt;element name="Akt" type="{http://www.gradskaskupstina.gov/}TReferenca"/>
  *         &lt;element name="Amandman" type="{http://www.gradskaskupstina.gov/}TAmandman" maxOccurs="unbounded"/>
  *         &lt;element name="Potpisnici" type="{http://www.gradskaskupstina.gov/}TPotpisnici"/>
- *         &lt;element name="UserName" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="TimeStamp" type="{http://www.w3.org/2001/XMLSchema}dateTime"/>
+ *         &lt;element name="UserName" type="{http://www.w3.org/2001/XMLSchema}string"  minOccurs="0" maxOccurs="1"/>
+ *         &lt;element name="TimeStamp" type="{http://www.w3.org/2001/XMLSchema}dateTime"  minOccurs="0" maxOccurs="1"/>
  *         &lt;element ref="{http://www.w3.org/2000/09/xmldsig#}Signature" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
@@ -66,9 +66,9 @@ public class Amandmani {
     protected List<TAmandman> amandman;
     @XmlElement(name = "Potpisnici", required = true)
     protected TPotpisnici potpisnici;
-    @XmlElement(name = "UserName", required = true)
+    @XmlElement(name = "UserName")
     protected String userName;
-    @XmlElement(name = "TimeStamp", required = true)
+    @XmlElement(name = "TimeStamp")
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar timeStamp;
     @XmlElement(name = "Signature", namespace = "http://www.w3.org/2000/09/xmldsig#")
