@@ -36,7 +36,7 @@ public class AmandmanController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity getAllAmandmans() {
         logger.info("Called REST for getting all amandments");
-        ArrayList<Amandmani> amandmani = amandmanManager.getAllAmendmentProposed();
+        ArrayList<Amandmani> amandmani = amandmanManager.getAllAmendmentsApproved();
         return new ResponseEntity(amandmani, HttpStatus.OK);
     }
 
@@ -52,7 +52,6 @@ public class AmandmanController {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = (User)auth.getPrincipal();
-
 
 
         ArrayList<Amandmani> amandmanis = amandmanManager.getAllAmendmentProposed();
