@@ -1,6 +1,5 @@
 package hello.rest;
 
-import com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl;
 import hello.StringResources.MarkLogicStrings;
 import hello.businessLogic.document.AktManager;
 import hello.businessLogic.document.AmandmanManager;
@@ -9,33 +8,21 @@ import hello.entity.gov.gradskaskupstina.Akt;
 import hello.entity.gov.gradskaskupstina.Amandmani;
 import hello.entity.gov.gradskaskupstina.User;
 import hello.security.EncryptKEK;
-import org.apache.fop.apps.*;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
-import org.w3c.dom.Document;
-import org.xml.sax.SAXException;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.*;
-import javax.xml.transform.sax.SAXResult;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import java.io.*;
@@ -43,8 +30,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import static com.sun.jersey.core.util.ReaderWriter.BUFFER_SIZE;
 
 /**
  * Created by Nebojsa on 6/4/2016.
@@ -236,45 +221,33 @@ public class AktController {
 
         User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        if(params.get(0).equals("ODBIJAJUSE")){
-                //params.get(0) - "ODBIJAJUSE"
-                //params.get(1) - "AKT ID"
-                //params.get(2:end) - "AMANDMAN ID"
-            logger.info("All amandments are being rejected");
-            for (int i = 2; i < params.size();i++){
-                amandmanManager.deleteAmandman(params.get(i));
-            }
-        } else if(params.get(0).equals("AKTSEODBIJA")){
-                //params.get(0) - "AKTSEODBIJA"
-                //params.get(1) - "AKT ID"
-                //params.get(2:end) - "AMANDMAN ID"
-            logger.info("Act is being rejected");
-            ArrayList<Amandmani> amandmani = amandmanManager.getAllAmandmansForAkt(aktManager.read(params.get(0),false));
-            aktManager.deleteAkt(params.get(0));
+
+        if (params.get(0).equals("ODBIJASE")){
+            aktManager.deleteAkt(params.get(1));
+            ArrayList<Amandmani> amandmani = amandmanManager.getAllAmandmansForAkt(params.get(1));
             for (Amandmani amandman : amandmani){
                 amandmanManager.deleteAmandman(amandman.getDocumentId());
             }
-        }else {
-            if (params.size() == 1) {
-                //params.get(0) - AKT ID
-                logger.info("Act is accepted in principle");
-                Akt akt = aktManager.read(params.get(0), false);
-                aktManager.proposeAkt(akt,user);
-            } else {
-                //params.get(0) - AKT ID
-                //params.get(1:end) - "AMANDMAN ID"
-                logger.info("Amandments are being accepted");
-                ArrayList<Amandmani> amandmani = new ArrayList<>();
-                for(int i = 1 ; i<params.size() ; i++) {
-                    Amandmani amandman = amandmanManager.read(params.get(i), false);
-                    amandmanManager.proposeAmandman(amandman,user);
-                    amandmani.add(amandman);
-                }
-                Akt akt = aktManager.read(params.get(0), false);
-                aktManager.applyAmendments(amandmani, akt, user);
+        } else if (params.get(0).equals("PRIHVATASE")){
+            Akt akt = aktManager.read(params.get(1),false);
+            aktManager.approveAkt(akt,user);
+
+            ArrayList<Amandmani> amandmanis =  new ArrayList<>();
+            for (int i = 2; i < params.size();i++){
+                amandmanis.add(amandmanManager.read(params.get(i),false));
+            }
+
+            for (Amandmani amandmani: amandmanis){
+                amandmanManager.approveAmandman(amandmani,user);
+            }
+
+            aktManager.applyAmendments(amandmanis,akt,user);
+
+            amandmanis = amandmanManager.getAllAmandmansForAkt(akt.getDocumentId());
+            for (Amandmani amandmani: amandmanis){
+                amandmanManager.deleteAmandman(amandmani.getDocumentId());
             }
         }
-
         return new ResponseEntity("",HttpStatus.OK);
     }
 

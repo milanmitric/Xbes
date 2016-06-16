@@ -203,12 +203,17 @@ public class AmandmanManager extends BeanManager<Amandmani> {
         return validateBeanBySchema(amandman);
     }
 
-    public ArrayList<Amandmani> getAllAmandmansForAkt(Akt akt){
+    /**
+     * Retreives all amendments for given akt.
+     * @param docId Document id of Akt.
+     * @return List of amendments.
+     */
+    public ArrayList<Amandmani> getAllAmandmansForAkt(String  docId){
         StringBuilder builder = new StringBuilder();
         builder.append("declare namespace a=\"http://www.gradskaskupstina.gov/\";");
         builder.append("for $x in collection(\"/predlozeniAmandmani\")");
         builder.append("  where $x/a:Amandmani/a:Akt/text() = \"");
-        builder.append(akt.getDocumentId() + "\"");
+        builder.append(docId + "\"");
         builder.append(" return $x");
         return queryManager.executeQuery(builder.toString());
     }

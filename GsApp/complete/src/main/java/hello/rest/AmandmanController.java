@@ -2,7 +2,6 @@ package hello.rest;
 
 import hello.businessLogic.document.AktManager;
 import hello.businessLogic.document.AmandmanManager;
-import hello.entity.gov.gradskaskupstina.Akt;
 import hello.entity.gov.gradskaskupstina.Amandmani;
 import hello.entity.gov.gradskaskupstina.User;
 import org.slf4j.Logger;
@@ -15,7 +14,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 /**
@@ -86,10 +87,7 @@ public class AmandmanController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity getAmandmentsForAkt(@RequestParam("docID") String docID) {
         logger.info("Called REST for getting amandments refering to act with id: " + docID);
-
-        Akt akt = aktManager.read(docID, false);
-        //System.out.print(amandmens.size());
-        ArrayList<Amandmani> amandmens = amandmanManager.getAllAmandmansForAkt(akt);
+        ArrayList<Amandmani> amandmens = amandmanManager.getAllAmandmansForAkt(docID);
         System.out.print(amandmens.size());
         return new ResponseEntity(amandmens, HttpStatus.OK);
     }
