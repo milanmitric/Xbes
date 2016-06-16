@@ -87,6 +87,7 @@
             <xs:element maxOccurs="unbounded" name="Clan" type="gov:TClan"/>
         </xs:sequence>
         <xs:attribute name="RednoSlovo" type="gov:TRednoSlovo" use="required"/>
+        <xs:attribute name="Naziv" type="xs:string" use="required"/>
     </xs:complexType>
 
     <xs:simpleType final="" name="TRednoSlovo">
