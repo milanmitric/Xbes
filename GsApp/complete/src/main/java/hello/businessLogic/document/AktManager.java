@@ -287,21 +287,25 @@ public class AktManager extends BeanManager<Akt> {
         //TODO: Da li treba proveravati sertifikat (CRL) i ovde?
         boolean ret = false;
         try{
-            akt.setSignature(null);
-            this.write(akt,"usv" +akt.getDocumentId(),MarkLogicStrings.AKTOVI_PRIMENJENI_COL_ID,false,null);
+            if (listaAmandmana.size() > 0)
+            {
+                akt.setSignature(null);
+                this.write(akt,"usv" +akt.getDocumentId(),MarkLogicStrings.AKTOVI_PRIMENJENI_COL_ID,false,null);
 
-            for (Amandmani amandmani: listaAmandmana){
-                for (TAmandman amandman : amandmani.getAmandman()){
-                    String tmp = amandman.getSadrzaj();
-                    String query = generateXquery(amandman.getPredmetIzmene(), amandman.getTipIzmene().value(), amandman.getSadrzaj(), "usv"+akt.getDocumentId());
-                    this.executeQuery(query);
+                for (Amandmani amandmani: listaAmandmana){
+                    for (TAmandman amandman : amandmani.getAmandman()){
+                        String tmp = amandman.getSadrzaj();
+                        String query = generateXquery(amandman.getPredmetIzmene(), amandman.getTipIzmene().value(), amandman.getSadrzaj(), "usv"+akt.getDocumentId());
+                        this.executeQuery(query);
 
+                    }
                 }
-            }
-            Akt tmpAkt = read("usv" +akt.getDocumentId(),false);
-            tmpAkt.setDocumentId("usv" +akt.getDocumentId());
+                Akt tmpAkt = read("usv" +akt.getDocumentId(),false);
+                tmpAkt.setDocumentId("usv" +akt.getDocumentId());
 
-            write(tmpAkt,"usv" +akt.getDocumentId(),MarkLogicStrings.AKTOVI_USVOJENI_COL_ID,true,user);
+                write(tmpAkt,"usv" +akt.getDocumentId(),MarkLogicStrings.AKTOVI_PRIMENJENI_COL_ID,true,user);
+            }
+
             ret = true;
         } catch (Exception e){
             logger.info("[ERROR] Could not apply amandemnts on document " + akt.getDocumentId());

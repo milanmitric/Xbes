@@ -163,7 +163,7 @@ public class AmandmanManager extends BeanManager<Amandmani> {
         }
         try {
             // XML DOCUMENT IS READY TO BE SIGNED!
-            boolean shouldSign = true;
+            boolean shouldSign = false;
             if (!write(amandman,amandman.getDocumentId(),MarkLogicStrings.AMANDMANI_USVOJENI_COL_ID,shouldSign,null)){
                 ret = null;
                 throw  new Exception();
@@ -212,7 +212,7 @@ public class AmandmanManager extends BeanManager<Amandmani> {
         StringBuilder builder = new StringBuilder();
         builder.append("declare namespace a=\"http://www.gradskaskupstina.gov/\";");
         builder.append("for $x in collection(\"/predlozeniAmandmani\")");
-        builder.append("  where $x/a:Amandmani/a:Akt/text() = \"");
+        builder.append("  where $x/a:Amandmani/a:Akt/@ref_akt= \"");
         builder.append(docId + "\"");
         builder.append(" return $x");
         return queryManager.executeQuery(builder.toString());
