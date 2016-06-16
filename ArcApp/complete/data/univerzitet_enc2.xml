@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><univerzitet naziv="UNS">
+	<fakultet id="1" naziv="FTN">
+		<odsek id="E" naziv="Elektro"><xenc:EncryptedData xmlns:xenc="http://www.w3.org/2001/04/xmlenc#" Type="http://www.w3.org/2001/04/xmlenc#Content"><xenc:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#tripledes-cbc" xmlns:xenc="http://www.w3.org/2001/04/xmlenc#"/><ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+<ds:KeyName>Kriptovani tajni kljuc</ds:KeyName>
+<xenc:EncryptedKey xmlns:xenc="http://www.w3.org/2001/04/xmlenc#"><xenc:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#rsa-1_5" xmlns:xenc="http://www.w3.org/2001/04/xmlenc#"/><xenc:CipherData xmlns:xenc="http://www.w3.org/2001/04/xmlenc#"><xenc:CipherValue xmlns:xenc="http://www.w3.org/2001/04/xmlenc#">cSvT/yjEni0nk8D9Dr+PNBDnQheO9Tfcwl1DPZc4WJcWG9269A+S7NLyidFRxnvltsNnK7pk9tzZ
+jnDgN3sphlFaSX+t7/m1duwf/ExMIY828QT2YgSa9vWIXAPl8Cncn5wG8tBQ1nlE21kP7yRfW7d5
+Y4z1uiV2qKPNiCuLVW0=</xenc:CipherValue></xenc:CipherData></xenc:EncryptedKey></ds:KeyInfo><xenc:CipherData xmlns:xenc="http://www.w3.org/2001/04/xmlenc#"><xenc:CipherValue xmlns:xenc="http://www.w3.org/2001/04/xmlenc#">QTL4dBTCa/x0uEqyhgWBncEJV42siSA5kFygJN1Le0VlFGLk666+smSmJATWtMuftEfN4R1fJbyW
+MyOOMeT66gEcmbT5gH6n9SC/ZJZ3l5GC9KqXqfRj3BD15xYDvGtcbeqUHgUjPT++zYLVlGuF26tE
+wvYzb1Ro47hXIsgQevxE/dDZ5FhwaAugTAj9sbB4++RqsXNZyR8KvZAWQATkbhvk+IT+yM0jiUT4
+umVeoSTcbsoMrOwrhb9yGgA/i878TZ4Cas9Ojrhq0Xi5IEjhv2ddasFEYXnrqc5t3Z4Vs/YMLcJE
+G8GSZOxUj9cW8K+TyXNNFeIZ45cQPVP5MvyV8dWgop23rZCu+zT+ehDjorx8tNjXfn1DMkZgcQhe
+/r7eDJUuL1GkU5zj778hckFlHdI7tpghAk9gkB4n4vaqQmAuH/ZBhIOdwDy9TeiHt3nGvVEpzYBa
+kqC0N2Yv1ZdsvUBIs9zS5+qt7QWPw3Ppmy2V7n1dNwyhBb+67a2bbxAmD6dsjLGzA1shKgEw8IGY
+O5G/Dy+/Tnr4/TIG9EIq0yxTOUrMy/hbdQZ/s2MT3iaCsn/g1FwtsHYvzG6AfWX3TE2QJiyZ8LG3
+qxB1Y3TbL/p8hXlay6TTxrPWhAl+ZsPlk+0QaN5srqsYujI+KSXQIm7vjrQy5K7ZOTlzXN0nN8pw
+hq8axnHnZJ8leyj7gEfQJWmAMTu1Lrg/r97wGAhp6FL3KSaRcshUXTKmNs7UFpMWnMCWAygpBGAV
+uRWS+97c7lzPfzmVp6o2u6sueyl0OdKuYJ0keCrtui7ItWQTUeio4WPwj7IC/kbkAOZeumzf3nZv
+cxzaWu8pMS+7Fk8DV0EaW8ssTmDGwV0UlaVfIYO2HQPh++w72M+8lV7BB6m/TSMSHESmBX05PQGT
+XkJf4PWqqJkX+FzYKdvXLTlIDINOGeWrKPh8Lr/iSgKvGxeJWn+qF51JsOyT4VyNVFZjSCGFD/JE
+IPh9VJdzRI5aVdGL4Sa0gFR6TnhyrYqfgs3KUMyQXcTKlbD9HuYP37B7x+XYCwZFkZloBwo/AyfR
+X7/SxfX8XdjSDrsE2ZYWjMBnBjkYlWWxih99b/X48etX7b7fvUgFZk7TDxD9nxq8GCcGu2QNn7EF
+fYlz3npMNXtHkOPqegj21rDfl0krxjMmJw==</xenc:CipherValue></xenc:CipherData></xenc:EncryptedData></odsek>
+		<odsek id="IM" naziv="Menadzment">
+			<student brojIndeksa="1122" ime="Svetlana" prezime="Tamnic">
+				<polozenIspit datum="2003-08-10" nastavnik="Jela" ocena="6">
+					<predmet>Ekonomija</predmet>
+				</polozenIspit>
+				<polozenIspit datum="2003-08-10" nastavnik="Vaso" ocena="7">
+					<predmet>Fizicko</predmet>
+				</polozenIspit>
+				<polozenIspit datum="2003-08-10" nastavnik="Ilija" ocena="8">
+					<predmet>Matematika</predmet>
+				</polozenIspit>
+			</student>
+			<student brojIndeksa="1133" ime="Mira" prezime="MIric">
+				<polozenIspit datum="2003-08-10" nastavnik="Pero" ocena="9">
+					<predmet>Ekonomija</predmet>
+				</polozenIspit>
+				<polozenIspit datum="2003-09-10" nastavnik="Vaso" ocena="9">
+					<predmet>Fizicko</predmet>
+				</polozenIspit>
+				<polozenIspit datum="2003-10-10" nastavnik="Ilija" ocena="8">
+					<predmet>Matematika</predmet>
+				</polozenIspit>
+			</student>
+		</odsek>
+	</fakultet>
+	<fakultet id="2" naziv="Ekonomski fakultet">
+		<odsek id="E" naziv="Opsta ekonomija">
+			<student brojIndeksa="1122" ime="Lijlja" prezime="Radic">
+				<polozenIspit datum="2002-08-10" nastavnik="Pero" ocena="6">
+					<predmet>Ekonomija 1</predmet>
+				</polozenIspit>
+				<polozenIspit datum="2002-08-10" nastavnik="Vaso" ocena="7">
+					<predmet>Fizicko</predmet>
+				</polozenIspit>
+				<polozenIspit datum="2002-08-10" nastavnik="Ilija" ocena="8">
+					<predmet>Makro ekonomija</predmet>
+				</polozenIspit>
+			</student>
+			<student brojIndeksa="1133" ime="Tamara" prezime="Jovic">
+				<polozenIspit datum="2002-08-10" nastavnik="Pero" ocena="10">
+					<predmet>Ekonomija 1</predmet>
+				</polozenIspit>
+				<polozenIspit datum="2002-08-10" nastavnik="Vaso" ocena="10">
+					<predmet>Fizicko</predmet>
+				</polozenIspit>
+				<polozenIspit datum="2002-08-10" nastavnik="Ilija" ocena="10">
+					<predmet>Makro ekonomija</predmet>
+				</polozenIspit>
+			</student>
+		</odsek>
+	</fakultet>
+</univerzitet>

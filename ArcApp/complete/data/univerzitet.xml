@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<univerzitet naziv="UNS">
+	<fakultet naziv="FTN" id="1">
+		<odsek naziv="Elektro" id="E">
+			<student brojIndeksa="1122" ime="Petar" prezime="Petrovic">
+				<polozenIspit ocena="6" datum="2004-08-10" nastavnik="Pero">
+					<predmet>Mehanika</predmet>
+				</polozenIspit>
+				<polozenIspit ocena="7" datum="2004-08-10" nastavnik="Vaso">
+					<predmet>Fizicko</predmet>
+				</polozenIspit>
+				<polozenIspit ocena="8" datum="2004-08-10" nastavnik="Ilija">
+					<predmet>Matematika</predmet>
+				</polozenIspit>
+			</student>
+			<student brojIndeksa="1133" ime="Marko" prezime="Markovic">
+				<polozenIspit ocena="9" datum="2004-08-10" nastavnik="Pero">
+					<predmet>Mehanika</predmet>
+				</polozenIspit>
+				<polozenIspit ocena="9" datum="2004-09-10" nastavnik="Vaso">
+					<predmet>Fizicko</predmet>
+				</polozenIspit>
+				<polozenIspit ocena="8" datum="2004-10-10" nastavnik="Ilija">
+					<predmet>Matematika</predmet>
+				</polozenIspit>
+			</student>
+		</odsek>
+		<odsek naziv="Menadzment" id="IM">
+			<student brojIndeksa="1122" ime="Svetlana" prezime="Tamnic">
+				<polozenIspit ocena="6" datum="2003-08-10" nastavnik="Jela">
+					<predmet>Ekonomija</predmet>
+				</polozenIspit>
+				<polozenIspit ocena="7" datum="2003-08-10" nastavnik="Vaso">
+					<predmet>Fizicko</predmet>
+				</polozenIspit>
+				<polozenIspit ocena="8" datum="2003-08-10" nastavnik="Ilija">
+					<predmet>Matematika</predmet>
+				</polozenIspit>
+			</student>
+			<student brojIndeksa="1133" ime="Mira" prezime="MIric">
+				<polozenIspit ocena="9" datum="2003-08-10" nastavnik="Pero">
+					<predmet>Ekonomija</predmet>
+				</polozenIspit>
+				<polozenIspit ocena="9" datum="2003-09-10" nastavnik="Vaso">
+					<predmet>Fizicko</predmet>
+				</polozenIspit>
+				<polozenIspit ocena="8" datum="2003-10-10" nastavnik="Ilija">
+					<predmet>Matematika</predmet>
+				</polozenIspit>
+			</student>
+		</odsek>
+	</fakultet>
+	<fakultet naziv="Ekonomski fakultet" id="2">
+		<odsek naziv="Opsta ekonomija" id="E">
+			<student brojIndeksa="1122" ime="Lijlja" prezime="Radic">
+				<polozenIspit ocena="6" datum="2002-08-10" nastavnik="Pero">
+					<predmet>Ekonomija 1</predmet>
+				</polozenIspit>
+				<polozenIspit ocena="7" datum="2002-08-10" nastavnik="Vaso">
+					<predmet>Fizicko</predmet>
+				</polozenIspit>
+				<polozenIspit ocena="8" datum="2002-08-10" nastavnik="Ilija">
+					<predmet>Makro ekonomija</predmet>
+				</polozenIspit>
+			</student>
+			<student brojIndeksa="1133" ime="Tamara" prezime="Jovic">
+				<polozenIspit ocena="10" datum="2002-08-10" nastavnik="Pero">
+					<predmet>Ekonomija 1</predmet>
+				</polozenIspit>
+				<polozenIspit ocena="10" datum="2002-08-10" nastavnik="Vaso">
+					<predmet>Fizicko</predmet>
+				</polozenIspit>
+				<polozenIspit ocena="10" datum="2002-08-10" nastavnik="Ilija">
+					<predmet>Makro ekonomija</predmet>
+				</polozenIspit>
+			</student>
+		</odsek>
+	</fakultet>
+</univerzitet>

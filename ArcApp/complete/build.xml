@@ -1,0 +1,53 @@
+<project name="XMLParsers (JAXB)" default="generateAll" basedir=".">
+
+	<!-- Skript generise potrebne java klase na osnovu XML seme ./data/univerzitet1.xsd
+	     Kako ova XML sema ima samo jedan globalni element, bice izgenerisana samo  jedna klasa (jedan .java fajl)
+	     koji u sebi sadrzi inner klase.
+	     Osim ove klase generisu se i ObjectFactory.java i package-info.java koje trebaju JAXB-u za rad
+	     Sve ove klase se generisu u ./gen folderu, pa ih je potrebno prekopirati u odgovarajuci paket u src fodleru
+	     U inicijalnoj verziji projekta ovo se ne mora raditi jer su klase vec prekopirane.
+	      -->
+	
+    <property name="src.dir" value="${basedir}/src"/>
+  	<property name="lib.dir" value="${basedir}/lib"/>
+  	<property name="bin.dir" value="${basedir}/bin"/>
+  	<property name="data.dir" value="${basedir}/schema"/>
+	<property name="gen.dir" value="${basedir}/src/main/java/hello/entity/"/>
+	<property name="proba.dir" value="${basedir}/src/main/java/hello/entity/proba"/>
+
+	<!-- Task za generisanje objektnog modela na osnovu XSD seme -->
+	<taskdef name="xjc" classname="com.sun.tools.xjc.XJCTask">
+	  <classpath>
+	    <fileset dir="${lib.dir}" includes="*.jar" />
+	  </classpath>
+	</taskdef>
+	
+	<!-- Task za generisanje XSD seme na osnovu objektnog modela -->
+	<taskdef name="schemagen" classname="com.sun.tools.jxc.SchemaGenTask">
+	  <classpath>
+	    <fileset dir="${lib.dir}" includes="*.jar" />
+	  </classpath>
+	</taskdef>
+	
+	<target name="init">
+	    <echo message="basedir = ${basedir}"/>
+	    <echo message="build.compiler = ${build.compiler}"/>
+	    <echo message="java.home = ${java.home}"/>
+	    <echo message="java.class.path = ${java.class.path}"/>
+	</target>
+
+	<target name="generateAkt" depends="init">
+		<xjc schema="${data.dir}/Akt.xsd" destdir="${proba.dir}"/>
+	</target>
+
+	<target name="generateAmandman" depends="init">
+		<xjc schema="${data.dir}/Amandmani.xsd" destdir="${gen.dir}"/>
+	</target>
+
+	<target name="generateUsers" depends="init">
+		<xjc schema="${data.dir}/Users.xsd" destdir="${gen.dir}"/>
+	</target>
+
+	<target name="generateAll" depends="generateAkt, generateAmandman"></target>
+
+</project>
