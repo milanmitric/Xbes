@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by Nebojsa on 6/5/2016.
@@ -39,6 +40,8 @@ public class AmandmanController {
         return new ResponseEntity(amandmani, HttpStatus.OK);
     }
 
+
+
     @PreAuthorize("hasRole('ROLE_ODBORNIK')")
     @RequestMapping(value = "/getmyallamandmans",
             method = RequestMethod.GET,
@@ -46,8 +49,40 @@ public class AmandmanController {
     public ResponseEntity getMyAllAmandmans() {
         logger.info("Called REST for getting all amandments by a person: ");
 
-        return new ResponseEntity(HttpStatus.OK);
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User)auth.getPrincipal();
+
+
+
+        ArrayList<Amandmani> amandmanis = amandmanManager.getAllAmendmentProposed();
+        System.out.println("ALL: "+amandmanis.size());
+        ArrayList<Amandmani> amandmanis2 = amandmanManager.getAllAmendmentsApproved();
+        System.out.println("ALL: "+amandmanis2.size());
+        for(int i=amandmanis.size()-1; i>=0; i--){
+            if(!amandmanis.get(i).getUserName().equals(user.getUsername())){
+                amandmanis.remove(i);
+            }
+        }
+        for(int i=amandmanis2.size()-1; i>=0; i--){
+            if(!amandmanis2.get(i).getUserName().equals(user.getUsername())){
+                amandmanis2.remove(i);
+            }
+        }
+        System.out.println("MY: "+amandmanis.size());
+        System.out.println("MY: "+amandmanis2.size());
+
+
+        HashMap<String,ArrayList<Amandmani>> returnTwoLists = new HashMap<String,ArrayList<Amandmani>>();
+        returnTwoLists.put("proposed",amandmanis);
+        returnTwoLists.put("approved",amandmanis2);
+
+
+
+        return new ResponseEntity(returnTwoLists, HttpStatus.OK);
     }
+
+
 
     @PreAuthorize("hasRole('ROLE_ODBORNIK')")
     @RequestMapping(value = "/amandman",

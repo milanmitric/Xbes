@@ -1,5 +1,92 @@
 <div>
-    <h3>Moji amandmani
+
+
+    <h3>Moji Predlozeni Amandmani
+    </h3>
+
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <!--<th>Naslov</th>-->
+                    <th>Id</th>
+                    <th>Amandmani</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="model in collection track by $index">
+                    <!--BTN-->
+                   <!-- <td>
+                        <button type="submit" class="btn btn-{{btns[$index]}} btn-sm" ng-click="dodaj(model.documentId, $index)">
+                            <span class="glyphicon glyphicon-{{btns2[$index]}}"></span>&nbsp;<span>&lt;!&ndash;txthere&ndash;&gt;</span>
+                        </button>
+                    </td>-->
+                    <!--ID-->
+                    <td>
+                        {{model.documentId}}
+                    </td>
+                    <!--NED TABLE-->
+                    <td>
+                        <!------------------------------------------------->
+                        <!--NEW TABLE-->
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Redni broj</th>
+                                    <th>Tip izmene</th>
+                                    <th>Detalji</th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="model2 in model.amandman">
+                                    <td>
+                                        {{model2.redniBroj}}
+                                    </td>
+                                    <td>
+                                        {{model2.predmetIzmeneAndTipIzmeneAndObrazlozenje[1]}}
+                                    </td>
+                                    <td>
+                                        {{model2.predmetIzmeneAndTipIzmeneAndObrazlozenje[2].content[0]}}
+                                        <br>
+                                        {{model2.predmetIzmeneAndTipIzmeneAndObrazlozenje[2].content[2]}}
+                                    </td>
+
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!------------------------------------------------->
+                    </td>
+
+                    <td>
+                        <button ng-click="opozovi(model.documentId)"
+                                class="btn btn-danger btn-sm">
+                            <span class="glyphicon glyphicon-remove"></span>&nbsp;<span>Opozovi</span>
+                        </button>
+                    </td>
+
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+<div>
+    <h3>
+        Moji Odobreni Amandmani
     </h3>
 
 
@@ -7,32 +94,72 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>Naslov</th>
-                <th></th>
-                <th></th>
+                <!--<th>Naslov</th>-->
+                <th>Id</th>
+                <th>Amandmani</th>
+
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="model in collection">
-                <td>{{model.naslov}}</td>
-                <!--<td>{{model.documentId}}</td>-->
+            <tr ng-repeat="model in collectionOdobreni track by $index">
+                <!--BTN-->
+                <!-- <td>
+                     <button type="submit" class="btn btn-{{btns[$index]}} btn-sm" ng-click="dodaj(model.documentId, $index)">
+                         <span class="glyphicon glyphicon-{{btns2[$index]}}"></span>&nbsp;<span>&lt;!&ndash;txthere&ndash;&gt;</span>
+                     </button>
+                 </td>-->
+                <!--ID-->
                 <td>
-                    <button type="submit"
-                            ui-sref="amandmandetail({id:model.documentId})"
-                            class="btn btn-info btn-sm">
-                        <span class="glyphicon glyphicon-blackboard"></span>&nbsp;<span>Otvori amandman</span>
-                    </button>
+                    {{model.documentId}}
                 </td>
+                <!--NED TABLE-->
                 <td>
-                    <button type="submit"
+                    <!------------------------------------------------->
+                    <!--NEW TABLE-->
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Redni broj</th>
+                                <th>Tip izmene</th>
+                                <th>Detalji</th>
 
-                            class="btn btn-danger btn-sm">
-                        <span class="glyphicon glyphicon-blackboard"></span>&nbsp;<span>Povuci amandman</span>
-                    </button>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="model2 in model.amandman">
+                                <td>
+                                    {{model2.redniBroj}}
+                                </td>
+                                <td>
+                                    {{model2.predmetIzmeneAndTipIzmeneAndObrazlozenje[1]}}
+                                </td>
+                                <td>
+                                    {{model2.predmetIzmeneAndTipIzmeneAndObrazlozenje[2].content[0]}}
+                                    <br>
+                                    {{model2.predmetIzmeneAndTipIzmeneAndObrazlozenje[2].content[2]}}
+                                </td>
+
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!------------------------------------------------->
                 </td>
+
+
             </tr>
             </tbody>
         </table>
     </div>
-</div>
 
+
+
+
+
+
+
+
+
+
+</div>

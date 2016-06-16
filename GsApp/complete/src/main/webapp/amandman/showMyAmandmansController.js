@@ -1,16 +1,31 @@
 'use strict';
 
 angular.module('xapp')
-    .controller('ShowMyAmandmansController', function ($scope, $state, $stateParams,aktService) {
+    .controller('ShowMyAmandmansController', function ($scope, $state, $stateParams,aktService, amandmanService) {
 
-     $scope.collection = [{naslov : "Moj Amandman 1", id : "IdOdAmandmana"}];
-//    aktService.getMyAllActs(function(response){
-////                console.log("ODGOVOR SA SERVERA!!!");
-////                console.log(response.data);
-//
-////                $scope.collectionOdobreni = response.data.approved;
-//                },function(response){
-//
-//    });
+
+             amandmanService.getMyAllAmandmans(
+                      function(response){
+                                      console.log("my amandmans response:");
+                                      console.log(response.data);
+                                      $scope.collection = response.data.proposed;
+                                      $scope.collectionOdobreni = response.data.approved;
+                      },
+                      function(response){
+
+                      }
+                 );
+
+
+                 $scope.opozovi=function(amID){
+                    //TODO
+                    alert(amID);
+                 }
+
+
+
+
+
+
 
     });

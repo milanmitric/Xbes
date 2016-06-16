@@ -49,10 +49,10 @@ angular.module('xapp')
                     function(response){
 
                         $scope.akts = response.data;
-                        $scope.btns=[];
+                       /* $scope.btns=[];
                         for(var i=0; i<$scope.akts.length; i++){
                             $scope.btns.push(false);
-                        }
+                        }*/
 
                     },function(response){
 
@@ -65,7 +65,7 @@ angular.module('xapp')
    $scope.prihvatiUNacelu=function(aktID, idx){
     //alert(aktID);
     $scope.btns[idx]=true;
-    var list=[];
+    /*var list=[];
     list.push(aktID);
      sednicaService.prihvati(
                          list,
@@ -77,10 +77,7 @@ angular.module('xapp')
 
 
                          }
-            );
-
-
-
+            );*/
    }
 
    //odbij btn

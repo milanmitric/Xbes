@@ -1,5 +1,6 @@
 package hello.rest;
 
+import com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl;
 import hello.StringResources.MarkLogicStrings;
 import hello.businessLogic.document.AktManager;
 import hello.businessLogic.document.AmandmanManager;
@@ -7,22 +8,36 @@ import hello.businessLogic.document.UsersManager;
 import hello.entity.gov.gradskaskupstina.Akt;
 import hello.entity.gov.gradskaskupstina.Amandmani;
 import hello.entity.gov.gradskaskupstina.User;
+import hello.security.Encrypt;
 import hello.security.EncryptKEK;
+import org.apache.fop.apps.*;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
+import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.*;
+import javax.xml.transform.sax.SAXResult;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import java.io.*;
@@ -31,6 +46,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static com.sun.jersey.core.util.ReaderWriter.BUFFER_SIZE;
+
 /**
  * Created by Nebojsa on 6/4/2016.
  */
@@ -38,6 +55,8 @@ import java.util.HashMap;
 @RequestMapping("/api")
 public class AktController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+
     private AktManager aktManager = new AktManager();
     private AmandmanManager amandmanManager = new AmandmanManager();
     private UsersManager usersManager = new UsersManager();
@@ -118,7 +137,33 @@ public class AktController {
     public ResponseEntity getMyAllAct() {
         logger.info("Called REST for getting act of a person (getmyallacts)");
 
-        return new ResponseEntity(HttpStatus.OK);
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User)auth.getPrincipal();
+
+
+        ArrayList<Akt> aktovi = aktManager.getAllFilesProposed();
+        System.out.println("ALL: "+aktovi.size());
+        ArrayList<Akt> aktovi2 = aktManager.getAllFilesApproved();
+        System.out.println("ALL: "+aktovi2.size());
+        for(int i=aktovi.size()-1; i>=0; i--){
+            if(!aktovi.get(i).getUserName().equals(user.getUsername())){
+                aktovi.remove(i);
+            }
+        }
+        for(int i=aktovi2.size()-1; i>=0; i--){
+            if(!aktovi2.get(i).getUserName().equals(user.getUsername())){
+                aktovi2.remove(i);
+            }
+        }
+        System.out.println("MY: "+aktovi.size());
+        System.out.println("MY: "+aktovi2.size());
+
+
+        HashMap<String,ArrayList<Akt>> returnTwoLists = new HashMap<String,ArrayList<Akt>>();
+        returnTwoLists.put("proposed",aktovi);
+        returnTwoLists.put("approved",aktovi2);
+        return new ResponseEntity(returnTwoLists, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/getproposed",
