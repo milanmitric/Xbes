@@ -1,15 +1,15 @@
 package hello.businessLogic.document;
 
-import com.marklogic.client.document.DocumentUriTemplate;
 import com.marklogic.client.query.MatchDocumentSummary;
 import com.marklogic.client.query.MatchLocation;
 import com.marklogic.client.query.MatchSnippet;
+import com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl;
 import hello.StringResources.MarkLogicStrings;
 import hello.StringResources.TipIzmene;
 import hello.businessLogic.core.BeanManager;
 import hello.entity.gov.gradskaskupstina.*;
-import hello.security.EncryptKEK;
 import hello.security.CRLVerifier;
+import hello.security.EncryptKEK;
 import org.apache.fop.apps.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,20 +17,16 @@ import org.springframework.web.client.RestTemplate;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
-import java.io.*;
-import java.security.cert.Certificate;
-
-
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.transform.*;
 import javax.xml.transform.sax.SAXResult;
 import javax.xml.transform.stream.StreamSource;
-
-import com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl;
-
-import org.apache.fop.apps.FopFactory;
-import org.xml.sax.SAXException;
-
+import java.io.*;
+import java.security.cert.Certificate;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 
 /**
@@ -105,6 +101,7 @@ public class AktManager extends BeanManager<Akt> {
         Certificate cert = keyStoreManager.readCertificate(user.getUsername(),user.getPassword().toCharArray());
         if (crlVerifier.isRevoked(cert)){
             logger.info("Certificate is revoked for user " + user.getUsername()+", can't propose.");
+            return null;
             //TODO: Da li treba da se izadje iz metode ako je revoked?
         }
         if (!validateBeanBySchema(akt)) {
@@ -112,10 +109,14 @@ public class AktManager extends BeanManager<Akt> {
             return null;
         }
         String ret = null;
-        DocumentUriTemplate template = xmlManager.newDocumentUriTemplate("xml"); //TODO: DocumentUriTemplate is never used ?
         try {
             ret = this.write(akt, MarkLogicStrings.AKTOVI_PREDLOZEN_COL_ID).getUri();
             akt.setDocumentId(ret);
+            akt.setUserName(user.getUsername());
+            GregorianCalendar c = new GregorianCalendar();
+            c.setTime(new Date());
+            XMLGregorianCalendar date2 = DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
+            akt.setTimeStamp(date2);
             // XML DOCUMENT IS READY TO BE SIGNED!
             boolean shouldSign = true;
             if (!this.write(akt, ret, MarkLogicStrings.AKTOVI_PREDLOZEN_COL_ID, shouldSign, user)) {

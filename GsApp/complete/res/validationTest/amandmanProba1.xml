@@ -3,7 +3,7 @@
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  xsi:schemaLocation="http://www.gradskaskupstina.gov/ file:/C:/Users/FS-LB/Desktop/XMLProjekat/DJIT/Xbes/GsApp/complete/schema/Amandmani.xsd">
     <PravniOsnov>Pravni osnov 1</PravniOsnov>
-    <Akt>4330496548285334957.xml</Akt>
+    <Akt ref_akt="4330496548285334957.xml"></Akt>
     <Amandman RedniBroj="1">
         <PredmetIzmene ref_clanovi="1" ref_stavovi="1">STAV broj 1 CLANA broj 1</PredmetIzmene>
         <TipIzmene>izmena</TipIzmene>
@@ -31,6 +31,4 @@
             <Prezime>Precednik</Prezime>
         </Potpisnik>
     </Potpisnici>
-    <UserName>test</UserName>
-    <TimeStamp>2016-06-14T16:40:23</TimeStamp>
 </Amandmani>

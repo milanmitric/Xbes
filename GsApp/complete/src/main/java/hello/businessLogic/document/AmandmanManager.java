@@ -1,6 +1,5 @@
 package hello.businessLogic.document;
 
-import com.marklogic.client.document.DocumentUriTemplate;
 import hello.StringResources.MarkLogicStrings;
 import hello.businessLogic.core.BeanManager;
 import hello.entity.gov.gradskaskupstina.Akt;
@@ -10,8 +9,12 @@ import hello.security.CRLVerifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 import java.security.cert.Certificate;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * Created by milan on 5.6.2016..
@@ -55,6 +58,22 @@ public class AmandmanManager extends BeanManager<Amandmani> {
     }
 
     /**
+     * Gets all proposed amandments for current user.
+     * @param user Current session user.
+     * @return List of proposed amandments.
+     */
+    public ArrayList<Amandmani> getMyAmandmentsProposed(User user){
+        StringBuilder query = new StringBuilder();
+        query.append("declare namespace a=\"http://www.gradskaskupstina.gov/\";");
+        query.append("for $x in fn:collection(\"/predlozeniAmandmani\")");
+        query.append("where $x//a:UserName/text() = \"" + user.getUsername() + "\"");
+        query.append(("return $x"));
+        return queryManager.executeQuery(query.toString());
+    }
+
+
+
+    /**
      * Deletes all amendments for given document.
      * @param akt Discarded document.
      * @return Indicator of success.
@@ -85,6 +104,7 @@ public class AmandmanManager extends BeanManager<Amandmani> {
         Certificate cert = keyStoreManager.readCertificate(user.getUsername(),user.getPassword().toCharArray());
         if (crlVerifier.isRevoked(cert)){
             logger.info("Certificate is revoked for user " + user.getUsername()+", can't propose.");
+            return null;
         }
 
         if (!validateBeanBySchema(amandman)){
@@ -92,10 +112,14 @@ public class AmandmanManager extends BeanManager<Amandmani> {
             return null;
         }
         String ret = null;
-        DocumentUriTemplate template = xmlManager.newDocumentUriTemplate("xml");
         try {
             ret = this.write(amandman,MarkLogicStrings.AMANDMANI_PREDLOZEN_COL_ID).getUri();
             amandman.setDocumentId(ret);
+            amandman.setUserName(user.getUsername());
+            GregorianCalendar c = new GregorianCalendar();
+            c.setTime(new Date());
+            XMLGregorianCalendar date2 = DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
+            amandman.setTimeStamp(date2);
             // XML DOCUMENT IS READY TO BE SIGNED!
             boolean shouldSign = true;
             if (!this.write(amandman,ret,MarkLogicStrings.AMANDMANI_PREDLOZEN_COL_ID,shouldSign,user)){
