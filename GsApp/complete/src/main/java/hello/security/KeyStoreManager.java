@@ -161,7 +161,7 @@ public class KeyStoreManager {
             builder.addRDN(BCStyle.OU, "Skupstina grada");
             builder.addRDN(BCStyle.C, "RS");
             // TODO: EMAIL IS HARDCODED!
-            builder.addRDN(BCStyle.E, "neki@mail.com");
+            builder.addRDN(BCStyle.E, user.getEmail());
             //UID (USER ID) je ID korisnika
             builder.addRDN(BCStyle.UID, user.getUsername());
             String sn= keyStoreReader.getCertificateSerialNumber();

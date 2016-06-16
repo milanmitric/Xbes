@@ -30,7 +30,7 @@ public class TestMain {
 
     public static void main(String[] args) throws FileNotFoundException {
         try{
-            generatingPdf();
+            deleteAkts();
         } catch (Exception e){
 
         }
@@ -59,18 +59,8 @@ public class TestMain {
 
     public static void deleteAkts(){
         AmandmanManager amandmanManager = new AmandmanManager();
-        amandmanManager.deleteAmandman("11012995581814757290.xml");
-        amandmanManager.deleteAmandman("11969076111915410290.xml");
-        amandmanManager.deleteAmandman("12461612367349772193.xml");
-        amandmanManager.deleteAmandman("1436059187549165823.xml");
-        amandmanManager.deleteAmandman("17430024136002101644.xml");
-        amandmanManager.deleteAmandman("1753570683026796015.xml");
-        amandmanManager.deleteAmandman("17927789539760040072.xml");
-        amandmanManager.deleteAmandman("5641641447770094113.xml");
-        amandmanManager.deleteAmandman("6568285907668089985.xml");
-        amandmanManager.deleteAmandman("6990168228709459453.xml");
-        amandmanManager.deleteAmandman("8412181606588559053.xml");
-        amandmanManager.deleteAmandman("8680279984619103899.xml");
+        amandmanManager.deleteAmandman("15354391884130424682.xml");
+
 
 
 
