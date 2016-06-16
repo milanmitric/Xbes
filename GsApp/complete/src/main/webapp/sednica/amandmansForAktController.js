@@ -51,75 +51,62 @@ angular.module('xapp')
     }
 
 
+
+
     /*
     //-----MAIN LOGIC HERE-------//
     */
 
-    /*DELIMICNO*/
-    $scope.prihvatiDelimicno=function(){
-
-            var list=[];
-            list.push($stateParams.id);
-            list = list.concat($scope.amandmantsToAdd);
-
-            sednicaService.prihvati(
-                    list,
-                    function(res){
 
 
-                    },
-                    function(res){
-
-
-                    }
-            );
-            $state.go('sednicahome');
-
-    }
-
-    /*SVE*/
-    $scope.prihvatiSve=function(){
-
-        var list=[];
-        list.push($stateParams.id);
-        list = list.concat($scope.amandmandsAll);
-        console.log(list);
-        sednicaService.prihvati(
-                     list,
-                     function(res){
-                        $state.go('sednicahome');
-                     },
-                     function(res){
-
-                     }
-        );
-
-    }
 
     /*SVE*/
     $scope.odbij=function(){
 
         var list=[];
-        list.push('ODBIJAJUSE');
+        list.push('ODBIJASE');
         list.push($stateParams.id);
-        list = list.concat($scope.amandmandsAll);
         console.log(list);
-
-
         sednicaService.prihvati(
                          list,
                          function(res){
 
-
                          },
                          function(res){
-
 
                          }
          );
 
          $state.go('sednicahome');
     }
+
+
+
+     $scope.prihvati=function(){
+
+            var list=[];
+            list.push('PRIHVATASE');
+            list.push($stateParams.id);
+            list = list.concat($scope.amandmantsToAdd);
+            console.log(list);
+            sednicaService.prihvati(
+                             list,
+                             function(res){
+
+
+                             },
+                             function(res){
+
+
+                             }
+             );
+
+             $state.go('sednicahome');
+        }
+
+
+
+
 
 
 
