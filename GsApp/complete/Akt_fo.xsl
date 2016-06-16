@@ -22,7 +22,7 @@
                                 <!--Glave u for petlji-->
                                 <fo:block font-family="sans-serif" text-align="center" font-size="20px" font-weight="bold" padding="30px">
                                     <!--Glava unutar for petlje za ispis glave-->
-                                    <xsl:for-each select="gov:Akt/gov:Deo/gov:Glava">
+                                    <xsl:for-each select="gov:Glava">
                                         Glava <xsl:value-of select="@RedniBroj" />.<br></br>
                                         <xsl:value-of select="@Naziv" /><br></br>
 
@@ -33,9 +33,8 @@
                                                 <xsl:value-of select="@Naziv"/><br></br>
                                                 <fo:block font-family="sans-serif" text-align="center" font-size="12px" font-weight="bold" padding="20px">
                                                     <xsl:for-each select="gov:Stav">
-                                                        Stav <xsl:value-of select="@RedniBroj"/>.<br></br>
                                                         <fo:block font-family="sans-serif" text-align="center" font-size="12px"  padding="10px">
-                                                            <xsl:value-of select="gov:Tekst"/><br></br><br></br>
+                                                            <xsl:value-of select="gov:Tekst"/><br></br>
                                                             <fo:block font-family="sans-serif" text-align="center" font-size="11px"  padding="10px">
                                                                 <xsl:for-each select="gov:Tacka">
                                                                     Tacka <xsl:value-of select="@RedniBroj"/>.<br></br>
@@ -74,9 +73,8 @@
                                                                     <xsl:value-of select="@Naziv"/><br></br>
                                                                     <fo:block font-family="sans-serif" text-align="center" font-size="12px" font-weight="bold" padding="20px">
                                                                         <xsl:for-each select="gov:Stav">
-                                                                            Stav <xsl:value-of select="@RedniBroj"/>.<br></br>
                                                                             <fo:block font-family="sans-serif" text-align="center" font-size="12px"  padding="10px">
-                                                                                <xsl:value-of select="gov:Tekst"/><br></br><br></br>
+                                                                                <xsl:value-of select="gov:Tekst"/><br></br><br>
                                                                                 <fo:block font-family="sans-serif" text-align="center" font-size="11px"  padding="10px">
                                                                                     <xsl:for-each select="gov:Tacka">
                                                                                         Tacka <xsl:value-of select="@RedniBroj"/>.<br></br>
@@ -109,9 +107,8 @@
                                                             <xsl:value-of select="@Naziv"/><br></br>
                                                             <fo:block font-family="sans-serif" text-align="center" font-size="12px" font-weight="bold" padding="20px">
                                                                 <xsl:for-each select="gov:Stav">
-                                                                    Stav <xsl:value-of select="@RedniBroj"/>.<br></br>
                                                                     <fo:block font-family="sans-serif" text-align="center" font-size="12px"  padding="10px">
-                                                                        <xsl:value-of select="gov:Tekst"/><br></br><br></br>
+                                                                        <xsl:value-of select="gov:Tekst"/><br></br>
                                                                         <fo:block font-family="sans-serif" text-align="center" font-size="11px"  padding="10px">
                                                                             <xsl:for-each select="gov:Tacka">
                                                                                 Tacka <xsl:value-of select="@RedniBroj"/>.<br></br>
@@ -156,9 +153,8 @@
                                     <xsl:value-of select="@Naziv"/><br></br>
                                     <fo:block font-family="sans-serif" text-align="center" font-size="12px" font-weight="bold" padding="20px">
                                         <xsl:for-each select="gov:Stav">
-                                            Stav <xsl:value-of select="@RedniBroj"/>.<br></br>
                                             <fo:block font-family="sans-serif" text-align="center" font-size="12px"  padding="10px">
-                                            <xsl:value-of select="gov:Tekst"/><br></br><br></br>
+                                            <xsl:value-of select="gov:Tekst"/><br></br>
                                             <fo:block font-family="sans-serif" text-align="center" font-size="11px"  padding="10px">
                                             <xsl:for-each select="gov:Tacka">
                                                 Tacka <xsl:value-of select="@RedniBroj"/>.<br></br>
@@ -197,9 +193,8 @@
                                                 <xsl:value-of select="@Naziv"/><br></br>
                                                 <fo:block font-family="sans-serif" text-align="center" font-size="12px" font-weight="bold" padding="20px">
                                                     <xsl:for-each select="gov:Stav">
-                                                        Stav <xsl:value-of select="@RedniBroj"/>.<br></br>
                                                         <fo:block font-family="sans-serif" text-align="center" font-size="12px"  padding="10px">
-                                                            <xsl:value-of select="gov:Tekst"/><br></br><br></br>
+                                                            <xsl:value-of select="gov:Tekst"/><br></br>
                                                             <fo:block font-family="sans-serif" text-align="center" font-size="11px"  padding="10px">
                                                                 <xsl:for-each select="gov:Tacka">
                                                                     Tacka <xsl:value-of select="@RedniBroj"/>.<br></br>
@@ -232,9 +227,8 @@
                                             <xsl:value-of select="@Naziv"/><br></br>
                                             <fo:block font-family="sans-serif" text-align="center" font-size="12px" font-weight="bold" padding="20px">
                                                 <xsl:for-each select="gov:Stav">
-                                                    Stav <xsl:value-of select="@RedniBroj"/>.<br></br>
                                                     <fo:block font-family="sans-serif" text-align="center" font-size="12px"  padding="10px">
-                                                        <xsl:value-of select="gov:Tekst"/><br></br><br></br>
+                                                        <xsl:value-of select="gov:Tekst"/><br></br>
                                                         <fo:block font-family="sans-serif" text-align="center" font-size="11px"  padding="10px">
                                                             <xsl:for-each select="gov:Tacka">
                                                                 Tacka <xsl:value-of select="@RedniBroj"/>.<br></br>
@@ -271,9 +265,8 @@
                                 <xsl:value-of select="@Naziv"/><br></br>
                                 <fo:block font-family="sans-serif" text-align="center" font-size="12px" font-weight="bold" padding="20px">
                                     <xsl:for-each select="gov:Stav">
-                                        Stav <xsl:value-of select="@RedniBroj"/>.<br></br>
                                         <fo:block font-family="sans-serif" text-align="center" font-size="12px"  padding="10px">
-                                            <xsl:value-of select="gov:Tekst"/><br></br><br></br>
+                                            <xsl:value-of select="gov:Tekst"/><br></br>
                                             <fo:block font-family="sans-serif" text-align="center" font-size="11px"  padding="10px">
                                                 <xsl:for-each select="gov:Tacka">
                                                     Tacka <xsl:value-of select="@RedniBroj"/>.<br></br>
@@ -311,9 +304,8 @@
                                     <xsl:value-of select="@Naziv"/><br></br>
                                     <fo:block font-family="sans-serif" text-align="center" font-size="12px" font-weight="bold" padding="20px">
                                         <xsl:for-each select="gov:Stav">
-                                            Stav <xsl:value-of select="@RedniBroj"/>.<br></br>
                                             <fo:block font-family="sans-serif" text-align="center" font-size="12px"  padding="10px">
-                                                <xsl:value-of select="gov:Tekst"/><br></br><br></br>
+                                                <xsl:value-of select="gov:Tekst"/><br></br>
                                                 <fo:block font-family="sans-serif" text-align="center" font-size="11px"  padding="10px">
                                                     <xsl:for-each select="gov:Tacka">
                                                         Tacka <xsl:value-of select="@RedniBroj"/>.<br></br>
@@ -352,9 +344,8 @@
                                                         <xsl:value-of select="@Naziv"/><br></br>
                                                         <fo:block font-family="sans-serif" text-align="center" font-size="12px" font-weight="bold" padding="20px">
                                                             <xsl:for-each select="gov:Stav">
-                                                                Stav <xsl:value-of select="@RedniBroj"/>.<br></br>
                                                                 <fo:block font-family="sans-serif" text-align="center" font-size="12px"  padding="10px">
-                                                                    <xsl:value-of select="gov:Tekst"/><br></br><br></br>
+                                                                    <xsl:value-of select="gov:Tekst"/><br></br>
                                                                     <fo:block font-family="sans-serif" text-align="center" font-size="11px"  padding="10px">
                                                                         <xsl:for-each select="gov:Tacka">
                                                                             Tacka <xsl:value-of select="@RedniBroj"/>.<br></br>
@@ -387,9 +378,8 @@
                                                 <xsl:value-of select="@Naziv"/><br></br>
                                                 <fo:block font-family="sans-serif" text-align="center" font-size="12px" font-weight="bold" padding="20px">
                                                     <xsl:for-each select="gov:Stav">
-                                                        Stav <xsl:value-of select="@RedniBroj"/>.<br></br>
                                                         <fo:block font-family="sans-serif" text-align="center" font-size="12px"  padding="10px">
-                                                            <xsl:value-of select="gov:Tekst"/><br></br><br></br>
+                                                            <xsl:value-of select="gov:Tekst"/><br></br>
                                                             <fo:block font-family="sans-serif" text-align="center" font-size="11px"  padding="10px">
                                                                 <xsl:for-each select="gov:Tacka">
                                                                     Tacka <xsl:value-of select="@RedniBroj"/>.<br></br>
