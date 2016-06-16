@@ -72,7 +72,6 @@ public class AktController {
         return new ResponseEntity(returnTwoLists, HttpStatus.OK);
     }
 
-
     @RequestMapping(value = "/generatepdf",
     method = RequestMethod.GET,
     produces = MediaType.APPLICATION_JSON_VALUE)
@@ -80,7 +79,6 @@ public class AktController {
 
         return new ResponseEntity(HttpStatus.OK);
     }
-
 
     @RequestMapping(value = "/getactbyid",
             method = RequestMethod.POST,
@@ -222,16 +220,13 @@ public class AktController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-
-
-
     /*prihvati akt nekako ili nemoj*/
     @PreAuthorize("hasRole('ROLE_PREDSEDNIK')")
     @RequestMapping(value = "/prihvatiovono",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity aktmadafaka(@RequestBody ArrayList<String> params){
-        logger.info("Called REST for PRIHVATIOVOONO");
+        logger.info("Called REST for accepting or rejecting acts and amandments");
 
         //*******************
         //TODO - tamo gde se akt prihvata konacno (nakon sto se primene amandmana ILI nakon sto se obiju amandmani
@@ -239,44 +234,36 @@ public class AktController {
         //       ozvati metodu iz aktmanagera - archiveIt(Akt a) koja ce taj akt poslati arhivi
         //*******************
 
-        //System.out.println("AMANDMANI: "+amandmants);
-        //uvek stigne lista, 0. u nizu je UVEK ID od AKTA, a nakon toga idu ID od amandmana
-        //String aktID=amandmants.get(0);
-
         User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         if(params.get(0).equals("ODBIJAJUSE")){
+                //params.get(0) - "ODBIJAJUSE"
+                //params.get(1) - "AKT ID"
+                //params.get(2:end) - "AMANDMAN ID"
             logger.info("All amandments are being rejected");
-            //TODO - SVI AMANDMAN ZA AKT SE ODBIJAJU
-            //Akt akt = aktManager.read(true,params.get(1));
-            //aktManager.
             for (int i = 2; i < params.size();i++){
                 amandmanManager.deleteAmandman(params.get(i));
             }
-            //AKT ID: amandmants.get(1) //AKT JE PRIHVACEN U NACELU VEC
-            //AMANDMANI ID get(2+n) n=0,1,2...Size
-        } else
-        if(params.get(0).equals("AKTSEODBIJA")){
+        } else if(params.get(0).equals("AKTSEODBIJA")){
+                //params.get(0) - "AKTSEODBIJA"
+                //params.get(1) - "AKT ID"
+                //params.get(2:end) - "AMANDMAN ID"
             logger.info("Act is being rejected");
-            //TODO - AKT SE ODBIJA
             ArrayList<Amandmani> amandmani = amandmanManager.getAllAmandmansForAkt(aktManager.read(params.get(0),false));
             aktManager.deleteAkt(params.get(0));
             for (Amandmani amandman : amandmani){
                 amandmanManager.deleteAmandman(amandman.getDocumentId());
             }
-            //AKT ID: amandmants.get(1)
-            //AMANDMANI ID get(2+n) n=0,1,2...Size
         }else {
             if (params.size() == 1) {
+                //params.get(0) - AKT ID
                 logger.info("Act is accepted in principle");
                 Akt akt = aktManager.read(params.get(0), false);
                 aktManager.proposeAkt(akt,user);
-                //TODO - AKT SE PRIHVATA SE U NACELU - KOJI AKT?
-                //AKT ID : amandmants.get(0)
             } else {
+                //params.get(0) - AKT ID
+                //params.get(1:end) - "AMANDMAN ID"
                 logger.info("Amandments are being accepted");
-                //AKT ID : amandmants.get(0) //AKT JE PRIHVACEN U NACELU VEC
-                //1. , 2. , 3. ... ID od AMANDMANA
                 ArrayList<Amandmani> amandmani = new ArrayList<>();
                 for(int i = 1 ; i<params.size() ; i++) {
                     Amandmani amandman = amandmanManager.read(params.get(i), false);
@@ -292,167 +279,22 @@ public class AktController {
     }
 
 
-
-
-    //TODO - crap - not working
-    @RequestMapping(value="/download",
-            method=RequestMethod.POST,
-            produces = "application/pdf")
+    @RequestMapping(value="/download/{fileName}",
+            method=RequestMethod.POST)
     public void doDownload(HttpServletRequest request,
                            HttpServletResponse response,
-                           @RequestParam String docID) throws IOException {
-        logger.info("Called REST for downloading");
-
-        System.out.println("PATH VAR: "+docID);
-        //String[] parts=docID.split('.');
-        //docID=parts[0];
-        System.out.println("PATH VAR: "+docID);
-        // Get your file stream from wherever.
-        //InputStream myStream = new //someClass.returnFile();
-
-        Akt a=aktManager.read(docID, false);
-        aktManager.convertToXml_withCustomName(a, docID);
-
-        //------------------------------//
-        //SONARA CODE FOR xml_TO_PDF
-
-        FopFactory fopFactory=null;
-        // Initialize FOP factory object
-        try {
-            fopFactory = FopFactory.newInstance(new File("fop.xconf"));
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        TransformerFactory transformerFactory = new TransformerFactoryImpl();
-        // Point to the XSL-FO file
-        File xsltFile = new File("Akt_fo.xsl");
-        // Create transformation source
-        StreamSource transformSource = new StreamSource(xsltFile);
-        // Initialize the transformation subject
-        StreamSource source = new StreamSource(new File(docID+".xml"));
-        // Initialize user agent needed for the transformation
-        FOUserAgent userAgent = fopFactory.newFOUserAgent();
-        // Create the output stream to store the results
-        ByteArrayOutputStream outStream = new ByteArrayOutputStream();
-
-        // Initialize the XSL-FO transformer object
-        Transformer xslFoTransformer = null;
-        try {
-            xslFoTransformer = transformerFactory.newTransformer(transformSource);
-        } catch (TransformerConfigurationException e) {
-            e.printStackTrace();
-        }
-
-        // Construct FOP instance with desired output format
-        Fop fop = null;
-        try {
-            fop = fopFactory.newFop(MimeConstants.MIME_PDF, userAgent, outStream);
-        } catch (FOPException e) {
-            e.printStackTrace();
-        }
-
-        // Resulting SAX events
-        Result res = null;
-        try {
-            res = new SAXResult(fop.getDefaultHandler());
-        } catch (FOPException e) {
-            e.printStackTrace();
-        }
-
-        // Start XSLT transformation and FOP processing
-        try {
-            xslFoTransformer.transform(source, res);
-        } catch (TransformerException e) {
-            e.printStackTrace();
-        }
-
-        // Generate PDF file
-        File pdfFile = new File(docID+".pdf");
-        OutputStream out = null;
-        try {
-            out = new BufferedOutputStream(new FileOutputStream(pdfFile));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        try {
-            out.write(outStream.toByteArray());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            System.out.println("[INFO] File \"" + pdfFile.getCanonicalPath() + "\" generated successfully.");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            out.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-       //------my my my my my --------///
-
-        // Set the content type and attachment header.
-      /*   response.addHeader("Content-disposition", "attachment;filename="+docID+".pdf");
+                           @PathVariable String fileName) throws IOException {
+        logger.info("Called REST for downloading PDF file of act "+ fileName);
+        fileName += ".xml";
+        aktManager.generatePdf(fileName);
         response.setContentType("application/pdf");
-
-        // Copy the stream to the response's output stream.
-        //IOUtils.copy(myStream, response.getOutputStream());
-        try {
+        try (InputStream is = new FileInputStream(new File("Akt.pdf"))){
+            org.apache.commons.io.IOUtils.copy(is, response.getOutputStream());
             response.flushBuffer();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
-
-        ServletContext context = request.getServletContext();
-        //String appPath = context.getRealPath("");
-        //System.out.println("appPath = " + appPath);
-
-        // construct the complete absolute path of the file
-        String fullPath = docID+".pdf";
-        File downloadFile = new File(fullPath);
-        FileInputStream inputStream = new FileInputStream(downloadFile);
-
-        // get MIME type of the file
-        String mimeType = context.getMimeType(fullPath);
-        if (mimeType == null) {
-            // set to binary type if MIME mapping not found
-            mimeType = "application/octet-stream";
+        } catch (IOException ex) {
+            logger.info("Error writing file to output stream. Filename was '{}'", fileName, ex);
+            throw new RuntimeException("IOError writing file to output stream");
         }
-        System.out.println("MIME type: " + mimeType);
-
-        // set content attributes for the response
-        response.setContentType(mimeType);
-        response.setContentLength((int) downloadFile.length());
-
-        // set headers for the response
-        String headerKey = "Content-Disposition";
-        String headerValue = String.format("attachment; filename=\"%s\"",
-                downloadFile.getName());
-        response.setHeader(headerKey, headerValue);
-
-        // get output stream of the response
-        OutputStream outStream2 = response.getOutputStream();
-
-        byte[] buffer = new byte[BUFFER_SIZE];
-        int bytesRead = -1;
-
-        // write bytes read from the input stream into the output stream
-        while ((bytesRead = inputStream.read(buffer)) != -1) {
-            outStream2.write(buffer, 0, bytesRead);
-        }
-
-        inputStream.close();
-        outStream2.close();
-
     }
-
-
-
-
 
 }

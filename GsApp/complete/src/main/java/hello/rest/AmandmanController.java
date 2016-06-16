@@ -84,12 +84,12 @@ public class AmandmanController {
     @RequestMapping(value = "/getamandmantsforakt",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity getamandmantsforakt(@RequestParam("docID") String docID) {
+    public ResponseEntity getAmandmentsForAkt(@RequestParam("docID") String docID) {
         logger.info("Called REST for getting amandments refering to act with id: " + docID);
 
-        Akt a =aktManager.read(docID, false);
+        Akt akt = aktManager.read(docID, false);
         //System.out.print(amandmens.size());
-        ArrayList<Amandmani> amandmens = amandmanManager.getAllAmandmansForAkt(a);
+        ArrayList<Amandmani> amandmens = amandmanManager.getAllAmandmansForAkt(akt);
         System.out.print(amandmens.size());
         return new ResponseEntity(amandmens, HttpStatus.OK);
     }

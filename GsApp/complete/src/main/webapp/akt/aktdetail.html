@@ -1,12 +1,15 @@
-<div id="Akt" style="text-align: center" ng-bind-html="thisCanBeusedInsideNgBindHtml">
+<div id="Akt" ng-hide = "showPdf" style="text-align: center" ng-bind-html="thisCanBeusedInsideNgBindHtml">
 
 </div>
 
-<div style="text-align: center">
+<div style="text-align: center" ng-hide = "showPdf">
 
     <button type="submit"
             class="btn btn-info btn-sm" ng-click="download()">
         <span class="glyphicon glyphicon-blackboard"></span>&nbsp;<span>Preuzmi kao PDF</span>
     </button>
 
+</div>
+<div ng-show = "showPdf" style="width:100%;height:600px;">
+    <embed  ng-src="{{content}}" style="width:100%;height:600px" ></embed>
 </div>
