@@ -41,7 +41,7 @@
 						<xsl:value-of select="@Naziv"/><br></br>
 						Clan <xsl:value-of select="@RedniBroj"/>.<br></br>
 							<xsl:for-each select="gov:Stav">
-								<xsl:<xsl:value-of select="gov:Tekst"/><br></br><br></br>
+								<xsl:value-of select="gov:Tekst"/><br></br><br></br>
 									<xsl:for-each select="gov:Tacka">
 										Tacka <xsl:value-of select="@RedniBroj"/>.<br></br>
 										<xsl:value-of select="gov:Sadrzaj"/><br></br>
