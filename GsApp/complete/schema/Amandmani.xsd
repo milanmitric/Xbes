@@ -14,8 +14,8 @@
                 <xs:element name="Akt" type="gov:TReferenca" minOccurs="1" maxOccurs="1"/>
                 <xs:element name="Amandman" type="gov:TAmandman" minOccurs="1" maxOccurs="unbounded"/>
                 <xs:element name="Potpisnici" type="gov:TPotpisnici" minOccurs="1" maxOccurs="1"/>
-                <xs:element name="UserName" type="xs:string"/>
-                <xs:element name="TimeStamp" type="xs:dateTime"/>
+                <xs:element name="UserName" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="TimeStamp" type="xs:dateTime" minOccurs="0" maxOccurs="1"/>
                 <xs:element ref="ds:Signature" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
         </xs:complexType>

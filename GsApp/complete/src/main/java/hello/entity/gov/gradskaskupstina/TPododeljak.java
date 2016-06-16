@@ -30,6 +30,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="Clan" type="{http://www.gradskaskupstina.gov/}TClan" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *       &lt;attribute name="RednoSlovo" use="required" type="{http://www.gradskaskupstina.gov/}TRednoSlovo" />
+ *       &lt;attribute name="Naziv" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -47,6 +48,8 @@ public class TPododeljak {
     protected List<TClan> clan;
     @XmlAttribute(name = "RednoSlovo", required = true)
     protected String rednoSlovo;
+    @XmlAttribute(name = "Naziv", required = true)
+    protected String naziv;
 
     /**
      * Gets the value of the clan property.
@@ -101,4 +104,27 @@ public class TPododeljak {
         this.rednoSlovo = value;
     }
 
+    /**
+     * Gets the value of the naziv property.
+     *
+     * @return
+     *     possible object is
+     *     {@link String }
+     *
+     */
+    public String getNaziv() {
+        return naziv;
+    }
+
+    /**
+     * Sets the value of the naziv property.
+     *
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *
+     */
+    public void setNaziv(String value) {
+        this.naziv = value;
+    }
 }
