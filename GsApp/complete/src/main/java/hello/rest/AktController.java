@@ -72,7 +72,6 @@ public class AktController {
         return new ResponseEntity(returnTwoLists, HttpStatus.OK);
     }
 
-
     @RequestMapping(value = "/generatepdf",
     method = RequestMethod.GET,
     produces = MediaType.APPLICATION_JSON_VALUE)
@@ -80,7 +79,6 @@ public class AktController {
 
         return new ResponseEntity(HttpStatus.OK);
     }
-
 
     @RequestMapping(value = "/getactbyid",
             method = RequestMethod.POST,
@@ -222,16 +220,13 @@ public class AktController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-
-
-
     /*prihvati akt nekako ili nemoj*/
     @PreAuthorize("hasRole('ROLE_PREDSEDNIK')")
     @RequestMapping(value = "/prihvatiovono",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity aktmadafaka(@RequestBody ArrayList<String> params){
-        logger.info("Called REST for PRIHVATIOVOONO");
+        logger.info("Called REST for accepting or rejecting acts and amandments");
 
         //*******************
         //TODO - tamo gde se akt prihvata konacno (nakon sto se primene amandmana ILI nakon sto se obiju amandmani
@@ -239,44 +234,36 @@ public class AktController {
         //       ozvati metodu iz aktmanagera - archiveIt(Akt a) koja ce taj akt poslati arhivi
         //*******************
 
-        //System.out.println("AMANDMANI: "+amandmants);
-        //uvek stigne lista, 0. u nizu je UVEK ID od AKTA, a nakon toga idu ID od amandmana
-        //String aktID=amandmants.get(0);
-
         User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         if(params.get(0).equals("ODBIJAJUSE")){
+                //params.get(0) - "ODBIJAJUSE"
+                //params.get(1) - "AKT ID"
+                //params.get(2:end) - "AMANDMAN ID"
             logger.info("All amandments are being rejected");
-            //TODO - SVI AMANDMAN ZA AKT SE ODBIJAJU
-            //Akt akt = aktManager.read(true,params.get(1));
-            //aktManager.
             for (int i = 2; i < params.size();i++){
                 amandmanManager.deleteAmandman(params.get(i));
             }
-            //AKT ID: amandmants.get(1) //AKT JE PRIHVACEN U NACELU VEC
-            //AMANDMANI ID get(2+n) n=0,1,2...Size
-        } else
-        if(params.get(0).equals("AKTSEODBIJA")){
+        } else if(params.get(0).equals("AKTSEODBIJA")){
+                //params.get(0) - "AKTSEODBIJA"
+                //params.get(1) - "AKT ID"
+                //params.get(2:end) - "AMANDMAN ID"
             logger.info("Act is being rejected");
-            //TODO - AKT SE ODBIJA
             ArrayList<Amandmani> amandmani = amandmanManager.getAllAmandmansForAkt(aktManager.read(params.get(0),false));
             aktManager.deleteAkt(params.get(0));
             for (Amandmani amandman : amandmani){
                 amandmanManager.deleteAmandman(amandman.getDocumentId());
             }
-            //AKT ID: amandmants.get(1)
-            //AMANDMANI ID get(2+n) n=0,1,2...Size
         }else {
             if (params.size() == 1) {
+                //params.get(0) - AKT ID
                 logger.info("Act is accepted in principle");
                 Akt akt = aktManager.read(params.get(0), false);
                 aktManager.proposeAkt(akt,user);
-                //TODO - AKT SE PRIHVATA SE U NACELU - KOJI AKT?
-                //AKT ID : amandmants.get(0)
             } else {
+                //params.get(0) - AKT ID
+                //params.get(1:end) - "AMANDMAN ID"
                 logger.info("Amandments are being accepted");
-                //AKT ID : amandmants.get(0) //AKT JE PRIHVACEN U NACELU VEC
-                //1. , 2. , 3. ... ID od AMANDMANA
                 ArrayList<Amandmani> amandmani = new ArrayList<>();
                 for(int i = 1 ; i<params.size() ; i++) {
                     Amandmani amandman = amandmanManager.read(params.get(i), false);
@@ -290,9 +277,6 @@ public class AktController {
 
         return new ResponseEntity("",HttpStatus.OK);
     }
-
-
-
 
     //TODO - crap - not working
     @RequestMapping(value="/download",
@@ -448,11 +432,6 @@ public class AktController {
 
         inputStream.close();
         outStream2.close();
-
     }
-
-
-
-
 
 }

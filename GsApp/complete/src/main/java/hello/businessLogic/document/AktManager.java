@@ -97,13 +97,14 @@ public class AktManager extends BeanManager<Akt> {
         Certificate cert = keyStoreManager.readCertificate(user.getUsername(),user.getPassword().toCharArray());
         if (crlVerifier.isRevoked(cert)){
             logger.info("Certificate is revoked for user " + user.getUsername()+", can't propose.");
+            //TODO: Da li treba da se izadje iz metode ako je revoked?
         }
         if (!validateBeanBySchema(akt)) {
-            logger.info("[AktManager] ERROR: Akt is not valid!");
+            logger.info("ERROR: Akt is not valid!");
             return null;
         }
         String ret = null;
-        DocumentUriTemplate template = xmlManager.newDocumentUriTemplate("xml");
+        DocumentUriTemplate template = xmlManager.newDocumentUriTemplate("xml"); //TODO: DocumentUriTemplate is never used ?
         try {
             ret = this.write(akt, MarkLogicStrings.AKTOVI_PREDLOZEN_COL_ID).getUri();
             akt.setDocumentId(ret);
@@ -120,7 +121,7 @@ public class AktManager extends BeanManager<Akt> {
     }
 
     /**
-     * Approves an document.
+     * Approves an document. //TODO: IN PRINCIPLE?
      * @param akt Bean to be approved.
      * @param user User to verify ceritificate.
      * @return Generated URI. <code>NULL</code> if not successful.
@@ -131,6 +132,7 @@ public class AktManager extends BeanManager<Akt> {
         Certificate cert = keyStoreManager.readCertificate(user.getUsername(),user.getPassword().toCharArray());
         if (crlVerifier.isRevoked(cert)){
             logger.info("Certificate is revoked for user " + user.getUsername()+", can't propose.");
+            //TODO: Da li treba da se izadje iz metode ako je revoked?
         }
 
         if (!validateBeanBySchema(akt)){
@@ -140,7 +142,7 @@ public class AktManager extends BeanManager<Akt> {
         String ret = null;
         String docId = akt.getDocumentId();
         try {
-            if (docId == null ||docId.isEmpty()){
+            if (docId == null || docId.isEmpty()){
                 throw new Exception();
             }
             if (!this.deleteDocument(docId)) {
@@ -273,6 +275,7 @@ public class AktManager extends BeanManager<Akt> {
      * @return Indicator of success.
      */
     public boolean applyAmendments(ArrayList<Amandmani> listaAmandmana, Akt akt, User user){
+        //TODO: Da li treba proveravati sertifikat (CRL) i ovde?
         boolean ret = false;
         try{
             akt.setSignature(null);
