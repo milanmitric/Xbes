@@ -61,33 +61,36 @@ public class ArchiveController {
     /*AND APP no1 WILL SEND DATA TO APP no2*/
     /*URL&PORT IS SPECIFIED IN AKTMANAGER.class*/
 
-
     @RequestMapping(value = "/testx",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity testx(@RequestBody Document encDoc) {
 
-
-        /*SAVE AS XML*/
+        System.out.println("SAVING TO ARCHIVE");
         String tmp="archived.xml";
-        encryptKEK.saveDocument(encDoc, tmp);
 
-        /*LOAD THAT ^ XML AND DECTYPT IT*/
-        Document doc = decryptKEK.loadDocument(tmp);
+        /*[TEST] SAVE TO FILE TO SEE ENCRYPTED DOC THAT CAME TO THIS REST*/
+        //encryptKEK.saveDocument(encDoc, tmp);
+        /*[TEST] LOAD THAT ^ XML AND DECTYPT IT*/
+        //Document doc = decryptKEK.loadDocument(tmp);
+
         //ucitava se privatni kljuc
         PrivateKey pk = keyStoreManager.getRootPrivateKey();
         //dekriptuje se dokument
         System.out.println("Decrypting....");
-        doc = decryptKEK.decrypt(doc, pk);
-        //snima se dokument
-        decryptKEK.saveDocument(doc, "OUTPUT.xml");
+        encDoc = decryptKEK.decrypt(encDoc, pk);
+        //[TEST] SAVE ENCRYPTED DOC
+        //decryptKEK.saveDocument(encDoc, "OUTPUT.xml");
         /*SAVE TO DB*/
-        InputStream is=aktManager.convertDocumentToInputStream(doc);
-        aktManager.write(is, "argTEST"+System.nanoTime(), "arhTEST", false, null);
-
+        InputStream is=aktManager.convertDocumentToInputStream(encDoc);
+        aktManager.write(is, MarkLogicStrings.ARCHIVE_PREFIX+System.nanoTime(), MarkLogicStrings.ARCHIVE_COL_ID, false, null);
+        System.out.println("WRITING TO DATABASE...");
+        System.out.println("DONE.");
 
         return new ResponseEntity("test_0:success", HttpStatus.OK);
     }
+
+
 
 
 

@@ -1,0 +1,80 @@
+<div >
+
+
+
+    <!-- LIST OF MY PROJECTS -->
+
+    <h3>
+        Rezultati pretrage: <b>{{poOvome}}</b>
+    </h3>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Predlozeni akti</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="(key, value) in collectionPredlozeni">
+                <td>
+                    <table class="table table-striped">
+                            <thead>
+                                <th>{{key}}</th>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="model in value track by $index">
+                                    <td>{{model}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                     </table >
+                </td>
+            <td>
+                <button type="submit"
+                        ui-sref="aktdetail({id:key})"
+                        class="btn btn-info btn-sm">
+                    <span class="glyphicon glyphicon-blackboard"></span>&nbsp;<span>Pogledaj akt</span>
+                </button>
+            </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Usvojeni akti</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="(key, value) in collectionUsvojeni">
+                <td><th>{{key}}</th>
+                    <tr ng-repeat="model in value track by $index">
+                        <td>model</td>
+                    </tr>
+                </td>
+                <td>
+                    <button type="submit"
+                            ui-sref="aktdetail({id:key})"
+                            class="btn btn-info btn-sm">
+                        <span class="glyphicon glyphicon-blackboard"></span>&nbsp;<span>Pogledaj akt</span>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+
+
+</div>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Users xmlns="http://www.gradskaskupstina.gov/"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.gradskaskupstina.gov/ file:/C:/Users/FS-LB/Desktop/XMLProjekat/DJIT/Xbes/GsApp/complete/schema/Users.xsd">
+	<User>
+		<Username>rusija</Username>
+		<Password>rusija</Password>
+		<Ime>Radomir</Ime>
+		<Prezime>Marinković</Prezime>
+		<Salt>X1eBX3DNI6M=</Salt>
+		<Role>ROLE_PREDSEDNIK</Role>
+	</User>
+	<User>
+		<Username>mitra</Username>
+		<Password>mitra</Password>
+		<Ime>Milan</Ime>
+		<Prezime>Mitrić</Prezime>
+		<Salt>X1eBX3DNI6M=</Salt>
+		<Role>ROLE_ODBORNIK</Role>
+	</User>
+	<User>
+		<Username>roki</Username>
+		<Password>roki</Password>
+		<Ime>Nebojša</Ime>
+		<Prezime>Popović</Prezime>
+		<Salt>X1eBX3DNI6M=</Salt>
+		<Role>ROLE_GRADJANIN</Role>
+	</User>
+	<User>
+		<Username>cho</Username>
+		<Password>cho</Password>
+		<Ime>Branislav</Ime>
+		<Prezime>Čogić</Prezime>
+		<Salt>X1eBX3DNI6M=</Salt>
+		<Role>ROLE_GRADJANIN</Role>
+	</User>
+</Users>

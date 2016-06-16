@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Akt xmlns="http://www.gradskaskupstina.gov/"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.gradskaskupstina.gov/ file:/C:/Users/FS-LB/Desktop/XMLProjekat/DJIT/Xbes/GsApp/complete/schema/Akt.xsd">
+    <Naslov>Akt</Naslov>
+    <Glava RedniBroj="1" Naziv="Glava1">
+        <Odeljak RedniBroj="1" Naziv="Odeljak1">
+            <Pododeljak RednoSlovo="a">
+                <Clan RedniBroj="1">
+                    <Stav RedniBroj="1">
+                        <Tekst>Tekst clana 1 stava 1</Tekst>
+                    </Stav>
+                    <Stav RedniBroj="2">
+                        <Tekst>Tekst clana 1 stava 2</Tekst>
+                    </Stav>
+                    <Stav RedniBroj="3">
+                        <Tekst>Tekst clana 1 stava 3</Tekst>
+                    </Stav>
+                </Clan>
+                <Clan RedniBroj="2">
+                    <Stav RedniBroj="1">
+                        <Tekst>Tekst clana 2 stava 1</Tekst>
+                    </Stav>
+                    <Stav RedniBroj="2">
+                        <Tekst>Tekst clana 2 stava 2</Tekst>
+                    </Stav>
+                    <Stav RedniBroj="3">
+                        <Tekst>Tekst clana 2 stava 3</Tekst>
+                    </Stav>
+                </Clan>
+            </Pododeljak>
+            <Pododeljak RednoSlovo="b">
+                <Clan RedniBroj="3">
+                    <Stav RedniBroj="1">
+                        <Tekst>Tekst clana 3 stava 1</Tekst>
+                    </Stav>
+                    <Stav RedniBroj="2">
+                        <Tekst>Tekst clana 3 stava 2</Tekst>
+                    </Stav>
+                    <Stav RedniBroj="3">
+                        <Tekst>Tekst clana 3 stava 3</Tekst>
+                    </Stav>
+                </Clan>
+            </Pododeljak>
+        </Odeljak>
+        <Odeljak RedniBroj="2" Naziv="Odeljak2">
+            <Clan RedniBroj="4">
+                <Stav RedniBroj="1">
+                    <Tekst>Tekst CLANA 4 STAVA 1</Tekst>
+                    <Tacka RedniBroj="1">
+                        <Sadrzaj>Tekst CLANA 4 STAVA 1 TACKE 1</Sadrzaj>
+                        <Podtacka RedniBroj="1">Tekst CLANA 4 STAVA 1 TACKE 1 PODTACKE 1</Podtacka>
+                        <Podtacka RedniBroj="2">Tekst CLANA 4 STAVA 1 TACKE 1 PODTACKE 2</Podtacka>
+                    </Tacka>
+                    <Tacka RedniBroj="2">
+                        <Sadrzaj>Tekst CLANA 4 STAVA 1 TACKE 2</Sadrzaj>
+                        <Podtacka RedniBroj="1">Tekst CLANA 4 STAVA 1 TACKE 2 PODTACKE 1</Podtacka>
+                        <Podtacka RedniBroj="2">Tekst CLANA 4 STAVA 1 TACKE 2 PODTACKE 2</Podtacka>
+                    </Tacka>
+                </Stav>
+            </Clan>
+            <Clan RedniBroj="5">
+                <Stav RedniBroj="1">
+                    <Tekst>Tekst CLANA 5 STAVA 1</Tekst>
+                </Stav>
+            </Clan>
+        </Odeljak>
+    </Glava>
+    <Glava RedniBroj="2" Naziv="Glava2">
+        <Clan RedniBroj="6">
+            <Stav RedniBroj="1">
+                <Tekst>Tekst CLANA 6 STAVA 1</Tekst>
+            </Stav>
+            <Stav RedniBroj="2">
+                <Tekst>Tekst CLANA 6 STAVA 2</Tekst>
+            </Stav>
+        </Clan>
+        <Clan RedniBroj="7">
+            <Stav RedniBroj="1">
+                <Tekst>Tekst CLANA 7 STAVA 1</Tekst>
+            </Stav>
+            <Stav RedniBroj="2">
+                <Tekst>Tekst CLANA 7 STAVA 2</Tekst>
+            </Stav>
+        </Clan>
+    </Glava>
+    <ZavrsniDeo>
+        <Organ>Organ0</Organ>
+        <Broj>Broj0</Broj>
+        <Datum>Datum0</Datum>
+        <Potpisnik>
+            <Ime>Ime0</Ime>
+            <Prezime>Prezime0</Prezime>
+        </Potpisnik>
+    </ZavrsniDeo>
+    <UserName>b</UserName>
+    <TimeStamp>2002-05-30T09:00:00</TimeStamp>
+</Akt>

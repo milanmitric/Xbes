@@ -1,0 +1,31 @@
+{
+  "name": "webapp",
+  "authors": [
+    "aloha <radomir.aloha@gmail.com>"
+  ],
+  "dependencies": {
+    "angular-aria": "1.4.8",
+    "angular-bootstrap": "0.14.3",
+    "angular-cache-buster": "0.4.3",
+    "angular-cookies": "1.4.8",
+    "angular-loading-bar": "0.8.0",
+    "angular-local-storage": "0.2.3",
+    "angular-mocks": "1.4.8",
+    "angular-resource": "1.4.8",
+    "angular-sanitize": "1.4.8",
+    "angular-ui-router": "0.2.15",
+    "bootstrap": "3.3.5",
+    "angular-modal-service": "^0.9.10"
+  },
+  "description": "najjaci",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

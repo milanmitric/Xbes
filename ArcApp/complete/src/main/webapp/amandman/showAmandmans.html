@@ -1,0 +1,22 @@
+<div>
+    <h3>Amandmani
+    </h3>
+
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Naslov</th>
+                <th>Doc Id</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="model in collection">
+                <td>Amandman na akt: {{model.akt.value}}</td>
+                <td>{{model.documentId}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
