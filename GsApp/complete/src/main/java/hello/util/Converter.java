@@ -44,6 +44,42 @@ public class Converter<T> {
         }
     }
 
+
+
+    /**
+     * Converts JAXB bean to XML file on tmp location.
+     * @param bean  JAXB bean to be converted.
+     * @return Indicator of success.
+     */
+    public boolean convertToXml_withCustomName(T  bean, String fileName){
+        boolean ret = false;
+        File file = new File(fileName+".xml");
+        FileOutputStream fileOutputStream = null;
+        try {
+            fileOutputStream = new FileOutputStream(file);
+            JAXBContext jc = JAXBContext.newInstance("hello.entity.gov.gradskaskupstina");
+            Marshaller marshaller = jc.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+            marshaller.setProperty(Marshaller.JAXB_SCHEMA_LOCATION, "http://www.gradskaskupstina.gov/");
+            marshaller.marshal(bean,fileOutputStream);
+            fileOutputStream.close();
+            ret = true;
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        } finally {
+            return ret;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
     /**
      * Converts JAXB bean to XML file on tmp location.
      * @param bean  JAXB bean to be converted.

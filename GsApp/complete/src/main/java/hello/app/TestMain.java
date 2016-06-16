@@ -1,5 +1,6 @@
 package hello.app;
 
+import com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl;
 import hello.Application;
 import hello.businessLogic.core.BeanManager;
 import hello.businessLogic.core.ReadManager;
@@ -8,17 +9,18 @@ import hello.businessLogic.document.AktManager;
 import hello.businessLogic.document.AmandmanManager;
 import hello.entity.gov.gradskaskupstina.*;
 import hello.security.KeyStoreManager;
+import org.apache.fop.apps.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.xml.sax.SAXException;
+import org.apache.fop.apps.FOUserAgent;
+import org.apache.fop.apps.FopFactory;
 
-import javax.xml.transform.Source;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.*;
+import javax.xml.transform.sax.SAXResult;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.ArrayList;
 
 /**
@@ -30,7 +32,7 @@ public class TestMain {
 
     public static void main(String[] args) throws FileNotFoundException {
         try{
-            transform();
+            generatingPdf();
         } catch (Exception e){
 
         }
@@ -178,6 +180,87 @@ public class TestMain {
         ArrayList<Amandmani> lista = new ArrayList<>();
         lista.add(amandmani);
         manager.applyAmendments(lista,null,null);
+    }
+
+    public static  void generatingPdf(){
+        FopFactory fopFactory=null;
+        // Initialize FOP factory object
+        try {
+            fopFactory = FopFactory.newInstance(new File("fop.xconf"));
+        } catch (SAXException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        TransformerFactory transformerFactory = new TransformerFactoryImpl();
+        // Point to the XSL-FO file
+        File xsltFile = new File("Akt_fo.xsl");
+        // Create transformation source
+        StreamSource transformSource = new StreamSource(xsltFile);
+        // Initialize the transformation subject
+        StreamSource source = new StreamSource(new File("tmp.xml"));
+        // Initialize user agent needed for the transformation
+        FOUserAgent userAgent = fopFactory.newFOUserAgent();
+        // Create the output stream to store the results
+        ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+
+        // Initialize the XSL-FO transformer object
+        Transformer xslFoTransformer = null;
+        try {
+            xslFoTransformer = transformerFactory.newTransformer(transformSource);
+        } catch (TransformerConfigurationException e) {
+            e.printStackTrace();
+        }
+
+        // Construct FOP instance with desired output format
+        Fop fop = null;
+        try {
+            fop = fopFactory.newFop(MimeConstants.MIME_PDF, userAgent, outStream);
+        } catch (FOPException e) {
+            e.printStackTrace();
+        }
+
+        // Resulting SAX events
+        Result res = null;
+        try {
+            res = new SAXResult(fop.getDefaultHandler());
+        } catch (FOPException e) {
+            e.printStackTrace();
+        }
+
+        // Start XSLT transformation and FOP processing
+        try {
+            xslFoTransformer.transform(source, res);
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        }
+
+        // Generate PDF file
+        File pdfFile = new File("Akt.pdf");
+        OutputStream out = null;
+        try {
+            out = new BufferedOutputStream(new FileOutputStream(pdfFile));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            out.write(outStream.toByteArray());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            System.out.println("[INFO] File \"" + pdfFile.getCanonicalPath() + "\" generated successfully.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
     }
 }
 

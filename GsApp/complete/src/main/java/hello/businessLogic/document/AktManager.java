@@ -9,13 +9,17 @@ import hello.StringResources.TipIzmene;
 import hello.businessLogic.core.BeanManager;
 import hello.entity.gov.gradskaskupstina.*;
 import hello.security.EncryptKEK;
-import hello.security.KeyStoreManager;
 import hello.security.CRLVerifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.util.SerializationUtils;
+import org.springframework.web.client.RestTemplate;
 import org.w3c.dom.Document;
 
-import javax.crypto.SecretKey;
+import javax.xml.transform.stream.StreamResult;
+import java.io.*;
 import java.security.cert.Certificate;
 
 import java.util.ArrayList;
@@ -26,8 +30,12 @@ import java.util.HashMap;
  * Class that handles all file related operations.
  */
 public class AktManager extends BeanManager<Akt> {
-
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+
+    /********************************************************************/
+    private String  archive_app_api="http://localhost:9090/api/testx";
+    /********************************************************************/
 
 
     private CRLVerifier crlVerifier = new CRLVerifier();
@@ -96,7 +104,6 @@ public class AktManager extends BeanManager<Akt> {
         }
         return ret;
     }
-
 
     /**
      * Approves an document.
@@ -188,38 +195,24 @@ public class AktManager extends BeanManager<Akt> {
         for (int i = 0; i < matches.length; i++) {
             result = matches[i];
             ArrayList<String> listOfMatched = new ArrayList<>();
-
-
             locations = result.getMatchLocations();
 
-
             for (MatchLocation location : locations) {
-
-
                 String item = "";
                 for (MatchSnippet snippet : location.getSnippets()) {
                     text = snippet.getText().trim();
-
                     if (!text.equals("")) {
-
                         item +=snippet.isHighlighted() ? text.toUpperCase() : text;
-
                         item +=" ";
                     }
                 }
                 listOfMatched.add(item);
-
             }
-
-
-
             //  id, string u kom je mecovano
             returnMap.put(result.getUri(),listOfMatched);
-
-            }
+        }
 //            System.out.println("PRINT SNIPETA SA DOKUMENTIMA");
 //            System.out.println(returnMap);
-
             return returnMap;
     }
 
@@ -235,37 +228,25 @@ public class AktManager extends BeanManager<Akt> {
         for (int i = 0; i < matches.length; i++) {
             result = matches[i];
             ArrayList<String> listOfMatched = new ArrayList<>();
-
-
             locations = result.getMatchLocations();
-
-
             for (MatchLocation location : locations) {
                 String putanja = location.getPath();
                 String retSplit [] = putanja.split(":");
-
                 if(retSplit[retSplit.length-1].split("\\[")[0].equals(tag)) {
                     String item = "";
+
                     for (MatchSnippet snippet : location.getSnippets()) {
                         text = snippet.getText().trim();
-
                         if (!text.equals("")) {
-
                             item += snippet.isHighlighted() ? text.toUpperCase() : text;
-
                             item += " ";
                         }
                     }
                     listOfMatched.add(item);
                 }
-
             }
-
-
-
             //  id, string u kom je mecovano
             returnMap.put(result.getUri(),listOfMatched);
-
         }
 
         return returnMap;
@@ -286,8 +267,9 @@ public class AktManager extends BeanManager<Akt> {
             for (Amandmani amandmani: listaAmandmana){
                 for (TAmandman amandman : amandmani.getAmandman()){
                     String tmp = amandman.getSadrzaj();
-                    String query = generateXquery(amandman.getPredmetIzmene(),amandman.getTipIzmene().value(),amandman.getSadrzaj(), amandmani.getDocumentId());
+                    String query = generateXquery(amandman.getPredmetIzmene(), amandman.getTipIzmene().value(), amandman.getSadrzaj(), "usv"+akt.getDocumentId());
                     this.executeQuery(query);
+
                 }
             }
             Akt tmpAkt = read("usv" +akt.getDocumentId(),false);
@@ -313,8 +295,8 @@ public class AktManager extends BeanManager<Akt> {
         String rednoSlovoPododeljka = referenca.getRefPododeljak();
         String redniBrojPodtacke = referenca.getRefPodtacka();
 
-        builder.append("declare namespace a=\"http://www.gradskaskupstina.gov/\";");
-        builder.append("let $x := doc(\"" + docId + "\")");
+        builder.append("declare namespace a=\"http://www.gradskaskupstina.gov/\";\n");
+        builder.append("let $x := doc(\"" + docId + "\")\n");
         if (type.toUpperCase().equals(TipIzmene.BRISANJE)){
             builder.append("return xdmp:node-delete($x/a:Akt//a:Clan[@RedniBroj=\"" + redniBrojClana +"\"]");
             if(redniBrojStava != null)
@@ -379,7 +361,7 @@ public class AktManager extends BeanManager<Akt> {
             builder.append(tekst);
             builder.append(")");
         }
-
+        logger.info(builder.toString());
         return builder.toString();
     }
     // NE ZNAM DA LI SE KORISTI KOD MOG KOMITA JE BILA TU
@@ -493,6 +475,33 @@ public class AktManager extends BeanManager<Akt> {
         return doc;
     }
 
+
+    /**
+    * archiving act
+     * DO NOT CALL THIS IF AKT IS 'U NACELU'
+    *
+    * */
+    public void archiveIt(Akt a1){
+
+        Document doc = encryptDoc(a1);
+        EncryptKEK e=new EncryptKEK();
+        e.saveDocument(doc, "ENKRIPTOVAN_TEMP.xml");
+
+
+       /*take 01
+        MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+        map.add("bytes", doc);
+        map.add("docID", a1.getDocumentId());
+        RestTemplate rt2=new RestTemplate();
+        String s2 = rt2.postForObject(archive_app_api, map, String.class);
+        */
+
+        //take 02
+        RestTemplate rt2=new RestTemplate();
+        String s2 = rt2.postForObject(archive_app_api, doc, String.class);
+        System.out.println(s2);
+
+    }
 
 
 

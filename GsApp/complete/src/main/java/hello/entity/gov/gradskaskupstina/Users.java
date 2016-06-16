@@ -75,4 +75,11 @@ public class Users {
         return this.user;
     }
 
+    public User getUserByUsername(String username) {
+        for (User user: getUser()) {
+            if(user.getUsername().equals(username))
+                return user;
+        }
+        return null;
+    }
 }

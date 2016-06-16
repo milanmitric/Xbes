@@ -11,4 +11,24 @@ angular.module('xapp')
                 },function(response){
 
     });
+
+      $scope.download = function(id){
+        //alert(id);
+        var res = id.slice(0, id.length-4);
+                aktService.download(
+                        res,
+                        function(response){
+                              //console.log("Stigao odgovor sa servera!");
+
+                        },
+                        function(response){
+
+                        }
+                     );
+         }
+
+
+
+
+
     });

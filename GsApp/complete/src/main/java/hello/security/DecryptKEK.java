@@ -66,7 +66,7 @@ public class DecryptKEK {
 	/**
 	 * Kreira DOM od XML dokumenta
 	 */
-	private Document loadDocument(String file) {
+	public Document loadDocument(String file) {
 		try {
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			dbf.setNamespaceAware(true);
@@ -92,7 +92,7 @@ public class DecryptKEK {
 	/**
 	 * Snima DOM u XML fajl 
 	 */
-	private void saveDocument(Document doc, String fileName) {
+	public void saveDocument(Document doc, String fileName) {
 		try {
 			File outFile = new File(fileName);
 			FileOutputStream f = new FileOutputStream(outFile);
@@ -128,7 +128,7 @@ public class DecryptKEK {
 	 * Ucitava privatni kljuc is KS fajla
 	 * alias primer
 	 */
-	private PrivateKey readPrivateKey() {
+	public PrivateKey readPrivateKey() {
 		try {
 			//kreiramo instancu KeyStore
 			KeyStore ks = KeyStore.getInstance("JKS", "SUN");
@@ -170,7 +170,7 @@ public class DecryptKEK {
 	/**
 	 * Kriptuje sadrzaj prvog elementa odsek
 	 */
-	private Document decrypt(Document doc, PrivateKey privateKey) {
+	public Document decrypt(Document doc, PrivateKey privateKey) {
 		
 		try {
 			//cipher za dekritpovanje XML-a

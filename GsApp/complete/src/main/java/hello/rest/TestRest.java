@@ -6,7 +6,9 @@ import hello.entity.gov.gradskaskupstina.Akt;
 import hello.security.EncryptKEK;
 import hello.security.KeyStoreManager;
 import hello.util.SednicaManager;
+import org.apache.commons.io.IOUtils;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -14,19 +16,20 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.w3c.dom.Document;
 
 import javax.crypto.SecretKey;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.*;
 import java.security.cert.Certificate;
 import java.util.ArrayList;
+
+import static com.sun.jersey.core.util.ReaderWriter.BUFFER_SIZE;
 
 /**
  * Created by aloha on 24-May-16.
@@ -39,16 +42,98 @@ public class TestRest {
     private int count=0;
 
 
-    @Secured({"ROLE_REGULAR_USER","ROLE_ADMIN"})
-    @RequestMapping("/test0")
-    public String test0() {
-        /*test - to see if rest is working*/
-        SednicaManager sm = new SednicaManager();
-        sm.updateSednica(false);
-        count++;
-        System.out.println("COUNT:"+count);
-        return "<b>adsasdad</b>";
+
+    //do not touch!
+    @RequestMapping(value="/file0",
+            method=RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<InputStreamResource> downloadStuff()
+            throws IOException {
+        //String fullPath = stuffService.figureOutFileNameFor(stuffId);
+        File file = new File("opa.pdf");
+
+        HttpHeaders respHeaders = new HttpHeaders();
+       respHeaders.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        respHeaders.setContentLength(12345678);
+        respHeaders.setContentDispositionFormData("attachment", "opa.pdf");
+
+        InputStreamResource isr = new InputStreamResource(new FileInputStream(file));
+        return new ResponseEntity<InputStreamResource>(isr, respHeaders, HttpStatus.OK);
     }
+
+
+
+
+    @RequestMapping(value="/downloadLogFile/{id}")
+    public void getLogFile(HttpSession session, HttpServletResponse response, @PathVariable String id) throws Exception {
+        try {
+            String filePathToBeServed = "opa.pdf";//complete file name with path;
+                    File fileToDownload = new File(filePathToBeServed);
+            InputStream inputStream = new FileInputStream(fileToDownload);
+            response.setContentType("application/force-download");
+            response.setHeader("Content-Disposition", "attachment; filename="+"opa"+".pdf");
+            IOUtils.copy(inputStream, response.getOutputStream());
+            response.flushBuffer();
+            inputStream.close();
+        } catch (Exception e){
+            //LOGGER.debug("Request could not be completed at this moment. Please try again.");
+            e.printStackTrace();
+        }
+
+    }
+
+    //do not touch
+        @RequestMapping(value="/file/{id}",
+            method=RequestMethod.GET,
+        produces = "application/pdf")
+        public void doDownload(HttpServletRequest request,
+                               HttpServletResponse response
+                                ,@PathVariable String id
+                                    ) throws IOException {
+
+            // get absolute path of the application
+            ServletContext context = request.getServletContext();
+            //String appPath = context.getRealPath("");
+            //System.out.println("appPath = " + appPath);
+
+            // construct the complete absolute path of the file
+            String fullPath = "opa.pdf";
+            File downloadFile = new File(fullPath);
+            FileInputStream inputStream = new FileInputStream(downloadFile);
+
+            // get MIME type of the file
+            String mimeType = context.getMimeType(fullPath);
+            if (mimeType == null) {
+                // set to binary type if MIME mapping not found
+                mimeType = "application/octet-stream";
+            }
+            System.out.println("MIME type: " + mimeType);
+
+            // set content attributes for the response
+            response.setContentType(mimeType);
+            response.setContentLength((int) downloadFile.length());
+
+            // set headers for the response
+            String headerKey = "Content-Disposition";
+            String headerValue = String.format("attachment; filename=\"%s\"",
+                    downloadFile.getName());
+            response.setHeader(headerKey, headerValue);
+
+            // get output stream of the response
+            OutputStream outStream = response.getOutputStream();
+
+            byte[] buffer = new byte[BUFFER_SIZE];
+            int bytesRead = -1;
+
+            // write bytes read from the input stream into the output stream
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                outStream.write(buffer, 0, bytesRead);
+            }
+
+            inputStream.close();
+            outStream.close();
+
+        }
 
 
 

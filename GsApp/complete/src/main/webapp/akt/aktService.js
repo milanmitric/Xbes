@@ -73,7 +73,21 @@ angular.module('xapp')
                      			$http(req).then(onSuccess, onError);
 
 		},
-		update:function(onSuccess, onError){
+		download:function(id, onSuccess, onError){
+
+            var req = {
+                 method: 'GET',
+                 url: '/api/downloadLogFile/'+id
+                 //data : {docID:id}
+                 /*headers: {
+                 'Content-Type': 'application/pdf'
+                 }*/
+             }
+
+            $http(req).then(onSuccess, onError);
+
+
+
 
 		},
 		getActById:function(docID,onSuccess, onError){

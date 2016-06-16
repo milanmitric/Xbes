@@ -1,6 +1,6 @@
 package hello.app;
 
-import java.io.*;
+import java.io.File;
 import java.util.ArrayList;
 
 import hello.Application;
@@ -12,11 +12,9 @@ import hello.entity.gov.gradskaskupstina.Akt;
 import hello.entity.gov.gradskaskupstina.Amandmani;
 import hello.entity.gov.gradskaskupstina.User;
 import hello.entity.gov.gradskaskupstina.Users;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.client.RestTemplate;
-
 
 /**
  * Created by milan on 4.6.2016..
@@ -26,7 +24,7 @@ public class TestsMainCogara {
     private static final Logger logger = LoggerFactory.getLogger(Application.class);
     private static User user = null;
 
-   /* static {
+    static {
         user = new User();
         user.setIme("test");
         user.setPrezime("test");
@@ -35,7 +33,7 @@ public class TestsMainCogara {
         user.setPassword("A18MXitD+Dynjr+mbSnU8Zqir5M=");
         user.setSalt("xAxoT8uwGUA=");
         user.setRole("ROLE_PREDSEDNIK");
-    }*/
+    }
 
 
     static {
@@ -53,8 +51,6 @@ public class TestsMainCogara {
                 });
     }
 
-
-
     public static void main(String[] args){
         //proposeAkt();
        /* try {
@@ -70,7 +66,6 @@ public class TestsMainCogara {
         deleteAmandmans();
         applyAmandmans();
     }
-
 
     public static void deleteAllUsers(){
         UsersManager usersManager = new UsersManager();
@@ -122,6 +117,7 @@ public class TestsMainCogara {
         Amandmani amandman = amandmanManager.convertFromXml(xmlFile);
         amandmanManager.proposeAmandman(amandman, user);
     }
+
     public static void applyAmandmans() {
         AktManager aktManager = new AktManager();
         AmandmanManager amandmanManager = new AmandmanManager();

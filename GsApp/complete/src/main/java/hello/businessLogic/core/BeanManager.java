@@ -220,6 +220,16 @@ public class BeanManager <T>{
        return converter.convertToXml(bean);
     }
 
+
+    /**
+     * Converts JAXB bean to XML file on awesome, cool, supercool location.
+     * @return Indicator of success.
+     */
+    public boolean convertToXml_withCustomName(T  bean, String customFileName){
+        return converter.convertToXml_withCustomName(bean, customFileName);
+    }
+
+
     /**
      * Deletes a document from given URI.
      * @param docId URI of document to be deleted.
