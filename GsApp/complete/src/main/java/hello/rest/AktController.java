@@ -8,12 +8,14 @@ import hello.businessLogic.document.UsersManager;
 import hello.entity.gov.gradskaskupstina.Akt;
 import hello.entity.gov.gradskaskupstina.Amandmani;
 import hello.entity.gov.gradskaskupstina.User;
+import hello.security.Encrypt;
 import hello.security.EncryptKEK;
 import org.apache.fop.apps.*;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -53,6 +55,8 @@ import static com.sun.jersey.core.util.ReaderWriter.BUFFER_SIZE;
 @RequestMapping("/api")
 public class AktController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+
     private AktManager aktManager = new AktManager();
     private AmandmanManager amandmanManager = new AmandmanManager();
     private UsersManager usersManager = new UsersManager();
@@ -133,7 +137,33 @@ public class AktController {
     public ResponseEntity getMyAllAct() {
         logger.info("Called REST for getting act of a person (getmyallacts)");
 
-        return new ResponseEntity(HttpStatus.OK);
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User)auth.getPrincipal();
+
+
+        ArrayList<Akt> aktovi = aktManager.getAllFilesProposed();
+        System.out.println("ALL: "+aktovi.size());
+        ArrayList<Akt> aktovi2 = aktManager.getAllFilesApproved();
+        System.out.println("ALL: "+aktovi2.size());
+        for(int i=aktovi.size()-1; i>=0; i--){
+            if(!aktovi.get(i).getUserName().equals(user.getUsername())){
+                aktovi.remove(i);
+            }
+        }
+        for(int i=aktovi2.size()-1; i>=0; i--){
+            if(!aktovi2.get(i).getUserName().equals(user.getUsername())){
+                aktovi2.remove(i);
+            }
+        }
+        System.out.println("MY: "+aktovi.size());
+        System.out.println("MY: "+aktovi2.size());
+
+
+        HashMap<String,ArrayList<Akt>> returnTwoLists = new HashMap<String,ArrayList<Akt>>();
+        returnTwoLists.put("proposed",aktovi);
+        returnTwoLists.put("approved",aktovi2);
+        return new ResponseEntity(returnTwoLists, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/getproposed",

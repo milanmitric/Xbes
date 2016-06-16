@@ -23,7 +23,7 @@ public class MarkLogicStrings {
 
     // Archive prefix and collection ID
     public static String ARCHIVE_PREFIX = "ARCHIVED:";
-    public static String ARCHIVE_COL_ID = "archive";
+    public static String ARCHIVE_COL_ID = "archived";
 
     public static String AKTOVI_PRIMENJENI_COL_ID = "/primenjeniAktovi";
 
