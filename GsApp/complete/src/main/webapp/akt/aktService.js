@@ -95,6 +95,20 @@ angular.module('xapp')
 
                              			$http(req).then(onSuccess, onError);
 
-        		} /// NE TREBA ZAREZ OVDE???
-	    }
+        		} ,
+	    rejectAct:function(docID,onSuccess, onError){
+
+                		var req = {
+                                                    method: 'POST',
+                                                    url: '/api/opozoviakt',
+                                                    headers: {
+                                                        'Content-Type': 'application/x-www-form-urlencoded'
+                                                    },
+                                                    data:docID
+                                                }
+
+                                     			$http(req).then(onSuccess, onError);
+
+                		}
+        	}
 });

@@ -2,6 +2,7 @@ package hello.rest;
 
 import hello.businessLogic.document.AktManager;
 import hello.businessLogic.document.AmandmanManager;
+import hello.entity.gov.gradskaskupstina.Akt;
 import hello.entity.gov.gradskaskupstina.Amandmani;
 import hello.entity.gov.gradskaskupstina.User;
 import org.slf4j.Logger;
@@ -125,5 +126,31 @@ public class AmandmanController {
         ArrayList<Amandmani> amandmens = amandmanManager.getAllAmandmansForAkt(docID);
         System.out.print(amandmens.size());
         return new ResponseEntity(amandmens, HttpStatus.OK);
+    }
+    /*opozivanje amandmana*/
+
+    @PreAuthorize("hasRole('ROLE_ODBORNIK')")
+    @RequestMapping(value = "/opozoviamandman",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity opozoviPredlogAmandmana(@RequestBody String data){
+        logger.info("Called REST for accepting or rejecting  amandments");
+
+        User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        boolean mojAmandman  = false;
+        for(Amandmani amandman: amandmanManager.getMyAmandmentsProposed(user)){
+            if(amandman.getDocumentId().equals(data)){
+                mojAmandman=true;
+            }
+        }
+
+        if(mojAmandman){
+            if(amandmanManager.deleteAmandman(data)){
+                return new ResponseEntity(HttpStatus.OK);
+            }
+        }
+
+
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 }

@@ -17,8 +17,25 @@ angular.module('xapp')
 
 
      $scope.opozovi=function(aktID){
-        //TODO
-        alert(aktID);
+
+        aktService.rejectAct(aktID,function(response){
+                     var indexForDelete= -1;
+                                                    for(var i = 0;i<$scope.collection.length;i++){
+                                                        if($scope.collection[i].documentId===aktID){
+                                                            indexForDelete=i;
+                                                            break;
+                                                        }
+
+                                                    }
+                                                    if (indexForDelete > -1) {
+                                                        $scope.collection.splice(indexForDelete, 1);
+                                                    }
+
+        },function(response){
+
+
+        })
+
      }
 
 

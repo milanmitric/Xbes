@@ -55,6 +55,21 @@ angular.module('xapp')
 		},
 		update:function(onSuccess, onError){
 
-		}
+		},
+		rejectAmandman:function(docID,onSuccess, onError){
+
+                        		var req = {
+                                                            method: 'POST',
+                                                            url: '/api/opozoviamandman',
+                                                            headers: {
+                                                                'Content-Type': 'application/x-www-form-urlencoded'
+                                                            },
+                                                            data:docID
+                                                        }
+
+                                             			$http(req).then(onSuccess, onError);
+
+
+                	    }
 	}
 });
