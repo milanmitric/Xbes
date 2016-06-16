@@ -278,160 +278,23 @@ public class AktController {
         return new ResponseEntity("",HttpStatus.OK);
     }
 
-    //TODO - crap - not working
-    @RequestMapping(value="/download",
-            method=RequestMethod.POST,
-            produces = "application/pdf")
+
+    @RequestMapping(value="/download/{fileName}",
+            method=RequestMethod.POST)
     public void doDownload(HttpServletRequest request,
                            HttpServletResponse response,
-                           @RequestParam String docID) throws IOException {
-        logger.info("Called REST for downloading");
-
-        System.out.println("PATH VAR: "+docID);
-        //String[] parts=docID.split('.');
-        //docID=parts[0];
-        System.out.println("PATH VAR: "+docID);
-        // Get your file stream from wherever.
-        //InputStream myStream = new //someClass.returnFile();
-
-        Akt a=aktManager.read(docID, false);
-        aktManager.convertToXml_withCustomName(a, docID);
-
-        //------------------------------//
-        //SONARA CODE FOR xml_TO_PDF
-
-        FopFactory fopFactory=null;
-        // Initialize FOP factory object
-        try {
-            fopFactory = FopFactory.newInstance(new File("fop.xconf"));
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        TransformerFactory transformerFactory = new TransformerFactoryImpl();
-        // Point to the XSL-FO file
-        File xsltFile = new File("Akt_fo.xsl");
-        // Create transformation source
-        StreamSource transformSource = new StreamSource(xsltFile);
-        // Initialize the transformation subject
-        StreamSource source = new StreamSource(new File(docID+".xml"));
-        // Initialize user agent needed for the transformation
-        FOUserAgent userAgent = fopFactory.newFOUserAgent();
-        // Create the output stream to store the results
-        ByteArrayOutputStream outStream = new ByteArrayOutputStream();
-
-        // Initialize the XSL-FO transformer object
-        Transformer xslFoTransformer = null;
-        try {
-            xslFoTransformer = transformerFactory.newTransformer(transformSource);
-        } catch (TransformerConfigurationException e) {
-            e.printStackTrace();
-        }
-
-        // Construct FOP instance with desired output format
-        Fop fop = null;
-        try {
-            fop = fopFactory.newFop(MimeConstants.MIME_PDF, userAgent, outStream);
-        } catch (FOPException e) {
-            e.printStackTrace();
-        }
-
-        // Resulting SAX events
-        Result res = null;
-        try {
-            res = new SAXResult(fop.getDefaultHandler());
-        } catch (FOPException e) {
-            e.printStackTrace();
-        }
-
-        // Start XSLT transformation and FOP processing
-        try {
-            xslFoTransformer.transform(source, res);
-        } catch (TransformerException e) {
-            e.printStackTrace();
-        }
-
-        // Generate PDF file
-        File pdfFile = new File(docID+".pdf");
-        OutputStream out = null;
-        try {
-            out = new BufferedOutputStream(new FileOutputStream(pdfFile));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        try {
-            out.write(outStream.toByteArray());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            System.out.println("[INFO] File \"" + pdfFile.getCanonicalPath() + "\" generated successfully.");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            out.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-       //------my my my my my --------///
-
-        // Set the content type and attachment header.
-      /*   response.addHeader("Content-disposition", "attachment;filename="+docID+".pdf");
+                           @PathVariable String fileName) throws IOException {
+        logger.info("Called REST for downloading PDF file of act "+ fileName);
+        fileName += ".xml";
+        aktManager.generatePdf(fileName);
         response.setContentType("application/pdf");
-
-        // Copy the stream to the response's output stream.
-        //IOUtils.copy(myStream, response.getOutputStream());
-        try {
+        try (InputStream is = new FileInputStream(new File("Akt.pdf"))){
+            org.apache.commons.io.IOUtils.copy(is, response.getOutputStream());
             response.flushBuffer();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
-
-        ServletContext context = request.getServletContext();
-        //String appPath = context.getRealPath("");
-        //System.out.println("appPath = " + appPath);
-
-        // construct the complete absolute path of the file
-        String fullPath = docID+".pdf";
-        File downloadFile = new File(fullPath);
-        FileInputStream inputStream = new FileInputStream(downloadFile);
-
-        // get MIME type of the file
-        String mimeType = context.getMimeType(fullPath);
-        if (mimeType == null) {
-            // set to binary type if MIME mapping not found
-            mimeType = "application/octet-stream";
+        } catch (IOException ex) {
+            logger.info("Error writing file to output stream. Filename was '{}'", fileName, ex);
+            throw new RuntimeException("IOError writing file to output stream");
         }
-        System.out.println("MIME type: " + mimeType);
-
-        // set content attributes for the response
-        response.setContentType(mimeType);
-        response.setContentLength((int) downloadFile.length());
-
-        // set headers for the response
-        String headerKey = "Content-Disposition";
-        String headerValue = String.format("attachment; filename=\"%s\"",
-                downloadFile.getName());
-        response.setHeader(headerKey, headerValue);
-
-        // get output stream of the response
-        OutputStream outStream2 = response.getOutputStream();
-
-        byte[] buffer = new byte[BUFFER_SIZE];
-        int bytesRead = -1;
-
-        // write bytes read from the input stream into the output stream
-        while ((bytesRead = inputStream.read(buffer)) != -1) {
-            outStream2.write(buffer, 0, bytesRead);
-        }
-
-        inputStream.close();
-        outStream2.close();
     }
 
 }

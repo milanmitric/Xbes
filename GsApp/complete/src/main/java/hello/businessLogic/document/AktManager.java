@@ -10,17 +10,25 @@ import hello.businessLogic.core.BeanManager;
 import hello.entity.gov.gradskaskupstina.*;
 import hello.security.EncryptKEK;
 import hello.security.CRLVerifier;
+import org.apache.fop.apps.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-import org.springframework.util.SerializationUtils;
 import org.springframework.web.client.RestTemplate;
 import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
 
-import javax.xml.transform.stream.StreamResult;
 import java.io.*;
 import java.security.cert.Certificate;
+
+
+import javax.xml.transform.*;
+import javax.xml.transform.sax.SAXResult;
+import javax.xml.transform.stream.StreamSource;
+
+import com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl;
+
+import org.apache.fop.apps.FopFactory;
+import org.xml.sax.SAXException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -520,7 +528,89 @@ public class AktManager extends BeanManager<Akt> {
 
     }
 
+    public void generatePdf(String docId){
+        //Preuzmi akt sa tim Id-om
+        Akt aktPdf = read(docId,false);
+        // Konvertuj u xml
+        convertToXml(aktPdf);
 
+        FopFactory fopFactory=null;
+        // Initialize FOP factory object
+        try {
+            fopFactory = FopFactory.newInstance(new File("fop.xconf"));
+        } catch (SAXException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        TransformerFactory transformerFactory = new TransformerFactoryImpl();
+        // Point to the XSL-FO file
+        File xsltFile = new File("Akt_fo.xsl");
+        // Create transformation source
+        StreamSource transformSource = new StreamSource(xsltFile);
+        // Initialize the transformation subject
+        StreamSource source = new StreamSource(new File("tmp.xml"));
+        // Initialize user agent needed for the transformation
+        FOUserAgent userAgent = fopFactory.newFOUserAgent();
+        // Create the output stream to store the results
+        ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+
+        // Initialize the XSL-FO transformer object
+        Transformer xslFoTransformer = null;
+        try {
+            xslFoTransformer = transformerFactory.newTransformer(transformSource);
+        } catch (TransformerConfigurationException e) {
+            e.printStackTrace();
+        }
+
+        // Construct FOP instance with desired output format
+        Fop fop = null;
+        try {
+            fop = fopFactory.newFop(MimeConstants.MIME_PDF, userAgent, outStream);
+        } catch (FOPException e) {
+            e.printStackTrace();
+        }
+
+        // Resulting SAX events
+        Result res = null;
+        try {
+            res = new SAXResult(fop.getDefaultHandler());
+        } catch (FOPException e) {
+            e.printStackTrace();
+        }
+
+        // Start XSLT transformation and FOP processing
+        try {
+            xslFoTransformer.transform(source, res);
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        }
+
+        // Generate PDF file
+        File pdfFile = new File("Akt.pdf");
+        OutputStream out = null;
+        try {
+            out = new BufferedOutputStream(new FileOutputStream(pdfFile));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            out.write(outStream.toByteArray());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            System.out.println("[INFO] File \"" + pdfFile.getCanonicalPath() + "\" generated successfully.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 }
