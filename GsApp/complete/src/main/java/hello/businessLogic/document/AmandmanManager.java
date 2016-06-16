@@ -55,6 +55,26 @@ public class AmandmanManager extends BeanManager<Amandmani> {
     }
 
     /**
+     * Deletes all amendments for given document.
+     * @param akt Discarded document.
+     * @return Indicator of success.
+     */
+    public boolean discardAmendments(Akt akt){
+        boolean ret = false;
+        try{
+            StringBuilder query = new StringBuilder();
+            query.append("declare namespace a=\"http://www.gradskaskupstina.gov/\";");
+            query.append("for $x in fn:collection(\"/predlozeniAmandmani\")");
+            query.append("where $x//a:Akt/text()=\"" + akt.getDocumentId() + "\"");
+            query.append("return xdmp:document-delete(fn:document-uri($x))");
+            ret = true;
+        } catch (Exception e){
+            logger.info("[ERROR] Could not discarde amendments for document " + akt.getDocumentId());
+        }
+        return  ret;
+    }
+
+    /**
      * Proposes an document.
      * @param amandman Bean to be proposed.
      * @return Generated URI. <code>NULL</code> if not successful.

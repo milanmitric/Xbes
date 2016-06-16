@@ -48,7 +48,7 @@
 
 
       <ul class="nav navbar-nav navbar-right">
-        <li ng-show="USER.role=='ROLE_ANONYMOUS'"><a ui-sref="signup">Registracija</a></li>
+        <li ng-show="USER.role=='ROLE_ADMINISTRATOR'"><a ui-sref="signup">Registracija</a></li>
         <li ng-show="USER.role=='ROLE_ANONYMOUS'"><a ui-sref="signin">Prijava</a></li>
         <li ng-show="USER.role!='ROLE_ANONYMOUS'"><a ui-sref="signout" >Odjava</a></li>
         <li><a style="color:deepSkyBlue;" >Dobrodosli {{USER.ime}} {{USER.prezime}}!</a></li>

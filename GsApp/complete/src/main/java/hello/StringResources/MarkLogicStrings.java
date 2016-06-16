@@ -30,6 +30,9 @@ public class MarkLogicStrings {
     // Root CA alias and password.
     public static String ROOT_CERTIFICATE_ALIAS = "root";
     public static char[] ROOT_CERTIFICATE_PASSWORD = "roow".toCharArray();
+
+    public static String ARHIVA_CERITIFICATE_ALIAS = "arhiva";
+    public static char[] ARHIVA_CERTIFICATE_PASSWORD = "arhiva".toCharArray();
     /* tlalala */
 
 

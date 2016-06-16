@@ -15,10 +15,10 @@
 
     </br>
 
-        <h3>Svi predlozeni aktovi:</h3>
+        <h3 ng-show="sednicaState" >Svi predlozeni aktovi:</h3>
 
 
-        <div class="table-responsive">
+        <div ng-show="sednicaState" class="table-responsive">
             <table class="table table-striped">
                 <thead>
                 <tr>
@@ -29,7 +29,7 @@
                 <tbody>
                 <tr ng-repeat="model in akts track by $index">
                     <td>
-                        {{model.naslov}}
+                        <a ui-sref="aktdetail({id:model.documentId})">{{model.naslov}}</a>
                     </td>
                     <td>
                         {{model.documentId}}

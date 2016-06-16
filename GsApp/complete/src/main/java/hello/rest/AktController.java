@@ -28,7 +28,6 @@ import org.springframework.web.client.RestTemplate;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
-import javax.print.attribute.standard.Media;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -156,8 +155,10 @@ public class AktController {
     public ResponseEntity getmyproposed() {
         logger.info("Called REST for getting proposed acts of a user: (getmyproposed)");
 
-        //TODO
-        ArrayList<Akt> aktovi = aktManager.getAllFilesProposed();
+        //TODO - rijesen?
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User)auth.getPrincipal();
+        ArrayList<Akt> aktovi = aktManager.getMyFilesProposed(user);
         for(int i=aktovi.size()-1; i>=0; i--){
 
             //if(aktovi.get(i).get)
@@ -242,34 +243,47 @@ public class AktController {
         //uvek stigne lista, 0. u nizu je UVEK ID od AKTA, a nakon toga idu ID od amandmana
         //String aktID=amandmants.get(0);
 
+        User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
         if(params.get(0).equals("ODBIJAJUSE")){
             logger.info("All amandments are being rejected");
             //TODO - SVI AMANDMAN ZA AKT SE ODBIJAJU
+            //Akt akt = aktManager.read(true,params.get(1));
+            //aktManager.
+            for (int i = 2; i < params.size();i++){
+                amandmanManager.deleteAmandman(params.get(i));
+            }
             //AKT ID: amandmants.get(1) //AKT JE PRIHVACEN U NACELU VEC
             //AMANDMANI ID get(2+n) n=0,1,2...Size
         } else
         if(params.get(0).equals("AKTSEODBIJA")){
             logger.info("Act is being rejected");
             //TODO - AKT SE ODBIJA
+            ArrayList<Amandmani> amandmani = amandmanManager.getAllAmandmansForAkt(aktManager.read(params.get(0),false));
+            aktManager.deleteAkt(params.get(0));
+            for (Amandmani amandman : amandmani){
+                amandmanManager.deleteAmandman(amandman.getDocumentId());
+            }
             //AKT ID: amandmants.get(1)
             //AMANDMANI ID get(2+n) n=0,1,2...Size
         }else {
             if (params.size() == 1) {
                 logger.info("Act is accepted in principle");
-                //TODO - AKT SE PRIHVATA SE U NACELU
+                Akt akt = aktManager.read(params.get(0), false);
+                aktManager.proposeAkt(akt,user);
+                //TODO - AKT SE PRIHVATA SE U NACELU - KOJI AKT?
                 //AKT ID : amandmants.get(0)
             } else {
                 logger.info("Amandments are being accepted");
-                //TODO - USVAJAJU SE AMNDMANI NA AKT
                 //AKT ID : amandmants.get(0) //AKT JE PRIHVACEN U NACELU VEC
                 //1. , 2. , 3. ... ID od AMANDMANA
                 ArrayList<Amandmani> amandmani = new ArrayList<>();
                 for(int i = 1 ; i<params.size() ; i++) {
                     Amandmani amandman = amandmanManager.read(params.get(i), false);
+                    amandmanManager.proposeAmandman(amandman,user);
                     amandmani.add(amandman);
                 }
                 Akt akt = aktManager.read(params.get(0), false);
-                User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
                 aktManager.applyAmendments(amandmani, akt, user);
             }
         }
