@@ -23,6 +23,8 @@
                     </button>
                 </td>
 
+
+
               <!--  <td>
                 <button type="submit"
                         class="btn btn-info btn-sm" ng-click="download(model.documentId)">
@@ -60,6 +62,21 @@
                         <span class="glyphicon glyphicon-blackboard"></span>&nbsp;<span>Otvori akt</span>
                     </button>
                 </td>
+
+
+                <td>
+                    <button type="submit"
+                            ui-sref="aktdetail({id:'usv'+model.documentId})"
+                            class="btn btn-info btn-sm">
+                        <span class="glyphicon glyphicon-blackboard"></span>&nbsp;<span>Otvori akt (s primenjenim amandmanima)</span>
+                    </button>
+                </td>
+
+
+
+
+
+
             </tr>
             </tbody>
         </table>

@@ -1,9 +1,6 @@
 <div >
 
 
-
-    <!-- LIST OF MY PROJECTS -->
-
     <h3>
         Rezultati pretrage: <b>{{poOvome}}</b>
     </h3>
@@ -67,6 +64,20 @@
                         <span class="glyphicon glyphicon-blackboard"></span>&nbsp;<span>Pogledaj akt</span>
                     </button>
                 </td>
+
+            <td>
+                <button type="submit"
+                        ui-sref="aktdetail({id:'usv'+key})"
+                        class="btn btn-info btn-sm">
+                    <span class="glyphicon glyphicon-blackboard"></span>&nbsp;<span>Otvori akt (s primenjenim amandmanima)</span>
+                </button>
+            </td>
+
+
+
+
+
+
             </tr>
             </tbody>
         </table>

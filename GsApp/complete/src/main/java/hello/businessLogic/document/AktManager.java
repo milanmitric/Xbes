@@ -38,14 +38,16 @@ public class AktManager extends BeanManager<Akt> {
 
 
     /********************************************************************/
-    private String  archive_app_api="http://localhost:9090/api/testx";
+    private String archive_app_api = "http://localhost:9090/api/testx";
     /********************************************************************/
 
+
     private CRLVerifier crlVerifier = new CRLVerifier();
+
     /**
      * Initializes a new intance of AktManager.
      */
-    public AktManager(){
+    public AktManager() {
         super();
     }
 
@@ -66,7 +68,7 @@ public class AktManager extends BeanManager<Akt> {
      * Return all files that are approved from database.
      * @return List of files in database. <code>NULL</code> if not successful.
      */
-    public ArrayList<Akt> getAllFilesApproved(){
+    public ArrayList<Akt> getAllFilesApproved() {
         StringBuilder query = new StringBuilder();
         query.append("fn:collection(\"");
         query.append(MarkLogicStrings.AKTOVI_USVOJENI_COL_ID);
@@ -79,7 +81,7 @@ public class AktManager extends BeanManager<Akt> {
      * @param user Current session user.
      * @return List of proposed files.
      */
-    public ArrayList<Akt> getMyFilesProposed(User user){
+    public ArrayList<Akt> getMyFilesProposed(User user) {
         StringBuilder query = new StringBuilder();
         query.append("declare namespace a=\"http://www.gradskaskupstina.gov/\";");
         query.append("for $x in fn:collection(\"/predlozeniAktovi\")");
@@ -97,10 +99,9 @@ public class AktManager extends BeanManager<Akt> {
     public String proposeAkt(Akt akt, User user) {
         logger.info("User " + user + " tries to propose Akt " +akt.getDocumentId());
         // Check if users' certificate is revoked
-        Certificate cert = keyStoreManager.readCertificate(user.getUsername(),user.getPassword().toCharArray());
-
-        if (crlVerifier.isRevoked(cert)){
-            logger.info("Certificate is revoked for user " + user.getUsername()+", can't propose.");
+        Certificate cert = keyStoreManager.readCertificate(user.getUsername(), user.getPassword().toCharArray());
+        if (crlVerifier.isRevoked(cert)) {
+            logger.info("Certificate is revoked for user " + user.getUsername() + ", can't propose.");
             return null;
             //TODO: Da li treba da se izadje iz metode ako je revoked?
         }
@@ -118,8 +119,6 @@ public class AktManager extends BeanManager<Akt> {
             ret = this.write(akt, MarkLogicStrings.AKTOVI_PREDLOZEN_COL_ID).getUri();
             akt.setDocumentId(ret);
             akt.setUserName(user.getUsername());
-            // TODO CHECK THIS
-
             GregorianCalendar c = new GregorianCalendar();
             c.setTime(new Date());
             XMLGregorianCalendar date2 = DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
@@ -138,17 +137,18 @@ public class AktManager extends BeanManager<Akt> {
 
     /**
      * Approves an document. //TODO: IN PRINCIPLE?
-     * @param akt Bean to be approved.
+     *
+     * @param akt  Bean to be approved.
      * @param user User to verify ceritificate.
      * @return Generated URI. <code>NULL</code> if not successful.
      */
-    public String approveAkt(Akt akt,User user){
+    public String approveAkt(Akt akt, User user) {
 
         logger.info("User " + user + " tries to approve Akt " +akt.getDocumentId());
         // Check if users' certificate is revoked
-        Certificate cert = keyStoreManager.readCertificate(user.getUsername(),user.getPassword().toCharArray());
-        if (crlVerifier.isRevoked(cert)){
-            logger.info("Certificate is revoked for user " + user.getUsername()+", can't propose.");
+        Certificate cert = keyStoreManager.readCertificate(user.getUsername(), user.getPassword().toCharArray());
+        if (crlVerifier.isRevoked(cert)) {
+            logger.info("Certificate is revoked for user " + user.getUsername() + ", can't propose.");
             //TODO: Da li treba da se izadje iz metode ako je revoked?
         }
 
@@ -163,11 +163,11 @@ public class AktManager extends BeanManager<Akt> {
         String ret = null;
         String docId = akt.getDocumentId();
         try {
-            if (docId == null || docId.isEmpty()){
+            if (docId == null || docId.isEmpty()) {
                 throw new Exception();
             }
             if (!this.deleteDocument(docId)) {
-                throw  new Exception();
+                throw new Exception();
             }
         } catch (Exception e) {
             logger.info("[ERROR] Could not delete document[" + docId + "] from proposed!");
@@ -175,9 +175,9 @@ public class AktManager extends BeanManager<Akt> {
         try {
             // XML DOCUMENT SHOULD NOT BE SIGNED!
             boolean shouldSign = false;
-            if (!write(akt,akt.getDocumentId(),MarkLogicStrings.AKTOVI_USVOJENI_COL_ID,shouldSign,null)){
+            if (!write(akt, akt.getDocumentId(), MarkLogicStrings.AKTOVI_USVOJENI_COL_ID, shouldSign, null)) {
                 ret = null;
-                throw  new Exception();
+                throw new Exception();
             } else {
                 logger.info("User " + user + " successfully approved Akt " +akt.getDocumentId());
                 ret = akt.getDocumentId();
@@ -194,14 +194,13 @@ public class AktManager extends BeanManager<Akt> {
      * @param docId URI of act to be deleted.
      * @return Indicator of success.
      */
-    public boolean deleteAkt(String docId){
+    public boolean deleteAkt(String docId) {
         boolean ret = false;
-
 
         try {
             deleteDocument(docId);
             ret = true;
-        } catch (Exception e){
+        } catch (Exception e) {
             logger.info("[ERROR] Could not delete document[" + docId + "]!");
         }
         return ret;
@@ -212,24 +211,24 @@ public class AktManager extends BeanManager<Akt> {
      * @param akt Akt to be validated.
      * @return Indicator of success.
      */
-    public boolean validateAkt(Akt akt){
+    public boolean validateAkt(Akt akt) {
         return validateBeanBySchema(akt);
     }
 
     /**
      * Return document with search results
      * @param parameterofSearch search parametar
-     * @param uriOfCollection id of collection
+     * @param uriOfCollection   id of collection
      * @return Document with search results
      */
-    public HashMap<String,ArrayList<String>> returnListOfDocumentsMatchedWithOneFieldSearch(String parameterofSearch, String uriOfCollection) {
+    public HashMap<String, ArrayList<String>> returnListOfDocumentsMatchedWithOneFieldSearch(String parameterofSearch, String uriOfCollection) {
         MatchDocumentSummary matches[] = customManager.searchByField(parameterofSearch, uriOfCollection);
 
         MatchDocumentSummary result;
         MatchLocation locations[];
         String text;
 
-        HashMap<String,ArrayList<String>> returnMap = new HashMap<>();
+        HashMap<String, ArrayList<String>> returnMap = new HashMap<>();
 
         for (int i = 0; i < matches.length; i++) {
             result = matches[i];
@@ -241,28 +240,28 @@ public class AktManager extends BeanManager<Akt> {
                 for (MatchSnippet snippet : location.getSnippets()) {
                     text = snippet.getText().trim();
                     if (!text.equals("")) {
-                        item +=snippet.isHighlighted() ? text.toUpperCase() : text;
-                        item +=" ";
+                        item += snippet.isHighlighted() ? text.toUpperCase() : text;
+                        item += " ";
                     }
                 }
                 listOfMatched.add(item);
             }
             //  id, string u kom je mecovano
-            returnMap.put(result.getUri(),listOfMatched);
+            returnMap.put(result.getUri(), listOfMatched);
         }
 //            System.out.println("PRINT SNIPETA SA DOKUMENTIMA");
 //            System.out.println(returnMap);
-            return returnMap;
+        return returnMap;
     }
 
-    public HashMap<String,ArrayList<String>> returnListOfDocumentsMatchedWithOneFieldSearchAndTag(String tag,String parameterofSearch, String uriOfCollection){
+    public HashMap<String, ArrayList<String>> returnListOfDocumentsMatchedWithOneFieldSearchAndTag(String tag, String parameterofSearch, String uriOfCollection) {
         MatchDocumentSummary matches[] = customManager.searchByField(parameterofSearch, uriOfCollection);
 
         MatchDocumentSummary result;
         MatchLocation locations[];
         String text;
 
-        HashMap<String,ArrayList<String>> returnMap = new HashMap<>();
+        HashMap<String, ArrayList<String>> returnMap = new HashMap<>();
 
         for (int i = 0; i < matches.length; i++) {
             result = matches[i];
@@ -270,8 +269,8 @@ public class AktManager extends BeanManager<Akt> {
             locations = result.getMatchLocations();
             for (MatchLocation location : locations) {
                 String putanja = location.getPath();
-                String retSplit [] = putanja.split(":");
-                if(retSplit[retSplit.length-1].split("\\[")[0].equals(tag)) {
+                String retSplit[] = putanja.split(":");
+                if (retSplit[retSplit.length - 1].split("\\[")[0].equals(tag)) {
                     String item = "";
 
                     for (MatchSnippet snippet : location.getSnippets()) {
@@ -285,7 +284,7 @@ public class AktManager extends BeanManager<Akt> {
                 }
             }
             //  id, string u kom je mecovano
-            returnMap.put(result.getUri(),listOfMatched);
+            returnMap.put(result.getUri(), listOfMatched);
         }
 
         return returnMap;
@@ -294,40 +293,39 @@ public class AktManager extends BeanManager<Akt> {
     /**
      * Applies amendments on document.
      * @param listaAmandmana List of amendments to be applied.
-     * @param akt Akt on whom the amendments need to be applied.
+     * @param akt            Akt on whom the amendments need to be applied.
      * @return Indicator of success.
      */
-    public boolean applyAmendments(ArrayList<Amandmani> listaAmandmana, Akt akt, User user){
+    public boolean applyAmendments(ArrayList<Amandmani> listaAmandmana, Akt akt, User user) {
         //TODO: Da li treba proveravati sertifikat (CRL) i ovde?
         boolean ret = false;
-        try{
-            if (listaAmandmana.size() > 0)
-            {
+        try {
+            if (listaAmandmana.size() > 0) {
                 akt.setSignature(null);
-                this.write(akt,"usv" +akt.getDocumentId(),MarkLogicStrings.AKTOVI_PRIMENJENI_COL_ID,false,null);
+                this.write(akt, "usv" + akt.getDocumentId(), MarkLogicStrings.AKTOVI_PRIMENJENI_COL_ID, false, null);
 
-                for (Amandmani amandmani: listaAmandmana){
-                    for (TAmandman amandman : amandmani.getAmandman()){
+                for (Amandmani amandmani : listaAmandmana) {
+                    for (TAmandman amandman : amandmani.getAmandman()) {
                         String tmp = amandman.getSadrzaj();
-                        String query = generateXquery(amandman.getPredmetIzmene(), amandman.getTipIzmene().value(), amandman.getSadrzaj(), "usv"+akt.getDocumentId());
+                        String query = generateXquery(amandman.getPredmetIzmene(), amandman.getTipIzmene().value(), amandman.getSadrzaj(), "usv" + akt.getDocumentId());
                         this.executeQuery(query);
 
                     }
                 }
-                Akt tmpAkt = read("usv" +akt.getDocumentId(),false);
-                tmpAkt.setDocumentId("usv" +akt.getDocumentId());
+                Akt tmpAkt = read("usv" + akt.getDocumentId(), false);
+                tmpAkt.setDocumentId("usv" + akt.getDocumentId());
 
-                write(tmpAkt,"usv" +akt.getDocumentId(),MarkLogicStrings.AKTOVI_PRIMENJENI_COL_ID,true,user);
+                write(tmpAkt, "usv" + akt.getDocumentId(), MarkLogicStrings.AKTOVI_PRIMENJENI_COL_ID, true, user);
             }
 
             ret = true;
-        } catch (Exception e){
+        } catch (Exception e) {
             logger.info("[ERROR] Could not apply amandemnts on document " + akt.getDocumentId());
         }
         return ret;
     }
 
-    public String generateXquery(TReferenca referenca, String type, String tekst, String docId){
+    public String generateXquery(TReferenca referenca, String type, String tekst, String docId) {
         String ret = null;
         StringBuilder builder = new StringBuilder();
 
@@ -341,21 +339,21 @@ public class AktManager extends BeanManager<Akt> {
 
         builder.append("declare namespace a=\"http://www.gradskaskupstina.gov/\";\n");
         builder.append("let $x := doc(\"" + docId + "\")\n");
-        if (type.toUpperCase().equals(TipIzmene.BRISANJE)){
-            builder.append("return xdmp:node-delete($x/a:Akt//a:Clan[@RedniBroj=\"" + redniBrojClana +"\"]");
-            if(redniBrojStava != null)
+        if (type.toUpperCase().equals(TipIzmene.BRISANJE)) {
+            builder.append("return xdmp:node-delete($x/a:Akt//a:Clan[@RedniBroj=\"" + redniBrojClana + "\"]");
+            if (redniBrojStava != null)
                 builder.append("/a:Stav[@RedniBroj = \"" + redniBrojStava + "\"]");
-            if(redniBrojTacke != null)
+            if (redniBrojTacke != null)
                 builder.append("/a:Tacka[@RedniBroj = \"" + redniBrojTacke + "\"]");
-            if(redniBrojPodtacke != null)
+            if (redniBrojPodtacke != null)
                 builder.append("/a:Podtacka[@RedniBroj = \"" + redniBrojPodtacke + "\"]");
             builder.append(")");
         } else if (type.toUpperCase().equals(TipIzmene.IZMENA)) {
-            builder.append("return xdmp:node-replace($x/a:Akt//a:Clan[@RedniBroj=\"" + redniBrojClana +"\"]");
+            builder.append("return xdmp:node-replace($x/a:Akt//a:Clan[@RedniBroj=\"" + redniBrojClana + "\"]");
             builder.append("/a:Stav[@RedniBroj = \"" + redniBrojStava + "\"]");
-            if(redniBrojTacke != null){
+            if (redniBrojTacke != null) {
                 builder.append("/a:Tacka[@RedniBroj = \"" + redniBrojTacke + "\"]");
-                if(redniBrojPodtacke != null){
+                if (redniBrojPodtacke != null) {
                     builder.append("/a:Podtacka[@RedniBroj = \"" + redniBrojPodtacke + "\"]/text()");
                 }
             }
@@ -427,8 +425,6 @@ public class AktManager extends BeanManager<Akt> {
         TSemiStruktuiraniTekst tekst = (TSemiStruktuiraniTekst)data.get(2);
 
         // DODAVANJE CLANA ZA SADA SAMO DIREKTNO U CLAN!
-
-
 
 
         int clanIndex = -1;
@@ -547,89 +543,106 @@ public class AktManager extends BeanManager<Akt> {
 
     }
 
-    public void generatePdf(String docId){
+    public boolean generatePdf(String docId) {
         //Preuzmi akt sa tim Id-om
-        Akt aktPdf = read(docId,false);
-        // Konvertuj u xml
-        convertToXml(aktPdf);
+        Akt aktPdf = read(docId, false);
 
-        FopFactory fopFactory=null;
-        // Initialize FOP factory object
-        try {
-            fopFactory = FopFactory.newInstance(new File("fop.xconf"));
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        TransformerFactory transformerFactory = new TransformerFactoryImpl();
-        // Point to the XSL-FO file
-        File xsltFile = new File("Akt_fo.xsl");
-        // Create transformation source
-        StreamSource transformSource = new StreamSource(xsltFile);
-        // Initialize the transformation subject
-        StreamSource source = new StreamSource(new File("tmp.xml"));
-        // Initialize user agent needed for the transformation
-        FOUserAgent userAgent = fopFactory.newFOUserAgent();
-        // Create the output stream to store the results
-        ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+        if (aktPdf != null) {
 
-        // Initialize the XSL-FO transformer object
-        Transformer xslFoTransformer = null;
-        try {
-            xslFoTransformer = transformerFactory.newTransformer(transformSource);
-        } catch (TransformerConfigurationException e) {
-            e.printStackTrace();
-        }
+            // Konvertuj u xml
+            convertToXml(aktPdf);
 
-        // Construct FOP instance with desired output format
-        Fop fop = null;
-        try {
-            fop = fopFactory.newFop(MimeConstants.MIME_PDF, userAgent, outStream);
-        } catch (FOPException e) {
-            e.printStackTrace();
-        }
+            FopFactory fopFactory = null;
+            // Initialize FOP factory object
+            try {
+                fopFactory = FopFactory.newInstance(new File("fop.xconf"));
+            } catch (SAXException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            TransformerFactory transformerFactory = new TransformerFactoryImpl();
+            // Point to the XSL-FO file
+            File xsltFile = new File("Akt_fo.xsl");
+            // Create transformation source
+            StreamSource transformSource = new StreamSource(xsltFile);
+            // Initialize the transformation subject
+            StreamSource source = new StreamSource(new File("tmp.xml"));
+            // Initialize user agent needed for the transformation
+            FOUserAgent userAgent = fopFactory.newFOUserAgent();
+            // Create the output stream to store the results
+            ByteArrayOutputStream outStream = new ByteArrayOutputStream();
 
-        // Resulting SAX events
-        Result res = null;
-        try {
-            res = new SAXResult(fop.getDefaultHandler());
-        } catch (FOPException e) {
-            e.printStackTrace();
-        }
+            // Initialize the XSL-FO transformer object
+            Transformer xslFoTransformer = null;
+            try {
+                xslFoTransformer = transformerFactory.newTransformer(transformSource);
+            } catch (TransformerConfigurationException e) {
+                e.printStackTrace();
+            }
 
-        // Start XSLT transformation and FOP processing
-        try {
-            xslFoTransformer.transform(source, res);
-        } catch (TransformerException e) {
-            e.printStackTrace();
-        }
+            // Construct FOP instance with desired output format
+            Fop fop = null;
+            try {
+                fop = fopFactory.newFop(MimeConstants.MIME_PDF, userAgent, outStream);
+            } catch (FOPException e) {
+                e.printStackTrace();
+            }
 
-        // Generate PDF file
-        File pdfFile = new File("Akt.pdf");
-        OutputStream out = null;
-        try {
-            out = new BufferedOutputStream(new FileOutputStream(pdfFile));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        try {
-            out.write(outStream.toByteArray());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            // Resulting SAX events
+            Result res = null;
+            try {
+                res = new SAXResult(fop.getDefaultHandler());
+            } catch (FOPException e) {
+                e.printStackTrace();
+            }
 
-        try {
-            System.out.println("[INFO] File \"" + pdfFile.getCanonicalPath() + "\" generated successfully.");
-        } catch (IOException e) {
-            e.printStackTrace();
+            // Start XSLT transformation and FOP processing
+            try {
+                xslFoTransformer.transform(source, res);
+            } catch (TransformerException e) {
+                e.printStackTrace();
+            }
+
+            // Generate PDF file
+            File pdfFile = new File("Akt.pdf");
+            OutputStream out = null;
+            try {
+                out = new BufferedOutputStream(new FileOutputStream(pdfFile));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            try {
+                out.write(outStream.toByteArray());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                System.out.println("[INFO] File \"" + pdfFile.getCanonicalPath() + "\" generated successfully.");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                out.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return true;
+
         }
-        try {
-            out.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        return false;
+
     }
+
+
+
+
+
+
+
+
 
 
 }

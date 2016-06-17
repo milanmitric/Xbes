@@ -98,6 +98,9 @@ public class AktController {
         try {
             Transformer transformer = factory.newTransformer(xslt);
             Akt aktHtml = aktManager.read(data,false);
+            if (aktHtml == null){
+                new ResponseEntity(HttpStatus.BAD_REQUEST);
+            }
             aktManager.convertToXml(aktHtml);
             Source text = new StreamSource(new File("tmp.xml"));
             transformer.transform(text, new StreamResult(new File("tmp.html")));
@@ -304,15 +307,19 @@ public class AktController {
                            @PathVariable String fileName) throws IOException {
         logger.info("Called REST for downloading PDF file of act "+ fileName);
         fileName += ".xml";
-        aktManager.generatePdf(fileName);
-        response.setContentType("application/pdf");
-        try (InputStream is = new FileInputStream(new File("Akt.pdf"))){
-            org.apache.commons.io.IOUtils.copy(is, response.getOutputStream());
-            response.flushBuffer();
-        } catch (IOException ex) {
-            logger.info("Error writing file to output stream. Filename was '{}'", fileName, ex);
-            throw new RuntimeException("IOError writing file to output stream");
-        }
+        boolean status = aktManager.generatePdf(fileName);
+
+        if(status) {
+
+            response.setContentType("application/pdf");
+            try (InputStream is = new FileInputStream(new File("Akt.pdf"))) {
+                org.apache.commons.io.IOUtils.copy(is, response.getOutputStream());
+                response.flushBuffer();
+            } catch (IOException ex) {
+                logger.info("Error writing file to output stream. Filename was '{}'", fileName, ex);
+                throw new RuntimeException("IOError writing file to output stream");
+            }
+        }else return;
     }
 
 
@@ -327,6 +334,7 @@ public class AktController {
         logger.info("Called REST for accepting or rejecting  acts");
         User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         boolean mojAkt  = false;
+        data = data.substring(0, data.length()-1);
         for(Akt akt: aktManager.getMyFilesProposed(user)){
             if(akt.getDocumentId().equals(data)){
                 mojAkt=true;
@@ -335,6 +343,10 @@ public class AktController {
 
         if(mojAkt){
             if(aktManager.deleteAkt(data)){
+//                TODO Check if this is working
+//                for ( Amandmani amandmani :amandmanManager.getAllAmandmansForAkt(data)){
+//                    amandmanManager.deleteAmandman(amandmani.getDocumentId());
+//                }
                 return new ResponseEntity(HttpStatus.OK);
             }
         }
