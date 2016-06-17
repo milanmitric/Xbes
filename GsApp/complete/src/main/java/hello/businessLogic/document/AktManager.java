@@ -41,7 +41,6 @@ public class AktManager extends BeanManager<Akt> {
     private String  archive_app_api="http://localhost:9090/api/testx";
     /********************************************************************/
 
-
     private CRLVerifier crlVerifier = new CRLVerifier();
     /**
      * Initializes a new intance of AktManager.
@@ -96,13 +95,19 @@ public class AktManager extends BeanManager<Akt> {
      * @return Generated URI. <code>NULL</code> if not successful.
      */
     public String proposeAkt(Akt akt, User user) {
-
+        logger.info("User " + user + " tries to propose Akt " +akt.getDocumentId());
         // Check if users' certificate is revoked
         Certificate cert = keyStoreManager.readCertificate(user.getUsername(),user.getPassword().toCharArray());
+
         if (crlVerifier.isRevoked(cert)){
             logger.info("Certificate is revoked for user " + user.getUsername()+", can't propose.");
             return null;
             //TODO: Da li treba da se izadje iz metode ako je revoked?
+        }
+
+        if (keyStoreManager.isCertificateExpired(cert)){
+            logger.info("Certificate is expired for user " + user.getUsername() + ", can't propose.");
+            return null;
         }
         if (!validateBeanBySchema(akt)) {
             logger.info("ERROR: Akt is not valid!");
@@ -113,6 +118,8 @@ public class AktManager extends BeanManager<Akt> {
             ret = this.write(akt, MarkLogicStrings.AKTOVI_PREDLOZEN_COL_ID).getUri();
             akt.setDocumentId(ret);
             akt.setUserName(user.getUsername());
+            // TODO CHECK THIS
+
             GregorianCalendar c = new GregorianCalendar();
             c.setTime(new Date());
             XMLGregorianCalendar date2 = DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
@@ -137,6 +144,7 @@ public class AktManager extends BeanManager<Akt> {
      */
     public String approveAkt(Akt akt,User user){
 
+        logger.info("User " + user + " tries to approve Akt " +akt.getDocumentId());
         // Check if users' certificate is revoked
         Certificate cert = keyStoreManager.readCertificate(user.getUsername(),user.getPassword().toCharArray());
         if (crlVerifier.isRevoked(cert)){
@@ -144,6 +152,10 @@ public class AktManager extends BeanManager<Akt> {
             //TODO: Da li treba da se izadje iz metode ako je revoked?
         }
 
+        if (keyStoreManager.isCertificateExpired(cert)){
+            logger.info("Certificate is expired for user " + user.getUsername() + ", can't approve.");
+            return null;
+        }
         if (!validateBeanBySchema(akt)){
             logger.info("[ERROR] Document["+akt.getDocumentId()+"] is not valid!");
             return null;
@@ -167,6 +179,7 @@ public class AktManager extends BeanManager<Akt> {
                 ret = null;
                 throw  new Exception();
             } else {
+                logger.info("User " + user + " successfully approved Akt " +akt.getDocumentId());
                 ret = akt.getDocumentId();
             }
 
@@ -183,6 +196,7 @@ public class AktManager extends BeanManager<Akt> {
      */
     public boolean deleteAkt(String docId){
         boolean ret = false;
+
 
         try {
             deleteDocument(docId);

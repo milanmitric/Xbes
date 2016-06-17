@@ -100,10 +100,15 @@ public class AmandmanManager extends BeanManager<Amandmani> {
      */
     public String proposeAmandman(Amandmani amandman,User user){
 
+        logger.info("User " + user.getUsername() + " tries to propose Amandman " + amandman.getDocumentId());
         // Check if users' certificate is revoked
         Certificate cert = keyStoreManager.readCertificate(user.getUsername(),user.getPassword().toCharArray());
         if (crlVerifier.isRevoked(cert)){
             logger.info("Certificate is revoked for user " + user.getUsername()+", can't propose.");
+            return null;
+        }
+        if (keyStoreManager.isCertificateExpired(cert)){
+            logger.info("Certificate is expired for user " + user.getUsername()+", can't propose.");
             return null;
         }
 
@@ -116,6 +121,7 @@ public class AmandmanManager extends BeanManager<Amandmani> {
             ret = this.write(amandman,MarkLogicStrings.AMANDMANI_PREDLOZEN_COL_ID).getUri();
             amandman.setDocumentId(ret);
             amandman.setUserName(user.getUsername());
+            // TODO CHECK THIS
             GregorianCalendar c = new GregorianCalendar();
             c.setTime(new Date());
             XMLGregorianCalendar date2 = DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
@@ -139,10 +145,17 @@ public class AmandmanManager extends BeanManager<Amandmani> {
      * @return Generated URI. <code>NULL</code> if not successful.
      */
     public String approveAmandman(Amandmani amandman,User user){
+        logger.info("User " + user.getUsername() + " tries to approve Amandman " + amandman.getDocumentId());
         // Check if users' certificate is revoked
         Certificate cert = keyStoreManager.readCertificate(user.getUsername(),user.getPassword().toCharArray());
         if (crlVerifier.isRevoked(cert)){
             logger.info("Certificate is revoked for user " + user.getUsername()+", can't propose.");
+            return  null;
+        }
+
+        if (keyStoreManager.isCertificateExpired(cert)){
+            logger.info("Certificate is expired for user " + user.getUsername()+", can't propose.");
+            return null;
         }
 
         if (!validateBeanBySchema(amandman)){

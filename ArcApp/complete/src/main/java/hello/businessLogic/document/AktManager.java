@@ -8,20 +8,14 @@ import hello.StringResources.MarkLogicStrings;
 import hello.StringResources.TipIzmene;
 import hello.businessLogic.core.BeanManager;
 import hello.entity.gov.gradskaskupstina.*;
-import hello.security.EncryptKEK;
 import hello.security.CRLVerifier;
+import hello.security.EncryptKEK;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-import org.springframework.util.SerializationUtils;
 import org.springframework.web.client.RestTemplate;
 import org.w3c.dom.Document;
 
-import javax.xml.transform.stream.StreamResult;
-import java.io.*;
 import java.security.cert.Certificate;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -516,6 +510,7 @@ public class AktManager extends BeanManager<Akt> {
         System.out.println(s2);
 
     }
+
 
 
 

@@ -1,50 +1,26 @@
 package hello.rest;
 
-import com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl;
 import hello.StringResources.MarkLogicStrings;
 import hello.businessLogic.document.AktManager;
-import hello.businessLogic.document.AmandmanManager;
-import hello.businessLogic.document.UsersManager;
 import hello.entity.gov.gradskaskupstina.Akt;
-import hello.entity.gov.gradskaskupstina.Amandmani;
-import hello.entity.gov.gradskaskupstina.User;
 import hello.security.DecryptKEK;
 import hello.security.EncryptKEK;
 import hello.security.KeyStoreManager;
-import org.apache.fop.apps.*;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
 
-import javax.print.Doc;
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.xml.transform.*;
-import javax.xml.transform.sax.SAXResult;
-import javax.xml.transform.stream.StreamResult;
-import javax.xml.transform.stream.StreamSource;
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.security.PrivateKey;
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import static com.sun.jersey.core.util.ReaderWriter.BUFFER_SIZE;
+import java.util.Date;
 
 /**
  * Created by Nebojsa on 6/4/2016.
@@ -58,6 +34,7 @@ public class ArchiveController {
     DecryptKEK decryptKEK = new DecryptKEK();
     KeyStoreManager keyStoreManager = new KeyStoreManager();
 
+    private String lastId = null;
     /*THIS IS ONLY CONTROLLER FOR ARCHIVE APP*/
     /*CREATE NEW INSTANCE OF SAME APP BUT ON DIFFERENT PORT AND WITHOUT HTTPS (CAN'T USE SELFSIGNED CRT)*/
     /*AND APP no1 WILL SEND DATA TO APP no2*/
@@ -68,7 +45,7 @@ public class ArchiveController {
     @RequestMapping(value = "/testx",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity testx(@RequestBody Document encDoc) {
+    public ResponseEntity testx(@RequestBody Document encDoc) throws FileNotFoundException {
 
         System.out.println("SAVING TO ARCHIVE");
         String tmp="archived.xml";
@@ -83,10 +60,35 @@ public class ArchiveController {
         //dekriptuje se dokument
         System.out.println("Decrypting....");
         encDoc = decryptKEK.decrypt(encDoc, pk);
+
+        FileOutputStream fileOutputStream = new FileOutputStream(new File("tmp.xml"));
+        aktManager.transform(encDoc,fileOutputStream);
+
+        Akt akt = aktManager.convertFromXml(new File("tmp.xml"));
+        if (lastId == null){
+            lastId = akt.getDocumentId();
+        } else if (lastId.equals(akt.getDocumentId())){
+            return new ResponseEntity("test_0:fail", HttpStatus.BAD_REQUEST);
+        }
+
+        Date now = new Date();
+        Date timeStamp =akt.getTimeStamp().toGregorianCalendar().getTime();
+
+        final long ONE_MINUTE_IN_MILLIS = 60000;//millisecs
+
+        long curTimeInMs = timeStamp.getTime();
+        timeStamp = new Date(curTimeInMs + (1 * ONE_MINUTE_IN_MILLIS));
+
+        if (timeStamp.after(now)){
+            return new ResponseEntity("test_0:fail", HttpStatus.BAD_REQUEST);
+        }
+
+
         //[TEST] SAVE ENCRYPTED DOC
         //decryptKEK.saveDocument(encDoc, "OUTPUT.xml");
         /*SAVE TO DB*/
         InputStream is=aktManager.convertDocumentToInputStream(encDoc);
+
         aktManager.write(is, MarkLogicStrings.ARCHIVE_PREFIX+System.nanoTime(), MarkLogicStrings.ARCHIVE_COL_ID, false, null);
         System.out.println("WRITING TO DATABASE...");
         System.out.println("DONE.");

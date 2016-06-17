@@ -19,6 +19,7 @@ import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import java.io.File;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 
 /**
@@ -309,5 +310,9 @@ public class BeanManager <T>{
      */
     protected MatchDocumentSummary[] searchByField(String parameterofSearch, String uriOfCollection){
         return customManager.searchByField(parameterofSearch,uriOfCollection);
+    }
+
+    public  void transform(Node node, OutputStream out) {
+        converter.transform(node,out);
     }
 }

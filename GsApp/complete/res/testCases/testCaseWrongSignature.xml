@@ -1,0 +1,235 @@
+<?xml  version="1.0" encoding="UTF-8"?>
+<Akt xsi:schemaLocation="http://www.gradskaskupstina.gov/" xmlns="http://www.gradskaskupstina.gov/" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <Naslov>Akt</Naslov>
+    <DocumentId>13444375487669466441.xml</DocumentId>
+    <Deo Naziv="Naziv prvog dela" RedniBroj="1">
+        <Glava Naziv="Glava1" RedniBroj="1">
+            <Odeljak Naziv="Odeljak1" RedniBroj="1">
+                <Pododeljak Naziv="Naziv pododeljka a" RednoSlovo="a">
+                    <Clan RedniBroj="1">
+                        <Stav RedniBroj="1">
+                            <Tekst>Tekst clana 1 stava 1</Tekst>
+                        </Stav>
+                        <Stav RedniBroj="2">
+                            <Tekst>Tekst clana 1 stava 2</Tekst>
+                        </Stav>
+                        <Stav RedniBroj="3">
+                            <Tekst>Tekst clana 1 stava 3</Tekst>
+                        </Stav>
+                    </Clan>
+                    <Clan RedniBroj="2">
+                        <Stav RedniBroj="1">
+                            <Tekst>Tekst clana 2 stava 1</Tekst>
+                        </Stav>
+                        <Stav RedniBroj="2">
+                            <Tekst>Tekst clana 2 stava 2</Tekst>
+                        </Stav>
+                        <Stav RedniBroj="3">
+                            <Tekst>Tekst clana 2 stava 3</Tekst>
+                        </Stav>
+                    </Clan>
+                </Pododeljak>
+                <Pododeljak Naziv="Naziv pododeljka b" RednoSlovo="b">
+                    <Clan RedniBroj="3">
+                        <Stav RedniBroj="1">
+                            <Tekst>Tekst clana 3 stava 1</Tekst>
+                        </Stav>
+                        <Stav RedniBroj="2">
+                            <Tekst>Tekst clana 3 stava 2</Tekst>
+                        </Stav>
+                        <Stav RedniBroj="3">
+                            <Tekst>Tekst clana 3 stava 3</Tekst>
+                        </Stav>
+                    </Clan>
+                </Pododeljak>
+            </Odeljak>
+            <Odeljak Naziv="Odeljak2" RedniBroj="2">
+                <Clan RedniBroj="4">
+                    <Stav RedniBroj="1">
+                        <Tekst>Tekst CLANA 4 STAVA 1</Tekst>
+                        <Tacka RedniBroj="1">
+                            <Sadrzaj>Tekst CLANA 4 STAVA 1 TACKE 1</Sadrzaj>
+                            <Podtacka RedniBroj="1">Tekst CLANA 4 STAVA 1 TACKE 1 PODTACKE 1</Podtacka>
+                            <Podtacka RedniBroj="2">Tekst CLANA 4 STAVA 1 TACKE 1 PODTACKE 2</Podtacka>
+                        </Tacka>
+                        <Tacka RedniBroj="2">
+                            <Sadrzaj>Tekst CLANA 4 STAVA 1 TACKE 2</Sadrzaj>
+                            <Podtacka RedniBroj="1">Tekst CLANA 4 STAVA 1 TACKE 2 PODTACKE 1</Podtacka>
+                            <Podtacka RedniBroj="2">Tekst CLANA 4 STAVA 1 TACKE 2 PODTACKE 2</Podtacka>
+                        </Tacka>
+                    </Stav>
+                </Clan>
+                <Clan RedniBroj="5">
+                    <Stav RedniBroj="1">
+                        <Tekst>Tekst CLANA 5 STAVA 1</Tekst>
+                    </Stav>
+                </Clan>
+            </Odeljak>
+        </Glava>
+        <Glava Naziv="Glava2" RedniBroj="2">
+            <Clan RedniBroj="6">
+                <Stav RedniBroj="1">
+                    <Tekst>Tekst CLANA 6 STAVA 1</Tekst>
+                </Stav>
+                <Stav RedniBroj="2">
+                    <Tekst>Tekst CLANA 6 STAVA 2</Tekst>
+                </Stav>
+            </Clan>
+            <Clan RedniBroj="7">
+                <Stav RedniBroj="1">
+                    <Tekst>Tekst CLANA 7 STAVA 1</Tekst>
+                </Stav>
+                <Stav RedniBroj="2">
+                    <Tekst>Tekst CLANA 7 STAVA 2</Tekst>
+                </Stav>
+            </Clan>
+        </Glava>
+    </Deo>
+    <Deo Naziv="Naziv drugog dela" RedniBroj="2">
+        <Glava Naziv="Glava3" RedniBroj="3">
+            <Odeljak Naziv="Odeljak1" RedniBroj="1">
+                <Pododeljak Naziv="Naziv pododeljka a2" RednoSlovo="a">
+                    <Clan RedniBroj="8">
+                        <Stav RedniBroj="1">
+                            <Tekst>Tekst clana 1 stava 1</Tekst>
+                        </Stav>
+                        <Stav RedniBroj="2">
+                            <Tekst>Tekst clana 1 stava 2</Tekst>
+                        </Stav>
+                        <Stav RedniBroj="3">
+                            <Tekst>Tekst clana 1 stava 3</Tekst>
+                        </Stav>
+                    </Clan>
+                    <Clan RedniBroj="9">
+                        <Stav RedniBroj="1">
+                            <Tekst>Tekst clana 2 stava 1</Tekst>
+                        </Stav>
+                        <Stav RedniBroj="2">
+                            <Tekst>Tekst clana 2 stava 2</Tekst>
+                        </Stav>
+                        <Stav RedniBroj="3">
+                            <Tekst>Tekst clana 2 stava 3</Tekst>
+                        </Stav>
+                    </Clan>
+                </Pododeljak>
+                <Pododeljak Naziv="pododeljka b2" RednoSlovo="b">
+                    <Clan RedniBroj="10">
+                        <Stav RedniBroj="1">
+                            <Tekst>Tekst clana 3 stava 1</Tekst>
+                        </Stav>
+                        <Stav RedniBroj="2">
+                            <Tekst>Tekst clana 3 stava 2</Tekst>
+                        </Stav>
+                        <Stav RedniBroj="3">
+                            <Tekst>Tekst clana 3 stava 3</Tekst>
+                        </Stav>
+                    </Clan>
+                </Pododeljak>
+            </Odeljak>
+            <Odeljak Naziv="Odeljak2" RedniBroj="2">
+                <Clan RedniBroj="11">
+                    <Stav RedniBroj="1">
+                        <Tekst>Tekst CLANA 4 STAVA 1</Tekst>
+                        <Tacka RedniBroj="1">
+                            <Sadrzaj>Tekst CLANA 4 STAVA 1 TACKE 1</Sadrzaj>
+                            <Podtacka RedniBroj="1">Tekst CLANA 4 STAVA 1 TACKE 1 PODTACKE 1</Podtacka>
+                            <Podtacka RedniBroj="2">Tekst CLANA 4 STAVA 1 TACKE 1 PODTACKE 2</Podtacka>
+                        </Tacka>
+                        <Tacka RedniBroj="2">
+                            <Sadrzaj>Tekst CLANA 4 STAVA 1 TACKE 2</Sadrzaj>
+                            <Podtacka RedniBroj="1">Tekst CLANA 4 STAVA 1 TACKE 2 PODTACKE 1</Podtacka>
+                            <Podtacka RedniBroj="2">Tekst CLANA 4 STAVA 1 TACKE 2 PODTACKE 2</Podtacka>
+                        </Tacka>
+                    </Stav>
+                </Clan>
+                <Clan RedniBroj="12">
+                    <Stav RedniBroj="1">
+                        <Tekst>Tekst CLANA 5 STAVA 1</Tekst>
+                    </Stav>
+                </Clan>
+            </Odeljak>
+        </Glava>
+        <Glava Naziv="Glava4" RedniBroj="4">
+            <Clan RedniBroj="13">
+                <Stav RedniBroj="1">
+                    <Tekst>Tekst CLANA 6 STAVA 1</Tekst>
+                </Stav>
+                <Stav RedniBroj="2">
+                    <Tekst>Tekst CLANA 6 STAVA 2</Tekst>
+                </Stav>
+            </Clan>
+            <Clan RedniBroj="14">
+                <Stav RedniBroj="1">
+                    <Tekst>Tekst CLANA 7 STAVA 1</Tekst>
+                </Stav>
+                <Stav RedniBroj="2">
+                    <Tekst>Tekst CLANA 7 STAVA 2</Tekst>
+                </Stav>
+            </Clan>
+        </Glava>
+    </Deo>
+    <ZavrsniDeo>
+        <Organ>Organ0</Organ>
+        <Broj>Broj0</Broj>
+        <Datum>Datum0</Datum>
+        <Potpisnik>
+            <Ime>Ime0</Ime>
+            <Prezime>Prezime0</Prezime>
+        </Potpisnik>
+    </ZavrsniDeo>
+    <UserName>o</UserName>
+    <TimeStamp>2016-06-16T22:53:35.830+02:00</TimeStamp>
+    <ds:Signature>
+        <ds:SignedInfo>
+            <ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315">
+            </ds:CanonicalizationMethod>
+            <ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1">
+            </ds:SignatureMethod>
+            <ds:Reference URI="">
+                <ds:Transforms>
+                    <ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature">
+                    </ds:Transform>
+                    <ds:Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments">
+                    </ds:Transform>
+                </ds:Transforms>
+                <ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1">
+                </ds:DigestMethod>
+                <ds:DigestValue>Jop+TG+tDQm3v4I6MvS3dJX292s=</ds:DigestValue>
+            </ds:Reference>
+        </ds:SignedInfo>
+        <ds:SignatureValue>
+            h+DG9KDTK3dyzj1y6NiLeNlq6M2jl5gK8jYRuoj7DBbgDhbILNp4TgomCIBorsfMFPilC+q2dg5K
+            rcdggMF24/KUoOb0HHo71D6eduQYI8HCjCGZDBIIH3CfzVSYbDut4CwqGp3GPW7UOxZn8VSep43T
+            LJt54VuEerNeIFFJ7d0=
+        </ds:SignatureValue>
+        <ds:KeyInfo>
+            <ds:KeyValue>
+                <ds:RSAKeyValue>
+                    <ds:Modulus>
+                        7CPg3HbUimtsp3E8Jxi8CMCnX8Xv8nWuPdUxmnaubRJwaDy3Nu0SZlQETI8THRJZWQ3N/3gYydTA
+                        sDubUcCItTfH/4Ih3HJEkNCtEoUpNRcfWpiK95BZd61TVyi4cYRD92Ao4mj9qQ0omenb4A4nv1+G
+                        Mw3LPdnR0rmOzGF3Y78=
+                    </ds:Modulus>
+                    <ds:Exponent>AQAB</ds:Exponent>
+                </ds:RSAKeyValue>
+            </ds:KeyValue>
+            <ds:X509Data>
+                <ds:X509Certificate>
+                    MIIC2TCCAkKgAwIBAgIBDTANBgkqhkiG9w0BAQsFADCBzjEjMCEGA1UEAwwaU2t1cHN0aW5hIGdy
+                    YWRhIE5vdm9nIFNhZGExEDAOBgNVBAQMB0dyYWRza2ExEjAQBgNVBCoMCVNrdXBzdGluYTEWMBQG
+                    A1UECgwNR3JhZCBOb3ZpIFNhZDEYMBYGA1UECwwPU2t1cHN0aW5hIGdyYWRhMQswCQYDVQQGEwJS
+                    UzEqMCgGCSqGSIb3DQEJARYbZ3JhZHNrYVNrdXBzdGluYUBub3Zpc2FkLnJzMRYwFAYKCZImiZPy
+                    LGQBAQwGMTIzNDQ1MB4XDTA3MTIzMDIzMDAwMFoXDTE3MTIzMDIzMDAwMFowgZUxCzAJBgNVBAMM
+                    Am9vMQowCAYDVQQEDAFvMQowCAYDVQQqDAFvMRYwFAYDVQQKDA1HcmFkIE5vdmkgU2FkMRgwFgYD
+                    VQQLDA9Ta3Vwc3RpbmEgZ3JhZGExCzAJBgNVBAYTAlJTMRwwGgYJKoZIhvcNAQkBFg1uZWtpQG1h
+                    aWwuY29tMREwDwYKCZImiZPyLGQBAQwBbzCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEA7CPg
+                    3HbUimtsp3E8Jxi8CMCnX8Xv8nWuPdUxmnaubRJwaDy3Nu0SZlQETI8THRJZWQ3N/3gYydTAsDub
+                    UcCItTfH/4Ih3HJEkNCtEoUpNRcfWpiK95BZd61TVyi4cYRD92Ao4mj9qQ0omenb4A4nv1+GMw3L
+                    PdnR0rmOzGF3Y78CAwEAATANBgkqhkiG9w0BAQsFAAOBgQAk1Llx3UYR/8LfnUeRyuMlu7uhwM+W
+                    4Fhq3KL2mUqH4oExaIKD8KKb4zXL7t6X6HyHsHUGkgyDg7ZkQXvTQye10Kt+iHTPe+ae8hioutIn
+                    sHTKnU1i6yifTsJnHjRB0EhybHpvIQ9YnWqxb0ixkNOG4LSOPWkCse1T/DlD1zzzXw==
+                </ds:X509Certificate>
+            </ds:X509Data>
+        </ds:KeyInfo>
+    </ds:Signature>
+</Akt>

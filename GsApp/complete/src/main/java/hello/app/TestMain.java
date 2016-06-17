@@ -58,15 +58,8 @@ public class TestMain {
 
 
     public static void deleteAkts(){
-        AmandmanManager amandmanManager = new AmandmanManager();
-        amandmanManager.deleteAmandman("11741131716210573855.xml");
-        amandmanManager.deleteAmandman("15354391884130424682.xml");
-        amandmanManager.deleteAmandman("15354391884130424682.xml");
-        amandmanManager.deleteAmandman("15354391884130424682.xml");
-        amandmanManager.deleteAmandman("15354391884130424682.xml");
-        amandmanManager.deleteAmandman("15354391884130424682.xml");
-
-
+        KeyStoreManager keyStoreManager = new KeyStoreManager();
+        keyStoreManager.reinitializeKeyStore();
 
     }
 

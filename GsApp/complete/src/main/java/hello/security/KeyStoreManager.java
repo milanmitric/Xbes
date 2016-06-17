@@ -181,6 +181,48 @@ public class KeyStoreManager {
     }
 
     /**
+     * Generates and saves certificate for user.
+     * @param user User to who the certificate is created.
+     * @param serialNumber Serial number of certificate in keystore.
+     * @return Indicator of success.
+     */
+    public boolean generateCertificate(User user, String serialNumber, Date startDate, Date endDate){
+        boolean ret = false;
+
+        try {
+            CertificateGenerator certificateGenerator = new CertificateGenerator();
+            KeyPair  keyPair = certificateGenerator.generateKeyPair();
+
+
+
+            X500NameBuilder builder = new X500NameBuilder(BCStyle.INSTANCE);
+            builder.addRDN(BCStyle.CN, user.getPrezime() + user.getIme());
+            builder.addRDN(BCStyle.SURNAME, user.getPrezime());
+            builder.addRDN(BCStyle.GIVENNAME, user.getIme());
+            builder.addRDN(BCStyle.O, "Grad Novi Sad");
+            builder.addRDN(BCStyle.OU, "Skupstina grada");
+            builder.addRDN(BCStyle.C, "RS");
+            // TODO: EMAIL IS HARDCODED!
+            builder.addRDN(BCStyle.E, user.getEmail());
+            //UID (USER ID) je ID korisnika
+            builder.addRDN(BCStyle.UID, user.getUsername());
+            String sn= serialNumber;
+
+            SubjectData subjectData = new SubjectData(keyPair.getPublic(),builder.build(),sn,startDate,endDate);
+            //generise se sertifikat
+            X509Certificate cert = certificateGenerator.generateCertificate(getRootIssuerData(), subjectData);
+
+            keyStoreWriter.write(user.getUsername(),keyPair.getPrivate(),user.getPassword().toCharArray(),cert);
+            keyStoreWriter.saveKeyStore(MarkLogicStrings.KEYSTORE_FILEPATH,MarkLogicStrings.KEYSTORE_PASSWORD);
+            ret = true;
+        } catch (Exception e){
+            logger.info("[ERROR] Can't generate certificate for user " + user.getIme());
+            logger.info(e.getMessage());
+        }
+        return ret;
+    }
+
+    /**
      * Read private key from keystore.
      * @param alias Certificate alias.
      * @param password Certificate password.
@@ -318,5 +360,12 @@ public class KeyStoreManager {
         //Serijski broj sertifikata
         String sn="1";
         return builder.build();
+    }
+
+    public boolean isCertificateExpired(Certificate cert){
+        X509Certificate  certificate = (X509Certificate)cert;
+        Date now = new Date();
+        return  now.after(certificate.getNotAfter());
+
     }
 }
