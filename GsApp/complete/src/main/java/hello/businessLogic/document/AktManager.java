@@ -179,6 +179,7 @@ public class AktManager extends BeanManager<Akt> {
                 ret = null;
                 throw new Exception();
             } else {
+                archiveIt(akt);
                 logger.info("User " + user + " successfully approved Akt " +akt.getDocumentId());
                 ret = akt.getDocumentId();
             }
@@ -510,7 +511,7 @@ public class AktManager extends BeanManager<Akt> {
         boolean status = convertToXml(akt1);
         System.out.println("Converting to xml status: "+status);
         /*load it from file system*/
-        Document doc = encKEK.loadDocument("./data/tmp.xml");
+        Document doc = encKEK.loadDocument("tmp.xml");
         doc=encKEK.encrypt(doc);
         return doc;
     }

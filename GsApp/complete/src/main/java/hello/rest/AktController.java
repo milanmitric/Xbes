@@ -1,6 +1,5 @@
 package hello.rest;
 
-import com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl;
 import hello.StringResources.MarkLogicStrings;
 import hello.businessLogic.document.AktManager;
 import hello.businessLogic.document.AmandmanManager;
@@ -8,36 +7,22 @@ import hello.businessLogic.document.UsersManager;
 import hello.entity.gov.gradskaskupstina.Akt;
 import hello.entity.gov.gradskaskupstina.Amandmani;
 import hello.entity.gov.gradskaskupstina.User;
-import hello.security.Encrypt;
 import hello.security.EncryptKEK;
-import org.apache.fop.apps.*;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
-import org.w3c.dom.Document;
-import org.xml.sax.SAXException;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.*;
-import javax.xml.transform.sax.SAXResult;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import java.io.*;
@@ -45,8 +30,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import static com.sun.jersey.core.util.ReaderWriter.BUFFER_SIZE;
 
 /**
  * Created by Nebojsa on 6/4/2016.
@@ -336,11 +319,11 @@ public class AktController {
         boolean mojAkt  = false;
         data = data.substring(0, data.length()-1);
         for(Akt akt: aktManager.getMyFilesProposed(user)){
-            if(akt.getDocumentId().equals(data)){
+            if(akt.getDocumentId().equals(data) && akt.getUserName().equals(user.getUsername())){
                 mojAkt=true;
             }
         }
-
+        logger.info("User " + user.getUsername() + " tries to delete akt " + data);
         if(mojAkt){
             if(aktManager.deleteAkt(data)){
 //                TODO Check if this is working

@@ -102,7 +102,6 @@ public class CRLVerifier {
         }
         return ret;
     }
-
     /**
      * Store CRL to file.
      * @return Indicator of success.

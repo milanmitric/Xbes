@@ -2,7 +2,6 @@ package hello.rest;
 
 import hello.businessLogic.document.AktManager;
 import hello.businessLogic.document.AmandmanManager;
-import hello.entity.gov.gradskaskupstina.Akt;
 import hello.entity.gov.gradskaskupstina.Amandmani;
 import hello.entity.gov.gradskaskupstina.User;
 import org.slf4j.Logger;
@@ -144,6 +143,7 @@ public class AmandmanController {
             }
         }
 
+        logger.info("User " + user.getUsername() + " tries to delete amandman " + data);
         if(mojAmandman){
             if(amandmanManager.deleteAmandman(data)){
                 return new ResponseEntity(HttpStatus.OK);

@@ -17,7 +17,6 @@ import org.w3c.dom.Document;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.security.PrivateKey;
 import java.util.Date;
@@ -51,7 +50,7 @@ public class ArchiveController {
         String tmp="archived.xml";
 
         /*[TEST] SAVE TO FILE TO SEE ENCRYPTED DOC THAT CAME TO THIS REST*/
-        //encryptKEK.saveDocument(encDoc, tmp);
+        encryptKEK.saveDocument(encDoc, tmp);
         /*[TEST] LOAD THAT ^ XML AND DECTYPT IT*/
         //Document doc = decryptKEK.loadDocument(tmp);
 
@@ -61,10 +60,16 @@ public class ArchiveController {
         System.out.println("Decrypting....");
         encDoc = decryptKEK.decrypt(encDoc, pk);
 
-        FileOutputStream fileOutputStream = new FileOutputStream(new File("tmp.xml"));
-        aktManager.transform(encDoc,fileOutputStream);
+        //FileOutputStream fileOutputStream = new FileOutputStream(new File("tmp.xml"));
+        //aktManager.transform(encDoc,fileOutputStream);
 
-        Akt akt = aktManager.convertFromXml(new File("tmp.xml"));
+
+
+
+        //[TEST] SAVE ENCRYPTED DOC
+        decryptKEK.saveDocument(encDoc, "OUTPUT.xml");
+
+        Akt akt = aktManager.convertFromXml(new File("OUTPUT.xml"));
         if (lastId == null){
             lastId = akt.getDocumentId();
         } else if (lastId.equals(akt.getDocumentId())){
@@ -82,14 +87,10 @@ public class ArchiveController {
         if (timeStamp.after(now)){
             return new ResponseEntity("test_0:fail", HttpStatus.BAD_REQUEST);
         }
-
-
-        //[TEST] SAVE ENCRYPTED DOC
-        //decryptKEK.saveDocument(encDoc, "OUTPUT.xml");
         /*SAVE TO DB*/
         InputStream is=aktManager.convertDocumentToInputStream(encDoc);
 
-        aktManager.write(is, MarkLogicStrings.ARCHIVE_PREFIX+System.nanoTime(), MarkLogicStrings.ARCHIVE_COL_ID, false, null);
+        aktManager.write(is, MarkLogicStrings.ARCHIVE_PREFIX+akt.getDocumentId(), MarkLogicStrings.ARCHIVE_COL_ID, false, null);
         System.out.println("WRITING TO DATABASE...");
         System.out.println("DONE.");
 

@@ -2,7 +2,7 @@
 <Akt xmlns="http://www.gradskaskupstina.gov/"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.gradskaskupstina.gov/ file:/C:/Users/FS-LB/Desktop/XMLProjekat/DJIT/Xbes/GsApp/complete/schema/Akt.xsd">
-    <Naslov>Akt proba stava u vise redova</Naslov>
+    <Naslov>Akt zadnja proba</Naslov>
     <Glava RedniBroj="1" Naziv="Naziv glave 1">
         <Odeljak RedniBroj="1" Naziv="Prelazne odredbe">
             <Pododeljak RednoSlovo="a" Naziv="Ovlascenja nadleznog organa">
