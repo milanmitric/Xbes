@@ -138,6 +138,7 @@ public class AmandmanController {
 
         User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         boolean mojAmandman  = false;
+        data = data.substring(0, data.length()-1);
         for(Amandmani amandman: amandmanManager.getMyAmandmentsProposed(user)){
             if(amandman.getDocumentId().equals(data)){
                 mojAmandman=true;
