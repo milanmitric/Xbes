@@ -5,6 +5,13 @@
 		<html>
 		<head>
 			<style type="text/css">
+				p.clan {
+					text-align: center;
+				}
+				p.pododeljak {
+					text-align: center;
+					font-weight: bold;
+				}
 				p.stav {
 					text-indent: 30px;
 				}
@@ -14,16 +21,26 @@
 				p.podtacka {
 					text-indent: 30px;
 				}
+				h3.glava {
+					text-align: center;
+					font-weight: bold;
+				}
+				h3.organ {
+					text-align: center;
+					font-weight: bold;
+				}
+				h4.odeljak {
+					text-align: center;
+					font-weight: bold;
+				}
 			</style>
 		</head>
 		<body>
 			
-			<h1><xsl:value-of select="gov:Akt/gov:Naslov"/> </h1>
-			
-			
+			<h1 style="text-align: center; font-weight: bold;"><xsl:value-of select="gov:Akt/gov:Naslov"/> </h1>
 
             <xsl:for-each select="gov:Akt/gov:Deo">
-				<h2> DEO
+				<h2 style="text-align: center; font-weight: bold;"> DEO
 					<xsl:choose>
 						<xsl:when test="@RedniBroj=1">PRVI</xsl:when>
 						<xsl:when test="@RedniBroj=2">DRUGI</xsl:when>
@@ -37,7 +54,7 @@
 				</h2><br></br>
 
 				<xsl:for-each select="gov:Glava">
-					<h3>Glava
+					<h3 class="glava">Glava
 					<xsl:choose>
 						<xsl:when test="@RedniBroj=1">I</xsl:when>
 						<xsl:when test="@RedniBroj=2">II</xsl:when>
@@ -49,8 +66,8 @@
 					<br></br>
 					<xsl:value-of select="@Naziv" /></h3><br></br>
 					<xsl:for-each select="gov:Clan">
-						<xsl:value-of select="@Naziv"/><br></br>
-						Clan <xsl:value-of select="@RedniBroj"/>.<br></br>
+						<p class="clan"><xsl:value-of select="@Naziv"/>
+						Clan <xsl:value-of select="@RedniBroj"/>.</p>
 							<xsl:for-each select="gov:Stav">
 								<p class="stav"><xsl:value-of select="gov:Tekst" /></p>
 								<xsl:value-of select="gov:Tekst"/><br></br><br></br>
@@ -65,12 +82,12 @@
 					</xsl:for-each>
 
 					<xsl:for-each select="gov:Odeljak">
-						<h4><xsl:value-of select="@RedniBroj" />. <xsl:value-of select="@Naziv" /></h4>
+						<h4 class="odeljak"><xsl:value-of select="@RedniBroj" />. <xsl:value-of select="@Naziv" /></h4>
 							<xsl:for-each select="gov:Pododeljak">
-								<b><xsl:value-of select="@RednoSlovo" />) <xsl:value-of select="@Naziv" /></b>
+								<p class="pododeljak"><xsl:value-of select="@RednoSlovo" />) <xsl:value-of select="@Naziv" /></p>
 									<xsl:for-each select="gov:Clan">
-										Clan <xsl:value-of select="@RedniBroj"/>.<br></br>
-												<xsl:value-of select="@Naziv"/><br></br>
+										<p class="clan"><xsl:value-of select="@Naziv"/>
+										Clan <xsl:value-of select="@RedniBroj"/>.</p>
 												<xsl:for-each select="gov:Stav">
 													<p class="stav"><xsl:value-of select="gov:Tekst" /></p>
 															<xsl:for-each select="gov:Tacka">
@@ -85,8 +102,8 @@
 									</xsl:for-each>
 							</xsl:for-each>
 							<xsl:for-each select="gov:Clan">
-								<xsl:value-of select="@Naziv"/><br></br>
-								Clan <xsl:value-of select="@RedniBroj"/>.<br></br>
+								<p class="clan"><xsl:value-of select="@Naziv"/>
+								Clan <xsl:value-of select="@RedniBroj"/>.</p>
 									<xsl:for-each select="gov:Stav">
 										<p class="stav"><xsl:value-of select="gov:Tekst"/></p>
 											<xsl:for-each select="gov:Tacka">
@@ -104,7 +121,7 @@
 			</xsl:for-each>
 			
 			<xsl:for-each select="gov:Akt/gov:Glava">
-				<h3>Glava
+				<h3 class="glava">Glava
 					<xsl:choose>
 						<xsl:when test="@RedniBroj=1">I</xsl:when>
 						<xsl:when test="@RedniBroj=2">II</xsl:when>
@@ -116,8 +133,8 @@
 					<br></br>
 					<xsl:value-of select="@Naziv" /></h3><br></br>
 					<xsl:for-each select="gov:Clan">
-						Clan <xsl:value-of select="@RedniBroj"/>.<br></br>
-						<xsl:value-of select="@Naziv"/><br></br>
+						<p class="clan"><xsl:value-of select="@Naziv"/>
+						Clan <xsl:value-of select="@RedniBroj"/>.</p>
 							<xsl:for-each select="gov:Stav">
 								<p class="stav"><xsl:value-of select="gov:Tekst" /></p>
 									<xsl:for-each select="gov:Tacka">
@@ -132,12 +149,12 @@
 					</xsl:for-each>
 					
 					<xsl:for-each select="gov:Odeljak">
-						<h4><xsl:value-of select="@RedniBroj" />. <xsl:value-of select="@Naziv" /></h4>
+						<h4 class="odeljak"><xsl:value-of select="@RedniBroj" />. <xsl:value-of select="@Naziv" /></h4>
 							<xsl:for-each select="gov:Pododeljak">
-								<b><xsl:value-of select="@RednoSlovo" />) <xsl:value-of select="@Naziv" /></b>
+								<p class="pododeljak"><xsl:value-of select="@RednoSlovo" />) <xsl:value-of select="@Naziv" /></p>
 									<xsl:for-each select="gov:Clan">
-										<xsl:value-of select="@Naziv"/><br></br>
-											Clan <xsl:value-of select="@RedniBroj"/>.<br></br>
+										<p class="clan"><xsl:value-of select="@Naziv"/>
+										Clan <xsl:value-of select="@RedniBroj"/>.</p>
 												<xsl:for-each select="gov:Stav">
 													<p class="stav"><xsl:value-of select="gov:Tekst" /></p>
 													<xsl:for-each select="gov:Tacka">
@@ -152,8 +169,8 @@
 									</xsl:for-each>
 							</xsl:for-each>
 							<xsl:for-each select="gov:Clan">
-								Clan <xsl:value-of select="@RedniBroj"/>.<br></br>
-								<xsl:value-of select="@Naziv"/><br></br>
+								<p class="clan"><xsl:value-of select="@Naziv"/>
+								Clan <xsl:value-of select="@RedniBroj"/>.</p>
 									<xsl:for-each select="gov:Stav">
 										<p class="stav"><xsl:value-of select="gov:Tekst" /></p>
 											<xsl:for-each select="gov:Tacka">
@@ -170,8 +187,8 @@
 			</xsl:for-each>
 			
 			<xsl:for-each select="gov:Akt/gov:Clan">
-					<xsl:value-of select="@Naziv"/><br></br>
-					Clan <xsl:value-of select="@RedniBroj"/>.<br></br>
+					<p class="clan"><xsl:value-of select="@Naziv"/>
+					Clan <xsl:value-of select="@RedniBroj"/>.</p>
 						<xsl:for-each select="gov:Stav">
 							<p class="stav"><xsl:value-of select="gov:Tekst" /></p>
 								<xsl:for-each select="gov:Tacka">
@@ -187,12 +204,20 @@
 			
 			
 			<xsl:if test="gov:Akt/gov:ZavrsniDeo/gov:PrelazneOdredbe"><xsl:value-of select="gov:Akt/gov:ZavrsniDeo/gov:PrelazneOdredbe"/>
-					<h2> Prelazne Odredbe </h2>
-					Glava <xsl:value-of select="gov:Akt/gov:ZavrsniDeo/gov:PrelazneOdredbe/@RedniBroj" />.<br></br>
-					<xsl:value-of select="gov:Akt/gov:ZavrsniDeo/gov:PrelazneOdredbe/@Naziv" /><br></br>
+				<h3 class="glava">Glava
+					<xsl:choose>
+						<xsl:when test="gov:Akt/gov:ZavrsniDeo/gov:PrelazneOdredbe/@RedniBroj=1">I</xsl:when>
+						<xsl:when test="gov:Akt/gov:ZavrsniDeo/gov:PrelazneOdredbe/@RedniBroj=2">II</xsl:when>
+						<xsl:when test="gov:Akt/gov:ZavrsniDeo/gov:PrelazneOdredbe/@RedniBroj=3">III</xsl:when>
+						<xsl:when test="gov:Akt/gov:ZavrsniDeo/gov:PrelazneOdredbe/@RedniBroj=4">IV</xsl:when>
+						<xsl:when test="gov:Akt/gov:ZavrsniDeo/gov:PrelazneOdredbe/@RedniBroj=5">V</xsl:when>
+						<xsl:otherwise><xsl:value-of select="gov:Akt/gov:ZavrsniDeo/gov:PrelazneOdredbe/@RedniBroj"/></xsl:otherwise>
+					</xsl:choose>
+					<br></br>
+					<xsl:value-of select="gov:Akt/gov:ZavrsniDeo/gov:PrelazneOdredbe/@Naziv" /></h3><br></br>
 					<xsl:for-each select="gov:Akt/gov:ZavrsniDeo/gov:PrelazneOdredbe/gov:Clan">
-						Clan <xsl:value-of select="@RedniBroj"/>.<br></br>
-						<xsl:value-of select="@Naziv"/><br></br>
+						<p class="clan"><xsl:value-of select="@Naziv"/>
+						Clan <xsl:value-of select="@RedniBroj"/>.</p>
 							<xsl:for-each select="gov:Stav">
 								<p class="stav"><xsl:value-of select="gov:Tekst" /></p>
 								<xsl:value-of select="gov:Tekst"/><br></br><br></br>
@@ -208,13 +233,13 @@
 					</xsl:for-each>
 					
 					<xsl:for-each select="gov:Akt/gov:ZavrsniDeo/gov:PrelazneOdredbe/gov:Odeljak">
-						Odeljak <xsl:value-of select="@RedniBroj" />.<br></br>
+						<h4 class="odeljak"><xsl:value-of select="@RedniBroj" />. <xsl:value-of select="@Naziv" /></h4>
 						<xsl:value-of select="@Naziv" /><br></br>
 							<xsl:for-each select="gov:Pododeljak">
-								RednoSlovo <xsl:value-of select="@RednoSlovo" />.<br></br>
+								<p class="pododeljak"><xsl:value-of select="@RednoSlovo" />) <xsl:value-of select="@Naziv" /></p>
 											<xsl:for-each select="gov:Clan">
-													Clan <xsl:value-of select="@RedniBroj"/>.<br></br>
-															<xsl:value-of select="@Naziv"/><br></br>
+													<p class="clan"><xsl:value-of select="@Naziv"/>
+													Clan <xsl:value-of select="@RedniBroj"/>.</p>
 																	<xsl:for-each select="gov:Stav">
 																			<p class="stav"><xsl:value-of select="gov:Tekst" /></p>
 																			<xsl:value-of select="gov:Tekst"/><br></br><br></br>
@@ -230,8 +255,8 @@
 											</xsl:for-each>
 							</xsl:for-each>
 							<xsl:for-each select="gov:Clan">
-								Clan <xsl:value-of select="@RedniBroj"/>.<br></br>
-								<xsl:value-of select="@Naziv"/><br></br>
+								<p class="clan"><xsl:value-of select="@Naziv"/>
+								Clan <xsl:value-of select="@RedniBroj"/>.</p>
 									<xsl:for-each select="gov:Stav">
 										<p class="stav"><xsl:value-of select="gov:Tekst" /></p>
 										<xsl:value-of select="gov:Tekst"/><br></br><br></br>
@@ -249,12 +274,20 @@
 			</xsl:if>
 
 			<xsl:if test="gov:Akt/gov:ZavrsniDeo/gov:ZavrsneOdredbe"><xsl:value-of select="gov:Akt/gov:ZavrsniDeo/gov:ZavrsneOdredbe"/>
-					<h2> Zavrsne Odredbe </h2>
-						Glava <xsl:value-of select="gov:Akt/gov:ZavrsniDeo/gov:ZavrsneOdredbe/@RedniBroj" />.<br></br>
-								<xsl:value-of select="gov:Akt/gov:ZavrsniDeo/gov:ZavrsneOdredbe/@Naziv" /><br></br>
+				<h3 class="glava">Glava
+					<xsl:choose>
+						<xsl:when test="gov:Akt/gov:ZavrsniDeo/gov:ZavrsneOdredbe/@RedniBroj=1">I</xsl:when>
+						<xsl:when test="gov:Akt/gov:ZavrsniDeo/gov:ZavrsneOdredbe/@RedniBroj=2">II</xsl:when>
+						<xsl:when test="gov:Akt/gov:ZavrsniDeo/gov:ZavrsneOdredbe/@RedniBroj=3">III</xsl:when>
+						<xsl:when test="gov:Akt/gov:ZavrsniDeo/gov:ZavrsneOdredbe/@RedniBroj=4">IV</xsl:when>
+						<xsl:when test="gov:Akt/gov:ZavrsniDeo/gov:ZavrsneOdredbe/@RedniBroj=5">V</xsl:when>
+						<xsl:otherwise><xsl:value-of select="gov:Akt/gov:ZavrsniDeo/gov:ZavrsneOdredbe/@RedniBroj"/></xsl:otherwise>
+					</xsl:choose>
+					<br></br>
+					<xsl:value-of select="gov:Akt/gov:ZavrsniDeo/gov:ZavrsneOdredbe/@RedniBroj" /></h3><br></br>
 								<xsl:for-each select="gov:Akt/gov:ZavrsniDeo/gov:ZavrsneOdredbe/gov:Clan">
-									Clan <xsl:value-of select="@RedniBroj"/>.<br></br>
-									<xsl:value-of select="@Naziv"/><br></br>
+									<p class="clan"><xsl:value-of select="@Naziv"/>
+									Clan <xsl:value-of select="@RedniBroj"/>.</p>
 										<xsl:for-each select="gov:Stav">
 											<p class="stav"><xsl:value-of select="gov:Tekst" /></p>
 											<xsl:value-of select="gov:Tekst"/><br></br><br></br>
@@ -270,13 +303,13 @@
 								</xsl:for-each>
 					
 					<xsl:for-each select="gov:Akt/gov:ZavrsniDeo/gov:ZavrsneOdredbe/gov:Odeljak">
-						Odeljak <xsl:value-of select="@RedniBroj" />.<br></br>
+						<h4 class="odeljak"><xsl:value-of select="@RedniBroj" />. <xsl:value-of select="@Naziv" /></h4>
 						<xsl:value-of select="@Naziv" /><br></br>
 							<xsl:for-each select="gov:Pododeljak">
-								RednoSlovo <xsl:value-of select="@RednoSlovo" />.<br></br>
+								<p class="pododeljak"><xsl:value-of select="@RednoSlovo" />) <xsl:value-of select="@Naziv" /></p>
 											<xsl:for-each select="gov:Clan">
-													Clan <xsl:value-of select="@RedniBroj"/>.<br></br>
-															<xsl:value-of select="@Naziv"/><br></br>
+													<p class="clan"><xsl:value-of select="@Naziv"/>
+													Clan <xsl:value-of select="@RedniBroj"/>.</p>
 																	<xsl:for-each select="gov:Stav">
 																			<p class="stav"><xsl:value-of select="gov:Tekst" /></p>
 																			<xsl:value-of select="gov:Tekst"/><br></br><br></br>
@@ -292,8 +325,8 @@
 											</xsl:for-each>
 							</xsl:for-each>
 							<xsl:for-each select="gov:Clan">
-								Clan <xsl:value-of select="@RedniBroj"/>.<br></br>
-								<xsl:value-of select="@Naziv"/><br></br>
+								<p class="clan"><xsl:value-of select="@Naziv"/>
+								Clan <xsl:value-of select="@RedniBroj"/>.</p>
 									<xsl:for-each select="gov:Stav">
 										<p class="stav"><xsl:value-of select="gov:Tekst" /></p>
 										<xsl:value-of select="gov:Tekst"/><br></br><br></br>
@@ -310,12 +343,11 @@
 					</xsl:for-each>
 			</xsl:if>
 			<!--Od Organa na nadalje-->
-			Organ : <xsl:value-of select="gov:Akt/gov:ZavrsniDeo/gov:Organ"/> <br></br>
-			Broj : <xsl:value-of select="gov:Akt/gov:ZavrsniDeo/gov:Broj"/> <br></br>
-			Datum : <xsl:value-of select="gov:Akt/gov:ZavrsniDeo/gov:Datum"/> <br></br>
-			<xsl:if test="gov:Akt/gov:ZavrsniDeo/gov:Potpisnik/gov:Titula">Titula : <xsl:value-of select="gov:Akt/gov:ZavrsniDeo/gov:Potpisnik/gov:Titula"/> <br></br></xsl:if>
-			Ime :<xsl:value-of select="gov:Akt/gov:ZavrsniDeo/gov:Potpisnik/gov:Ime"/> <br></br>
-			Prezime :<xsl:value-of select="gov:Akt/gov:ZavrsniDeo/gov:Potpisnik/gov:Prezime"/> <br></br>
+			<xsl:value-of select="gov:Akt/gov:ZavrsniDeo/gov:Broj"/><br></br>
+			<xsl:value-of select="gov:Akt/gov:ZavrsniDeo/gov:Datum"/>
+			<h3 class="organ"><xsl:value-of select="gov:Akt/gov:ZavrsniDeo/gov:Organ"/></h3>
+			<xsl:if test="gov:Akt/gov:ZavrsniDeo/gov:Potpisnik/gov:Titula"> <xsl:value-of select="gov:Akt/gov:ZavrsniDeo/gov:Potpisnik/gov:Titula"/></xsl:if>
+			<xsl:value-of select="gov:Akt/gov:ZavrsniDeo/gov:Potpisnik/gov:Ime"/>&#160;<xsl:value-of select="gov:Akt/gov:ZavrsniDeo/gov:Potpisnik/gov:Prezime"/>
 		</body>
 		</html>
 	</xsl:template>
