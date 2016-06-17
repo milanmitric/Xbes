@@ -1,0 +1,26 @@
+[2:14:16] Milan Mitrić:         FileOutputStream fileOutputStream = new FileOutputStream(new File("tmp.xml"));
+        aktManager.transform(encDoc,fileOutputStream);
+
+        Akt akt = aktManager.convertFromXml(new File("tmp.xml"));
+        if (lastId == null){
+            lastId = akt.getDocumentId();
+        } else if (lastId.equals(akt.getDocumentId())){
+            return new ResponseEntity("test_0:fail", HttpStatus.BAD_REQUEST);
+        }
+
+        Date now = new Date();
+        Date timeStamp =akt.getTimeStamp().toGregorianCalendar().getTime();
+
+        final long ONE_MINUTE_IN_MILLIS = 60000;//millisecs
+
+        long curTimeInMs = timeStamp.getTime();
+        timeStamp = new Date(curTimeInMs + (1 * ONE_MINUTE_IN_MILLIS));
+
+        if (timeStamp.after(now)){
+            return new ResponseEntity("test_0:fail", HttpStatus.BAD_REQUEST);
+        }
+[2:14:23] Milan Mitrić: ovo ubaci posle dekriptovanja
+[2:14:33] Milan Mitrić:     public  void transform(Node node, OutputStream out) {
+        converter.transform(node,out);
+    }
+[2:14:39] Milan Mitrić: ovo dodaj u beanmanager
