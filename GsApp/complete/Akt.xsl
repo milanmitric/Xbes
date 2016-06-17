@@ -7,19 +7,21 @@
 			<style type="text/css">
 				p.clan {
 					text-align: center;
+					font-weght: bold;
 				}
 				p.pododeljak {
 					text-align: center;
-					font-weight: bold;
 				}
 				p.stav {
 					text-indent: 30px;
 				}
 				p.tacka {
 					text-indent: 30px;
+					margin-left: 40px;
 				}
 				p.podtacka {
 					text-indent: 30px;
+					margin-left: 80px;
 				}
 				h3.glava {
 					text-align: center;
@@ -72,9 +74,9 @@
 								<p class="stav"><xsl:value-of select="gov:Tekst" /></p>
 								<xsl:value-of select="gov:Tekst"/><br></br><br></br>
 									<xsl:for-each select="gov:Tacka">
-										<p class="Tacka"><xsl:value-of select="@RedniBroj"/>) <xsl:value-of select="gov:Sadrzaj"/></p>
+										<p class="tacka"><xsl:value-of select="@RedniBroj"/>) <xsl:value-of select="gov:Sadrzaj"/></p>
 											<xsl:for-each select="gov:Podtacka">
-												<p class="Podtacka">(<xsl:value-of select="@RedniBroj"/>) <xsl:value-of select="text()"/></p>
+												<p class="podtacka">(<xsl:value-of select="@RedniBroj"/>) <xsl:value-of select="text()"/></p>
 												
 											</xsl:for-each>
 									</xsl:for-each>
@@ -92,9 +94,9 @@
 													<p class="stav"><xsl:value-of select="gov:Tekst" /></p>
 															<xsl:for-each select="gov:Tacka">
 																
-																	<p class="Tacka"><xsl:value-of select="@RedniBroj"/>) <xsl:value-of select="gov:Sadrzaj"/></p>
+																	<p class="tacka"><xsl:value-of select="@RedniBroj"/>) <xsl:value-of select="gov:Sadrzaj"/></p>
 																		<xsl:for-each select="gov:Podtacka">
-																			<p class="Podtacka">(<xsl:value-of select="@RedniBroj"/>) <xsl:value-of select="text()"/></p>
+																			<p class="podtacka">(<xsl:value-of select="@RedniBroj"/>) <xsl:value-of select="text()"/></p>
 																			
 																		</xsl:for-each>
 															</xsl:for-each>
@@ -108,9 +110,9 @@
 										<p class="stav"><xsl:value-of select="gov:Tekst"/></p>
 											<xsl:for-each select="gov:Tacka">
 												
-												<p class="Tacka"><xsl:value-of select="@RedniBroj"/>) <xsl:value-of select="gov:Sadrzaj"/></p>
+												<p class="tacka"><xsl:value-of select="@RedniBroj"/>) <xsl:value-of select="gov:Sadrzaj"/></p>
 													<xsl:for-each select="gov:Podtacka">
-														<p class="Podtacka">(<xsl:value-of select="@RedniBroj"/>) <xsl:value-of select="text()"/></p>
+														<p class="podtacka">(<xsl:value-of select="@RedniBroj"/>) <xsl:value-of select="text()"/></p>
 														
 													</xsl:for-each>
 											</xsl:for-each>
@@ -139,9 +141,9 @@
 								<p class="stav"><xsl:value-of select="gov:Tekst" /></p>
 									<xsl:for-each select="gov:Tacka">
 										
-										<p class="Tacka"><xsl:value-of select="@RedniBroj"/>) <xsl:value-of select="gov:Sadrzaj"/></p>
+										<p class="tacka"><xsl:value-of select="@RedniBroj"/>) <xsl:value-of select="gov:Sadrzaj"/></p>
 											<xsl:for-each select="gov:Podtacka">
-												<p class="Podtacka">(<xsl:value-of select="@RedniBroj"/>) <xsl:value-of select="text()"/></p>
+												<p class="podtacka">(<xsl:value-of select="@RedniBroj"/>) <xsl:value-of select="text()"/></p>
 												
 											</xsl:for-each>
 									</xsl:for-each>
@@ -159,9 +161,9 @@
 													<p class="stav"><xsl:value-of select="gov:Tekst" /></p>
 													<xsl:for-each select="gov:Tacka">
 														
-															<p class="Tacka"><xsl:value-of select="@RedniBroj"/>) <xsl:value-of select="gov:Sadrzaj"/></p>
+															<p class="tacka"><xsl:value-of select="@RedniBroj"/>) <xsl:value-of select="gov:Sadrzaj"/></p>
 																<xsl:for-each select="gov:Podtacka">
-																	<p class="Podtacka">(<xsl:value-of select="@RedniBroj"/>) <xsl:value-of select="text()"/></p>
+																	<p class="podtacka">(<xsl:value-of select="@RedniBroj"/>) <xsl:value-of select="text()"/></p>
 																	
 																</xsl:for-each>
 													</xsl:for-each>
@@ -175,9 +177,9 @@
 										<p class="stav"><xsl:value-of select="gov:Tekst" /></p>
 											<xsl:for-each select="gov:Tacka">
 												
-												<p class="Tacka"><xsl:value-of select="@RedniBroj"/>) <xsl:value-of select="gov:Sadrzaj"/></p>
+												<p class="tacka"><xsl:value-of select="@RedniBroj"/>) <xsl:value-of select="gov:Sadrzaj"/></p>
 													<xsl:for-each select="gov:Podtacka">
-														<p class="Podtacka">(<xsl:value-of select="@RedniBroj"/>) <xsl:value-of select="text()"/></p>
+														<p class="podtacka">(<xsl:value-of select="@RedniBroj"/>) <xsl:value-of select="text()"/></p>
 														
 													</xsl:for-each>
 											</xsl:for-each>
@@ -193,9 +195,9 @@
 							<p class="stav"><xsl:value-of select="gov:Tekst" /></p>
 								<xsl:for-each select="gov:Tacka">
 									
-									<p class="Tacka"><xsl:value-of select="@RedniBroj"/>) <xsl:value-of select="gov:Sadrzaj"/></p>
+									<p class="tacka"><xsl:value-of select="@RedniBroj"/>) <xsl:value-of select="gov:Sadrzaj"/></p>
 										<xsl:for-each select="gov:Podtacka">
-											<p class="Podtacka">(<xsl:value-of select="@RedniBroj"/>) <xsl:value-of select="text()"/></p>
+											<p class="podtacka">(<xsl:value-of select="@RedniBroj"/>) <xsl:value-of select="text()"/></p>
 											
 										</xsl:for-each>
 								</xsl:for-each>
@@ -223,9 +225,9 @@
 								<xsl:value-of select="gov:Tekst"/><br></br><br></br>
 									<xsl:for-each select="gov:Tacka">
 										
-										<p class="Tacka"><xsl:value-of select="@RedniBroj"/>) <xsl:value-of select="gov:Sadrzaj"/></p>
+										<p class="tacka"><xsl:value-of select="@RedniBroj"/>) <xsl:value-of select="gov:Sadrzaj"/></p>
 											<xsl:for-each select="gov:Podtacka">
-												<p class="Podtacka">(<xsl:value-of select="@RedniBroj"/>) <xsl:value-of select="text()"/></p>
+												<p class="podtacka">(<xsl:value-of select="@RedniBroj"/>) <xsl:value-of select="text()"/></p>
 												
 											</xsl:for-each>
 									</xsl:for-each>
@@ -245,9 +247,9 @@
 																			<xsl:value-of select="gov:Tekst"/><br></br><br></br>
 																				<xsl:for-each select="gov:Tacka">
 																					
-																						<p class="Tacka"><xsl:value-of select="@RedniBroj"/>) <xsl:value-of select="gov:Sadrzaj"/></p>
+																						<p class="tacka"><xsl:value-of select="@RedniBroj"/>) <xsl:value-of select="gov:Sadrzaj"/></p>
 																							<xsl:for-each select="gov:Podtacka">
-																								<p class="Podtacka">(<xsl:value-of select="@RedniBroj"/>) <xsl:value-of select="text()"/></p>
+																								<p class="podtacka">(<xsl:value-of select="@RedniBroj"/>) <xsl:value-of select="text()"/></p>
 																								
 																							</xsl:for-each>
 																				</xsl:for-each>
@@ -262,9 +264,9 @@
 										<xsl:value-of select="gov:Tekst"/><br></br><br></br>
 											<xsl:for-each select="gov:Tacka">
 												
-												<p class="Tacka"><xsl:value-of select="@RedniBroj"/>) <xsl:value-of select="gov:Sadrzaj"/></p>
+												<p class="tacka"><xsl:value-of select="@RedniBroj"/>) <xsl:value-of select="gov:Sadrzaj"/></p>
 													<xsl:for-each select="gov:Podtacka">
-														<p class="Podtacka">(<xsl:value-of select="@RedniBroj"/>) <xsl:value-of select="text()"/></p>
+														<p class="podtacka">(<xsl:value-of select="@RedniBroj"/>) <xsl:value-of select="text()"/></p>
 														
 													</xsl:for-each>
 											</xsl:for-each>
@@ -293,9 +295,9 @@
 											<xsl:value-of select="gov:Tekst"/><br></br><br></br>
 												<xsl:for-each select="gov:Tacka">
 													
-													<p class="Tacka"><xsl:value-of select="@RedniBroj"/>) <xsl:value-of select="gov:Sadrzaj"/></p>
+													<p class="tacka"><xsl:value-of select="@RedniBroj"/>) <xsl:value-of select="gov:Sadrzaj"/></p>
 														<xsl:for-each select="gov:Podtacka">
-															<p class="Podtacka">(<xsl:value-of select="@RedniBroj"/>) <xsl:value-of select="text()"/></p>
+															<p class="podtacka">(<xsl:value-of select="@RedniBroj"/>) <xsl:value-of select="text()"/></p>
 															
 														</xsl:for-each>
 												</xsl:for-each>
@@ -315,9 +317,9 @@
 																			<xsl:value-of select="gov:Tekst"/><br></br><br></br>
 																				<xsl:for-each select="gov:Tacka">
 																					
-																						<p class="Tacka"><xsl:value-of select="@RedniBroj"/>) <xsl:value-of select="gov:Sadrzaj"/></p>
+																						<p class="tacka"><xsl:value-of select="@RedniBroj"/>) <xsl:value-of select="gov:Sadrzaj"/></p>
 																							<xsl:for-each select="gov:Podtacka">
-																								<p class="Podtacka">(<xsl:value-of select="@RedniBroj"/>) <xsl:value-of select="text()"/></p>
+																								<p class="podtacka">(<xsl:value-of select="@RedniBroj"/>) <xsl:value-of select="text()"/></p>
 																								
 																							</xsl:for-each>
 																				</xsl:for-each>
@@ -331,10 +333,10 @@
 										<p class="stav"><xsl:value-of select="gov:Tekst" /></p>
 										<xsl:value-of select="gov:Tekst"/><br></br><br></br>
 											<xsl:for-each select="gov:Tacka">
-												<p class="Tacka"><xsl:value-of select="@RedniBroj"/>)
+												<p class="tacka"><xsl:value-of select="@RedniBroj"/>)
 												<xsl:value-of select="gov:Sadrzaj"/></p>
 												<xsl:for-each select="gov:Podtacka">
-													<p class="Podtacka">(<xsl:value-of select="@RedniBroj"/>) <xsl:value-of select="text()"/></p>
+													<p class="podtacka">(<xsl:value-of select="@RedniBroj"/>) <xsl:value-of select="text()"/></p>
 													
 												</xsl:for-each>
 											</xsl:for-each>
