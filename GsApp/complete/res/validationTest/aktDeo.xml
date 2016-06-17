@@ -1,0 +1,112 @@
+<?xml  version="1.0" encoding="UTF-8"?>
+<Akt xsi:schemaLocation="http://www.gradskaskupstina.gov/" xmlns="http://www.gradskaskupstina.gov/" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <Naslov>Akt Deo Cirilica</Naslov>
+    <DocumentId>16279533255118590399.xml</DocumentId>
+    <Deo RedniBroj="1">
+        <Glava Naziv="Glava1" RedniBroj="1">
+            <Odeljak Naziv="Odeljak1" RedniBroj="1">
+                <Pododeljak Naziv="Naziv pododeljka a1" RednoSlovo="a">
+                    <Clan RedniBroj="1">
+                        <Stav RedniBroj="1">
+                            <Tekst>Tekst clana 1 stava 1 Прелазним одредбама успоставља се однос између прописа
+                                који престаје да важи и новог прописа у погледу њиховог дејства на
+                                случајеве, ситуације и односе који су настали за време важења ранијег
+                                прописа.</Tekst>
+                        </Stav>
+                        <Stav RedniBroj="2">
+                            <Tekst>Tekst clana 1 stava 2 Када је овлашћење за доношење подзаконског прописа у
+                                погледу органа који треба да га донесе и садржине тог прописа у новом
+                                пропису идентично као и у пропису који престаје да важи даном ступања на
+                                снагу новог прописа, новим прописом треба продужити важење подзаконског
+                                прописа који је донет на основу ранијег прописа до доношења
+                                подзаконског прописа на основу новог прописа.</Tekst>
+                        </Stav>
+                        <Stav RedniBroj="3">
+                            <Tekst>Tekst clana 1 stava 3</Tekst>
+                        </Stav>
+                    </Clan>
+                    <Clan RedniBroj="2">
+                        <Stav RedniBroj="1">
+                            <Tekst>Tekst clana 2 stava 1</Tekst>
+                        </Stav>
+                        <Stav RedniBroj="2">
+                            <Tekst>Tekst clana 2 stava 2</Tekst>
+                        </Stav>
+                        <Stav RedniBroj="3">
+                            <Tekst>Tekst clana 2 stava 3</Tekst>
+                        </Stav>
+                    </Clan>
+                </Pododeljak>
+                <Pododeljak Naziv="Naziv pododeljka b1" RednoSlovo="b">
+                    <Clan RedniBroj="3">
+                        <Stav RedniBroj="1">
+                            <Tekst>Tekst clana 3 stava 1</Tekst>
+                        </Stav>
+                        <Stav RedniBroj="2">
+                            <Tekst>Tekst clana 3 stava 2</Tekst>
+                        </Stav>
+                        <Stav RedniBroj="3">
+                            <Tekst>Tekst clana 3 stava 3</Tekst>
+                        </Stav>
+                    </Clan>
+                </Pododeljak>
+            </Odeljak>
+            <Odeljak Naziv="Odeljak2" RedniBroj="2">
+                <Clan RedniBroj="4">
+                    <Stav RedniBroj="1">
+                        <Tekst>Tekst CLANA 4 STAVA 1</Tekst>
+                        <Tacka RedniBroj="1">
+                            <Sadrzaj>Tekst CLANA 4 STAVA 1 TACKE 1 одређивањем рока после којег ће се примењивати нови
+                                поступак за решавање случајева;</Sadrzaj>
+                            <Podtacka RedniBroj="1">Tekst CLANA 4 STAVA 1 TACKE 1 PODTACKE 1 допуштањем да се започети поступци доврше према
+                                одредбама ранијег прописа, што треба формулисати на следећи начин:
+                                „Поступци који до дана ступања на снагу овог прописа нису
+                                окончани окончаће се по одредбама прописа који је био на снази до дана
+                                ступања на снагу овог прописа.”</Podtacka>
+                            <Podtacka RedniBroj="2">Tekst CLANA 4 STAVA 1 TACKE 1 PODTACKE 2</Podtacka>
+                        </Tacka>
+                        <Tacka RedniBroj="2">
+                            <Sadrzaj>Tekst CLANA 4 STAVA 1 TACKE 2</Sadrzaj>
+                            <Podtacka RedniBroj="1">Tekst CLANA 4 STAVA 1 TACKE 2 PODTACKE 1</Podtacka>
+                            <Podtacka RedniBroj="2">Tekst CLANA 4 STAVA 1 TACKE 2 PODTACKE 2</Podtacka>
+                        </Tacka>
+                    </Stav>
+                </Clan>
+                <Clan RedniBroj="5">
+                    <Stav RedniBroj="1">
+                        <Tekst>Tekst CLANA 5 STAVA 1</Tekst>
+                    </Stav>
+                </Clan>
+            </Odeljak>
+        </Glava>
+        <Glava Naziv="Glava2" RedniBroj="2">
+            <Clan RedniBroj="6">
+                <Stav RedniBroj="1">
+                    <Tekst>Tekst CLANA 6 STAVA 1</Tekst>
+                </Stav>
+                <Stav RedniBroj="2">
+                    <Tekst>Tekst CLANA 6 STAVA 2</Tekst>
+                </Stav>
+            </Clan>
+            <Clan RedniBroj="7">
+                <Stav RedniBroj="1">
+                    <Tekst>Tekst CLANA 7 STAVA 1</Tekst>
+                </Stav>
+                <Stav RedniBroj="2">
+                    <Tekst>Tekst CLANA 7 STAVA 2</Tekst>
+                </Stav>
+            </Clan>
+        </Glava>
+    </Deo>
+    <ZavrsniDeo>
+        <Organ>Organ0</Organ>
+        <Broj>Broj0</Broj>
+        <Datum>Datum0</Datum>
+        <Potpisnik>
+            <Ime>Ime0</Ime>
+            <Prezime>Prezime0</Prezime>
+        </Potpisnik>
+    </ZavrsniDeo>
+    <UserName>o</UserName>
+    <TimeStamp>2016-06-17T13:45:00.656+02:00</TimeStamp>
+</Akt>

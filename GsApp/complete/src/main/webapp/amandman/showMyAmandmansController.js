@@ -18,8 +18,29 @@ angular.module('xapp')
 
 
                  $scope.opozovi=function(amID){
-                    //TODO
-                    alert(amID);
+
+                            amandmanService.rejectAmandman(amID,function(response){
+
+                                var indexForDelete= -1;
+                                for(var i = 0;i<$scope.collection.length;i++){
+                                    if($scope.collection[i].documentId===amID){
+                                        indexForDelete=i;
+                                        break;
+                                    }
+
+                                }
+                                if (indexForDelete > -1) {
+                                    $scope.collection.splice(indexForDelete, 1);
+                                }
+
+
+
+                            },function(response){
+
+
+                            })
+
+
                  }
 
 

@@ -315,4 +315,36 @@ public class AktController {
         }
     }
 
+
+
+
+    /*opozivanje amandmana*/
+    @PreAuthorize("hasRole('ROLE_ODBORNIK')")
+    @RequestMapping(value = "/opozoviakt",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity opozoviPredlogAkta(@RequestBody String data){
+        logger.info("Called REST for accepting or rejecting  acts");
+        User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        boolean mojAkt  = false;
+        data = data.substring(0, data.length()-1);
+        for(Akt akt: aktManager.getMyFilesProposed(user)){
+            if(akt.getDocumentId().equals(data)){
+                mojAkt=true;
+            }
+        }
+
+        if(mojAkt){
+            if(aktManager.deleteAkt(data)){
+//                TODO Check if this is working
+//                for ( Amandmani amandmani :amandmanManager.getAllAmandmansForAkt(data)){
+//                    amandmanManager.deleteAmandman(amandmani.getDocumentId());
+//                }
+                return new ResponseEntity(HttpStatus.OK);
+            }
+        }
+
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    }
+
 }
