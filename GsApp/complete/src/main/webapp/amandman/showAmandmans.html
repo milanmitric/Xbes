@@ -53,7 +53,8 @@
                             <tr>
                                 <th>Redni broj</th>
                                 <th>Tip izmene</th>
-                                <th>Detalji</th>
+                                <th>Obrazlozenje</th>
+                                <th>Predmet izmene</th>
 
                             </tr>
                             </thead>
@@ -63,12 +64,14 @@
                                     {{model2.redniBroj}}
                                 </td>
                                 <td>
-                                    {{model2.predmetIzmeneAndTipIzmeneAndObrazlozenje[1]}}
+                                    {{model2.tipIzmene}}
                                 </td>
                                 <td>
-                                    {{model2.predmetIzmeneAndTipIzmeneAndObrazlozenje[2].content[0]}}
+                                    {{model2.obrazlozenje.content[0]}}
                                     <br>
-                                    {{model2.predmetIzmeneAndTipIzmeneAndObrazlozenje[2].content[2]}}
+                                    </td>
+                                <td>
+                                    {{model2.predmetIzmene.value}}
                                 </td>
 
                             </tr>
@@ -77,6 +80,7 @@
                     </div>
                     <!------------------------------------------------->
                 </td>
+<!--
 
                 <td>
                     <button ng-click="opozovi(model.documentId)"
@@ -84,6 +88,7 @@
                         <span class="glyphicon glyphicon-remove"></span>&nbsp;<span>Opozovi</span>
                     </button>
                 </td>
+-->
 
 
             </tr>
